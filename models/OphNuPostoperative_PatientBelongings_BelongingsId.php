@@ -1,5 +1,4 @@
-<?php
-/**
+<?php /**
  * OpenEyes
  *
  * (C) Moorfields Eye Hospital NHS Foundation Trust, 2008-2011
@@ -18,12 +17,11 @@
  */
 
 /**
- * This is the model class for table "et_ophnupostoperative_skinassessment".
+ * This is the model class for table "ophnupostoperative_patientbelongings_belongings_id".
  *
  * The followings are the available columns in table:
  * @property string $id
- * @property integer $event_id
- * @property string $comments
+ * @property string $name
  *
  * The followings are the available model relations:
  *
@@ -32,10 +30,9 @@
  * @property Event $event
  * @property User $user
  * @property User $usermodified
- * @property Element_OphNuPostoperative_SkinAssessment_AssessmentId_Assignment $assessment_ids
  */
 
-class Element_OphNuPostoperative_SkinAssessment  extends  BaseEventTypeElement
+class OphNuPostoperative_PatientBelongings_BelongingsId extends BaseActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -51,7 +48,7 @@ class Element_OphNuPostoperative_SkinAssessment  extends  BaseEventTypeElement
 	 */
 	public function tableName()
 	{
-		return 'et_ophnupostoperative_skinassessment';
+		return 'ophnupostoperative_patientbelongings_belongings_id';
 	}
 
 	/**
@@ -60,9 +57,9 @@ class Element_OphNuPostoperative_SkinAssessment  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, comments, ', 'safe'),
-			array('comments, ', 'required'),
-			array('id, event_id, comments, ', 'safe', 'on' => 'search'),
+			array('name', 'safe'),
+			array('name', 'required'),
+			array('id, name', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -77,7 +74,6 @@ class Element_OphNuPostoperative_SkinAssessment  extends  BaseEventTypeElement
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'assessment_ids' => array(self::HAS_MANY, 'Element_OphNuPostoperative_SkinAssessment_AssessmentId_Assignment', 'element_id'),
 		);
 	}
 
@@ -88,9 +84,7 @@ class Element_OphNuPostoperative_SkinAssessment  extends  BaseEventTypeElement
 	{
 		return array(
 			'id' => 'ID',
-			'event_id' => 'Event',
-			'assessment_id' => 'Skin assessment',
-			'comments' => 'Comments',
+			'name' => 'Name',
 		);
 	}
 
@@ -103,57 +97,11 @@ class Element_OphNuPostoperative_SkinAssessment  extends  BaseEventTypeElement
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id, true);
-		$criteria->compare('event_id', $this->event_id, true);
-		$criteria->compare('assessment_id', $this->assessment_id);
-		$criteria->compare('comments', $this->comments);
+		$criteria->compare('name', $this->name, true);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
-	}
-
-
-	public function getophnupostoperative_skinassessment_assessment_id_defaults() {
-		$ids = array();
-		foreach (OphNuPostoperative_SkinAssessment_AssessmentId::model()->findAll('`default` = ?',array(1)) as $item) {
-			$ids[] = $item->id;
-		}
-		return $ids;
-	}
-
-	protected function afterSave()
-	{
-		if (!empty($_POST['MultiSelect_assessment_id'])) {
-
-			$existing_ids = array();
-
-			foreach (Element_OphNuPostoperative_SkinAssessment_AssessmentId_Assignment::model()->findAll('element_id = :elementId', array(':elementId' => $this->id)) as $item) {
-				$existing_ids[] = $item->ophnupostoperative_skinassessment_assessment_id_id;
-			}
-
-			foreach ($_POST['MultiSelect_assessment_id'] as $id) {
-				if (!in_array($id,$existing_ids)) {
-					$item = new Element_OphNuPostoperative_SkinAssessment_AssessmentId_Assignment;
-					$item->element_id = $this->id;
-					$item->ophnupostoperative_skinassessment_assessment_id_id = $id;
-
-					if (!$item->save()) {
-						throw new Exception('Unable to save MultiSelect item: '.print_r($item->getErrors(),true));
-					}
-				}
-			}
-
-			foreach ($existing_ids as $id) {
-				if (!in_array($id,$_POST['MultiSelect_assessment_id'])) {
-					$item = Element_OphNuPostoperative_SkinAssessment_AssessmentId_Assignment::model()->find('element_id = :elementId and ophnupostoperative_skinassessment_assessment_id_id = :lookupfieldId',array(':elementId' => $this->id, ':lookupfieldId' => $id));
-					if (!$item->delete()) {
-						throw new Exception('Unable to delete MultiSelect item: '.print_r($item->getErrors(),true));
-					}
-				}
-			}
-		}
-
-		return parent::afterSave();
 	}
 }
 ?>

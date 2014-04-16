@@ -22,8 +22,22 @@
 <table class="subtleWhite normalText">
 	<tbody>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('skin_assessment_id'))?></td>
-			<td><span class="big"><?php echo $element->skin_assessment ? $element->skin_assessment->name : 'None'?></span></td>
+			<td colspan="2">
+				<div class="colThird">
+					<b><?php echo CHtml::encode($element->getAttributeLabel('assessment_id'))?>:</b>
+					<div class="eventHighlight medium">
+						<?php if (!$element->assessment_ids) {?>
+							<h4>None</h4>
+						<?php } else {?>
+							<h4>
+								<?php foreach ($element->assessment_ids as $item) {
+									echo $item->ophnupostoperative_skinassessment_assessment_id->name?><br/>
+								<?php }?>
+							</h4>
+						<?php }?>
+					</div>
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('comments'))?></td>

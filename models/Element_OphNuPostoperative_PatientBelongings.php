@@ -24,7 +24,6 @@
  * @property string $id
  * @property integer $event_id
  * @property integer $patient_belongings
- * @property integer $patient_belongings_id
  * @property string $comments
  *
  * The followings are the available model relations:
@@ -34,7 +33,7 @@
  * @property Event $event
  * @property User $user
  * @property User $usermodified
- * @property OphNuPostoperative_PatientBelongings_PatientBelongings $patient_belongings
+ * @property Element_OphNuPostoperative_PatientBelongings_BelongingsId_Assignment $belongings_ids
  */
 
 class Element_OphNuPostoperative_PatientBelongings  extends  BaseEventTypeElement
@@ -62,9 +61,9 @@ class Element_OphNuPostoperative_PatientBelongings  extends  BaseEventTypeElemen
 	public function rules()
 	{
 		return array(
-			array('event_id, patient_belongings, patient_belongings_id, comments, ', 'safe'),
-			array('patient_belongings, patient_belongings_id, comments, ', 'required'),
-			array('id, event_id, patient_belongings, patient_belongings_id, comments, ', 'safe', 'on' => 'search'),
+			array('event_id, patient_belongings, comments, ', 'safe'),
+			array('patient_belongings, comments, ', 'required'),
+			array('id, event_id, patient_belongings, comments, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -79,7 +78,7 @@ class Element_OphNuPostoperative_PatientBelongings  extends  BaseEventTypeElemen
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'patient_belongings' => array(self::BELONGS_TO, 'OphNuPostoperative_PatientBelongings_PatientBelongings', 'patient_belongings_id'),
+			'belongings_ids' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PatientBelongings_BelongingsId_Assignment', 'element_id'),
 		);
 	}
 
@@ -92,7 +91,7 @@ class Element_OphNuPostoperative_PatientBelongings  extends  BaseEventTypeElemen
 			'id' => 'ID',
 			'event_id' => 'Event',
 			'patient_belongings' => 'Patient Belongings',
-			'patient_belongings_id' => 'Patient belongings',
+			'belongings_id' => 'Patient belongings',
 			'comments' => 'Comments',
 		);
 	}
@@ -108,7 +107,7 @@ class Element_OphNuPostoperative_PatientBelongings  extends  BaseEventTypeElemen
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
 		$criteria->compare('patient_belongings', $this->patient_belongings);
-		$criteria->compare('patient_belongings_id', $this->patient_belongings_id);
+		$criteria->compare('belongings_id', $this->belongings_id);
 		$criteria->compare('comments', $this->comments);
 
 		return new CActiveDataProvider(get_class($this), array(
@@ -117,9 +116,45 @@ class Element_OphNuPostoperative_PatientBelongings  extends  BaseEventTypeElemen
 	}
 
 
+	public function getophnupostoperative_patientbelongings_belongings_id_defaults() {
+		$ids = array();
+		foreach (OphNuPostoperative_PatientBelongings_BelongingsId::model()->findAll('`default` = ?',array(1)) as $item) {
+			$ids[] = $item->id;
+		}
+		return $ids;
+	}
 
 	protected function afterSave()
 	{
+		if (!empty($_POST['MultiSelect_belongings_id'])) {
+
+			$existing_ids = array();
+
+			foreach (Element_OphNuPostoperative_PatientBelongings_BelongingsId_Assignment::model()->findAll('element_id = :elementId', array(':elementId' => $this->id)) as $item) {
+				$existing_ids[] = $item->ophnupostoperative_patientbelongings_belongings_id_id;
+			}
+
+			foreach ($_POST['MultiSelect_belongings_id'] as $id) {
+				if (!in_array($id,$existing_ids)) {
+					$item = new Element_OphNuPostoperative_PatientBelongings_BelongingsId_Assignment;
+					$item->element_id = $this->id;
+					$item->ophnupostoperative_patientbelongings_belongings_id_id = $id;
+
+					if (!$item->save()) {
+						throw new Exception('Unable to save MultiSelect item: '.print_r($item->getErrors(),true));
+					}
+				}
+			}
+
+			foreach ($existing_ids as $id) {
+				if (!in_array($id,$_POST['MultiSelect_belongings_id'])) {
+					$item = Element_OphNuPostoperative_PatientBelongings_BelongingsId_Assignment::model()->find('element_id = :elementId and ophnupostoperative_patientbelongings_belongings_id_id = :lookupfieldId',array(':elementId' => $this->id, ':lookupfieldId' => $id));
+					if (!$item->delete()) {
+						throw new Exception('Unable to delete MultiSelect item: '.print_r($item->getErrors(),true));
+					}
+				}
+			}
+		}
 
 		return parent::afterSave();
 	}

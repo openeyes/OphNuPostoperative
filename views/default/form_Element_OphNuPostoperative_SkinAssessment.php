@@ -28,7 +28,7 @@
 	</header>
 
 		<div class="element-fields">
-			<?php echo $form->dropDownList($element, 'skin_assessment_id', CHtml::listData(OphNuPostoperative_SkinAssessment_SkinAssessment::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'))?>
+			<?php echo $form->multiSelectList($element, 'MultiSelect_assessment_id', 'assessment_ids', 'ophnupostoperative_skinassessment_assessment_id_id', CHtml::listData(OphNuPostoperative_SkinAssessment_AssessmentId::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_skinassessment_assessment_id_defaults, array('empty' => '- Please select -', 'label' => 'Skin assessment'))?>
 	<?php echo $form->textField($element, 'comments', array('size' => '10'))?>
 	</div>
 	

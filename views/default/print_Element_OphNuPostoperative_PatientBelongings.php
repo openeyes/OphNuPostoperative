@@ -26,8 +26,22 @@
 			<td><span class="big"><?php echo $element->patient_belongings ? 'Yes' : 'No'?></span></td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('patient_belongings_id'))?></td>
-			<td><span class="big"><?php echo $element->patient_belongings ? $element->patient_belongings->name : 'None'?></span></td>
+			<td colspan="2">
+				<div class="colThird">
+					<b><?php echo CHtml::encode($element->getAttributeLabel('belongings_id'))?>:</b>
+					<div class="eventHighlight medium">
+						<?php if (!$element->belongings_ids) {?>
+							<h4>None</h4>
+						<?php } else {?>
+							<h4>
+								<?php foreach ($element->belongings_ids as $item) {
+									echo $item->ophnupostoperative_patientbelongings_belongings_id->name?><br/>
+								<?php }?>
+							</h4>
+						<?php }?>
+					</div>
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('comments'))?></td>

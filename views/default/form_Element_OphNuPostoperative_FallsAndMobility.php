@@ -29,7 +29,7 @@
 
 		<div class="element-fields">
 			<?php echo $form->radioBoolean($element, 'falls_mobility')?>
-	<?php echo $form->dropDownList($element, 'falls_mobility_id', CHtml::listData(OphNuPostoperative_FallsAndMobility_FallsMobility::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'))?>
+	<?php echo $form->multiSelectList($element, 'MultiSelect_fm_id', 'fm_ids', 'ophnupostoperative_fallsmobility_fm_id_id', CHtml::listData(OphNuPostoperative_FallsAndMobility_FmId::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_fallsmobility_fm_id_defaults, array('empty' => '- Please select -', 'label' => 'Falls / Mobility'))?>
 	</div>
 	
 </section>

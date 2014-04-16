@@ -28,7 +28,7 @@
 	</header>
 
 		<div class="element-fields">
-			<?php echo $form->dropDownList($element, 'post_op_observations_id', CHtml::listData(OphNuPostoperative_PostOpObservations_PostOpObservations::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'))?>
+			<?php echo $form->multiSelectList($element, 'MultiSelect_ob_id', 'ob_ids', 'ophnupostoperative_observations_ob_id_id', CHtml::listData(OphNuPostoperative_PostOpObservations_ObId::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_observations_ob_id_defaults, array('empty' => '- Please select -', 'label' => 'Post Op Observations'))?>
 	<?php echo $form->textField($element, 'comments', array('size' => '10'))?>
 	</div>
 	

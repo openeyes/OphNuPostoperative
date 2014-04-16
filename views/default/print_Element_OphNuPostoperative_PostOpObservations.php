@@ -22,8 +22,22 @@
 <table class="subtleWhite normalText">
 	<tbody>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('post_op_observations_id'))?></td>
-			<td><span class="big"><?php echo $element->post_op_observations ? $element->post_op_observations->name : 'None'?></span></td>
+			<td colspan="2">
+				<div class="colThird">
+					<b><?php echo CHtml::encode($element->getAttributeLabel('ob_id'))?>:</b>
+					<div class="eventHighlight medium">
+						<?php if (!$element->ob_ids) {?>
+							<h4>None</h4>
+						<?php } else {?>
+							<h4>
+								<?php foreach ($element->ob_ids as $item) {
+									echo $item->ophnupostoperative_observations_ob_id->name?><br/>
+								<?php }?>
+							</h4>
+						<?php }?>
+					</div>
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('comments'))?></td>

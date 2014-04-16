@@ -26,8 +26,22 @@
 			<td><span class="big"><?php echo $element->falls_mobility ? 'Yes' : 'No'?></span></td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('falls_mobility_id'))?></td>
-			<td><span class="big"><?php echo $element->falls_mobility ? $element->falls_mobility->name : 'None'?></span></td>
+			<td colspan="2">
+				<div class="colThird">
+					<b><?php echo CHtml::encode($element->getAttributeLabel('fm_id'))?>:</b>
+					<div class="eventHighlight medium">
+						<?php if (!$element->fm_ids) {?>
+							<h4>None</h4>
+						<?php } else {?>
+							<h4>
+								<?php foreach ($element->fm_ids as $item) {
+									echo $item->ophnupostoperative_fallsmobility_fm_id->name?><br/>
+								<?php }?>
+							</h4>
+						<?php }?>
+					</div>
+				</div>
+			</td>
 		</tr>
 	</tbody>
 </table>

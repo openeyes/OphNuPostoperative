@@ -25,8 +25,15 @@
 
 		<div class="element-data">
 				<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('post_op_observations_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->post_op_observations ? $element->post_op_observations->name : 'None'?></div></div>
+			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('ob_id'))?>:</div></div>
+			<div class="large-10 column end"><div class="data-value"><?php if (!$element->ob_ids) {?>
+							None
+						<?php } else {?>
+								<?php foreach ($element->ob_ids as $item) {
+									echo $item->ophnupostoperative_observations_ob_id->name?><br/>
+								<?php }?>
+						<?php }?>
+			</div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('comments'))?></div></div>

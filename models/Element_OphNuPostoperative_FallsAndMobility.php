@@ -24,7 +24,6 @@
  * @property string $id
  * @property integer $event_id
  * @property integer $falls_mobility
- * @property integer $falls_mobility_id
  *
  * The followings are the available model relations:
  *
@@ -33,7 +32,7 @@
  * @property Event $event
  * @property User $user
  * @property User $usermodified
- * @property OphNuPostoperative_FallsAndMobility_FallsMobility $falls_mobility
+ * @property Element_OphNuPostoperative_FallsAndMobility_FmId_Assignment $fm_ids
  */
 
 class Element_OphNuPostoperative_FallsAndMobility  extends  BaseEventTypeElement
@@ -61,9 +60,9 @@ class Element_OphNuPostoperative_FallsAndMobility  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, falls_mobility, falls_mobility_id, ', 'safe'),
-			array('falls_mobility, falls_mobility_id, ', 'required'),
-			array('id, event_id, falls_mobility, falls_mobility_id, ', 'safe', 'on' => 'search'),
+			array('event_id, falls_mobility, ', 'safe'),
+			array('falls_mobility, ', 'required'),
+			array('id, event_id, falls_mobility, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -78,7 +77,7 @@ class Element_OphNuPostoperative_FallsAndMobility  extends  BaseEventTypeElement
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'falls_mobility' => array(self::BELONGS_TO, 'OphNuPostoperative_FallsAndMobility_FallsMobility', 'falls_mobility_id'),
+			'fm_ids' => array(self::HAS_MANY, 'Element_OphNuPostoperative_FallsAndMobility_FmId_Assignment', 'element_id'),
 		);
 	}
 
@@ -91,7 +90,7 @@ class Element_OphNuPostoperative_FallsAndMobility  extends  BaseEventTypeElement
 			'id' => 'ID',
 			'event_id' => 'Event',
 			'falls_mobility' => 'Falls / Mobility',
-			'falls_mobility_id' => 'Falls / Mobility',
+			'fm_id' => 'Falls / Mobility',
 		);
 	}
 
@@ -106,7 +105,7 @@ class Element_OphNuPostoperative_FallsAndMobility  extends  BaseEventTypeElement
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
 		$criteria->compare('falls_mobility', $this->falls_mobility);
-		$criteria->compare('falls_mobility_id', $this->falls_mobility_id);
+		$criteria->compare('fm_id', $this->fm_id);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
@@ -114,9 +113,45 @@ class Element_OphNuPostoperative_FallsAndMobility  extends  BaseEventTypeElement
 	}
 
 
+	public function getophnupostoperative_fallsmobility_fm_id_defaults() {
+		$ids = array();
+		foreach (OphNuPostoperative_FallsAndMobility_FmId::model()->findAll('`default` = ?',array(1)) as $item) {
+			$ids[] = $item->id;
+		}
+		return $ids;
+	}
 
 	protected function afterSave()
 	{
+		if (!empty($_POST['MultiSelect_fm_id'])) {
+
+			$existing_ids = array();
+
+			foreach (Element_OphNuPostoperative_FallsAndMobility_FmId_Assignment::model()->findAll('element_id = :elementId', array(':elementId' => $this->id)) as $item) {
+				$existing_ids[] = $item->ophnupostoperative_fallsmobility_fm_id_id;
+			}
+
+			foreach ($_POST['MultiSelect_fm_id'] as $id) {
+				if (!in_array($id,$existing_ids)) {
+					$item = new Element_OphNuPostoperative_FallsAndMobility_FmId_Assignment;
+					$item->element_id = $this->id;
+					$item->ophnupostoperative_fallsmobility_fm_id_id = $id;
+
+					if (!$item->save()) {
+						throw new Exception('Unable to save MultiSelect item: '.print_r($item->getErrors(),true));
+					}
+				}
+			}
+
+			foreach ($existing_ids as $id) {
+				if (!in_array($id,$_POST['MultiSelect_fm_id'])) {
+					$item = Element_OphNuPostoperative_FallsAndMobility_FmId_Assignment::model()->find('element_id = :elementId and ophnupostoperative_fallsmobility_fm_id_id = :lookupfieldId',array(':elementId' => $this->id, ':lookupfieldId' => $id));
+					if (!$item->delete()) {
+						throw new Exception('Unable to delete MultiSelect item: '.print_r($item->getErrors(),true));
+					}
+				}
+			}
+		}
 
 		return parent::afterSave();
 	}

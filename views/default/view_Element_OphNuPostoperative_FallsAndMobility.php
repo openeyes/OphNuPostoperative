@@ -29,8 +29,15 @@
 			<div class="large-10 column end"><div class="data-value"><?php echo $element->falls_mobility ? 'Yes' : 'No'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('falls_mobility_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->falls_mobility ? $element->falls_mobility->name : 'None'?></div></div>
+			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('fm_id'))?>:</div></div>
+			<div class="large-10 column end"><div class="data-value"><?php if (!$element->fm_ids) {?>
+							None
+						<?php } else {?>
+								<?php foreach ($element->fm_ids as $item) {
+									echo $item->ophnupostoperative_fallsmobility_fm_id->name?><br/>
+								<?php }?>
+						<?php }?>
+			</div></div>
 		</div>
 			</div>
 </section>
