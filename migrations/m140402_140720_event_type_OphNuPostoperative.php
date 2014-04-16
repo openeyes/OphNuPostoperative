@@ -30,41 +30,11 @@ class m140402_140720_event_type_OphNuPostoperative extends CDbMigration
 		}
 
 		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Post Operative Progress Notes'))->queryRow();
-		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Falls and Mobility',':eventTypeId'=>$event_type['id']))->queryRow()) {
-			$this->insert('element_type', array('name' => 'Falls and Mobility','class_name' => 'Element_OphNuPostoperative_FallsAndMobility', 'event_type_id' => $event_type['id'], 'display_order' => 1));
+		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Post Operative',':eventTypeId'=>$event_type['id']))->queryRow()) {
+			$this->insert('element_type', array('name' => 'Post Operative','class_name' => 'Element_OphNuPostoperative_PostOperative', 'event_type_id' => $event_type['id'], 'display_order' => 1));
 		}
 
-		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Falls and Mobility'))->queryRow();
-		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Dental Work',':eventTypeId'=>$event_type['id']))->queryRow()) {
-			$this->insert('element_type', array('name' => 'Dental Work','class_name' => 'Element_OphNuPostoperative_DentalWork', 'event_type_id' => $event_type['id'], 'display_order' => 1));
-		}
-
-		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Dental Work'))->queryRow();
-		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Hearing aid',':eventTypeId'=>$event_type['id']))->queryRow()) {
-			$this->insert('element_type', array('name' => 'Hearing aid','class_name' => 'Element_OphNuPostoperative_HearingAid', 'event_type_id' => $event_type['id'], 'display_order' => 1));
-		}
-
-		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Hearing aid'))->queryRow();
-		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Patient Belongings',':eventTypeId'=>$event_type['id']))->queryRow()) {
-			$this->insert('element_type', array('name' => 'Patient Belongings','class_name' => 'Element_OphNuPostoperative_PatientBelongings', 'event_type_id' => $event_type['id'], 'display_order' => 1));
-		}
-
-		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Patient Belongings'))->queryRow();
-		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Skin Assessment',':eventTypeId'=>$event_type['id']))->queryRow()) {
-			$this->insert('element_type', array('name' => 'Skin Assessment','class_name' => 'Element_OphNuPostoperative_SkinAssessment', 'event_type_id' => $event_type['id'], 'display_order' => 1));
-		}
-
-		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Skin Assessment'))->queryRow();
-		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Post Op Observations',':eventTypeId'=>$event_type['id']))->queryRow()) {
-			$this->insert('element_type', array('name' => 'Post Op Observations','class_name' => 'Element_OphNuPostoperative_PostOpObservations', 'event_type_id' => $event_type['id'], 'display_order' => 1));
-		}
-
-		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Post Op Observations'))->queryRow();
-		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Checklist',':eventTypeId'=>$event_type['id']))->queryRow()) {
-			$this->insert('element_type', array('name' => 'Checklist','class_name' => 'Element_OphNuPostoperative_Checklist', 'event_type_id' => $event_type['id'], 'display_order' => 1));
-		}
-
-		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Checklist'))->queryRow();
+		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Post Operative'))->queryRow();
 
 		$this->createTable('ophnupostoperative_patient_hand_off_from', array(
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
@@ -242,7 +212,7 @@ class m140402_140720_event_type_OphNuPostoperative extends CDbMigration
 				'CONSTRAINT `et_ophnupostoperative_progressnote_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
 			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
 
-		$this->createTable('ophnupostoperative_fallsmobility_fm_id', array(
+		$this->createTable('ophnupostoperative_postoperative_falls', array(
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
 				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
 				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
@@ -252,63 +222,93 @@ class m140402_140720_event_type_OphNuPostoperative extends CDbMigration
 				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'PRIMARY KEY (`id`)',
-				'KEY `ophnupostoperative_fallsmobility_fm_id_lmui_fk` (`last_modified_user_id`)',
-				'KEY `ophnupostoperative_fallsmobility_fm_id_cui_fk` (`created_user_id`)',
-				'CONSTRAINT `ophnupostoperative_fallsmobility_fm_id_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `ophnupostoperative_fallsmobility_fm_id_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+				'KEY `ophnupostoperative_postoperative_falls_lmui_fk` (`last_modified_user_id`)',
+				'KEY `ophnupostoperative_postoperative_falls_cui_fk` (`created_user_id`)',
+				'CONSTRAINT `ophnupostoperative_postoperative_falls_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `ophnupostoperative_postoperative_falls_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
 			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
 
-		$this->insert('ophnupostoperative_fallsmobility_fm_id',array('name'=>'Unaided','display_order'=>1));
-		$this->insert('ophnupostoperative_fallsmobility_fm_id',array('name'=>'Crutches','display_order'=>2));
-		$this->insert('ophnupostoperative_fallsmobility_fm_id',array('name'=>'Cane','display_order'=>3));
-		$this->insert('ophnupostoperative_fallsmobility_fm_id',array('name'=>'Walker','display_order'=>4));
-		$this->insert('ophnupostoperative_fallsmobility_fm_id',array('name'=>'Wheelchair','display_order'=>5));
-		$this->insert('ophnupostoperative_fallsmobility_fm_id',array('name'=>'Parents','display_order'=>6));
+		$this->insert('ophnupostoperative_postoperative_falls',array('name'=>'Unaided','display_order'=>1));
+		$this->insert('ophnupostoperative_postoperative_falls',array('name'=>'Walker','display_order'=>2));
+		$this->insert('ophnupostoperative_postoperative_falls',array('name'=>'Crutches','display_order'=>3));
+		$this->insert('ophnupostoperative_postoperative_falls',array('name'=>'Wheelchair','display_order'=>4));
+		$this->insert('ophnupostoperative_postoperative_falls',array('name'=>'Cane','display_order'=>5));
+		$this->insert('ophnupostoperative_postoperative_falls',array('name'=>'Parents','display_order'=>6));
 
-
-
-		$this->createTable('et_ophnupostoperative_fallsmobility', array(
+		$this->createTable('ophnupostoperative_postoperative_belongings', array(
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
-				'event_id' => 'int(10) unsigned NOT NULL',
-				'falls_mobility' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
-
+				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
+				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'default' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
 				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'PRIMARY KEY (`id`)',
-				'KEY `et_ophnupostoperative_fallsmobility_lmui_fk` (`last_modified_user_id`)',
-				'KEY `et_ophnupostoperative_fallsmobility_cui_fk` (`created_user_id`)',
-				'KEY `et_ophnupostoperative_fallsmobility_ev_fk` (`event_id`)',
-				'CONSTRAINT `et_ophnupostoperative_fallsmobility_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_fallsmobility_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_fallsmobility_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
+				'KEY `ophnupostoperative_postoperative_belongings_lmui_fk` (`last_modified_user_id`)',
+				'KEY `ophnupostoperative_postoperative_belongings_cui_fk` (`created_user_id`)',
+				'CONSTRAINT `ophnupostoperative_postoperative_belongings_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `ophnupostoperative_postoperative_belongings_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
 			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
 
-		$this->createTable('et_ophnupostoperative_fallsmobility_fm_id_assignment', array(
+		$this->insert('ophnupostoperative_postoperative_belongings',array('name'=>'Glasses','display_order'=>1));
+		$this->insert('ophnupostoperative_postoperative_belongings',array('name'=>'Jewelery','display_order'=>2));
+		$this->insert('ophnupostoperative_postoperative_belongings',array('name'=>'Clothing','display_order'=>3));
+		$this->insert('ophnupostoperative_postoperative_belongings',array('name'=>'Other','display_order'=>4));
+
+		$this->createTable('ophnupostoperative_postoperative_skin', array(
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
-				'element_id' => 'int(10) unsigned NOT NULL',
-				'ophnupostoperative_fallsmobility_fm_id_id' => 'int(10) unsigned NOT NULL',
+				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
+				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'default' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
 				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'PRIMARY KEY (`id`)',
-				'KEY `et_ophnupostoperative_fallsmobility_fm_id_assignment_lmui_fk` (`last_modified_user_id`)',
-				'KEY `et_ophnupostoperative_fallsmobility_fm_id_assignment_cui_fk` (`created_user_id`)',
-				'KEY `et_ophnupostoperative_fallsmobility_fm_id_assignment_ele_fk` (`element_id`)',
-				'KEY `et_ophnupostoperative_fallsmobility_fm_id_assignment_lku_fk` (`ophnupostoperative_fallsmobility_fm_id_id`)',
-				'CONSTRAINT `et_ophnupostoperative_fallsmobility_fm_id_assignment_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_fallsmobility_fm_id_assignment_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_fallsmobility_fm_id_assignment_ele_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophnupostoperative_fallsmobility` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_fallsmobility_fm_id_assignment_lku_fk` FOREIGN KEY (`ophnupostoperative_fallsmobility_fm_id_id`) REFERENCES `ophnupostoperative_fallsmobility_fm_id` (`id`)',
+				'KEY `ophnupostoperative_postoperative_skin_lmui_fk` (`last_modified_user_id`)',
+				'KEY `ophnupostoperative_postoperative_skin_cui_fk` (`created_user_id`)',
+				'CONSTRAINT `ophnupostoperative_postoperative_skin_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `ophnupostoperative_postoperative_skin_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
 			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
 
+		$this->insert('ophnupostoperative_postoperative_skin',array('name'=>'Bruising','display_order'=>1));
+		$this->insert('ophnupostoperative_postoperative_skin',array('name'=>'Dry','display_order'=>2));
+		$this->insert('ophnupostoperative_postoperative_skin',array('name'=>'Warm','display_order'=>3));
+		$this->insert('ophnupostoperative_postoperative_skin',array('name'=>'Cool','display_order'=>4));
+		$this->insert('ophnupostoperative_postoperative_skin',array('name'=>'Moist','display_order'=>5));
+		$this->insert('ophnupostoperative_postoperative_skin',array('name'=>'Other','display_order'=>6));
+
+		$this->createTable('ophnupostoperative_postoperative_obs', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
+				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'default' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `ophnupostoperative_postoperative_obs_lmui_fk` (`last_modified_user_id`)',
+				'KEY `ophnupostoperative_postoperative_obs_cui_fk` (`created_user_id`)',
+				'CONSTRAINT `ophnupostoperative_postoperative_obs_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `ophnupostoperative_postoperative_obs_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+		$this->insert('ophnupostoperative_postoperative_obs',array('name'=>'Anxious / Restless','display_order'=>1));
+		$this->insert('ophnupostoperative_postoperative_obs',array('name'=>'Calm','display_order'=>2));
+		$this->insert('ophnupostoperative_postoperative_obs',array('name'=>'Crying','display_order'=>3));
+		$this->insert('ophnupostoperative_postoperative_obs',array('name'=>'Talkative','display_order'=>4));
+		$this->insert('ophnupostoperative_postoperative_obs',array('name'=>'Withdrawn','display_order'=>5));
+		$this->insert('ophnupostoperative_postoperative_obs',array('name'=>'Other','display_order'=>6));
 
 
-		$this->createTable('et_ophnupostoperative_dentalwork', array(
+
+		$this->createTable('et_ophnupostoperative_postoperative', array(
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
 				'event_id' => 'int(10) unsigned NOT NULL',
+				'fallsmobility' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
+
 				'removable_dental' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
 
 				'full_uppers' => 'tinyint(1) unsigned NOT NULL',
@@ -325,259 +325,119 @@ class m140402_140720_event_type_OphNuPostoperative extends CDbMigration
 
 				'other_comments' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'',
 
-				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'PRIMARY KEY (`id`)',
-				'KEY `et_ophnupostoperative_dentalwork_lmui_fk` (`last_modified_user_id`)',
-				'KEY `et_ophnupostoperative_dentalwork_cui_fk` (`created_user_id`)',
-				'KEY `et_ophnupostoperative_dentalwork_ev_fk` (`event_id`)',
-				'CONSTRAINT `et_ophnupostoperative_dentalwork_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_dentalwork_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_dentalwork_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
-			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+				'hearing_aid_present' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
 
+				'h_right' => 'tinyint(1) unsigned NOT NULL',
 
+				'h_returned_right' => 'tinyint(1) unsigned NOT NULL',
 
-		$this->createTable('et_ophnupostoperative_hearingaid', array(
-				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
-				'event_id' => 'int(10) unsigned NOT NULL',
-				'hearing_aid' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
+				'h_left' => 'tinyint(1) unsigned NOT NULL',
 
-				'right' => 'tinyint(1) unsigned NOT NULL',
+				'h_returned_left' => 'tinyint(1) unsigned NOT NULL',
 
-				'right_returned' => 'tinyint(1) unsigned NOT NULL',
+				'h_comments' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'',
 
-				'left' => 'tinyint(1) unsigned NOT NULL',
+				's_comments' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'',
 
-				'left_returned' => 'tinyint(1) unsigned NOT NULL',
+				'o_comments' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
+
+				'eye_dressing_in_place' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
+
+				'iv_removed' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
+
+				'ecg_dots_removed' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
+
+				'take_home_ophthalmic' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
+
+				'instructions_given' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
 
 				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'PRIMARY KEY (`id`)',
-				'KEY `et_ophnupostoperative_hearingaid_lmui_fk` (`last_modified_user_id`)',
-				'KEY `et_ophnupostoperative_hearingaid_cui_fk` (`created_user_id`)',
-				'KEY `et_ophnupostoperative_hearingaid_ev_fk` (`event_id`)',
-				'CONSTRAINT `et_ophnupostoperative_hearingaid_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_hearingaid_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_hearingaid_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
+				'KEY `et_ophnupostoperative_postoperative_lmui_fk` (`last_modified_user_id`)',
+				'KEY `et_ophnupostoperative_postoperative_cui_fk` (`created_user_id`)',
+				'KEY `et_ophnupostoperative_postoperative_ev_fk` (`event_id`)',
+				'CONSTRAINT `et_ophnupostoperative_postoperative_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnupostoperative_postoperative_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnupostoperative_postoperative_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
 			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
 
-		$this->createTable('ophnupostoperative_patientbelongings_belongings', array(
-				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
-				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
-				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'default' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
-				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'PRIMARY KEY (`id`)',
-				'KEY `ophnupostoperative_patientbelongings_belongings_lmui_fk` (`last_modified_user_id`)',
-				'KEY `ophnupostoperative_patientbelongings_belongings_cui_fk` (`created_user_id`)',
-				'CONSTRAINT `ophnupostoperative_patientbelongings_belongings_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `ophnupostoperative_patientbelongings_belongings_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
-			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
-
-		$this->insert('ophnupostoperative_patientbelongings_belongings',array('name'=>'Glasses','display_order'=>1));
-		$this->insert('ophnupostoperative_patientbelongings_belongings',array('name'=>'Jewelery','display_order'=>2));
-		$this->insert('ophnupostoperative_patientbelongings_belongings',array('name'=>'Clothing','display_order'=>3));
-		$this->insert('ophnupostoperative_patientbelongings_belongings',array('name'=>'Other','display_order'=>4));
-
-
-
-		$this->createTable('et_ophnupostoperative_patientbelongings', array(
-				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
-				'event_id' => 'int(10) unsigned NOT NULL',
-				'patient_belongings' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
-
-				'comments' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'',
-
-				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'PRIMARY KEY (`id`)',
-				'KEY `et_ophnupostoperative_patientbelongings_lmui_fk` (`last_modified_user_id`)',
-				'KEY `et_ophnupostoperative_patientbelongings_cui_fk` (`created_user_id`)',
-				'KEY `et_ophnupostoperative_patientbelongings_ev_fk` (`event_id`)',
-				'CONSTRAINT `et_ophnupostoperative_patientbelongings_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_patientbelongings_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_patientbelongings_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
-			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
-
-		$this->createTable('et_ophnupostoperative_patientbelongings_belongings_assignment', array(
+		$this->createTable('et_ophnupostoperative_postoperative_falls_assignment', array(
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
 				'element_id' => 'int(10) unsigned NOT NULL',
-				'ophnupostoperative_patientbelongings_belongings_id' => 'int(10) unsigned NOT NULL',
+				'ophnupostoperative_postoperative_falls_id' => 'int(10) unsigned NOT NULL',
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `et_ophnupostoperative_postoperative_falls_assignment_lmui_fk` (`last_modified_user_id`)',
+				'KEY `et_ophnupostoperative_postoperative_falls_assignment_cui_fk` (`created_user_id`)',
+				'KEY `et_ophnupostoperative_postoperative_falls_assignment_ele_fk` (`element_id`)',
+				'KEY `et_ophnupostoperative_postoperative_falls_assignment_lku_fk` (`ophnupostoperative_postoperative_falls_id`)',
+				'CONSTRAINT `et_ophnupostoperative_postoperative_falls_assignment_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnupostoperative_postoperative_falls_assignment_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnupostoperative_postoperative_falls_assignment_ele_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophnupostoperative_postoperative` (`id`)',
+				'CONSTRAINT `et_ophnupostoperative_postoperative_falls_assignment_lku_fk` FOREIGN KEY (`ophnupostoperative_postoperative_falls_id`) REFERENCES `ophnupostoperative_postoperative_falls` (`id`)',
+			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+		$this->createTable('et_ophnupostoperative_postoperative_belongings_assignment', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'element_id' => 'int(10) unsigned NOT NULL',
+				'ophnupostoperative_postoperative_belongings_id' => 'int(10) unsigned NOT NULL',
 				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'PRIMARY KEY (`id`)',
 				'KEY `et_opba_lmui_fk` (`last_modified_user_id`)',
-				'KEY `et_opba_cui_fk` (`created_user_id`)',
-				'KEY `et_opba_ele_fk` (`element_id`)',
-				'KEY `et_opba_lku_fk` (`ophnupostoperative_patientbelongings_belongings_id`)',
+				'KEY `et_ophnupostoperative_postoperative_belongings_assignment_cui_fk` (`created_user_id`)',
+				'KEY `et_ophnupostoperative_postoperative_belongings_assignment_ele_fk` (`element_id`)',
+				'KEY `et_ophnupostoperative_postoperative_belongings_assignment_lku_fk` (`ophnupostoperative_postoperative_belongings_id`)',
 				'CONSTRAINT `et_opba_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_opba_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_opba_ele_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophnupostoperative_patientbelongings` (`id`)',
-				'CONSTRAINT `et_opba_lku_fk` FOREIGN KEY (`ophnupostoperative_patientbelongings_belongings_id`) REFERENCES `ophnupostoperative_patientbelongings_belongings` (`id`)',
+				'CONSTRAINT `et_ophnupostoperative_postoperative_belongings_assignment_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnupostoperative_postoperative_belongings_assignment_ele_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophnupostoperative_postoperative` (`id`)',
+				'CONSTRAINT `et_ophnupostoperative_postoperative_belongings_assignment_lku_fk` FOREIGN KEY (`ophnupostoperative_postoperative_belongings_id`) REFERENCES `ophnupostoperative_postoperative_belongings` (`id`)',
 			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
 
-		$this->createTable('ophnupostoperative_skinassessment_assessment_id', array(
-				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
-				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
-				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'default' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
-				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'PRIMARY KEY (`id`)',
-				'KEY `ophnupostoperative_skinassessment_assessment_id_lmui_fk` (`last_modified_user_id`)',
-				'KEY `ophnupostoperative_skinassessment_assessment_id_cui_fk` (`created_user_id`)',
-				'CONSTRAINT `ophnupostoperative_skinassessment_assessment_id_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `ophnupostoperative_skinassessment_assessment_id_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
-			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
-
-		$this->insert('ophnupostoperative_skinassessment_assessment_id',array('name'=>'Bruising','display_order'=>1));
-		$this->insert('ophnupostoperative_skinassessment_assessment_id',array('name'=>'Warm','display_order'=>2));
-		$this->insert('ophnupostoperative_skinassessment_assessment_id',array('name'=>'Cool','display_order'=>3));
-		$this->insert('ophnupostoperative_skinassessment_assessment_id',array('name'=>'Dry','display_order'=>4));
-		$this->insert('ophnupostoperative_skinassessment_assessment_id',array('name'=>'Moist','display_order'=>5));
-		$this->insert('ophnupostoperative_skinassessment_assessment_id',array('name'=>'Other','display_order'=>6));
-
-
-
-		$this->createTable('et_ophnupostoperative_skinassessment', array(
-				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
-				'event_id' => 'int(10) unsigned NOT NULL',
-				'comments' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'',
-
-				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'PRIMARY KEY (`id`)',
-				'KEY `et_ophnupostoperative_skinassessment_lmui_fk` (`last_modified_user_id`)',
-				'KEY `et_ophnupostoperative_skinassessment_cui_fk` (`created_user_id`)',
-				'KEY `et_ophnupostoperative_skinassessment_ev_fk` (`event_id`)',
-				'CONSTRAINT `et_ophnupostoperative_skinassessment_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_skinassessment_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_skinassessment_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
-			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
-
-		$this->createTable('et_ophnupostoperative_skinassessment_assessment_id_assignment', array(
+		$this->createTable('et_ophnupostoperative_postoperative_skin_assignment', array(
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
 				'element_id' => 'int(10) unsigned NOT NULL',
-				'ophnupostoperative_skinassessment_assessment_id_id' => 'int(10) unsigned NOT NULL',
+				'ophnupostoperative_postoperative_skin_id' => 'int(10) unsigned NOT NULL',
 				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'PRIMARY KEY (`id`)',
-				'KEY `et_osaia_lmui_fk` (`last_modified_user_id`)',
-				'KEY `et_osaia_cui_fk` (`created_user_id`)',
-				'KEY `et_osaia_ele_fk` (`element_id`)',
-				'KEY `et_osaia_lku_fk` (`ophnupostoperative_skinassessment_assessment_id_id`)',
-				'CONSTRAINT `et_osaia_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_osaia_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_osaia_ele_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophnupostoperative_skinassessment` (`id`)',
-				'CONSTRAINT `et_osaia_lku_fk` FOREIGN KEY (`ophnupostoperative_skinassessment_assessment_id_id`) REFERENCES `ophnupostoperative_skinassessment_assessment_id` (`id`)',
+				'KEY `et_ophnupostoperative_postoperative_skin_assignment_lmui_fk` (`last_modified_user_id`)',
+				'KEY `et_ophnupostoperative_postoperative_skin_assignment_cui_fk` (`created_user_id`)',
+				'KEY `et_ophnupostoperative_postoperative_skin_assignment_ele_fk` (`element_id`)',
+				'KEY `et_ophnupostoperative_postoperative_skin_assignment_lku_fk` (`ophnupostoperative_postoperative_skin_id`)',
+				'CONSTRAINT `et_ophnupostoperative_postoperative_skin_assignment_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnupostoperative_postoperative_skin_assignment_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnupostoperative_postoperative_skin_assignment_ele_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophnupostoperative_postoperative` (`id`)',
+				'CONSTRAINT `et_ophnupostoperative_postoperative_skin_assignment_lku_fk` FOREIGN KEY (`ophnupostoperative_postoperative_skin_id`) REFERENCES `ophnupostoperative_postoperative_skin` (`id`)',
 			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
 
-		$this->createTable('ophnupostoperative_observations_ob_id', array(
-				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
-				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
-				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'default' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
-				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'PRIMARY KEY (`id`)',
-				'KEY `ophnupostoperative_observations_ob_id_lmui_fk` (`last_modified_user_id`)',
-				'KEY `ophnupostoperative_observations_ob_id_cui_fk` (`created_user_id`)',
-				'CONSTRAINT `ophnupostoperative_observations_ob_id_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `ophnupostoperative_observations_ob_id_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
-			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
-
-		$this->insert('ophnupostoperative_observations_ob_id',array('name'=>'Anxious / Restless','display_order'=>1));
-		$this->insert('ophnupostoperative_observations_ob_id',array('name'=>'Calm','display_order'=>2));
-		$this->insert('ophnupostoperative_observations_ob_id',array('name'=>'Talkative','display_order'=>3));
-		$this->insert('ophnupostoperative_observations_ob_id',array('name'=>'Withdrawn','display_order'=>4));
-		$this->insert('ophnupostoperative_observations_ob_id',array('name'=>'Crying','display_order'=>5));
-		$this->insert('ophnupostoperative_observations_ob_id',array('name'=>'Other','display_order'=>6));
-
-
-
-		$this->createTable('et_ophnupostoperative_observations', array(
-				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
-				'event_id' => 'int(10) unsigned NOT NULL',
-				'comments' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'',
-
-				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'PRIMARY KEY (`id`)',
-				'KEY `et_ophnupostoperative_observations_lmui_fk` (`last_modified_user_id`)',
-				'KEY `et_ophnupostoperative_observations_cui_fk` (`created_user_id`)',
-				'KEY `et_ophnupostoperative_observations_ev_fk` (`event_id`)',
-				'CONSTRAINT `et_ophnupostoperative_observations_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_observations_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_observations_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
-			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
-
-		$this->createTable('et_ophnupostoperative_observations_ob_id_assignment', array(
+		$this->createTable('et_ophnupostoperative_postoperative_obs_assignment', array(
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
 				'element_id' => 'int(10) unsigned NOT NULL',
-				'ophnupostoperative_observations_ob_id_id' => 'int(10) unsigned NOT NULL',
+				'ophnupostoperative_postoperative_obs_id' => 'int(10) unsigned NOT NULL',
 				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'PRIMARY KEY (`id`)',
-				'KEY `et_ophnupostoperative_observations_ob_id_assignment_lmui_fk` (`last_modified_user_id`)',
-				'KEY `et_ophnupostoperative_observations_ob_id_assignment_cui_fk` (`created_user_id`)',
-				'KEY `et_ophnupostoperative_observations_ob_id_assignment_ele_fk` (`element_id`)',
-				'KEY `et_ophnupostoperative_observations_ob_id_assignment_lku_fk` (`ophnupostoperative_observations_ob_id_id`)',
-				'CONSTRAINT `et_ophnupostoperative_observations_ob_id_assignment_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_observations_ob_id_assignment_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_observations_ob_id_assignment_ele_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophnupostoperative_observations` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_observations_ob_id_assignment_lku_fk` FOREIGN KEY (`ophnupostoperative_observations_ob_id_id`) REFERENCES `ophnupostoperative_observations_ob_id` (`id`)',
-			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
-
-
-
-		$this->createTable('et_ophnupostoperative_checklist', array(
-				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
-				'event_id' => 'int(10) unsigned NOT NULL',
-				'eye_dressing_in_place' => 'tinyint(1) unsigned NOT NULL',
-
-				'iv_removed' => 'tinyint(1) unsigned NOT NULL',
-
-				'ecg_dots_removed' => 'tinyint(1) unsigned NOT NULL',
-
-				'take_home_ophthalmic_medication_and/or_analgesics_supplies' => 'tinyint(1) unsigned NOT NULL',
-
-				'instructions' => 'tinyint(1) unsigned NOT NULL',
-
-				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'PRIMARY KEY (`id`)',
-				'KEY `et_ophnupostoperative_checklist_lmui_fk` (`last_modified_user_id`)',
-				'KEY `et_ophnupostoperative_checklist_cui_fk` (`created_user_id`)',
-				'KEY `et_ophnupostoperative_checklist_ev_fk` (`event_id`)',
-				'CONSTRAINT `et_ophnupostoperative_checklist_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_checklist_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_checklist_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
+				'KEY `et_ophnupostoperative_postoperative_obs_assignment_lmui_fk` (`last_modified_user_id`)',
+				'KEY `et_ophnupostoperative_postoperative_obs_assignment_cui_fk` (`created_user_id`)',
+				'KEY `et_ophnupostoperative_postoperative_obs_assignment_ele_fk` (`element_id`)',
+				'KEY `et_ophnupostoperative_postoperative_obs_assignment_lku_fk` (`ophnupostoperative_postoperative_obs_id`)',
+				'CONSTRAINT `et_ophnupostoperative_postoperative_obs_assignment_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnupostoperative_postoperative_obs_assignment_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_ophnupostoperative_postoperative_obs_assignment_ele_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophnupostoperative_postoperative` (`id`)',
+				'CONSTRAINT `et_ophnupostoperative_postoperative_obs_assignment_lku_fk` FOREIGN KEY (`ophnupostoperative_postoperative_obs_id`) REFERENCES `ophnupostoperative_postoperative_obs` (`id`)',
 			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
 
 	}
@@ -604,41 +464,17 @@ class m140402_140720_event_type_OphNuPostoperative extends CDbMigration
 
 
 
-		$this->dropTable('et_ophnupostoperative_fallsmobility_fm_id_assignment');
-		$this->dropTable('et_ophnupostoperative_fallsmobility');
+		$this->dropTable('et_ophnupostoperative_postoperative_falls_assignment');
+		$this->dropTable('et_ophnupostoperative_postoperative_belongings_assignment');
+		$this->dropTable('et_ophnupostoperative_postoperative_skin_assignment');
+		$this->dropTable('et_ophnupostoperative_postoperative_obs_assignment');
+		$this->dropTable('et_ophnupostoperative_postoperative');
 
 
-		$this->dropTable('ophnupostoperative_fallsmobility_fm_id');
-
-		$this->dropTable('et_ophnupostoperative_dentalwork');
-
-
-
-		$this->dropTable('et_ophnupostoperative_hearingaid');
-
-
-
-		$this->dropTable('et_ophnupostoperative_patientbelongings_belongings_assignment');
-		$this->dropTable('et_ophnupostoperative_patientbelongings');
-
-
-		$this->dropTable('ophnupostoperative_patientbelongings_belongings');
-
-		$this->dropTable('et_ophnupostoperative_skinassessment_assessment_id_assignment');
-		$this->dropTable('et_ophnupostoperative_skinassessment');
-
-
-		$this->dropTable('ophnupostoperative_skinassessment_assessment_id');
-
-		$this->dropTable('et_ophnupostoperative_observations_ob_id_assignment');
-		$this->dropTable('et_ophnupostoperative_observations');
-
-
-		$this->dropTable('ophnupostoperative_observations_ob_id');
-
-		$this->dropTable('et_ophnupostoperative_checklist');
-
-
+		$this->dropTable('ophnupostoperative_postoperative_falls');
+		$this->dropTable('ophnupostoperative_postoperative_belongings');
+		$this->dropTable('ophnupostoperative_postoperative_skin');
+		$this->dropTable('ophnupostoperative_postoperative_obs');
 
 
 		$event_type = $this->dbConnection->createCommand()->select('id')->from('event_type')->where('class_name=:class_name', array(':class_name'=>'OphNuPostoperative'))->queryRow();
