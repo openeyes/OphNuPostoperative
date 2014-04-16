@@ -29,12 +29,12 @@
 			<div class="large-10 column end"><div class="data-value"><?php echo $element->patient_belongings ? 'Yes' : 'No'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('belongings_id'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php if (!$element->belongings_ids) {?>
+			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('belongings'))?>:</div></div>
+			<div class="large-10 column end"><div class="data-value"><?php if (!$element->belongingss) {?>
 							None
 						<?php } else {?>
-								<?php foreach ($element->belongings_ids as $item) {
-									echo $item->ophnupostoperative_patientbelongings_belongings_id->name?><br/>
+								<?php foreach ($element->belongingss as $item) {
+									echo $item->ophnupostoperative_patientbelongings_belongings->name?><br/>
 								<?php }?>
 						<?php }?>
 			</div></div>

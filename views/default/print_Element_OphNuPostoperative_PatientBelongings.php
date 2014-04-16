@@ -28,14 +28,14 @@
 		<tr>
 			<td colspan="2">
 				<div class="colThird">
-					<b><?php echo CHtml::encode($element->getAttributeLabel('belongings_id'))?>:</b>
+					<b><?php echo CHtml::encode($element->getAttributeLabel('belongings'))?>:</b>
 					<div class="eventHighlight medium">
-						<?php if (!$element->belongings_ids) {?>
+						<?php if (!$element->belongingss) {?>
 							<h4>None</h4>
 						<?php } else {?>
 							<h4>
-								<?php foreach ($element->belongings_ids as $item) {
-									echo $item->ophnupostoperative_patientbelongings_belongings_id->name?><br/>
+								<?php foreach ($element->belongingss as $item) {
+									echo $item->ophnupostoperative_patientbelongings_belongings->name?><br/>
 								<?php }?>
 							</h4>
 						<?php }?>

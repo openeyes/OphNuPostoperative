@@ -366,7 +366,7 @@ class m140402_140720_event_type_OphNuPostoperative extends CDbMigration
 				'CONSTRAINT `et_ophnupostoperative_hearingaid_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
 			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
 
-		$this->createTable('ophnupostoperative_patientbelongings_belongings_id', array(
+		$this->createTable('ophnupostoperative_patientbelongings_belongings', array(
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
 				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
 				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
@@ -376,17 +376,16 @@ class m140402_140720_event_type_OphNuPostoperative extends CDbMigration
 				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'PRIMARY KEY (`id`)',
-				'KEY `ophnupostoperative_patientbelongings_belongings_id_lmui_fk` (`last_modified_user_id`)',
-				'KEY `ophnupostoperative_patientbelongings_belongings_id_cui_fk` (`created_user_id`)',
-				'CONSTRAINT `ophnupostoperative_patientbelongings_belongings_id_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `ophnupostoperative_patientbelongings_belongings_id_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+				'KEY `ophnupostoperative_patientbelongings_belongings_lmui_fk` (`last_modified_user_id`)',
+				'KEY `ophnupostoperative_patientbelongings_belongings_cui_fk` (`created_user_id`)',
+				'CONSTRAINT `ophnupostoperative_patientbelongings_belongings_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `ophnupostoperative_patientbelongings_belongings_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
 			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
 
-		$this->insert('ophnupostoperative_patientbelongings_belongings_id',array('name'=>'Glasses','display_order'=>1));
-		$this->insert('ophnupostoperative_patientbelongings_belongings_id',array('name'=>'Jewelery','display_order'=>2));
-		$this->insert('ophnupostoperative_patientbelongings_belongings_id',array('name'=>'Clothing','display_order'=>3));
-		$this->insert('ophnupostoperative_patientbelongings_belongings_id',array('name'=>'Other','display_order'=>4));
-		$this->insert('ophnupostoperative_patientbelongings_belongings_id',array('name'=>'Enter value','display_order'=>5));
+		$this->insert('ophnupostoperative_patientbelongings_belongings',array('name'=>'Glasses','display_order'=>1));
+		$this->insert('ophnupostoperative_patientbelongings_belongings',array('name'=>'Jewelery','display_order'=>2));
+		$this->insert('ophnupostoperative_patientbelongings_belongings',array('name'=>'Clothing','display_order'=>3));
+		$this->insert('ophnupostoperative_patientbelongings_belongings',array('name'=>'Other','display_order'=>4));
 
 
 
@@ -410,23 +409,23 @@ class m140402_140720_event_type_OphNuPostoperative extends CDbMigration
 				'CONSTRAINT `et_ophnupostoperative_patientbelongings_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
 			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
 
-		$this->createTable('et_ophnupostoperative_patientbelongings_belongings_id_assignment', array(
+		$this->createTable('et_ophnupostoperative_patientbelongings_belongings_assignment', array(
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
 				'element_id' => 'int(10) unsigned NOT NULL',
-				'ophnupostoperative_patientbelongings_belongings_id_id' => 'int(10) unsigned NOT NULL',
+				'ophnupostoperative_patientbelongings_belongings_id' => 'int(10) unsigned NOT NULL',
 				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'PRIMARY KEY (`id`)',
-				'KEY `et_opbia_lmui_fk` (`last_modified_user_id`)',
-				'KEY `et_opbia_cui_fk` (`created_user_id`)',
-				'KEY `et_opbia_ele_fk` (`element_id`)',
-				'KEY `et_opbia_lku_fk` (`ophnupostoperative_patientbelongings_belongings_id_id`)',
-				'CONSTRAINT `et_opbia_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_opbia_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_opbia_ele_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophnupostoperative_patientbelongings` (`id`)',
-				'CONSTRAINT `et_opbia_lku_fk` FOREIGN KEY (`ophnupostoperative_patientbelongings_belongings_id_id`) REFERENCES `ophnupostoperative_patientbelongings_belongings_id` (`id`)',
+				'KEY `et_opba_lmui_fk` (`last_modified_user_id`)',
+				'KEY `et_opba_cui_fk` (`created_user_id`)',
+				'KEY `et_opba_ele_fk` (`element_id`)',
+				'KEY `et_opba_lku_fk` (`ophnupostoperative_patientbelongings_belongings_id`)',
+				'CONSTRAINT `et_opba_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_opba_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `et_opba_ele_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophnupostoperative_patientbelongings` (`id`)',
+				'CONSTRAINT `et_opba_lku_fk` FOREIGN KEY (`ophnupostoperative_patientbelongings_belongings_id`) REFERENCES `ophnupostoperative_patientbelongings_belongings` (`id`)',
 			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
 
 		$this->createTable('ophnupostoperative_skinassessment_assessment_id', array(
@@ -619,11 +618,11 @@ class m140402_140720_event_type_OphNuPostoperative extends CDbMigration
 
 
 
-		$this->dropTable('et_ophnupostoperative_patientbelongings_belongings_id_assignment');
+		$this->dropTable('et_ophnupostoperative_patientbelongings_belongings_assignment');
 		$this->dropTable('et_ophnupostoperative_patientbelongings');
 
 
-		$this->dropTable('ophnupostoperative_patientbelongings_belongings_id');
+		$this->dropTable('ophnupostoperative_patientbelongings_belongings');
 
 		$this->dropTable('et_ophnupostoperative_skinassessment_assessment_id_assignment');
 		$this->dropTable('et_ophnupostoperative_skinassessment');

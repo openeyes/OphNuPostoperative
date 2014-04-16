@@ -29,7 +29,7 @@
 
 		<div class="element-fields">
 			<?php echo $form->radioBoolean($element, 'patient_belongings')?>
-	<?php echo $form->multiSelectList($element, 'MultiSelect_belongings_id', 'belongings_ids', 'ophnupostoperative_patientbelongings_belongings_id_id', CHtml::listData(OphNuPostoperative_PatientBelongings_BelongingsId::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_patientbelongings_belongings_id_defaults, array('empty' => '- Please select -', 'label' => 'Patient belongings'))?>
+	<?php echo $form->multiSelectList($element, 'MultiSelect_belongings', 'belongingss', 'ophnupostoperative_patientbelongings_belongings_id', CHtml::listData(OphNuPostoperative_PatientBelongings_Belongings::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_patientbelongings_belongings_defaults, array('empty' => '- Please select -', 'label' => 'Patient Belongings'))?>
 	<?php echo $form->textField($element, 'comments', array('size' => '10'))?>
 	</div>
 	
