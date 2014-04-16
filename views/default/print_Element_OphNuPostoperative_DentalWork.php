@@ -22,36 +22,36 @@
 <table class="subtleWhite normalText">
 	<tbody>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('dental_present'))?>:</td>
-			<td><span class="big"><?php echo $element->dental_present ? 'Yes' : 'No'?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('removable_dental'))?>:</td>
+			<td><span class="big"><?php echo $element->removable_dental ? 'Yes' : 'No'?></span></td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('uppers'))?></td>
-			<td><span class="big"><?php echo $element->uppers ? 'Yes' : 'No'?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('full_uppers'))?></td>
+			<td><span class="big"><?php echo $element->full_uppers ? 'Yes' : 'No'?></span></td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('uppers_removed'))?></td>
-			<td><span class="big"><?php echo $element->uppers_removed ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('lowers'))?></td>
-			<td><span class="big"><?php echo $element->lowers ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('lowers_removed'))?></td>
-			<td><span class="big"><?php echo $element->lowers_removed ? 'Yes' : 'No'?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('full_lowers'))?></td>
+			<td><span class="big"><?php echo $element->full_lowers ? 'Yes' : 'No'?></span></td>
 		</tr>
 		<tr>
 			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('other'))?></td>
 			<td><span class="big"><?php echo $element->other ? 'Yes' : 'No'?></span></td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('other_comments'))?></td>
-			<td><span class="big"><?php echo CHtml::encode($element->other_comments)?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('full_uppers_returned'))?></td>
+			<td><span class="big"><?php echo $element->full_uppers_returned ? 'Yes' : 'No'?></span></td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('other_removed'))?></td>
-			<td><span class="big"><?php echo $element->other_removed ? 'Yes' : 'No'?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('ful_lowers_returned'))?></td>
+			<td><span class="big"><?php echo $element->ful_lowers_returned ? 'Yes' : 'No'?></span></td>
+		</tr>
+		<tr>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('other_returned'))?></td>
+			<td><span class="big"><?php echo $element->other_returned ? 'Yes' : 'No'?></span></td>
+		</tr>
+		<tr>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('other_comments'))?></td>
+			<td><span class="big"><?php echo CHtml::encode($element->other_comments)?></span></td>
 		</tr>
 	</tbody>
 </table>

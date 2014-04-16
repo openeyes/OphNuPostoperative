@@ -28,11 +28,11 @@
 	</header>
 
 		<div class="element-fields">
-			<?php echo $form->radioBoolean($element, 'hearing_aid_present')?>
+			<?php echo $form->radioBoolean($element, 'hearing_aid')?>
 	<?php echo $form->checkBox($element, 'right')?>
+	<?php echo $form->checkBox($element, 'right_returned')?>
 	<?php echo $form->checkBox($element, 'left')?>
-	<?php echo $form->checkBox($element, 'left_removed')?>
-	<?php echo $form->radioBoolean($element, 'right_removed')?>
+	<?php echo $form->checkBox($element, 'left_returned')?>
 	</div>
 	
 </section>

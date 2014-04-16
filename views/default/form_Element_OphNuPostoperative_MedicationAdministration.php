@@ -28,7 +28,7 @@
 	</header>
 
 		<div class="element-fields">
-			<?php echo $form->textArea($element, 'comments', array('rows' => 6, 'cols' => 80))?>
+			<?php echo $form->textArea($element, 'medication_administration', array('rows' => 6, 'cols' => 80))?>
 	</div>
 	
 </section>

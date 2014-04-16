@@ -24,11 +24,8 @@
  * @property string $id
  * @property integer $event_id
  * @property integer $patient_belongings
- * @property integer $glasses
- * @property integer $jewlery
- * @property integer $clothing
- * @property integer $other
- * @property string $other_comments
+ * @property integer $patient_belongings_id
+ * @property string $comments
  *
  * The followings are the available model relations:
  *
@@ -37,12 +34,11 @@
  * @property Event $event
  * @property User $user
  * @property User $usermodified
+ * @property OphNuPostoperative_PatientBelongings_PatientBelongings $patient_belongings
  */
 
 class Element_OphNuPostoperative_PatientBelongings  extends  BaseEventTypeElement
 {
-	public $service;
-
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -66,9 +62,9 @@ class Element_OphNuPostoperative_PatientBelongings  extends  BaseEventTypeElemen
 	public function rules()
 	{
 		return array(
-			array('event_id, patient_belongings, glasses, jewlery, clothing, other, other_comments, ', 'safe'),
-			array('patient_belongings, glasses, jewlery, clothing, other, other_comments, ', 'required'),
-			array('id, event_id, patient_belongings, glasses, jewlery, clothing, other, other_comments, ', 'safe', 'on' => 'search'),
+			array('event_id, patient_belongings, patient_belongings_id, comments, ', 'safe'),
+			array('patient_belongings, patient_belongings_id, comments, ', 'required'),
+			array('id, event_id, patient_belongings, patient_belongings_id, comments, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -83,6 +79,7 @@ class Element_OphNuPostoperative_PatientBelongings  extends  BaseEventTypeElemen
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
+			'patient_belongings' => array(self::BELONGS_TO, 'OphNuPostoperative_PatientBelongings_PatientBelongings', 'patient_belongings_id'),
 		);
 	}
 
@@ -94,12 +91,9 @@ class Element_OphNuPostoperative_PatientBelongings  extends  BaseEventTypeElemen
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'patient_belongings' => 'Patient belongings',
-			'glasses' => 'Glasses',
-			'jewlery' => 'Jewlery',
-			'clothing' => 'Clothing',
-			'other' => 'Other',
-			'other_comments' => 'Other',
+			'patient_belongings' => 'Patient Belongings',
+			'patient_belongings_id' => 'Patient belongings',
+			'comments' => 'Comments',
 		);
 	}
 
@@ -114,11 +108,8 @@ class Element_OphNuPostoperative_PatientBelongings  extends  BaseEventTypeElemen
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
 		$criteria->compare('patient_belongings', $this->patient_belongings);
-		$criteria->compare('glasses', $this->glasses);
-		$criteria->compare('jewlery', $this->jewlery);
-		$criteria->compare('clothing', $this->clothing);
-		$criteria->compare('other', $this->other);
-		$criteria->compare('other_comments', $this->other_comments);
+		$criteria->compare('patient_belongings_id', $this->patient_belongings_id);
+		$criteria->compare('comments', $this->comments);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,

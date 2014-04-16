@@ -29,11 +29,8 @@
 
 		<div class="element-fields">
 			<?php echo $form->radioBoolean($element, 'patient_belongings')?>
-	<?php echo $form->checkBox($element, 'glasses')?>
-	<?php echo $form->checkBox($element, 'jewlery')?>
-	<?php echo $form->checkBox($element, 'clothing')?>
-	<?php echo $form->checkBox($element, 'other')?>
-	<?php echo $form->textField($element, 'other_comments', array('size' => '10'))?>
+	<?php echo $form->dropDownList($element, 'patient_belongings_id', CHtml::listData(OphNuPostoperative_PatientBelongings_PatientBelongings::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'))?>
+	<?php echo $form->textField($element, 'comments', array('size' => '10'))?>
 	</div>
 	
 </section>

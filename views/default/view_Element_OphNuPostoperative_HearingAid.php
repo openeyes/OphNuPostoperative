@@ -25,24 +25,24 @@
 
 		<div class="element-data">
 				<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('hearing_aid_present'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->hearing_aid_present ? 'Yes' : 'No'?></div></div>
+			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('hearing_aid'))?>:</div></div>
+			<div class="large-10 column end"><div class="data-value"><?php echo $element->hearing_aid ? 'Yes' : 'No'?></div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('right'))?></div></div>
 			<div class="large-10 column end"><div class="data-value"><?php echo $element->right ? 'Yes' : 'No'?></div></div>
 		</div>
 		<div class="row data-row">
+			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('right_returned'))?></div></div>
+			<div class="large-10 column end"><div class="data-value"><?php echo $element->right_returned ? 'Yes' : 'No'?></div></div>
+		</div>
+		<div class="row data-row">
 			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('left'))?></div></div>
 			<div class="large-10 column end"><div class="data-value"><?php echo $element->left ? 'Yes' : 'No'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('left_removed'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->left_removed ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('right_removed'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->right_removed ? 'Yes' : 'No'?></div></div>
+			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('left_returned'))?></div></div>
+			<div class="large-10 column end"><div class="data-value"><?php echo $element->left_returned ? 'Yes' : 'No'?></div></div>
 		</div>
 			</div>
 </section>

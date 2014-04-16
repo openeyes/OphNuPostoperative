@@ -23,13 +23,8 @@
  * The followings are the available columns in table:
  * @property string $id
  * @property integer $event_id
- * @property integer $bruising
- * @property integer $dry
- * @property integer $warm
- * @property integer $moist
- * @property integer $cool
- * @property integer $other
- * @property string $other_comments
+ * @property integer $skin_assessment_id
+ * @property string $comments
  *
  * The followings are the available model relations:
  *
@@ -38,12 +33,11 @@
  * @property Event $event
  * @property User $user
  * @property User $usermodified
+ * @property OphNuPostoperative_SkinAssessment_SkinAssessment $skin_assessment
  */
 
 class Element_OphNuPostoperative_SkinAssessment  extends  BaseEventTypeElement
 {
-	public $service;
-
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -67,9 +61,9 @@ class Element_OphNuPostoperative_SkinAssessment  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, bruising, dry, warm, moist, cool, other, other_comments, ', 'safe'),
-			array('bruising, dry, warm, moist, cool, other, other_comments, ', 'required'),
-			array('id, event_id, bruising, dry, warm, moist, cool, other, other_comments, ', 'safe', 'on' => 'search'),
+			array('event_id, skin_assessment_id, comments, ', 'safe'),
+			array('skin_assessment_id, comments, ', 'required'),
+			array('id, event_id, skin_assessment_id, comments, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -84,6 +78,7 @@ class Element_OphNuPostoperative_SkinAssessment  extends  BaseEventTypeElement
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
+			'skin_assessment' => array(self::BELONGS_TO, 'OphNuPostoperative_SkinAssessment_SkinAssessment', 'skin_assessment_id'),
 		);
 	}
 
@@ -95,13 +90,8 @@ class Element_OphNuPostoperative_SkinAssessment  extends  BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'bruising' => 'Bruising',
-			'dry' => 'Dry',
-			'warm' => 'Warm',
-			'moist' => 'Moist',
-			'cool' => 'Cool',
-			'other' => 'Other',
-			'other_comments' => 'Other',
+			'skin_assessment_id' => 'Skin assessment',
+			'comments' => 'Comments',
 		);
 	}
 
@@ -115,13 +105,8 @@ class Element_OphNuPostoperative_SkinAssessment  extends  BaseEventTypeElement
 
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
-		$criteria->compare('bruising', $this->bruising);
-		$criteria->compare('dry', $this->dry);
-		$criteria->compare('warm', $this->warm);
-		$criteria->compare('moist', $this->moist);
-		$criteria->compare('cool', $this->cool);
-		$criteria->compare('other', $this->other);
-		$criteria->compare('other_comments', $this->other_comments);
+		$criteria->compare('skin_assessment_id', $this->skin_assessment_id);
+		$criteria->compare('comments', $this->comments);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,

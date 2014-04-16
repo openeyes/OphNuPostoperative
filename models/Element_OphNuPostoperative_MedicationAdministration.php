@@ -23,7 +23,7 @@
  * The followings are the available columns in table:
  * @property string $id
  * @property integer $event_id
- * @property string $comments
+ * @property string $medication_administration
  *
  * The followings are the available model relations:
  *
@@ -36,8 +36,6 @@
 
 class Element_OphNuPostoperative_MedicationAdministration  extends  BaseEventTypeElement
 {
-	public $service;
-
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -61,9 +59,9 @@ class Element_OphNuPostoperative_MedicationAdministration  extends  BaseEventTyp
 	public function rules()
 	{
 		return array(
-			array('event_id, comments, ', 'safe'),
-			array('comments, ', 'required'),
-			array('id, event_id, comments, ', 'safe', 'on' => 'search'),
+			array('event_id, medication_administration, ', 'safe'),
+			array('medication_administration, ', 'required'),
+			array('id, event_id, medication_administration, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -89,7 +87,7 @@ class Element_OphNuPostoperative_MedicationAdministration  extends  BaseEventTyp
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'comments' => 'Comments',
+			'medication_administration' => 'Medication Administration',
 		);
 	}
 
@@ -103,7 +101,7 @@ class Element_OphNuPostoperative_MedicationAdministration  extends  BaseEventTyp
 
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
-		$criteria->compare('comments', $this->comments);
+		$criteria->compare('medication_administration', $this->medication_administration);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,

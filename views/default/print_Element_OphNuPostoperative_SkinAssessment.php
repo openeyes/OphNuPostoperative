@@ -22,32 +22,12 @@
 <table class="subtleWhite normalText">
 	<tbody>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('bruising'))?></td>
-			<td><span class="big"><?php echo $element->bruising ? 'Yes' : 'No'?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('skin_assessment_id'))?></td>
+			<td><span class="big"><?php echo $element->skin_assessment ? $element->skin_assessment->name : 'None'?></span></td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('dry'))?></td>
-			<td><span class="big"><?php echo $element->dry ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('warm'))?></td>
-			<td><span class="big"><?php echo $element->warm ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('moist'))?></td>
-			<td><span class="big"><?php echo $element->moist ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('cool'))?></td>
-			<td><span class="big"><?php echo $element->cool ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('other'))?></td>
-			<td><span class="big"><?php echo $element->other ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('other_comments'))?></td>
-			<td><span class="big"><?php echo CHtml::encode($element->other_comments)?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('comments'))?></td>
+			<td><span class="big"><?php echo CHtml::encode($element->comments)?></span></td>
 		</tr>
 	</tbody>
 </table>

@@ -22,24 +22,24 @@
 <table class="subtleWhite normalText">
 	<tbody>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('hearing_aid_present'))?>:</td>
-			<td><span class="big"><?php echo $element->hearing_aid_present ? 'Yes' : 'No'?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('hearing_aid'))?>:</td>
+			<td><span class="big"><?php echo $element->hearing_aid ? 'Yes' : 'No'?></span></td>
 		</tr>
 		<tr>
 			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('right'))?></td>
 			<td><span class="big"><?php echo $element->right ? 'Yes' : 'No'?></span></td>
 		</tr>
 		<tr>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('right_returned'))?></td>
+			<td><span class="big"><?php echo $element->right_returned ? 'Yes' : 'No'?></span></td>
+		</tr>
+		<tr>
 			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('left'))?></td>
 			<td><span class="big"><?php echo $element->left ? 'Yes' : 'No'?></span></td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('left_removed'))?></td>
-			<td><span class="big"><?php echo $element->left_removed ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('right_removed'))?>:</td>
-			<td><span class="big"><?php echo $element->right_removed ? 'Yes' : 'No'?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('left_returned'))?></td>
+			<td><span class="big"><?php echo $element->left_returned ? 'Yes' : 'No'?></span></td>
 		</tr>
 	</tbody>
 </table>

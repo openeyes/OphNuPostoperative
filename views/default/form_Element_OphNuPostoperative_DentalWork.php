@@ -28,14 +28,14 @@
 	</header>
 
 		<div class="element-fields">
-			<?php echo $form->radioBoolean($element, 'dental_present')?>
-	<?php echo $form->checkBox($element, 'uppers')?>
-	<?php echo $form->checkBox($element, 'uppers_removed')?>
-	<?php echo $form->checkBox($element, 'lowers')?>
-	<?php echo $form->checkBox($element, 'lowers_removed')?>
+			<?php echo $form->radioBoolean($element, 'removable_dental')?>
+	<?php echo $form->checkBox($element, 'full_uppers')?>
+	<?php echo $form->checkBox($element, 'full_lowers')?>
 	<?php echo $form->checkBox($element, 'other')?>
+	<?php echo $form->checkBox($element, 'full_uppers_returned')?>
+	<?php echo $form->checkBox($element, 'ful_lowers_returned')?>
+	<?php echo $form->checkBox($element, 'other_returned')?>
 	<?php echo $form->textField($element, 'other_comments', array('size' => '10'))?>
-	<?php echo $form->checkBox($element, 'other_removed')?>
 	</div>
 	
 </section>

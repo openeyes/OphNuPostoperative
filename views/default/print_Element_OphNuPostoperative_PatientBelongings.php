@@ -26,24 +26,12 @@
 			<td><span class="big"><?php echo $element->patient_belongings ? 'Yes' : 'No'?></span></td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('glasses'))?></td>
-			<td><span class="big"><?php echo $element->glasses ? 'Yes' : 'No'?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('patient_belongings_id'))?></td>
+			<td><span class="big"><?php echo $element->patient_belongings ? $element->patient_belongings->name : 'None'?></span></td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('jewlery'))?></td>
-			<td><span class="big"><?php echo $element->jewlery ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('clothing'))?></td>
-			<td><span class="big"><?php echo $element->clothing ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('other'))?></td>
-			<td><span class="big"><?php echo $element->other ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('other_comments'))?></td>
-			<td><span class="big"><?php echo CHtml::encode($element->other_comments)?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('comments'))?></td>
+			<td><span class="big"><?php echo CHtml::encode($element->comments)?></span></td>
 		</tr>
 	</tbody>
 </table>

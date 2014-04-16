@@ -23,14 +23,14 @@
  * The followings are the available columns in table:
  * @property string $id
  * @property integer $event_id
- * @property integer $dental_present
- * @property integer $uppers
- * @property integer $uppers_removed
- * @property integer $lowers
- * @property integer $lowers_removed
+ * @property integer $removable_dental
+ * @property integer $full_uppers
+ * @property integer $full_lowers
  * @property integer $other
+ * @property integer $full_uppers_returned
+ * @property integer $ful_lowers_returned
+ * @property integer $other_returned
  * @property string $other_comments
- * @property integer $other_removed
  *
  * The followings are the available model relations:
  *
@@ -43,8 +43,6 @@
 
 class Element_OphNuPostoperative_DentalWork  extends  BaseEventTypeElement
 {
-	public $service;
-
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -68,9 +66,9 @@ class Element_OphNuPostoperative_DentalWork  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, dental_present, uppers, uppers_removed, lowers, lowers_removed, other, other_comments, other_removed, ', 'safe'),
-			array('dental_present, uppers, uppers_removed, lowers, lowers_removed, other, other_comments, other_removed, ', 'required'),
-			array('id, event_id, dental_present, uppers, uppers_removed, lowers, lowers_removed, other, other_comments, other_removed, ', 'safe', 'on' => 'search'),
+			array('event_id, removable_dental, full_uppers, full_lowers, other, full_uppers_returned, ful_lowers_returned, other_returned, other_comments, ', 'safe'),
+			array('removable_dental, full_uppers, full_lowers, other, full_uppers_returned, ful_lowers_returned, other_returned, other_comments, ', 'required'),
+			array('id, event_id, removable_dental, full_uppers, full_lowers, other, full_uppers_returned, ful_lowers_returned, other_returned, other_comments, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -96,14 +94,14 @@ class Element_OphNuPostoperative_DentalWork  extends  BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'dental_present' => 'Removable dental work present',
-			'uppers' => 'Full Uppers',
-			'uppers_removed' => 'Removed',
-			'lowers' => 'Full Lowers',
-			'lowers_removed' => 'Removed',
+			'removable_dental' => 'Removable Dental work Present?',
+			'full_uppers' => 'Full Uppers',
+			'full_lowers' => 'Full lowers',
 			'other' => 'Other',
-			'other_comments' => 'Other Comments',
-			'other_removed' => 'Removed',
+			'full_uppers_returned' => 'Returned?',
+			'ful_lowers_returned' => 'Returned?',
+			'other_returned' => 'Returned?',
+			'other_comments' => 'Comments',
 		);
 	}
 
@@ -117,14 +115,14 @@ class Element_OphNuPostoperative_DentalWork  extends  BaseEventTypeElement
 
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
-		$criteria->compare('dental_present', $this->dental_present);
-		$criteria->compare('uppers', $this->uppers);
-		$criteria->compare('uppers_removed', $this->uppers_removed);
-		$criteria->compare('lowers', $this->lowers);
-		$criteria->compare('lowers_removed', $this->lowers_removed);
+		$criteria->compare('removable_dental', $this->removable_dental);
+		$criteria->compare('full_uppers', $this->full_uppers);
+		$criteria->compare('full_lowers', $this->full_lowers);
 		$criteria->compare('other', $this->other);
+		$criteria->compare('full_uppers_returned', $this->full_uppers_returned);
+		$criteria->compare('ful_lowers_returned', $this->ful_lowers_returned);
+		$criteria->compare('other_returned', $this->other_returned);
 		$criteria->compare('other_comments', $this->other_comments);
-		$criteria->compare('other_removed', $this->other_removed);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,

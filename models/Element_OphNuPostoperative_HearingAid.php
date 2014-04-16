@@ -23,11 +23,11 @@
  * The followings are the available columns in table:
  * @property string $id
  * @property integer $event_id
- * @property integer $hearing_aid_present
+ * @property integer $hearing_aid
  * @property integer $right
+ * @property integer $right_returned
  * @property integer $left
- * @property integer $left_removed
- * @property integer $right_removed
+ * @property integer $left_returned
  *
  * The followings are the available model relations:
  *
@@ -40,8 +40,6 @@
 
 class Element_OphNuPostoperative_HearingAid  extends  BaseEventTypeElement
 {
-	public $service;
-
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -65,9 +63,9 @@ class Element_OphNuPostoperative_HearingAid  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, hearing_aid_present, right, left, left_removed, right_removed, ', 'safe'),
-			array('hearing_aid_present, right, left, left_removed, right_removed, ', 'required'),
-			array('id, event_id, hearing_aid_present, right, left, left_removed, right_removed, ', 'safe', 'on' => 'search'),
+			array('event_id, hearing_aid, right, right_returned, left, left_returned, ', 'safe'),
+			array('hearing_aid, right, right_returned, left, left_returned, ', 'required'),
+			array('id, event_id, hearing_aid, right, right_returned, left, left_returned, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -93,11 +91,11 @@ class Element_OphNuPostoperative_HearingAid  extends  BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'hearing_aid_present' => 'Hearing aid present',
+			'hearing_aid' => 'Hearing aid present',
 			'right' => 'Right',
+			'right_returned' => 'Returned?',
 			'left' => 'Left',
-			'left_removed' => 'Removed',
-			'right_removed' => 'Removed',
+			'left_returned' => 'Returned?',
 		);
 	}
 
@@ -111,11 +109,11 @@ class Element_OphNuPostoperative_HearingAid  extends  BaseEventTypeElement
 
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
-		$criteria->compare('hearing_aid_present', $this->hearing_aid_present);
+		$criteria->compare('hearing_aid', $this->hearing_aid);
 		$criteria->compare('right', $this->right);
+		$criteria->compare('right_returned', $this->right_returned);
 		$criteria->compare('left', $this->left);
-		$criteria->compare('left_removed', $this->left_removed);
-		$criteria->compare('right_removed', $this->right_removed);
+		$criteria->compare('left_returned', $this->left_returned);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,

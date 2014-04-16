@@ -28,13 +28,8 @@
 	</header>
 
 		<div class="element-fields">
-			<?php echo $form->checkBox($element, 'bruising')?>
-	<?php echo $form->checkBox($element, 'dry')?>
-	<?php echo $form->checkBox($element, 'warm')?>
-	<?php echo $form->checkBox($element, 'moist')?>
-	<?php echo $form->checkBox($element, 'cool')?>
-	<?php echo $form->checkBox($element, 'other')?>
-	<?php echo $form->textField($element, 'other_comments', array('size' => '10'))?>
+			<?php echo $form->dropDownList($element, 'skin_assessment_id', CHtml::listData(OphNuPostoperative_SkinAssessment_SkinAssessment::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'))?>
+	<?php echo $form->textField($element, 'comments', array('size' => '10'))?>
 	</div>
 	
 </section>
