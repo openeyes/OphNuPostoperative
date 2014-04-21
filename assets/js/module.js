@@ -38,6 +38,25 @@ $(document).ready(function() {
 			}
 		}
 	});
+
+	$(".collapse").hide();
+
+	$("input:radio").each(function()
+	{
+		if($(this).is(':checked') && $(this).val()==1){
+			$(this).closest("fieldset").next(".collapse").show();
+		}
+	});
+
+	$(document.body).on('click', '[type="radio"]', function(e) {
+		var button = $(e.currentTarget);
+		if(button.val()==1){
+			button.closest("fieldset").next(".collapse").show();
+		}
+		else {
+			button.closest("fieldset").next(".collapse").hide();
+		}
+	});
 });
 
 function ucfirst(str) { str += ''; var f = str.charAt(0).toUpperCase(); return f + str.substr(1); }

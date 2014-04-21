@@ -27,33 +27,34 @@
 		<h3 class="element-title"><?php echo $element->elementType->name; ?></h3>
 	</header>
 
-		<div class="element-fields">
-			<?php echo $form->radioBoolean($element, 'fallsmobility')?>
-	<?php echo $form->multiSelectList($element, 'MultiSelect_falls', 'fallss', 'ophnupostoperative_postoperative_falls_id', CHtml::listData(OphNuPostoperative_PostOperative_Falls::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_postoperative_falls_defaults, array('empty' => '- Please select -', 'label' => 'Falls/mobility'))?>
-	<?php echo $form->radioBoolean($element, 'removable_dental')?>
-	<?php echo $form->checkBox($element, 'full_uppers')?>
-	<?php echo $form->checkBox($element, 'full_lowers')?>
-	<?php echo $form->checkBox($element, 'other')?>
-	<?php echo $form->checkBox($element, 'full_uppers_returned')?>
-	<?php echo $form->checkBox($element, 'ful_lowers_returned')?>
-	<?php echo $form->checkBox($element, 'other_returned')?>
-	<?php echo $form->textField($element, 'other_comments', array('size' => '10'))?>
-	<?php echo $form->radioBoolean($element, 'hearing_aid_present')?>
-	<?php echo $form->checkBox($element, 'h_right')?>
-	<?php echo $form->checkBox($element, 'h_returned_right')?>
-	<?php echo $form->checkBox($element, 'h_left')?>
-	<?php echo $form->checkBox($element, 'h_returned_left')?>
-	<?php echo $form->multiSelectList($element, 'MultiSelect_belongings', 'belongingss', 'ophnupostoperative_postoperative_belongings_id', CHtml::listData(OphNuPostoperative_PostOperative_Belongings::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_postoperative_belongings_defaults, array('empty' => '- Please select -', 'label' => 'Patient Belongings'))?>
-	<?php echo $form->textField($element, 'h_comments', array('size' => '10'))?>
-	<?php echo $form->multiSelectList($element, 'MultiSelect_skin', 'skins', 'ophnupostoperative_postoperative_skin_id', CHtml::listData(OphNuPostoperative_PostOperative_Skin::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_postoperative_skin_defaults, array('empty' => '- Please select -', 'label' => 'Skin Assessment'))?>
-	<?php echo $form->textField($element, 's_comments', array('size' => '10'))?>
-	<?php echo $form->multiSelectList($element, 'MultiSelect_obs', 'obss', 'ophnupostoperative_postoperative_obs_id', CHtml::listData(OphNuPostoperative_PostOperative_Obs::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_postoperative_obs_defaults, array('empty' => '- Please select -', 'label' => 'Post-Op Observations'))?>
-	<?php echo $form->radioBoolean($element, 'o_comments')?>
-	<?php echo $form->radioBoolean($element, 'eye_dressing_in_place')?>
-	<?php echo $form->radioBoolean($element, 'iv_removed')?>
-	<?php echo $form->radioBoolean($element, 'ecg_dots_removed')?>
-	<?php echo $form->radioBoolean($element, 'take_home_ophthalmic')?>
-	<?php echo $form->radioBoolean($element, 'instructions_given')?>
+
+	<div class="element-fields">
+		<?php echo $form->radioBoolean($element, 'fallsmobility', array('class'=> 'collapse'))?>
+		<div class="collapse">
+			<?php echo $form->multiSelectList($element, 'MultiSelect_falls', 'fallss', 'ophnupostoperative_postoperative_falls_id', CHtml::listData(OphNuPostoperative_PostOperative_Falls::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_postoperative_falls_defaults, array('empty' => '- Please select -', 'label' => 'Falls/mobility'))?>
+		</div>
+		<?php echo $form->radioButtons($element, 'removable_dental_id', 'ophnupostoperative_postoperative_removable_dental')?>
+		<div class="collapse">
+			<?php echo $form->multiSelectList($element, 'MultiSelect_dental', 'dentals', 'ophnupostoperative_postoperative_dental_id', CHtml::listData(OphNuPostoperative_PostOperative_Dental::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_postoperative_dental_defaults, array('empty' => '- Please select -', 'label' => 'Items returned'))?>
+			<?php echo $form->textField($element, 'other_comments', array('size' => '10'))?>
+		</div>
+		<?php echo $form->radioButtons($element, 'hearing_aid_returned_id', 'ophnupostoperative_postoperative_hearing_aid_returned')?>
+		<div class="collapse">
+			<?php echo $form->multiSelectList($element, 'MultiSelect_hearing', 'hearings', 'ophnupostoperative_postoperative_hearing_id', CHtml::listData(OphNuPostoperative_PostOperative_Hearing::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_postoperative_hearing_defaults, array('empty' => '- Please select -', 'label' => 'Items Returned'))?>
+		</div>
+		<?php echo $form->radioBoolean($element, 'patent_belongings_returned')?>
+		<div class="collapse">
+			<?php echo $form->multiSelectList($element, 'MultiSelect_belongings', 'belongingss', 'ophnupostoperative_postoperative_belongings_id', CHtml::listData(OphNuPostoperative_PostOperative_Belongings::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_postoperative_belongings_defaults, array('empty' => '- Please select -', 'label' => 'Items Returned'))?>
+			<?php echo $form->textField($element, 'h_comments', array('size' => '10'))?>
+		</div>
+		<div class="collapse">
+			<?php echo $form->multiSelectList($element, 'MultiSelect_skin', 'skins', 'ophnupostoperative_postoperative_skin_id', CHtml::listData(OphNuPostoperative_PostOperative_Skin::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_postoperative_skin_defaults, array('empty' => '- Please select -', 'label' => 'Skin Assessment'))?>
+			<?php echo $form->textField($element, 's_comments', array('size' => '10'))?>
+		</div>
+		<div class="collapse">
+			<?php echo $form->multiSelectList($element, 'MultiSelect_obs', 'obss', 'ophnupostoperative_postoperative_obs_id', CHtml::listData(OphNuPostoperative_PostOperative_Obs::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_postoperative_obs_defaults, array('empty' => '- Please select -', 'label' => 'Post-Op Observations'))?>
+			<?php echo $form->textField($element, 'o_comments', array('size' => '10'))?>
+		</div>
 	</div>
 	
 </section>

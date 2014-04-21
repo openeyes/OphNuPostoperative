@@ -40,56 +40,42 @@
 			</div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('removable_dental'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->removable_dental ? 'Yes' : 'No'?></div></div>
+			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('removable_dental_id'))?></div></div>
+			<div class="large-10 column end"><div class="data-value"><?php echo $element->removable_dental ? $element->removable_dental->name : 'None'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('full_uppers'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->full_uppers ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('full_lowers'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->full_lowers ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('other'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->other ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('full_uppers_returned'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->full_uppers_returned ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('ful_lowers_returned'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->ful_lowers_returned ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('other_returned'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->other_returned ? 'Yes' : 'No'?></div></div>
+			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('dental'))?>:</div></div>
+			<div class="large-10 column end"><div class="data-value"><?php if (!$element->dentals) {?>
+							None
+						<?php } else {?>
+								<?php foreach ($element->dentals as $item) {
+									echo $item->ophnupostoperative_postoperative_dental->name?><br/>
+								<?php }?>
+						<?php }?>
+			</div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('other_comments'))?></div></div>
 			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->other_comments)?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('hearing_aid_present'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->hearing_aid_present ? 'Yes' : 'No'?></div></div>
+			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('hearing_aid_returned_id'))?></div></div>
+			<div class="large-10 column end"><div class="data-value"><?php echo $element->hearing_aid_returned ? $element->hearing_aid_returned->name : 'None'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('h_right'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->h_right ? 'Yes' : 'No'?></div></div>
+			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('hearing'))?>:</div></div>
+			<div class="large-10 column end"><div class="data-value"><?php if (!$element->hearings) {?>
+							None
+						<?php } else {?>
+								<?php foreach ($element->hearings as $item) {
+									echo $item->ophnupostoperative_postoperative_hearing->name?><br/>
+								<?php }?>
+						<?php }?>
+			</div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('h_returned_right'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->h_returned_right ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('h_left'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->h_left ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('h_returned_left'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->h_returned_left ? 'Yes' : 'No'?></div></div>
+			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('patent_belongings_returned'))?>:</div></div>
+			<div class="large-10 column end"><div class="data-value"><?php echo $element->patent_belongings_returned ? 'Yes' : 'No'?></div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('belongings'))?>:</div></div>
@@ -133,28 +119,8 @@
 			</div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('o_comments'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->o_comments ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('eye_dressing_in_place'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->eye_dressing_in_place ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iv_removed'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->iv_removed ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('ecg_dots_removed'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->ecg_dots_removed ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('take_home_ophthalmic'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->take_home_ophthalmic ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('instructions_given'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->instructions_given ? 'Yes' : 'No'?></div></div>
+			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('o_comments'))?></div></div>
+			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->o_comments)?></div></div>
 		</div>
 			</div>
 </section>

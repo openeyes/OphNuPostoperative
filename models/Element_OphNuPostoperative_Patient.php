@@ -104,7 +104,7 @@ class Element_OphNuPostoperative_Patient  extends  BaseEventTypeElement
 			'event_id' => 'Event',
 			'patient_id_verified_with_two_identifiers' => 'Patient ID / Wristband verified with two identifiers',
 			'allergies_verified' => 'Allergies Verified',
-			'patient_enters_recovery_room' => 'Patient enters recovery room',
+			'patient_enters_recovery_room' => 'Time patient enters recovery room',
 			'hand_off_from_id' => 'Anaesthesia Hand off from',
 			'hand_off_to_id' => 'Hand off to',
 			'handing_off_from_id' => 'Nursing Hand off from',

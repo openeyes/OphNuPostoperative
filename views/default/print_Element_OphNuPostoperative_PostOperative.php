@@ -44,56 +44,56 @@
 			</td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('removable_dental'))?>:</td>
-			<td><span class="big"><?php echo $element->removable_dental ? 'Yes' : 'No'?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('removable_dental_id'))?></td>
+			<td><span class="big"><?php echo $element->removable_dental ? $element->removable_dental->name : 'None'?></span></td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('full_uppers'))?></td>
-			<td><span class="big"><?php echo $element->full_uppers ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('full_lowers'))?></td>
-			<td><span class="big"><?php echo $element->full_lowers ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('other'))?></td>
-			<td><span class="big"><?php echo $element->other ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('full_uppers_returned'))?></td>
-			<td><span class="big"><?php echo $element->full_uppers_returned ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('ful_lowers_returned'))?></td>
-			<td><span class="big"><?php echo $element->ful_lowers_returned ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('other_returned'))?></td>
-			<td><span class="big"><?php echo $element->other_returned ? 'Yes' : 'No'?></span></td>
+			<td colspan="2">
+				<div class="colThird">
+					<b><?php echo CHtml::encode($element->getAttributeLabel('dental'))?>:</b>
+					<div class="eventHighlight medium">
+						<?php if (!$element->dentals) {?>
+							<h4>None</h4>
+						<?php } else {?>
+							<h4>
+								<?php foreach ($element->dentals as $item) {
+									echo $item->ophnupostoperative_postoperative_dental->name?><br/>
+								<?php }?>
+							</h4>
+						<?php }?>
+					</div>
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('other_comments'))?></td>
 			<td><span class="big"><?php echo CHtml::encode($element->other_comments)?></span></td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('hearing_aid_present'))?>:</td>
-			<td><span class="big"><?php echo $element->hearing_aid_present ? 'Yes' : 'No'?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('hearing_aid_returned_id'))?></td>
+			<td><span class="big"><?php echo $element->hearing_aid_returned ? $element->hearing_aid_returned->name : 'None'?></span></td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('h_right'))?></td>
-			<td><span class="big"><?php echo $element->h_right ? 'Yes' : 'No'?></span></td>
+			<td colspan="2">
+				<div class="colThird">
+					<b><?php echo CHtml::encode($element->getAttributeLabel('hearing'))?>:</b>
+					<div class="eventHighlight medium">
+						<?php if (!$element->hearings) {?>
+							<h4>None</h4>
+						<?php } else {?>
+							<h4>
+								<?php foreach ($element->hearings as $item) {
+									echo $item->ophnupostoperative_postoperative_hearing->name?><br/>
+								<?php }?>
+							</h4>
+						<?php }?>
+					</div>
+				</div>
+			</td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('h_returned_right'))?></td>
-			<td><span class="big"><?php echo $element->h_returned_right ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('h_left'))?></td>
-			<td><span class="big"><?php echo $element->h_left ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('h_returned_left'))?></td>
-			<td><span class="big"><?php echo $element->h_returned_left ? 'Yes' : 'No'?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('patent_belongings_returned'))?>:</td>
+			<td><span class="big"><?php echo $element->patent_belongings_returned ? 'Yes' : 'No'?></span></td>
 		</tr>
 		<tr>
 			<td colspan="2">
@@ -158,28 +158,8 @@
 			</td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('o_comments'))?>:</td>
-			<td><span class="big"><?php echo $element->o_comments ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('eye_dressing_in_place'))?>:</td>
-			<td><span class="big"><?php echo $element->eye_dressing_in_place ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('iv_removed'))?>:</td>
-			<td><span class="big"><?php echo $element->iv_removed ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('ecg_dots_removed'))?>:</td>
-			<td><span class="big"><?php echo $element->ecg_dots_removed ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('take_home_ophthalmic'))?>:</td>
-			<td><span class="big"><?php echo $element->take_home_ophthalmic ? 'Yes' : 'No'?></span></td>
-		</tr>
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('instructions_given'))?>:</td>
-			<td><span class="big"><?php echo $element->instructions_given ? 'Yes' : 'No'?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('o_comments'))?></td>
+			<td><span class="big"><?php echo CHtml::encode($element->o_comments)?></span></td>
 		</tr>
 	</tbody>
 </table>

@@ -24,27 +24,13 @@
  * @property string $id
  * @property integer $event_id
  * @property integer $fallsmobility
- * @property integer $removable_dental
- * @property integer $full_uppers
- * @property integer $full_lowers
- * @property integer $other
- * @property integer $full_uppers_returned
- * @property integer $ful_lowers_returned
- * @property integer $other_returned
+ * @property integer $removable_dental_id
  * @property string $other_comments
- * @property integer $hearing_aid_present
- * @property integer $h_right
- * @property integer $h_returned_right
- * @property integer $h_left
- * @property integer $h_returned_left
+ * @property integer $hearing_aid_returned_id
+ * @property integer $patent_belongings_returned
  * @property string $h_comments
  * @property string $s_comments
- * @property integer $o_comments
- * @property integer $eye_dressing_in_place
- * @property integer $iv_removed
- * @property integer $ecg_dots_removed
- * @property integer $take_home_ophthalmic
- * @property integer $instructions_given
+ * @property string $o_comments
  *
  * The followings are the available model relations:
  *
@@ -54,6 +40,10 @@
  * @property User $user
  * @property User $usermodified
  * @property Element_OphNuPostoperative_PostOperative_Falls_Assignment $fallss
+ * @property OphNuPostoperative_PostOperative_RemovableDental $removable_dental
+ * @property Element_OphNuPostoperative_PostOperative_Dental_Assignment $dentals
+ * @property OphNuPostoperative_PostOperative_HearingAidReturned $hearing_aid_returned
+ * @property Element_OphNuPostoperative_PostOperative_Hearing_Assignment $hearings
  * @property Element_OphNuPostoperative_PostOperative_Belongings_Assignment $belongingss
  * @property Element_OphNuPostoperative_PostOperative_Skin_Assignment $skins
  * @property Element_OphNuPostoperative_PostOperative_Obs_Assignment $obss
@@ -84,9 +74,9 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, fallsmobility, removable_dental, full_uppers, full_lowers, other, full_uppers_returned, ful_lowers_returned, other_returned, other_comments, hearing_aid_present, h_right, h_returned_right, h_left, h_returned_left, h_comments, s_comments, o_comments, eye_dressing_in_place, iv_removed, ecg_dots_removed, take_home_ophthalmic, instructions_given, ', 'safe'),
-			array('fallsmobility, removable_dental, full_uppers, full_lowers, other, full_uppers_returned, ful_lowers_returned, other_returned, other_comments, hearing_aid_present, h_right, h_returned_right, h_left, h_returned_left, h_comments, s_comments, o_comments, eye_dressing_in_place, iv_removed, ecg_dots_removed, take_home_ophthalmic, instructions_given, ', 'required'),
-			array('id, event_id, fallsmobility, removable_dental, full_uppers, full_lowers, other, full_uppers_returned, ful_lowers_returned, other_returned, other_comments, hearing_aid_present, h_right, h_returned_right, h_left, h_returned_left, h_comments, s_comments, o_comments, eye_dressing_in_place, iv_removed, ecg_dots_removed, take_home_ophthalmic, instructions_given, ', 'safe', 'on' => 'search'),
+			array('event_id, fallsmobility, removable_dental_id, other_comments, hearing_aid_returned_id, patent_belongings_returned, h_comments, s_comments, o_comments, ', 'safe'),
+			array('fallsmobility, removable_dental_id, other_comments, hearing_aid_returned_id, patent_belongings_returned, h_comments, s_comments, o_comments, ', 'required'),
+			array('id, event_id, fallsmobility, removable_dental_id, other_comments, hearing_aid_returned_id, patent_belongings_returned, h_comments, s_comments, o_comments, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -102,6 +92,10 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 			'fallss' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Falls_Assignment', 'element_id'),
+			'removable_dental' => array(self::BELONGS_TO, 'OphNuPostoperative_PostOperative_RemovableDental', 'removable_dental_id'),
+			'dentals' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Dental_Assignment', 'element_id'),
+			'hearing_aid_returned' => array(self::BELONGS_TO, 'OphNuPostoperative_PostOperative_HearingAidReturned', 'hearing_aid_returned_id'),
+			'hearings' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Hearing_Assignment', 'element_id'),
 			'belongingss' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Belongings_Assignment', 'element_id'),
 			'skins' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Skin_Assignment', 'element_id'),
 			'obss' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Obs_Assignment', 'element_id'),
@@ -118,30 +112,18 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 			'event_id' => 'Event',
 			'fallsmobility' => 'Falls/Mobility',
 			'falls' => 'Falls/mobility',
-			'removable_dental' => 'Removable Dental work Present?',
-			'full_uppers' => 'Full Uppers',
-			'full_lowers' => 'Full lowers',
-			'other' => 'Other',
-			'full_uppers_returned' => 'Returned?',
-			'ful_lowers_returned' => 'Returned?',
-			'other_returned' => 'Returned?',
+			'removable_dental_id' => 'Removable Dental work Returned?',
+			'dental' => 'Items returned',
 			'other_comments' => 'Comments',
-			'hearing_aid_present' => 'Hearing aid present?',
-			'h_right' => 'Right',
-			'h_returned_right' => 'Returned?',
-			'h_left' => 'Left',
-			'h_returned_left' => 'Returned?',
-			'belongings' => 'Patient Belongings',
+			'hearing_aid_returned_id' => 'Hearing aid returned?',
+			'hearing' => 'Items Returned',
+			'patent_belongings_returned' => 'Patent Belongings Returned?',
+			'belongings' => 'Items Returned',
 			'h_comments' => 'Comments',
 			'skin' => 'Skin Assessment',
 			's_comments' => 'Comments',
 			'obs' => 'Post-Op Observations',
 			'o_comments' => 'Comments',
-			'eye_dressing_in_place' => 'Eye dressing in place',
-			'iv_removed' => 'IV Removed',
-			'ecg_dots_removed' => 'ECG dots removed',
-			'take_home_ophthalmic' => 'Take home ophthalmic medications and/or analgesics supplies',
-			'instructions_given' => 'Post-op education and instructions given to patient',
 		);
 	}
 
@@ -157,30 +139,18 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 		$criteria->compare('event_id', $this->event_id, true);
 		$criteria->compare('fallsmobility', $this->fallsmobility);
 		$criteria->compare('falls', $this->falls);
-		$criteria->compare('removable_dental', $this->removable_dental);
-		$criteria->compare('full_uppers', $this->full_uppers);
-		$criteria->compare('full_lowers', $this->full_lowers);
-		$criteria->compare('other', $this->other);
-		$criteria->compare('full_uppers_returned', $this->full_uppers_returned);
-		$criteria->compare('ful_lowers_returned', $this->ful_lowers_returned);
-		$criteria->compare('other_returned', $this->other_returned);
+		$criteria->compare('removable_dental_id', $this->removable_dental_id);
+		$criteria->compare('dental', $this->dental);
 		$criteria->compare('other_comments', $this->other_comments);
-		$criteria->compare('hearing_aid_present', $this->hearing_aid_present);
-		$criteria->compare('h_right', $this->h_right);
-		$criteria->compare('h_returned_right', $this->h_returned_right);
-		$criteria->compare('h_left', $this->h_left);
-		$criteria->compare('h_returned_left', $this->h_returned_left);
+		$criteria->compare('hearing_aid_returned_id', $this->hearing_aid_returned_id);
+		$criteria->compare('hearing', $this->hearing);
+		$criteria->compare('patent_belongings_returned', $this->patent_belongings_returned);
 		$criteria->compare('belongings', $this->belongings);
 		$criteria->compare('h_comments', $this->h_comments);
 		$criteria->compare('skin', $this->skin);
 		$criteria->compare('s_comments', $this->s_comments);
 		$criteria->compare('obs', $this->obs);
 		$criteria->compare('o_comments', $this->o_comments);
-		$criteria->compare('eye_dressing_in_place', $this->eye_dressing_in_place);
-		$criteria->compare('iv_removed', $this->iv_removed);
-		$criteria->compare('ecg_dots_removed', $this->ecg_dots_removed);
-		$criteria->compare('take_home_ophthalmic', $this->take_home_ophthalmic);
-		$criteria->compare('instructions_given', $this->instructions_given);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
@@ -191,6 +161,20 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 	public function getophnupostoperative_postoperative_falls_defaults() {
 		$ids = array();
 		foreach (OphNuPostoperative_PostOperative_Falls::model()->findAll('`default` = ?',array(1)) as $item) {
+			$ids[] = $item->id;
+		}
+		return $ids;
+	}
+	public function getophnupostoperative_postoperative_dental_defaults() {
+		$ids = array();
+		foreach (OphNuPostoperative_PostOperative_Dental::model()->findAll('`default` = ?',array(1)) as $item) {
+			$ids[] = $item->id;
+		}
+		return $ids;
+	}
+	public function getophnupostoperative_postoperative_hearing_defaults() {
+		$ids = array();
+		foreach (OphNuPostoperative_PostOperative_Hearing::model()->findAll('`default` = ?',array(1)) as $item) {
 			$ids[] = $item->id;
 		}
 		return $ids;
@@ -242,6 +226,64 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 			foreach ($existing_ids as $id) {
 				if (!in_array($id,$_POST['MultiSelect_falls'])) {
 					$item = Element_OphNuPostoperative_PostOperative_Falls_Assignment::model()->find('element_id = :elementId and ophnupostoperative_postoperative_falls_id = :lookupfieldId',array(':elementId' => $this->id, ':lookupfieldId' => $id));
+					if (!$item->delete()) {
+						throw new Exception('Unable to delete MultiSelect item: '.print_r($item->getErrors(),true));
+					}
+				}
+			}
+		}
+		if (!empty($_POST['MultiSelect_dental'])) {
+
+			$existing_ids = array();
+
+			foreach (Element_OphNuPostoperative_PostOperative_Dental_Assignment::model()->findAll('element_id = :elementId', array(':elementId' => $this->id)) as $item) {
+				$existing_ids[] = $item->ophnupostoperative_postoperative_dental_id;
+			}
+
+			foreach ($_POST['MultiSelect_dental'] as $id) {
+				if (!in_array($id,$existing_ids)) {
+					$item = new Element_OphNuPostoperative_PostOperative_Dental_Assignment;
+					$item->element_id = $this->id;
+					$item->ophnupostoperative_postoperative_dental_id = $id;
+
+					if (!$item->save()) {
+						throw new Exception('Unable to save MultiSelect item: '.print_r($item->getErrors(),true));
+					}
+				}
+			}
+
+			foreach ($existing_ids as $id) {
+				if (!in_array($id,$_POST['MultiSelect_dental'])) {
+					$item = Element_OphNuPostoperative_PostOperative_Dental_Assignment::model()->find('element_id = :elementId and ophnupostoperative_postoperative_dental_id = :lookupfieldId',array(':elementId' => $this->id, ':lookupfieldId' => $id));
+					if (!$item->delete()) {
+						throw new Exception('Unable to delete MultiSelect item: '.print_r($item->getErrors(),true));
+					}
+				}
+			}
+		}
+		if (!empty($_POST['MultiSelect_hearing'])) {
+
+			$existing_ids = array();
+
+			foreach (Element_OphNuPostoperative_PostOperative_Hearing_Assignment::model()->findAll('element_id = :elementId', array(':elementId' => $this->id)) as $item) {
+				$existing_ids[] = $item->ophnupostoperative_postoperative_hearing_id;
+			}
+
+			foreach ($_POST['MultiSelect_hearing'] as $id) {
+				if (!in_array($id,$existing_ids)) {
+					$item = new Element_OphNuPostoperative_PostOperative_Hearing_Assignment;
+					$item->element_id = $this->id;
+					$item->ophnupostoperative_postoperative_hearing_id = $id;
+
+					if (!$item->save()) {
+						throw new Exception('Unable to save MultiSelect item: '.print_r($item->getErrors(),true));
+					}
+				}
+			}
+
+			foreach ($existing_ids as $id) {
+				if (!in_array($id,$_POST['MultiSelect_hearing'])) {
+					$item = Element_OphNuPostoperative_PostOperative_Hearing_Assignment::model()->find('element_id = :elementId and ophnupostoperative_postoperative_hearing_id = :lookupfieldId',array(':elementId' => $this->id, ':lookupfieldId' => $id));
 					if (!$item->delete()) {
 						throw new Exception('Unable to delete MultiSelect item: '.print_r($item->getErrors(),true));
 					}

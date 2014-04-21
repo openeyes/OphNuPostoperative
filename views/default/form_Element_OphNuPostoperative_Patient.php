@@ -35,7 +35,9 @@
 	<?php echo $form->dropDownList($element, 'hand_off_to_id', CHtml::listData(OphNuPostoperative_Patient_HandOffTo::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'))?>
 	<?php echo $form->dropDownList($element, 'handing_off_from_id', CHtml::listData(OphNuPostoperative_Patient_HandingOffFrom::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'))?>
 	<?php echo $form->radioButtons($element, 'translator_present_id', 'ophnupostoperative_patient_translator_present')?>
-	<?php echo $form->textField($element, 'name_of_translator', array('size' => '10'))?>
+	<div class="collapse">
+			<?php echo $form->textField($element, 'name_of_translator', array('size' => '10'))?>
+	</div>
 	</div>
 	
 </section>
