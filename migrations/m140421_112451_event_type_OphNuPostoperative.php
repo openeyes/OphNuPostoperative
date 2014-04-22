@@ -216,7 +216,7 @@ class m140421_112451_event_type_OphNuPostoperative extends CDbMigration
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
 				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
 				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'default' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
+				'default' => 'tinyint(1) unsigned NOT NULL',
 				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
@@ -258,7 +258,7 @@ class m140421_112451_event_type_OphNuPostoperative extends CDbMigration
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
 				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
 				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'default' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
+				'default' => 'tinyint(1) unsigned NOT NULL',
 				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
@@ -297,7 +297,7 @@ class m140421_112451_event_type_OphNuPostoperative extends CDbMigration
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
 				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
 				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'default' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
+				'default' => 'tinyint(1) unsigned NOT NULL',
 				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
@@ -316,7 +316,7 @@ class m140421_112451_event_type_OphNuPostoperative extends CDbMigration
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
 				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
 				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'default' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
+				'default' => 'tinyint(1) unsigned NOT NULL',
 				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
@@ -337,7 +337,7 @@ class m140421_112451_event_type_OphNuPostoperative extends CDbMigration
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
 				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
 				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'default' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
+				'default' => 'tinyint(1) unsigned NOT NULL',
 				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
@@ -360,7 +360,7 @@ class m140421_112451_event_type_OphNuPostoperative extends CDbMigration
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
 				'name' => 'varchar(128) COLLATE utf8_bin NOT NULL',
 				'display_order' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'default' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
+				'default' => 'tinyint(1) unsigned NOT NULL',
 				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
@@ -384,7 +384,7 @@ class m140421_112451_event_type_OphNuPostoperative extends CDbMigration
 		$this->createTable('et_ophnupostoperative_postoperative', array(
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
 				'event_id' => 'int(10) unsigned NOT NULL',
-				'fallsmobility' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
+				'fallsmobility' => 'tinyint(1) unsigned NOT NULL',
 
 				'removable_dental_id' => 'int(10) unsigned NOT NULL',
 
@@ -392,7 +392,7 @@ class m140421_112451_event_type_OphNuPostoperative extends CDbMigration
 
 				'hearing_aid_returned_id' => 'int(10) unsigned NOT NULL',
 
-				'patent_belongings_returned' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
+				'patent_belongings_returned' => 'tinyint(1) unsigned NOT NULL',
 
 				'h_comments' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'',
 
