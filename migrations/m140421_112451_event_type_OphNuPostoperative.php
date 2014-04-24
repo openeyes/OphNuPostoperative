@@ -5,7 +5,7 @@ class m140421_112451_event_type_OphNuPostoperative extends CDbMigration
 	{
 		if (!$this->dbConnection->createCommand()->select('id')->from('event_type')->where('class_name=:class_name', array(':class_name'=>'OphNuPostoperative'))->queryRow()) {
 			$group = $this->dbConnection->createCommand()->select('id')->from('event_group')->where('name=:name',array(':name'=>'Nursing'))->queryRow();
-			$this->insert('event_type', array('class_name' => 'OphNuPostoperative', 'name' => 'Postoperative','event_group_id' => $group['id']));
+			$this->insert('event_type', array('class_name' => 'OphNuPostoperative', 'name' => 'Post-operative Nursing Note','event_group_id' => $group['id']));
 		}
 
 		$event_type = $this->dbConnection->createCommand()->select('id')->from('event_type')->where('class_name=:class_name', array(':class_name'=>'OphNuPostoperative'))->queryRow();
