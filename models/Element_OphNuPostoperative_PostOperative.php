@@ -75,7 +75,7 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 	{
 		return array(
 			array('event_id, fallsmobility, removable_dental_id, other_comments, hearing_aid_returned_id, patent_belongings_returned, h_comments, s_comments, o_comments, ', 'safe'),
-			array('fallsmobility, removable_dental_id, other_comments, hearing_aid_returned_id, patent_belongings_returned, h_comments, s_comments, o_comments, ', 'required'),
+			array('fallsmobility, removable_dental_id, hearing_aid_returned_id, patent_belongings_returned, ', 'required'),
 			array('id, event_id, fallsmobility, removable_dental_id, other_comments, hearing_aid_returned_id, patent_belongings_returned, h_comments, s_comments, o_comments, ', 'safe', 'on' => 'search'),
 		);
 	}

@@ -19,24 +19,24 @@
 ?>
 
 <section class="element <?php echo $element->elementType->class_name?>"
-	data-element-type-id="<?php echo $element->elementType->id?>"
-	data-element-type-class="<?php echo $element->elementType->class_name?>"
-	data-element-type-name="<?php echo $element->elementType->name?>"
-	data-element-display-order="<?php echo $element->elementType->display_order?>">
+				 data-element-type-id="<?php echo $element->elementType->id?>"
+				 data-element-type-class="<?php echo $element->elementType->class_name?>"
+				 data-element-type-name="<?php echo $element->elementType->name?>"
+				 data-element-display-order="<?php echo $element->elementType->display_order?>">
 	<header class="element-header">
 		<h3 class="element-title"><?php echo $element->elementType->name; ?></h3>
 	</header>
 
 
 	<div class="element-fields">
-		<?php echo $form->radioBoolean($element, 'fallsmobility', array('class'=> 'collapse'))?>
+		<?php echo $form->radioBoolean($element, 'fallsmobility')?>
 		<div class="collapse">
 			<?php echo $form->multiSelectList($element, 'MultiSelect_falls', 'fallss', 'ophnupostoperative_postoperative_falls_id', CHtml::listData(OphNuPostoperative_PostOperative_Falls::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_postoperative_falls_defaults, array('empty' => '- Please select -', 'label' => 'Falls/mobility'))?>
 		</div>
 		<?php echo $form->radioButtons($element, 'removable_dental_id', 'ophnupostoperative_postoperative_removable_dental')?>
 		<div class="collapse">
-			<?php echo $form->multiSelectList($element, 'MultiSelect_dental', 'dentals', 'ophnupostoperative_postoperative_dental_id', CHtml::listData(OphNuPostoperative_PostOperative_Dental::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_postoperative_dental_defaults, array('empty' => '- Please select -', 'label' => 'Items returned'))?>
-			<?php echo $form->textField($element, 'other_comments', array('size' => '10'))?>
+			<?php echo $form->multiSelectList($element, 'MultiSelect_dental', 'dentals', 'ophnupostoperative_postoperative_dental_id', CHtml::listData(OphNuPostoperative_PostOperative_Dental::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_postoperative_dental_defaults, array('empty' => '- Please select -', 'label' => 'Items returned', 'class' => 'linked-fields', 'data-linked-fields' => 'other_comments', 'data-linked-values' => 'Other Returned'))?>
+			<?php echo $form->textField($element, 'other_comments', array('hide' => !$element->hasMultiSelectValue('dentals','Other')))?>
 		</div>
 		<?php echo $form->radioButtons($element, 'hearing_aid_returned_id', 'ophnupostoperative_postoperative_hearing_aid_returned')?>
 		<div class="collapse">
@@ -44,17 +44,14 @@
 		</div>
 		<?php echo $form->radioBoolean($element, 'patent_belongings_returned')?>
 		<div class="collapse">
-			<?php echo $form->multiSelectList($element, 'MultiSelect_belongings', 'belongingss', 'ophnupostoperative_postoperative_belongings_id', CHtml::listData(OphNuPostoperative_PostOperative_Belongings::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_postoperative_belongings_defaults, array('empty' => '- Please select -', 'label' => 'Items Returned'))?>
-			<?php echo $form->textField($element, 'h_comments', array('size' => '10'))?>
+			<?php echo $form->multiSelectList($element, 'MultiSelect_belongings', 'belongingss', 'ophnupostoperative_postoperative_belongings_id', CHtml::listData(OphNuPostoperative_PostOperative_Belongings::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_postoperative_belongings_defaults, array('empty' => '- Please select -', 'label' => 'Items Returned', 'class' => 'linked-fields', 'data-linked-fields' => 'h_comments', 'data-linked-values' => 'Other'))?>
+			<?php echo $form->textField($element, 'h_comments',array('hide' => !$element->hasMultiSelectValue('belongingss','Other')))?>
 		</div>
-		<div class="collapse">
-			<?php echo $form->multiSelectList($element, 'MultiSelect_skin', 'skins', 'ophnupostoperative_postoperative_skin_id', CHtml::listData(OphNuPostoperative_PostOperative_Skin::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_postoperative_skin_defaults, array('empty' => '- Please select -', 'label' => 'Skin Assessment'))?>
-			<?php echo $form->textField($element, 's_comments', array('size' => '10'))?>
-		</div>
-		<div class="collapse">
-			<?php echo $form->multiSelectList($element, 'MultiSelect_obs', 'obss', 'ophnupostoperative_postoperative_obs_id', CHtml::listData(OphNuPostoperative_PostOperative_Obs::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_postoperative_obs_defaults, array('empty' => '- Please select -', 'label' => 'Post-Op Observationsx``'))?>
-			<?php echo $form->textField($element, 'o_comments', array('size' => '10'))?>
-		</div>
+		<?php echo $form->multiSelectList($element, 'MultiSelect_skin', 'skins', 'ophnupostoperative_postoperative_skin_id', CHtml::listData(OphNuPostoperative_PostOperative_Skin::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_postoperative_skin_defaults, array('empty' => '- Please select -', 'label' => 'Skin Assessment', 'class' => 'linked-fields', 'data-linked-fields' => 's_comments', 'data-linked-values' => 'Other'))?>
+		<?php echo $form->textField($element, 's_comments', array('hide' => !$element->hasMultiSelectValue('obss','Other')))?>
+		<?php echo $form->multiSelectList($element, 'MultiSelect_obs', 'obss', 'ophnupostoperative_postoperative_obs_id', CHtml::listData(OphNuPostoperative_PostOperative_Obs::model()->findAll(array('order'=>'display_order asc')),'id','name'), $element->ophnupostoperative_postoperative_obs_defaults, array('empty' => '- Please select -', 'label' => 'Post-Op Observations','class' => 'linked-fields', 'data-linked-fields' => 'o_comments', 'data-linked-values' => 'Other'))?>
+		<?php echo $form->textField($element, 'o_comments', array('hide' => !$element->hasMultiSelectValue('obss','Other')))?>
+
 	</div>
-	
+
 </section>

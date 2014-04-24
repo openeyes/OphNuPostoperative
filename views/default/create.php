@@ -26,7 +26,7 @@ $this->beginContent('//patient/event_container');?>
 	'enableAjaxValidation'=>false,
 	'layoutColumns' => array(
 		'label' => 2,
-		'field' => 5
+		'field' => 4
 	)
 ));
 

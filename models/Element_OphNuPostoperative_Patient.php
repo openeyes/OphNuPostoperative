@@ -71,7 +71,7 @@ class Element_OphNuPostoperative_Patient  extends  BaseEventTypeElement
 	{
 		return array(
 			array('event_id, patient_id_verified_with_two_identifiers, allergies_verified, patient_enters_recovery_room, hand_off_from_id, hand_off_to_id, handing_off_from_id, translator_present_id, name_of_translator, ', 'safe'),
-			array('patient_id_verified_with_two_identifiers, allergies_verified, patient_enters_recovery_room, hand_off_from_id, hand_off_to_id, handing_off_from_id, translator_present_id, name_of_translator, ', 'required'),
+			array('patient_id_verified_with_two_identifiers, allergies_verified, patient_enters_recovery_room, hand_off_from_id, hand_off_to_id, handing_off_from_id, translator_present_id ', 'required'),
 			array('id, event_id, patient_id_verified_with_two_identifiers, allergies_verified, patient_enters_recovery_room, hand_off_from_id, hand_off_to_id, handing_off_from_id, translator_present_id, name_of_translator, ', 'safe', 'on' => 'search'),
 		);
 	}

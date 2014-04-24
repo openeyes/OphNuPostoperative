@@ -27,7 +27,7 @@ $form = $this->beginWidget('BaseEventTypeCActiveForm', array(
 	'enableAjaxValidation'=>false,
 	'layoutColumns' => array(
 		'label' => 2,
-		'field' => 10
+		'field' => 4
 	)
 ));
 

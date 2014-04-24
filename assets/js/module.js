@@ -51,7 +51,16 @@ $(document).ready(function() {
 		var button = $(e.currentTarget);
 		var div = button.closest("fieldset").next(".collapse");
 		if(div)	{
-			button.val()==1 ? div.show() :	div.hide();
+			button.val()==1 ? div.show() :	hideAndBlank(div);
+		}
+
+		function hideAndBlank(div) {
+				div.hide();
+				div.find('input').removeAttr('checked');
+				div.find('[type=text]').val('');
+				div.find('a.MultiSelectRemove').map(function() {
+			$(this).click();
+				});
 		}
 	});
 });
