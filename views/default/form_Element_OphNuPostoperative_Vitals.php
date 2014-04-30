@@ -19,18 +19,86 @@
 ?>
 
 <section class="element <?php echo $element->elementType->class_name?>"
-	data-element-type-id="<?php echo $element->elementType->id?>"
-	data-element-type-class="<?php echo $element->elementType->class_name?>"
-	data-element-type-name="<?php echo $element->elementType->name?>"
-	data-element-display-order="<?php echo $element->elementType->display_order?>">
+				 data-element-type-id="<?php echo $element->elementType->id?>"
+				 data-element-type-class="<?php echo $element->elementType->class_name?>"
+				 data-element-type-name="<?php echo $element->elementType->name?>"
+				 data-element-display-order="<?php echo $element->elementType->display_order?>">
 	<header class="element-header">
 		<h3 class="element-title"><?php echo $element->elementType->name; ?></h3>
 	</header>
 
-		<div class="element-fields">
-			<?php echo $form->textArea($element, 'vitals', array('rows' => 6, 'cols' => 80))?>
-	<?php echo $form->textField($element, 'total_fluid_intake', array('size' => '10'))?>
-	<?php echo $form->textField($element, 'total_fluid_output', array('size' => '10'))?>
+	<div class="element-fields">
+
+		<?php
+
+
+		$vitals = array ('Heart Rate','Blood Pressure','RR','Sa02','o2 l/min','Glucose Level','Temp (C)','Pain Score','Nausea/Vomiting','Blood Loss','AVPU','MEWS Score');
+
+		$time = new DateTime();
+
+		$num_intervals = 15;
+		$times = array();
+		for ($i = 1; $i <= $num_intervals; $i++) {
+			$time = $time->add(new DateInterval('PT15M'));
+			$times[] = $time->format('H:i').'<BR>';
+		}
+
+		$data = array($times);
+
+		foreach($vitals as $vital){
+			$data_row= array_fill(0,$num_intervals+1,'');
+			$data_row[0]=$vital;
+			$data[]=$data_row;
+		}
+
+		?>
+		<div id="vitalswidget" style="cursor: pointer;">
+			<?php
+			$this->widget('application.widgets.Grid', array(
+					'id'=>'vitals',
+					'Options' => array('data'=>$data, 'vertical-headers'=>true, 'horizontal-headers'=>true)
+			));
+			array_unshift($vitals,'Time');
+			?>
+		</div>
+		<div class="addVitalsFields" style="display: none">
+			<input type="hidden" id="vitals-count" value="<?php echo sizeOf($vitals)?>">
+			<?php
+
+			foreach($vitals as $key => $vital)
+			{?>
+				<div class="row field-row">
+					<div class="large-2 column"><label><?php echo $vital?></label></div>
+					<div class="large-2 column end">
+						<?php
+						$htmlOptions = $vital=='Time' ?  array('readOnly'=>true) : array();
+						echo CHtml::textField($key+1,'',$htmlOptions);?>
+					</div>
+				</div>
+			<?php }
+			?>
+			<div class="row field-row">
+				<div class="large-2 column"><label></label></div>
+				<div class="large-4 column end">
+					<button id="edit-vital" class="secondary small" value="">Add</button>
+					<button class="cancel-vital warning small">Cancel</button>
+				</div>
+			</div>
+		</div>
+		<div class="row field-row vitalsErrors" style="display: none">
+			<div class="large-3 column"><label></label></div>
+			<div class="large-5 column end">
+				<div class="alert-box alert with-icon">
+					<p>Please fix the following input errors:</p>
+					<ul class="vitalsErrorList">
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+		<?php echo $form->textField($element, 'total_fluid_intake', array('size' => '10'))?>
+		<?php echo $form->textField($element, 'total_fluid_output', array('size' => '10'))?>
 	</div>
-	
+
 </section>

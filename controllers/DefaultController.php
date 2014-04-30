@@ -22,6 +22,13 @@ class DefaultController extends BaseEventTypeController
 		parent::actionPrint($id);
 	}
 
+	protected function setElementDefaultOptions_Element_OphNuPostoperative_Vitals($element, $action)
+	{
+		if ($action == 'create') {
+
+		}
+	}
+
 	/**
 	* use the split event type javascript and styling
 	*

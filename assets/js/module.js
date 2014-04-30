@@ -53,15 +53,43 @@ $(document).ready(function() {
 		if(div)	{
 			button.val()==1 ? div.show() :	hideAndBlank(div);
 		}
+	});
 
-		function hideAndBlank(div) {
-				div.hide();
-				div.find('input').removeAttr('checked');
-				div.find('[type=text]').val('');
-				div.find('a.MultiSelectRemove').map(function() {
+	function hideAndBlank(div) {
+		div.hide();
+		div.find('input').removeAttr('checked');
+		div.find('[type=text]').val('');
+		div.find('a.MultiSelectRemove').map(function() {
 			$(this).click();
-				});
+		});
+	};
+
+
+	$('#vitals td').click(function() {
+		var col = $(this).data('column');
+		$('.addVitalsFields').show();
+		$('#edit-vital').val(col);
+		var fields =$('#vitals-count').val();
+		for (var row=1;row<=fields;row++){
+
+			$('.addVitalsFields').find('#' + row).val($(".vitals-col-"+col+".vitals-row-"+row).text().trim());
 		}
+	});
+
+	$('#edit-vital').click(function() {
+		event.preventDefault();
+		var fields =$('#vitals-count').val();
+
+		var col = $('#edit-vital').val();
+		for (var row=1;row<=fields;row++){
+			$(".vitals-col-"+col+".vitals-row-"+row).html($('.addVitalsFields').find('#'+row).val());
+		}
+		$('.addVitalsFields').hide();
+	});
+
+	$('.cancel-vital').click(function() {
+		event.preventDefault();
+		$('.addVitalsFields').hide();
 	});
 });
 
