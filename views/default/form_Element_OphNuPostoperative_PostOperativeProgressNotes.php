@@ -50,5 +50,7 @@
 				</table>
 				<button class="addnote secondary small">Add note</button>
 		<?php echo $form->textArea($element, 'progress_notes', array('rows' => 6, 'cols' => 80))?>
+
+
 	</div>
 </section>

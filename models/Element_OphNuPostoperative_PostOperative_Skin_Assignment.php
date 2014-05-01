@@ -102,5 +102,10 @@ class Element_OphNuPostoperative_PostOperative_Skin_Assignment extends BaseActiv
 			'criteria' => $criteria,
 		));
 	}
+
+	public function getName()
+	{
+		return $this->ophnupostoperative_postoperative_skin->name;
+	}
 }
 ?>

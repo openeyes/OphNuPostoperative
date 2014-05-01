@@ -102,5 +102,10 @@ class Element_OphNuPostoperative_PostOperative_Belongings_Assignment extends Bas
 			'criteria' => $criteria,
 		));
 	}
+
+	public function getName()
+	{
+		return $this->ophnupostoperative_postoperative_belongings->name;
+	}
 }
 ?>

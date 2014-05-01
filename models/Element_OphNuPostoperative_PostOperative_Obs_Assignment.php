@@ -102,5 +102,10 @@ class Element_OphNuPostoperative_PostOperative_Obs_Assignment extends BaseActive
 			'criteria' => $criteria,
 		));
 	}
+
+	public function getName()
+	{
+		return $this->ophnupostoperative_postoperative_obs->name;
+	}
 }
 ?>

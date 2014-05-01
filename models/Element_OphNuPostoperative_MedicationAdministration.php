@@ -34,7 +34,7 @@
  * @property User $usermodified
  */
 
-class Element_OphNuPostoperative_MedicationAdministration  extends  BaseEventTypeElement
+class Element_OphNuPostoperative_MedicationAdministration  extends	BaseEventTypeElement
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -59,9 +59,9 @@ class Element_OphNuPostoperative_MedicationAdministration  extends  BaseEventTyp
 	public function rules()
 	{
 		return array(
-			array('event_id, medication_administration, ', 'safe'),
-			array('medication_administration, ', 'required'),
-			array('id, event_id, medication_administration, ', 'safe', 'on' => 'search'),
+			array('event_id, medication_administration', 'safe'),
+			array('medication_administration', 'required'),
+			array('id, event_id, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -76,6 +76,7 @@ class Element_OphNuPostoperative_MedicationAdministration  extends  BaseEventTyp
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
+			'medications' => array(self::HAS_MANY, 'OphNuPostoperative_MedicationAdministration_Medication', 'element_id'),
 		);
 	}
 
@@ -87,7 +88,7 @@ class Element_OphNuPostoperative_MedicationAdministration  extends  BaseEventTyp
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'medication_administration' => 'Medication Administration',
+			'medication_administration' => 'Medication administration',
 		);
 	}
 
@@ -108,12 +109,36 @@ class Element_OphNuPostoperative_MedicationAdministration  extends  BaseEventTyp
 		));
 	}
 
-
-
-	protected function afterSave()
+	public function updateMedications($medication_ids=array(),$drug_ids=array(),$route_ids=array(),$option_ids=array(),$frequency_ids=array(),$start_dates=array())
 	{
+		$ids = array();
 
-		return parent::afterSave();
+		foreach ($drug_ids as $i => $drug_id) {
+			if (!$medication_ids[$i] || !$medication = OphNuPostoperative_MedicationAdministration_Medication::model()->findByPk($medication_ids[$i])) {
+				$medication = new OphNuPostoperative_MedicationAdministration_Medication;
+				$medication->element_id = $this->id;
+			}
+
+			$medication->drug_id = $drug_id;
+			$medication->route_id = $route_ids[$i];
+			$medication->option_id = $option_ids[$i];
+			$medication->frequency_id = $frequency_ids[$i];
+			$medication->start_date = $start_dates[$i];
+
+			if (!$medication->save()) {
+				throw new Exception("Unable to save medication: ".print_r($medication->getErrors(),true));
+			}
+
+			$ids[] = $medication->id;
+		}
+
+		$criteria = new CDbCriteria;
+		$criteria->addCondition('element_id = :element_id');
+		$criteria->params[':element_id'] = $this->id;
+
+		!empty($ids) && $criteria->addNotInCondition('id',$ids);
+
+		OphNuPostoperative_MedicationAdministration_Medication::model()->deleteAll($criteria);
 	}
 }
 ?>

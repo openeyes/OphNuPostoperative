@@ -45,7 +45,7 @@
  * @property OphNuPostoperative_Patient_TranslatorPresent $translator_present
  */
 
-class Element_OphNuPostoperative_Patient  extends  BaseEventTypeElement
+class Element_OphNuPostoperative_Patient	extends  BaseEventTypeElement
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -70,7 +70,7 @@ class Element_OphNuPostoperative_Patient  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, patient_id_verified_with_two_identifiers, allergies_verified, patient_enters_recovery_room, hand_off_from_id, hand_off_to_id, handing_off_from_id, translator_present_id, name_of_translator, ', 'safe'),
+			array('event_id, patient_id_verified_with_two_identifiers, allergies_verified, patient_enters_recovery_room, hand_off_from_id, hand_off_to_id, handing_off_from_id, translator_present_id, name_of_translator, patient_has_no_allergies', 'safe'),
 			array('patient_id_verified_with_two_identifiers, allergies_verified, patient_enters_recovery_room, hand_off_from_id, hand_off_to_id, handing_off_from_id, translator_present_id ', 'required'),
 			array('id, event_id, patient_id_verified_with_two_identifiers, allergies_verified, patient_enters_recovery_room, hand_off_from_id, hand_off_to_id, handing_off_from_id, translator_present_id, name_of_translator, ', 'safe', 'on' => 'search'),
 		);
@@ -91,6 +91,8 @@ class Element_OphNuPostoperative_Patient  extends  BaseEventTypeElement
 			'hand_off_to' => array(self::BELONGS_TO, 'OphNuPostoperative_Patient_HandOffTo', 'hand_off_to_id'),
 			'handing_off_from' => array(self::BELONGS_TO, 'OphNuPostoperative_Patient_HandingOffFrom', 'handing_off_from_id'),
 			'translator_present' => array(self::BELONGS_TO, 'OphNuPostoperative_Patient_TranslatorPresent', 'translator_present_id'),
+			'allergies' => array(self::HAS_MANY, 'OphNuPostoperative_Patient_Allergy', 'element_id'),
+			'identifiers' => array(self::HAS_MANY, 'OphNuPostoperative_Patient_Identifier_Assignment', 'element_id'),
 		);
 	}
 
@@ -102,14 +104,15 @@ class Element_OphNuPostoperative_Patient  extends  BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'patient_id_verified_with_two_identifiers' => 'Patient ID / Wristband verified with two identifiers',
-			'allergies_verified' => 'Allergies Verified',
+			'patient_id_verified_with_two_identifiers' => 'Patient ID / wristband verified with two identifiers',
+			'allergies_verified' => 'Allergies verified',
 			'patient_enters_recovery_room' => 'Time patient enters recovery room',
-			'hand_off_from_id' => 'Anaesthesia Hand off from',
+			'hand_off_from_id' => 'Anaesthesia hand off from',
 			'hand_off_to_id' => 'Hand off to',
-			'handing_off_from_id' => 'Nursing Hand off from',
-			'translator_present_id' => 'Translator Present',
-			'name_of_translator' => 'Name of Translator',
+			'handing_off_from_id' => 'Nursing hand off from',
+			'translator_present_id' => 'Translator present',
+			'name_of_translator' => 'Name of translator',
+			'patient_has_no_allergies' => 'Confirm that the patient has no allergies',
 		);
 	}
 
@@ -137,12 +140,62 @@ class Element_OphNuPostoperative_Patient  extends  BaseEventTypeElement
 		));
 	}
 
-
-
-	protected function afterSave()
+	public function beforeValidate()
 	{
+		if ($this->translator_present && $this->translator_present->name == 'Yes') {
+			if (!$this->name_of_translator) {
+				$this->addError('name_of_translator',$this->getAttributeLabel('name_of_translator').' cannot be blank.');
+			}
+		}
 
-		return parent::afterSave();
+		if ($this->patient_id_verified_with_two_identifiers) {
+			if (count($this->identifiers) != 2) {
+				$this->addError('identifiers','Please select exactly 2 identifiers');
+			}
+		}
+
+		return parent::beforeValidate();
+	}
+
+	public function getAvailableAllergyList()
+	{
+		$allergy_ids = array();
+
+		foreach ($this->allergies as $allergy) {
+			$allergy_ids[] = $allergy->allergy_id;
+		}
+
+		$criteria = new CDbCriteria;
+		!empty($allergy_ids) && $criteria->addNotInCondition('id',$allergy_ids);
+		$criteria->order = 'name asc';
+
+		return CHtml::listData(Allergy::model()->findAll($criteria),'id','name');
+	}
+
+	public function updateAllergies($allergy_ids)
+	{
+		$ids = array();
+
+		foreach ($allergy_ids as $allergy_id) {
+			if (!$allergy = OphNuPostoperative_Patient_Allergy::model()->find('element_id=? and allergy_id=?',array($this->id,$allergy_id))) {
+				$allergy = new OphNuPostoperative_Patient_Allergy;
+				$allergy->element_id = $this->id;
+				$allergy->allergy_id = $allergy_id;
+
+				if (!$allergy->save()) {
+					throw new Exception("Unable to save allergy: ".print_r($allergy->getErrors(),true));
+				}
+			}
+
+			$ids[] = $allergy->id;
+		}
+
+		$criteria = new CDbCriteria;
+		$criteria->addCondition('element_id = :element_id');
+		$criteria->params[':element_id'] = $this->id;
+		!empty($ids) && $criteria->addNotInCondition('id',$ids);
+
+		OphNuPostoperative_Patient_Allergy::model()->deleteAll($criteria);
 	}
 }
 ?>

@@ -87,7 +87,7 @@ class Element_OphNuPostoperative_PostOperativeProgressNotes  extends  BaseEventT
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'progress_notes' => 'Post Operative Progress Notes',
+			'progress_notes' => 'Post operative progress notes',
 		);
 	}
 

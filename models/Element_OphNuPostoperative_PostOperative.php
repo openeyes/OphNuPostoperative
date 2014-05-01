@@ -110,20 +110,20 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'fallsmobility' => 'Falls/Mobility',
-			'falls' => 'Falls/mobility',
-			'removable_dental_id' => 'Removable Dental work Returned?',
-			'dental' => 'Items returned',
-			'other_comments' => 'Comments',
+			'fallsmobility' => 'Falls/mobility',
+			'falls' => 'Falls/mobility items',
+			'removable_dental_id' => 'Removable dental work returned?',
+			'dental' => 'Dental items returned',
+			'other_comments' => 'Other dental items',
 			'hearing_aid_returned_id' => 'Hearing aid returned?',
-			'hearing' => 'Items Returned',
-			'patent_belongings_returned' => 'Patent Belongings Returned?',
-			'belongings' => 'Items Returned',
-			'h_comments' => 'Comments',
-			'skin' => 'Skin Assessment',
-			's_comments' => 'Comments',
-			'obs' => 'Post-Op Observations',
-			'o_comments' => 'Comments',
+			'hearing' => 'Items returned',
+			'patent_belongings_returned' => 'Patent belongings returned?',
+			'belongings' => 'Items returned',
+			'h_comments' => 'Other belongings',
+			'skin' => 'Skin assessment',
+			's_comments' => 'Other skin notes',
+			'obs' => 'Post-op observations',
+			'o_comments' => 'Other post-op observations',
 		);
 	}
 
@@ -157,228 +157,57 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 		));
 	}
 
-
-	public function getophnupostoperative_postoperative_falls_defaults() {
-		$ids = array();
-		foreach (OphNuPostoperative_PostOperative_Falls::model()->findAll('`default` = ?',array(1)) as $item) {
-			$ids[] = $item->id;
-		}
-		return $ids;
-	}
-	public function getophnupostoperative_postoperative_dental_defaults() {
-		$ids = array();
-		foreach (OphNuPostoperative_PostOperative_Dental::model()->findAll('`default` = ?',array(1)) as $item) {
-			$ids[] = $item->id;
-		}
-		return $ids;
-	}
-	public function getophnupostoperative_postoperative_hearing_defaults() {
-		$ids = array();
-		foreach (OphNuPostoperative_PostOperative_Hearing::model()->findAll('`default` = ?',array(1)) as $item) {
-			$ids[] = $item->id;
-		}
-		return $ids;
-	}
-	public function getophnupostoperative_postoperative_belongings_defaults() {
-		$ids = array();
-		foreach (OphNuPostoperative_PostOperative_Belongings::model()->findAll('`default` = ?',array(1)) as $item) {
-			$ids[] = $item->id;
-		}
-		return $ids;
-	}
-	public function getophnupostoperative_postoperative_skin_defaults() {
-		$ids = array();
-		foreach (OphNuPostoperative_PostOperative_Skin::model()->findAll('`default` = ?',array(1)) as $item) {
-			$ids[] = $item->id;
-		}
-		return $ids;
-	}
-	public function getophnupostoperative_postoperative_obs_defaults() {
-		$ids = array();
-		foreach (OphNuPostoperative_PostOperative_Obs::model()->findAll('`default` = ?',array(1)) as $item) {
-			$ids[] = $item->id;
-		}
-		return $ids;
-	}
-
-	protected function afterSave()
+	public function beforeValidate()
 	{
-		if (!empty($_POST['MultiSelect_falls'])) {
-
-			$existing_ids = array();
-
-			foreach (Element_OphNuPostoperative_PostOperative_Falls_Assignment::model()->findAll('element_id = :elementId', array(':elementId' => $this->id)) as $item) {
-				$existing_ids[] = $item->ophnupostoperative_postoperative_falls_id;
-			}
-
-			foreach ($_POST['MultiSelect_falls'] as $id) {
-				if (!in_array($id,$existing_ids)) {
-					$item = new Element_OphNuPostoperative_PostOperative_Falls_Assignment;
-					$item->element_id = $this->id;
-					$item->ophnupostoperative_postoperative_falls_id = $id;
-
-					if (!$item->save()) {
-						throw new Exception('Unable to save MultiSelect item: '.print_r($item->getErrors(),true));
-					}
-				}
-			}
-
-			foreach ($existing_ids as $id) {
-				if (!in_array($id,$_POST['MultiSelect_falls'])) {
-					$item = Element_OphNuPostoperative_PostOperative_Falls_Assignment::model()->find('element_id = :elementId and ophnupostoperative_postoperative_falls_id = :lookupfieldId',array(':elementId' => $this->id, ':lookupfieldId' => $id));
-					if (!$item->delete()) {
-						throw new Exception('Unable to delete MultiSelect item: '.print_r($item->getErrors(),true));
-					}
-				}
+		if ($this->fallsmobility) {
+			if (empty($this->fallss)) {
+				$this->addError('fallss','Please enter at least one falls/mobility item');
 			}
 		}
-		if (!empty($_POST['MultiSelect_dental'])) {
 
-			$existing_ids = array();
-
-			foreach (Element_OphNuPostoperative_PostOperative_Dental_Assignment::model()->findAll('element_id = :elementId', array(':elementId' => $this->id)) as $item) {
-				$existing_ids[] = $item->ophnupostoperative_postoperative_dental_id;
+		if ($this->removable_dental && $this->removable_dental->name == 'Yes') {
+			if (empty($this->dentals)) {
+				$this->addError('dentals','Please enter at least one dental item');
 			}
 
-			foreach ($_POST['MultiSelect_dental'] as $id) {
-				if (!in_array($id,$existing_ids)) {
-					$item = new Element_OphNuPostoperative_PostOperative_Dental_Assignment;
-					$item->element_id = $this->id;
-					$item->ophnupostoperative_postoperative_dental_id = $id;
-
-					if (!$item->save()) {
-						throw new Exception('Unable to save MultiSelect item: '.print_r($item->getErrors(),true));
-					}
-				}
-			}
-
-			foreach ($existing_ids as $id) {
-				if (!in_array($id,$_POST['MultiSelect_dental'])) {
-					$item = Element_OphNuPostoperative_PostOperative_Dental_Assignment::model()->find('element_id = :elementId and ophnupostoperative_postoperative_dental_id = :lookupfieldId',array(':elementId' => $this->id, ':lookupfieldId' => $id));
-					if (!$item->delete()) {
-						throw new Exception('Unable to delete MultiSelect item: '.print_r($item->getErrors(),true));
-					}
-				}
-			}
-		}
-		if (!empty($_POST['MultiSelect_hearing'])) {
-
-			$existing_ids = array();
-
-			foreach (Element_OphNuPostoperative_PostOperative_Hearing_Assignment::model()->findAll('element_id = :elementId', array(':elementId' => $this->id)) as $item) {
-				$existing_ids[] = $item->ophnupostoperative_postoperative_hearing_id;
-			}
-
-			foreach ($_POST['MultiSelect_hearing'] as $id) {
-				if (!in_array($id,$existing_ids)) {
-					$item = new Element_OphNuPostoperative_PostOperative_Hearing_Assignment;
-					$item->element_id = $this->id;
-					$item->ophnupostoperative_postoperative_hearing_id = $id;
-
-					if (!$item->save()) {
-						throw new Exception('Unable to save MultiSelect item: '.print_r($item->getErrors(),true));
-					}
-				}
-			}
-
-			foreach ($existing_ids as $id) {
-				if (!in_array($id,$_POST['MultiSelect_hearing'])) {
-					$item = Element_OphNuPostoperative_PostOperative_Hearing_Assignment::model()->find('element_id = :elementId and ophnupostoperative_postoperative_hearing_id = :lookupfieldId',array(':elementId' => $this->id, ':lookupfieldId' => $id));
-					if (!$item->delete()) {
-						throw new Exception('Unable to delete MultiSelect item: '.print_r($item->getErrors(),true));
-					}
-				}
-			}
-		}
-		if (!empty($_POST['MultiSelect_belongings'])) {
-
-			$existing_ids = array();
-
-			foreach (Element_OphNuPostoperative_PostOperative_Belongings_Assignment::model()->findAll('element_id = :elementId', array(':elementId' => $this->id)) as $item) {
-				$existing_ids[] = $item->ophnupostoperative_postoperative_belongings_id;
-			}
-
-			foreach ($_POST['MultiSelect_belongings'] as $id) {
-				if (!in_array($id,$existing_ids)) {
-					$item = new Element_OphNuPostoperative_PostOperative_Belongings_Assignment;
-					$item->element_id = $this->id;
-					$item->ophnupostoperative_postoperative_belongings_id = $id;
-
-					if (!$item->save()) {
-						throw new Exception('Unable to save MultiSelect item: '.print_r($item->getErrors(),true));
-					}
-				}
-			}
-
-			foreach ($existing_ids as $id) {
-				if (!in_array($id,$_POST['MultiSelect_belongings'])) {
-					$item = Element_OphNuPostoperative_PostOperative_Belongings_Assignment::model()->find('element_id = :elementId and ophnupostoperative_postoperative_belongings_id = :lookupfieldId',array(':elementId' => $this->id, ':lookupfieldId' => $id));
-					if (!$item->delete()) {
-						throw new Exception('Unable to delete MultiSelect item: '.print_r($item->getErrors(),true));
-					}
-				}
-			}
-		}
-		if (!empty($_POST['MultiSelect_skin'])) {
-
-			$existing_ids = array();
-
-			foreach (Element_OphNuPostoperative_PostOperative_Skin_Assignment::model()->findAll('element_id = :elementId', array(':elementId' => $this->id)) as $item) {
-				$existing_ids[] = $item->ophnupostoperative_postoperative_skin_id;
-			}
-
-			foreach ($_POST['MultiSelect_skin'] as $id) {
-				if (!in_array($id,$existing_ids)) {
-					$item = new Element_OphNuPostoperative_PostOperative_Skin_Assignment;
-					$item->element_id = $this->id;
-					$item->ophnupostoperative_postoperative_skin_id = $id;
-
-					if (!$item->save()) {
-						throw new Exception('Unable to save MultiSelect item: '.print_r($item->getErrors(),true));
-					}
-				}
-			}
-
-			foreach ($existing_ids as $id) {
-				if (!in_array($id,$_POST['MultiSelect_skin'])) {
-					$item = Element_OphNuPostoperative_PostOperative_Skin_Assignment::model()->find('element_id = :elementId and ophnupostoperative_postoperative_skin_id = :lookupfieldId',array(':elementId' => $this->id, ':lookupfieldId' => $id));
-					if (!$item->delete()) {
-						throw new Exception('Unable to delete MultiSelect item: '.print_r($item->getErrors(),true));
-					}
-				}
-			}
-		}
-		if (!empty($_POST['MultiSelect_obs'])) {
-
-			$existing_ids = array();
-
-			foreach (Element_OphNuPostoperative_PostOperative_Obs_Assignment::model()->findAll('element_id = :elementId', array(':elementId' => $this->id)) as $item) {
-				$existing_ids[] = $item->ophnupostoperative_postoperative_obs_id;
-			}
-
-			foreach ($_POST['MultiSelect_obs'] as $id) {
-				if (!in_array($id,$existing_ids)) {
-					$item = new Element_OphNuPostoperative_PostOperative_Obs_Assignment;
-					$item->element_id = $this->id;
-					$item->ophnupostoperative_postoperative_obs_id = $id;
-
-					if (!$item->save()) {
-						throw new Exception('Unable to save MultiSelect item: '.print_r($item->getErrors(),true));
-					}
-				}
-			}
-
-			foreach ($existing_ids as $id) {
-				if (!in_array($id,$_POST['MultiSelect_obs'])) {
-					$item = Element_OphNuPostoperative_PostOperative_Obs_Assignment::model()->find('element_id = :elementId and ophnupostoperative_postoperative_obs_id = :lookupfieldId',array(':elementId' => $this->id, ':lookupfieldId' => $id));
-					if (!$item->delete()) {
-						throw new Exception('Unable to delete MultiSelect item: '.print_r($item->getErrors(),true));
-					}
+			if ($this->hasMultiSelectValue('dentals','Other (please specify)')) {
+				if (!$this->other_comments) {
+					$this->addError('other_comments',$this->getAttributeLabel('other_comments').' cannot be blank.');
 				}
 			}
 		}
 
-		return parent::afterSave();
+		if ($this->hearing_aid_returned && $this->hearing_aid_returned->name == 'Yes') {
+			if (empty($this->hearings)) {
+				$this->addError('hearings','Please enter at least one hearing aid item');
+			}
+		}
+
+		if ($this->patent_belongings_returned) {
+			if (empty($this->belongingss)) {
+				$this->addError('belongingss','Please enter at least one patient belonging');
+			}
+
+			if ($this->hasMultiSelectValue('belongingss','Other (please specify)')) {
+				if (!$this->h_comments) {
+					$this->addError('h_comments',$this->getAttributeLabel('h_comments').' cannot be blank.');
+				}
+			}
+		}
+
+		if ($this->hasMultiSelectValue('skins','Other (please specify)')) {
+			if (!$this->s_comments) {
+				$this->addError('s_comments',$this->getAttributeLabel('s_comments').' cannot be blank.');
+			}
+		}
+
+		if ($this->hasMultiSelectValue('obss','Other (please specify)')) {
+			if (!$this->o_comments) {
+				$this->addError('o_comments',$this->getAttributeLabel('o_comments').' cannot be blank.');
+			}
+		}
+
+		return parent::beforeValidate();
 	}
 }
 ?>
