@@ -27,17 +27,14 @@
 		<h3 class="element-title"><?php echo $element->elementType->name; ?></h3>
 	</header>
 
-		<div class="element-fields">
-			<?php echo $form->checkBox($element, 'patient_id_verified_with_two_identifiers')?>
-	<?php echo $form->checkBox($element, 'allergies_verified')?>
-	<?php echo $form->textField($element, 'patient_enters_recovery_room', array('size' => '10'))?>
-	<?php echo $form->dropDownList($element, 'hand_off_from_id', CHtml::listData(OphNuPostoperative_Patient_HandOffFrom::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'))?>
-	<?php echo $form->dropDownList($element, 'hand_off_to_id', CHtml::listData(OphNuPostoperative_Patient_HandOffTo::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'))?>
-	<?php echo $form->dropDownList($element, 'handing_off_from_id', CHtml::listData(OphNuPostoperative_Patient_HandingOffFrom::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'))?>
-	<?php echo $form->radioButtons($element, 'translator_present_id', 'ophnupostoperative_patient_translator_present')?>
-	<div class="collapse">
-			<?php echo $form->textField($element, 'name_of_translator', array('size' => '10'))?>
+	<div class="element-fields">
+		<?php echo $form->checkBox($element, 'patient_id_verified_with_two_identifiers', array('text-align' => 'right'), array('label' => 3, 'field' => 4))?>
+		<?php echo $form->checkBox($element, 'allergies_verified', array('text-align' => 'right'), array('label' => 3, 'field' => 4))?>
+		<?php echo $form->textField($element, 'patient_enters_recovery_room', array(), array(), array('label' => 3, 'field' => 1))?>
+		<?php echo $form->dropDownList($element, 'hand_off_from_id', CHtml::listData(OphNuPostoperative_Patient_HandOffFrom::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 4))?>
+		<?php echo $form->dropDownList($element, 'hand_off_to_id', CHtml::listData(OphNuPostoperative_Patient_HandOffTo::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 4))?>
+		<?php echo $form->dropDownList($element, 'handing_off_from_id', CHtml::listData(OphNuPostoperative_Patient_HandingOffFrom::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 4))?>
+		<?php echo $form->radioButtons($element, 'translator_present_id', CHtml::listData(OphNuPostoperative_Patient_TranslatorPresent::model()->findAll(array('order' => 'display_order asc')),'id','name'), null, false, false, false, false, array('class'=>'linked-fields','data-linked-fields'=>'name_of_translator','data-linked-values'=>'Yes'), array('label' => 3, 'field' => 4))?>
+		<?php echo $form->textField($element, 'name_of_translator', array('hide' => !$element->translator_present || $element->translator_present->name != 'Yes'), array(), array('label' => 3, 'field' => 4))?>
 	</div>
-	</div>
-	
 </section>

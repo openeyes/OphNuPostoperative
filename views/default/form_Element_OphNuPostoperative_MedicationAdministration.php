@@ -27,8 +27,7 @@
 		<h3 class="element-title"><?php echo $element->elementType->name; ?></h3>
 	</header>
 
-		<div class="element-fields">
-			<?php echo $form->textArea($element, 'medication_administration', array('rows' => 6, 'cols' => 80))?>
+	<div class="element-fields">
+		<?php echo $form->textArea($element, 'medication_administration', array(), false, array(), array('label' => 3, 'field' => 4))?>
 	</div>
-	
 </section>

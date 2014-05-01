@@ -102,14 +102,14 @@ class Element_OphNuPostoperative_Patient  extends  BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'patient_id_verified_with_two_identifiers' => 'Patient ID / Wristband verified with two identifiers',
-			'allergies_verified' => 'Allergies Verified',
+			'patient_id_verified_with_two_identifiers' => 'Patient ID / wristband verified with two identifiers',
+			'allergies_verified' => 'Allergies verified',
 			'patient_enters_recovery_room' => 'Time patient enters recovery room',
-			'hand_off_from_id' => 'Anaesthesia Hand off from',
+			'hand_off_from_id' => 'Anaesthesia hand off from',
 			'hand_off_to_id' => 'Hand off to',
-			'handing_off_from_id' => 'Nursing Hand off from',
-			'translator_present_id' => 'Translator Present',
-			'name_of_translator' => 'Name of Translator',
+			'handing_off_from_id' => 'Nursing hand off from',
+			'translator_present_id' => 'Translator present',
+			'name_of_translator' => 'Name of translator',
 		);
 	}
 
@@ -137,12 +137,15 @@ class Element_OphNuPostoperative_Patient  extends  BaseEventTypeElement
 		));
 	}
 
-
-
-	protected function afterSave()
+	public function beforeValidate()
 	{
+		if ($this->translator_present && $this->translator_present->name == 'Yes') {
+			if (!$this->translator_name) {
+				$this->addError('translator_name',$this->getAttributeLabel('translator_name').' cannot be blank.');
+			}
+		}
 
-		return parent::afterSave();
+		return parent::beforeValidate();
 	}
 }
 ?>

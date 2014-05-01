@@ -87,7 +87,7 @@ class Element_OphNuPostoperative_MedicationAdministration  extends  BaseEventTyp
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'medication_administration' => 'Medication Administration',
+			'medication_administration' => 'Medication administration',
 		);
 	}
 
