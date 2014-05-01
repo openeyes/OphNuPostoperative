@@ -18,7 +18,7 @@
  */
 
 /**
- * This is the model class for table "ophcianaesthesiarecord_gas_level".
+ * This is the model class for table "ophnupostoperative_gas_level".
  *
  * The followings are the available columns in table:
  * @property integer $id
@@ -29,7 +29,7 @@
  * @property string $value
  */
 
-class OphCiAnaesthesiarecord_Gas_Level extends BaseActiveRecordVersioned
+class OphNuPostoperative_Gas_Level extends BaseActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -45,7 +45,7 @@ class OphCiAnaesthesiarecord_Gas_Level extends BaseActiveRecordVersioned
 	 */
 	public function tableName()
 	{
-		return 'ophcianaesthesiarecord_gas_level';
+		return 'ophnupostoperative_gas_level';
 	}
 
 	/**
@@ -71,7 +71,7 @@ class OphCiAnaesthesiarecord_Gas_Level extends BaseActiveRecordVersioned
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'item' => array(self::BELONGS_TO, 'OphCiAnaesthesiarecord_Gas', 'item_id'),
+			'item' => array(self::BELONGS_TO, 'OphNuPostoperative_Gas', 'item_id'),
 		);
 	}
 

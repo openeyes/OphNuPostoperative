@@ -1,5 +1,5 @@
 <?php 
-class m140421_112451_event_type_OphNuPostoperative extends CDbMigration
+class m140421_112451_event_type_OphNuPostoperative extends OEMigration
 {
 	public function up()
 	{
@@ -149,28 +149,6 @@ class m140421_112451_event_type_OphNuPostoperative extends CDbMigration
 			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
 
 
-
-		$this->createTable('et_ophnupostoperative_vitals', array(
-				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
-				'event_id' => 'int(10) unsigned NOT NULL',
-				'vitals' => 'text COLLATE utf8_bin DEFAULT \'\'',
-
-				'total_fluid_intake' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'',
-
-				'total_fluid_output' => 'varchar(255) COLLATE utf8_bin DEFAULT \'\'',
-
-				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
-				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
-				'PRIMARY KEY (`id`)',
-				'KEY `et_ophnupostoperative_vitals_lmui_fk` (`last_modified_user_id`)',
-				'KEY `et_ophnupostoperative_vitals_cui_fk` (`created_user_id`)',
-				'KEY `et_ophnupostoperative_vitals_ev_fk` (`event_id`)',
-				'CONSTRAINT `et_ophnupostoperative_vitals_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_vitals_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
-				'CONSTRAINT `et_ophnupostoperative_vitals_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
-			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
 
 
 
@@ -530,6 +508,9 @@ class m140421_112451_event_type_OphNuPostoperative extends CDbMigration
 				'CONSTRAINT `et_ophnupostoperative_postoperative_obs_assignment_ele_fk` FOREIGN KEY (`element_id`) REFERENCES `et_ophnupostoperative_postoperative` (`id`)',
 				'CONSTRAINT `et_ophnupostoperative_postoperative_obs_assignment_lku_fk` FOREIGN KEY (`ophnupostoperative_postoperative_obs_id`) REFERENCES `ophnupostoperative_postoperative_obs` (`id`)',
 			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
+
+		$this->initialiseData(dirname(__FILE__));
+
 
 	}
 

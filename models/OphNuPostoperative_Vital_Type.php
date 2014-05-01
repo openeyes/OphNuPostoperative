@@ -18,7 +18,7 @@
  */
 
 /**
- * This is the model class for table "ophcianaesthesiarecord_reading_type".
+ * This is the model class for table "ophnupostoperative_vital_type".
  *
  * The followings are the available columns in table:
  * @property integer $id
@@ -26,7 +26,7 @@
  * @property string $comments
  */
 
-class OphCiAnaesthesiarecord_Reading_Type extends BaseActiveRecordVersionedSoftDelete
+class OphNuPostoperative_Vital_Type extends BaseActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -42,7 +42,7 @@ class OphCiAnaesthesiarecord_Reading_Type extends BaseActiveRecordVersionedSoftD
 	 */
 	public function tableName()
 	{
-		return 'ophcianaesthesiarecord_reading_type';
+		return 'ophnupostoperative_vital_type';
 	}
 
 	/**
@@ -68,7 +68,7 @@ class OphCiAnaesthesiarecord_Reading_Type extends BaseActiveRecordVersionedSoftD
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'fieldType' => array(self::BELONGS_TO, 'OphCiAnaesthesiarecord_Reading_Type_Field_Type', 'field_type_id'),
+			'fieldType' => array(self::BELONGS_TO, 'OphNuPostoperative_Vital_Type_Field_Type', 'field_type_id'),
 		);
 	}
 
@@ -106,7 +106,7 @@ class OphCiAnaesthesiarecord_Reading_Type extends BaseActiveRecordVersionedSoftD
 	{
 		$attributes = array();
 
-		foreach (OphCiAnaesthesiarecord_Reading_Type::model()->findAll() as $type) {
+		foreach (OphNuPostoperative_Vital_Type::model()->findAll() as $type) {
 			$attributes[$type->id] = array('data-attr-unit' => $type->unit);
 		}
 

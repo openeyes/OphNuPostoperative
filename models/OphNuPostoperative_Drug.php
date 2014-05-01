@@ -18,7 +18,7 @@
  */
 
 /**
- * This is the model class for table "ophcianaesthesiarecord_drug".
+ * This is the model class for table "ophnupostoperative_drug".
  *
  * The followings are the available columns in table:
  * @property integer $id
@@ -26,7 +26,7 @@
  * @property string $display_order
  */
 
-class OphCiAnaesthesiarecord_Drug extends BaseActiveRecordVersionedSoftDelete
+class OphNuPostoperative_Drug extends BaseActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -42,7 +42,7 @@ class OphCiAnaesthesiarecord_Drug extends BaseActiveRecordVersionedSoftDelete
 	 */
 	public function tableName()
 	{
-		return 'ophcianaesthesiarecord_drug';
+		return 'ophnupostoperative_drug';
 	}
 
 	/**

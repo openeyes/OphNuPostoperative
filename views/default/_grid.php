@@ -26,7 +26,7 @@
 			</td>
 		<?php }?>
 	</tr>
-	<?php foreach (OphCiAnaesthesiarecord_Gas::model()->activeOrPk($element->gasValues)->findAll(array('order'=>'display_order')) as $gas) {
+	<?php foreach (OphNuPostoperative_Gas::model()->findAll(array('order'=>'display_order')) as $gas) {
 		$lastColour = '#fff';?>
 		<tr>
 			<th data-attr-min="<?php echo $gas->min?>" data-attr-max="<?php echo $gas->max?>"><?php echo $gas->name?><?php if ($gas->unit) {?> (<?php echo $gas->unit?>)<?php }?></th>
@@ -42,43 +42,43 @@
 				<?php }else{?>
 					<td style="background: <?php echo $lastColour?>">
 				<?php }?>
-					<?php if ($mode == 'edit') {?>
-						<?php echo CHtml::textField('gas_level_'.$gas->id.'_'.$i,$value,array('size'=>6,'class'=>'gas_level'))?>
-					<?php }else{?>
-						<?php echo $value?>
-					<?php }?>
+				<?php if ($mode == 'edit') {?>
+					<?php echo CHtml::textField('gas_level_'.$gas->id.'_'.$i,$value,array('size'=>6,'class'=>'gas_level'))?>
+				<?php }else{?>
+					<?php echo $value?>
+				<?php }?>
 				</td>
 			<?php }?>
 		</tr>
 	<?php }?>
-	<?php foreach (OphCiAnaesthesiarecord_Drug::model()->activeOrPk($element->drugValues)->findAll(array('order'=>'display_order')) as $drug) {?>
+	<?php foreach (OphNuPostoperative_Drug::model()->findAll(array('order'=>'display_order')) as $drug) {?>
 		<tr>
 			<th><?php echo $drug->name?><?php if ($drug->unit) {?> (<?php echo $drug->unit?>)<?php }?></th>
 			<?php for ($i=0;$i<$element->intervals;$i++) {?>
 				<td style="background: #fff">
-					<?php if ($mode == 'edit') {?>
-						<?php echo CHtml::textField('drug_'.$drug->id.'_'.$i,$this->getDrugItem($element,$drug,$i),array('size'=>6))?>
-					<?php }else{?>
-						<?php echo $this->getDrugItem($element,$drug,$i)?></td>
-					<?php }?>
+				<?php if ($mode == 'edit') {?>
+					<?php echo CHtml::textField('drug_'.$drug->id.'_'.$i,$this->getDrugItem($element,$drug,$i),array('size'=>6))?>
+				<?php }else{?>
+					<?php echo $this->getDrugItem($element,$drug,$i)?></td>
+				<?php }?>
 				</td>
 			<?php }?>
 		</tr>
 	<?php }?>
-	<?php foreach (OphCiAnaesthesiarecord_Reading_Type::model()->activeOrPk($element->readingTypeValues)->findAll(array('order'=>'display_order')) as $reading_type) {?>
+	<?php foreach (OphNuPostoperative_Vital_Type::model()->findAll(array('order'=>'display_order')) as $reading_type) {?>
 		<tr>
 			<th><?php echo $reading_type->name?><?php if ($reading_type->unit) {?> (<?php echo $reading_type->unit?>)<?php }?></th>
 			<?php for ($i=0;$i<$element->intervals;$i++) {?>
 				<td style="background: #fff">
-					<?php if ($mode == 'edit') {?>
-						<?php if ($reading_type->fieldType && $reading_type->fieldType->name == 'Select') {?>
-							<?php echo CHtml::dropDownList("reading_".$reading_type->id.'_'.$i,$this->getReadingItem($element,$reading_type,$i),CHtml::listData(OphCiAnaesthesiarecord_Reading_Type_Field_Type_Option::model()->notDeletedOrPk($this->getReadingItem($element,$reading_type,$i))->findAll(array('order'=>'display_order','condition'=>'reading_type_id=:reading_type_id','params'=>array(':reading_type_id'=>$reading_type->id))),'name','name'),array('empty'=>''))?>
-						<?php }else{?>
-							<?php echo CHtml::textField('reading_'.$reading_type->id.'_'.$i,$this->getReadingItem($element,$reading_type,$i),array('size'=>6))?>
-						<?php }?>
+				<?php if ($mode == 'edit') {?>
+					<?php if ($reading_type->fieldType && $reading_type->fieldType->name == 'Select') {?>
+						<?php echo CHtml::dropDownList("reading_".$reading_type->id.'_'.$i,$this->getReadingItem($element,$reading_type,$i),CHtml::listData(OphNuPostoperative_Vital_Type_Field_Type_Option::model()->findAll(array('order'=>'display_order','condition'=>'reading_type_id=:reading_type_id','params'=>array(':reading_type_id'=>$reading_type->id))),'name','name'),array('empty'=>''))?>
 					<?php }else{?>
-						<?php echo $this->getReadingItem($element,$reading_type,$i)?></td>
+						<?php echo CHtml::textField('reading_'.$reading_type->id.'_'.$i,$this->getReadingItem($element,$reading_type,$i),array('size'=>6))?>
 					<?php }?>
+				<?php }else{?>
+					<?php echo $this->getReadingItem($element,$reading_type,$i)?></td>
+				<?php }?>
 				</td>
 			<?php }?>
 		</tr>

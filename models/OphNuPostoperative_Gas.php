@@ -18,7 +18,7 @@
  */
 
 /**
- * This is the model class for table "ophcianaesthesiarecord_gas".
+ * This is the model class for table "ophnupostoperative_gas".
  *
  * The followings are the available columns in table:
  * @property integer $id
@@ -27,7 +27,7 @@
  * @property integer $field_type_id
  */
 
-class OphCiAnaesthesiarecord_Gas extends BaseActiveRecordVersionedSoftDelete
+class OphNuPostoperative_Gas extends BaseActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -43,7 +43,7 @@ class OphCiAnaesthesiarecord_Gas extends BaseActiveRecordVersionedSoftDelete
 	 */
 	public function tableName()
 	{
-		return 'ophcianaesthesiarecord_gas';
+		return 'ophnupostoperative_gas';
 	}
 
 	/**
@@ -69,7 +69,7 @@ class OphCiAnaesthesiarecord_Gas extends BaseActiveRecordVersionedSoftDelete
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'fieldType' => array(self::BELONGS_TO, 'OphCiAnaesthesiarecord_Gas_Field_Type', 'field_type_id'),
+			'fieldType' => array(self::BELONGS_TO, 'OphNuPostoperative_Gas_Field_Type', 'field_type_id'),
 		);
 	}
 

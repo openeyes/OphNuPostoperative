@@ -29,76 +29,38 @@
 
 	<div class="element-fields">
 
-		<?php
-
-
-		$vitals = array ('Heart Rate','Blood Pressure','RR','Sa02','o2 l/min','Glucose Level','Temp (C)','Pain Score','Nausea/Vomiting','Blood Loss','AVPU','MEWS Score');
-
-		$time = new DateTime();
-
-		$num_intervals = 15;
-		$times = array();
-		for ($i = 1; $i <= $num_intervals; $i++) {
-			$time = $time->add(new DateInterval('PT15M'));
-			$times[] = $time->format('H:i').'<BR>';
-		}
-
-		$data = array($times);
-
-		foreach($vitals as $vital){
-			$data_row= array_fill(0,$num_intervals+1,'');
-			$data_row[0]=$vital;
-			$data[]=$data_row;
-		}
-
-		?>
-		<div id="vitalswidget" style="cursor: pointer;">
-			<?php
-			$this->widget('application.widgets.Grid', array(
-					'id'=>'vitals',
-					'Options' => array('data'=>$data, 'vertical-headers'=>true, 'horizontal-headers'=>true)
-			));
-			array_unshift($vitals,'Time');
-			?>
-		</div>
-		<div class="addVitalsFields" style="display: none">
-			<input type="hidden" id="vitals-count" value="<?php echo sizeOf($vitals)?>">
-			<?php
-
-			foreach($vitals as $key => $vital)
-			{?>
-				<div class="row field-row">
-					<div class="large-2 column"><label><?php echo $vital?></label></div>
-					<div class="large-2 column end">
-						<?php
-						$htmlOptions = $vital=='Time' ?  array('readOnly'=>true) : array();
-						echo CHtml::textField($key+1,'',$htmlOptions);?>
-					</div>
-				</div>
-			<?php }
-			?>
-			<div class="row field-row">
-				<div class="large-2 column"><label></label></div>
-				<div class="large-4 column end">
-					<button id="edit-vital" class="secondary small" value="">Add</button>
-					<button class="cancel-vital warning small">Cancel</button>
-				</div>
-			</div>
-		</div>
-		<div class="row field-row vitalsErrors" style="display: none">
-			<div class="large-3 column"><label></label></div>
-			<div class="large-5 column end">
-				<div class="alert-box alert with-icon">
-					<p>Please fix the following input errors:</p>
-					<ul class="vitalsErrorList">
-					</ul>
+		<div id="div_Element_OphNuPostoperative_Vitals" class="eventDetail">
+			<div class="label">Data items:</div>
+			<div class="data">
+				<div id="items">
+					<?php echo $this->renderPartial('_grid',array('element'=>$element,'mode'=>'edit'))?>
 				</div>
 			</div>
 		</div>
 
 
-		<?php echo $form->textField($element, 'total_fluid_intake', array('size' => '10'))?>
-		<?php echo $form->textField($element, 'total_fluid_output', array('size' => '10'))?>
+		<div id="div_Element_OphNuPostoperative_Vitals_anaesthesia_start_time" class="eventDetail">
+			<div class="label"><?php echo $element->getAttributeLabel('anaesthesia_start_time')?>:</div>
+			<div class="data">
+				<?php echo $form->textField($element,'anaesthesia_start_time',array('size'=>6,'nowrapper'=>true))?>
+				<a href="#" id="anaesthesia_start_time_now">now</a>
+				<div class="OphNuPostoperative_extra_label">
+					<?php echo $element->getAttributeLabel('anaesthesia_end_time')?>:
+				</div>
+				<?php echo $form->textField($element,'anaesthesia_end_time',array('size'=>6,'nowrapper'=>true))?>
+				<a href="#" id="anaesthesia_end_time_now">now</a>
+				<div class="OphNuPostoperative_extra_label">
+					<?php echo $element->getAttributeLabel('surgery_start_time')?>:
+				</div>
+				<?php echo $form->textField($element,'surgery_start_time',array('size'=>6,'nowrapper'=>true))?>
+				<a href="#" id="surgery_start_time_now">now</a>
+				<div class="OphNuPostoperative_extra_label">
+					<?php echo $element->getAttributeLabel('surgery_end_time')?>:
+				</div>
+				<?php echo $form->textField($element,'surgery_end_time',array('size'=>6,'nowrapper'=>true))?>
+				<a href="#" id="surgery_end_time_now">now</a>
+			</div>
+		</div>
 	</div>
 
 </section>

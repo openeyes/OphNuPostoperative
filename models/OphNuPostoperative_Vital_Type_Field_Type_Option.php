@@ -18,7 +18,7 @@
  */
 
 /**
- * This is the model class for table "ophcianaesthesiarecord_reading_type_field_type_option".
+ * This is the model class for table "ophnupostoperative_vital_type_field_type_option".
  *
  * The followings are the available columns in table:
  * @property integer $id
@@ -27,7 +27,7 @@
  * @property string $comments
  */
 
-class OphCiAnaesthesiarecord_Reading_Type_Field_Type_Option extends BaseActiveRecordVersionedSoftDelete
+class OphNuPostoperative_Vital_Type_Field_Type_Option extends BaseActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -43,7 +43,7 @@ class OphCiAnaesthesiarecord_Reading_Type_Field_Type_Option extends BaseActiveRe
 	 */
 	public function tableName()
 	{
-		return 'ophcianaesthesiarecord_reading_type_field_type_option';
+		return 'ophnupostoperative_vital_type_field_type_option';
 	}
 
 	/**

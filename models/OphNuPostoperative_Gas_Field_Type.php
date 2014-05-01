@@ -18,7 +18,7 @@
  */
 
 /**
- * This is the model class for table "ophcianaesthesiarecord_gas_field_type".
+ * This is the model class for table "ophnupostoperative_gas_field_type".
  *
  * The followings are the available columns in table:
  * @property integer $id
@@ -26,7 +26,7 @@
  * @property string $display_order
  */
 
-class OphCiAnaesthesiarecord_Gas_Field_Type extends BaseActiveRecordVersionedSoftDelete
+class OphNuPostoperative_Gas_Field_Type extends BaseActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -42,7 +42,7 @@ class OphCiAnaesthesiarecord_Gas_Field_Type extends BaseActiveRecordVersionedSof
 	 */
 	public function tableName()
 	{
-		return 'ophcianaesthesiarecord_gas_field_type';
+		return 'ophnupostoperative_gas_field_type';
 	}
 
 	/**

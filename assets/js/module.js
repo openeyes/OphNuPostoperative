@@ -91,6 +91,55 @@ $(document).ready(function() {
 		event.preventDefault();
 		$('.addVitalsFields').hide();
 	});
+
+	$('.addnote').click(function() {
+		event.preventDefault();
+		$('.no_notes').hide();
+
+		$.ajax({
+			'type': 'POST',
+			'url': baseUrl+'/OphNuPostoperative/default/validateNote/',
+			'data': 'YII_CSRF_TOKEN='+YII_CSRF_TOKEN+'&note=yehaww',
+			'dataType': 'json',
+			'success': function(resp) {
+				$('.medicationErrorList').html('');
+
+				if (resp['status'] == 'error') {
+					for (var i in resp['errors']) {
+						$('.medicationErrorList').append('<li>'+resp['errors'][i]);
+					}
+
+					$('.medicationErrors').show();
+				} else {
+					$('.medicationErrors').hide();
+
+					if ($('#_edit_row_id').val() != '' || !medication_in_list($('#_medication_id').val(),$('#start_date').val())) {
+						$('.medications tr.no_medications').hide();
+
+						if ($('#_edit_row_id').val() == '') {
+							$('.medications tbody').append(resp['row']);
+						} else {
+							$('#'+$('#_edit_row_id').val()).replaceWith(resp['row']);
+						}
+						var i = 0;
+						$('.medications tbody tr').map(function() {
+							$(this).attr('id','t'+i);
+							i += 1;
+						});
+						$('.cancelMedication').click();
+					} else {
+						$('.medicationErrorList').append('Medication is already in the list for the given date');
+						$('.medicationErrors').show();
+					}
+				}
+			}
+		});
+
+		$('.notes').append('<tr><td>13:37</td><td>Note</td></tr>');
+	});
+
+
+
 });
 
 function ucfirst(str) { str += ''; var f = str.charAt(0).toUpperCase(); return f + str.substr(1); }

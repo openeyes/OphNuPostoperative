@@ -27,8 +27,28 @@
 		<h3 class="element-title"><?php echo $element->elementType->name; ?></h3>
 	</header>
 
-		<div class="element-fields">
-			<?php echo $form->textArea($element, 'progress_notes', array('rows' => 6, 'cols' => 80))?>
+	<div class="element-fields">
+				<table class="grid notes">
+					<thead>
+					<tr>
+						<th style="width: 15%;">Time</th>
+						<th>Note</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr class="no_notes"<?php if (!empty($element->notes)) {?> style="display: none"<?php }?>>
+						<td colspan="2">
+							No notes been entered for this patient.
+						</td>
+					</tr>
+					<?php if (!empty($element->notes)) {?>
+						<?php foreach ($element->notes as $i => $note) {
+							echo $this->renderPartial('_note_row',array('note'=>$note,'i'=>$i,'edit'=>true));
+						}?>
+					<?php }?>
+					</tbody>
+				</table>
+				<button class="addnote secondary small">Add note</button>
+		<?php echo $form->textArea($element, 'progress_notes', array('rows' => 6, 'cols' => 80))?>
 	</div>
-	
 </section>
