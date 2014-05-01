@@ -160,17 +160,17 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 	public function beforeValidate()
 	{
 		if ($this->fallsmobility) {
-			if (empty($this->falls)) {
-				$this->addError('falls','Please enter at least one falls/mobility item');
+			if (empty($this->fallss)) {
+				$this->addError('fallss','Please enter at least one falls/mobility item');
 			}
 		}
 
 		if ($this->removable_dental && $this->removable_dental->name == 'Yes') {
-			if (empty($this->dental)) {
-				$this->addError('dental','Please enter at least one dental item');
+			if (empty($this->dentals)) {
+				$this->addError('dentals','Please enter at least one dental item');
 			}
 
-			if ($this->hasMultiSelectValue('dental','Other (please specify)')) {
+			if ($this->hasMultiSelectValue('dentals','Other (please specify)')) {
 				if (!$this->other_comments) {
 					$this->addError('other_comments',$this->getAttributeLabel('other_comments').' cannot be blank.');
 				}
@@ -178,17 +178,17 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 		}
 
 		if ($this->hearing_aid_returned && $this->hearing_aid_returned->name == 'Yes') {
-			if (empty($this->hearing)) {
-				$this->addError('hearing','Please enter at least one hearing aid item');
+			if (empty($this->hearings)) {
+				$this->addError('hearings','Please enter at least one hearing aid item');
 			}
 		}
 
 		if ($this->patent_belongings_returned) {
-			if (empty($this->belongings)) {
-				$this->addError('belongings','Please enter at least one patient belonging');
+			if (empty($this->belongingss)) {
+				$this->addError('belongingss','Please enter at least one patient belonging');
 			}
 
-			if ($this->hasMultiSelectValue('belongings','Other (please specify)')) {
+			if ($this->hasMultiSelectValue('belongingss','Other (please specify)')) {
 				if (!$this->h_comments) {
 					$this->addError('h_comments',$this->getAttributeLabel('h_comments').' cannot be blank.');
 				}

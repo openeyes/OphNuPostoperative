@@ -92,6 +92,7 @@ class Element_OphNuPostoperative_Patient	extends  BaseEventTypeElement
 			'handing_off_from' => array(self::BELONGS_TO, 'OphNuPostoperative_Patient_HandingOffFrom', 'handing_off_from_id'),
 			'translator_present' => array(self::BELONGS_TO, 'OphNuPostoperative_Patient_TranslatorPresent', 'translator_present_id'),
 			'allergies' => array(self::HAS_MANY, 'OphNuPostoperative_Patient_Allergy', 'element_id'),
+			'identifiers' => array(self::HAS_MANY, 'OphNuPostoperative_Patient_Identifier_Assignment', 'element_id'),
 		);
 	}
 
@@ -142,8 +143,14 @@ class Element_OphNuPostoperative_Patient	extends  BaseEventTypeElement
 	public function beforeValidate()
 	{
 		if ($this->translator_present && $this->translator_present->name == 'Yes') {
-			if (!$this->translator_name) {
-				$this->addError('translator_name',$this->getAttributeLabel('translator_name').' cannot be blank.');
+			if (!$this->name_of_translator) {
+				$this->addError('name_of_translator',$this->getAttributeLabel('name_of_translator').' cannot be blank.');
+			}
+		}
+
+		if ($this->patient_id_verified_with_two_identifiers) {
+			if (count($this->identifiers) != 2) {
+				$this->addError('identifiers','Please select exactly 2 identifiers');
 			}
 		}
 
