@@ -29,6 +29,13 @@
 
 	<div class="element-fields">
 		<?php echo $form->checkBox($element, 'patient_id_verified_with_two_identifiers', array('text-align' => 'right'), array('label' => 3, 'field' => 4))?>
+		<?php $form->widget('application.widgets.AllergySelection', array(
+			'form' => $form,
+			'element' => $element,
+			'relation' => 'allergies',
+			'input_name' => 'allergies',
+			'no_allergies_field' => 'patient_has_no_allergies',
+		))?>
 		<?php echo $form->checkBox($element, 'allergies_verified', array('text-align' => 'right'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->textField($element, 'patient_enters_recovery_room', array(), array(), array('label' => 3, 'field' => 1))?>
 		<?php echo $form->dropDownList($element, 'hand_off_from_id', CHtml::listData(OphNuPostoperative_Patient_HandOffFrom::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 4))?>

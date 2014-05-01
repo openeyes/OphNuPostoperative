@@ -1,5 +1,4 @@
-<?php
-/**
+<?php /**
  * OpenEyes
  *
  * (C) Moorfields Eye Hospital NHS Foundation Trust, 2008-2011
@@ -18,14 +17,11 @@
  */
 
 /**
- * This is the model class for table "et_ophnupostoperative_vitals".
+ * This is the model class for table "ophnupostoperative_patient_allergy".
  *
  * The followings are the available columns in table:
  * @property string $id
- * @property integer $event_id
- * @property string $vitals
- * @property string $total_fluid_intake
- * @property string $total_fluid_output
+ * @property string $name
  *
  * The followings are the available model relations:
  *
@@ -36,7 +32,7 @@
  * @property User $usermodified
  */
 
-class Element_OphNuPostoperative_Vitals  extends  BaseEventTypeElement
+class OphNuPostoperative_Patient_Allergy extends BaseActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -52,7 +48,7 @@ class Element_OphNuPostoperative_Vitals  extends  BaseEventTypeElement
 	 */
 	public function tableName()
 	{
-		return 'et_ophnupostoperative_vitals';
+		return 'ophnupostoperative_patient_allergy';
 	}
 
 	/**
@@ -61,9 +57,9 @@ class Element_OphNuPostoperative_Vitals  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, vitals, total_fluid_intake, total_fluid_output, ', 'safe'),
-			array('total_fluid_intake, total_fluid_output, ', 'required'),
-			array('id, event_id, vitals, total_fluid_intake, total_fluid_output, ', 'safe', 'on' => 'search'),
+			array('allergy_id', 'safe'),
+			array('allergy_id', 'required'),
+			array('id, name', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -78,6 +74,7 @@ class Element_OphNuPostoperative_Vitals  extends  BaseEventTypeElement
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
+			'allergy' => array(self::BELONGS_TO, 'Allergy', 'allergy_id'),
 		);
 	}
 
@@ -88,10 +85,12 @@ class Element_OphNuPostoperative_Vitals  extends  BaseEventTypeElement
 	{
 		return array(
 			'id' => 'ID',
-			'event_id' => 'Event',
-			'vitals' => 'Vitals',
-			'total_fluid_intake' => 'Total Fluid Intake (mL)',
-			'total_fluid_output' => 'Total Fluid Output (mL)',
+			'name' => 'Name',
+			'drug_id' => 'Drug',
+			'route_id' => 'Route',
+			'frequency_id' => 'Frequency',
+			'start_date' => 'Start date',
+			'end_date' => 'End date',
 		);
 	}
 
@@ -104,22 +103,11 @@ class Element_OphNuPostoperative_Vitals  extends  BaseEventTypeElement
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id, true);
-		$criteria->compare('event_id', $this->event_id, true);
-		$criteria->compare('vitals', $this->vitals);
-		$criteria->compare('total_fluid_intake', $this->total_fluid_intake);
-		$criteria->compare('total_fluid_output', $this->total_fluid_output);
+		$criteria->compare('name', $this->name, true);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
-	}
-
-
-
-	protected function afterSave()
-	{
-
-		return parent::afterSave();
 	}
 }
 ?>

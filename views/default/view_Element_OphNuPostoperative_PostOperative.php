@@ -23,14 +23,14 @@
 		<h3 class="element-title"><?php echo $element->elementType->name?></h3>
 	</header>
 
-		<div class="element-data">
-				<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('fallsmobility'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->fallsmobility ? 'Yes' : 'No'?></div></div>
+	<div class="element-data">
+		<div class="row data-row">
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('fallsmobility'))?>:</div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->fallsmobility ? 'Yes' : 'No'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('falls'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php if (!$element->fallss) {?>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('falls'))?>:</div></div>
+			<div class="large-9 column end"><div class="data-value"><?php if (!$element->fallss) {?>
 							None
 						<?php } else {?>
 								<?php foreach ($element->fallss as $item) {
@@ -40,12 +40,12 @@
 			</div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('removable_dental_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->removable_dental ? $element->removable_dental->name : 'None'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('removable_dental_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->removable_dental ? $element->removable_dental->name : 'None'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('dental'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php if (!$element->dentals) {?>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('dental'))?>:</div></div>
+			<div class="large-9 column end"><div class="data-value"><?php if (!$element->dentals) {?>
 							None
 						<?php } else {?>
 								<?php foreach ($element->dentals as $item) {
@@ -55,16 +55,16 @@
 			</div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('other_comments'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->other_comments)?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('other_comments'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->other_comments)?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('hearing_aid_returned_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->hearing_aid_returned ? $element->hearing_aid_returned->name : 'None'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('hearing_aid_returned_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->hearing_aid_returned ? $element->hearing_aid_returned->name : 'None'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('hearing'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php if (!$element->hearings) {?>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('hearing'))?>:</div></div>
+			<div class="large-9 column end"><div class="data-value"><?php if (!$element->hearings) {?>
 							None
 						<?php } else {?>
 								<?php foreach ($element->hearings as $item) {
@@ -74,12 +74,12 @@
 			</div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('patent_belongings_returned'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->patent_belongings_returned ? 'Yes' : 'No'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('patent_belongings_returned'))?>:</div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->patent_belongings_returned ? 'Yes' : 'No'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('belongings'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php if (!$element->belongingss) {?>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('belongings'))?>:</div></div>
+			<div class="large-9 column end"><div class="data-value"><?php if (!$element->belongingss) {?>
 							None
 						<?php } else {?>
 								<?php foreach ($element->belongingss as $item) {
@@ -89,12 +89,12 @@
 			</div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('h_comments'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->h_comments)?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('h_comments'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->h_comments)?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('skin'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php if (!$element->skins) {?>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('skin'))?>:</div></div>
+			<div class="large-9 column end"><div class="data-value"><?php if (!$element->skins) {?>
 							None
 						<?php } else {?>
 								<?php foreach ($element->skins as $item) {
@@ -104,12 +104,12 @@
 			</div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('s_comments'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->s_comments)?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('s_comments'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->s_comments)?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('obs'))?>:</div></div>
-			<div class="large-10 column end"><div class="data-value"><?php if (!$element->obss) {?>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('obs'))?>:</div></div>
+			<div class="large-9 column end"><div class="data-value"><?php if (!$element->obss) {?>
 							None
 						<?php } else {?>
 								<?php foreach ($element->obss as $item) {
@@ -119,8 +119,8 @@
 			</div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('o_comments'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->o_comments)?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('o_comments'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->o_comments)?></div></div>
 		</div>
-			</div>
+	</div>
 </section>

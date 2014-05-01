@@ -195,13 +195,13 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 			}
 		}
 
-		if ($this->skin && $this->skin->name == 'Yes') {
+		if ($this->hasMultiSelectValue('skins','Other (please specify)')) {
 			if (!$this->s_comments) {
 				$this->addError('s_comments',$this->getAttributeLabel('s_comments').' cannot be blank.');
 			}
 		}
 
-		if ($this->obs && $this->obs->name == 'Yes') {
+		if ($this->hasMultiSelectValue('obss','Other (please specify)')) {
 			if (!$this->o_comments) {
 				$this->addError('o_comments',$this->getAttributeLabel('o_comments').' cannot be blank.');
 			}

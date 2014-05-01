@@ -28,6 +28,11 @@
 	</header>
 
 	<div class="element-fields">
+		<?php $form->widget('application.widgets.MedicationSelection', array(
+			'element' => $element,
+			'relation' => 'medications',
+			'input_name' => 'medication_history',
+		))?>
 		<?php echo $form->textArea($element, 'medication_administration', array(), false, array(), array('label' => 3, 'field' => 4))?>
 	</div>
 </section>
