@@ -19,15 +19,21 @@
 ?>
 
 <section class="element <?php echo $element->elementType->class_name?>"
-	data-element-type-id="<?php echo $element->elementType->id?>"
-	data-element-type-class="<?php echo $element->elementType->class_name?>"
-	data-element-type-name="<?php echo $element->elementType->name?>"
-	data-element-display-order="<?php echo $element->elementType->display_order?>">
+				 data-element-type-id="<?php echo $element->elementType->id?>"
+				 data-element-type-class="<?php echo $element->elementType->class_name?>"
+				 data-element-type-name="<?php echo $element->elementType->name?>"
+				 data-element-display-order="<?php echo $element->elementType->display_order?>">
 	<header class="element-header">
 		<h3 class="element-title"><?php echo $element->elementType->name; ?></h3>
 	</header>
 
 	<div class="element-fields">
+		<div class="row field-row">
+			<div class="large-3 column">
+				<label>Notes:</label>
+			</div>
+
+			<div class="large-9 column">
 				<table class="grid notes">
 					<thead>
 					<tr>
@@ -49,8 +55,8 @@
 					</tbody>
 				</table>
 				<button class="addnote secondary small">Add note</button>
-		<?php echo $form->textArea($element, 'progress_notes', array('rows' => 6, 'cols' => 80))?>
-
-
+			</div>
+		</div>
+		<?php echo $form->textArea($element, 'progress_notes', array('layoutColumns'=>array('label' => 3, 'field' => 9)))?>
 	</div>
 </section>

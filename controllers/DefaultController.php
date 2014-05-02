@@ -70,7 +70,7 @@ class DefaultController extends BaseEventTypeController
 		return parent::beforeAction($action);
 	}
 
-<<<<<<< HEAD
+
 	public function getGasItem($element, $gas, $offset)
 	{
 		if (!empty($_POST)) {
@@ -110,7 +110,8 @@ class DefaultController extends BaseEventTypeController
 		if ($element->id && $reading = OphNuPreoperative_Vital::model()->find('element_id=? and item_id=? and offset=?',array($element->id,$reading_type->id,$offset))) {
 			return $reading->value;
 		}
-=======
+	}
+
 	protected function setElementDefaultOptions_Element_OphNuPostoperative_Patient($element, $action)
 	{
 		if ($action == 'create') {
@@ -300,6 +301,6 @@ class DefaultController extends BaseEventTypeController
 		$element->updateMultiSelectData('Element_OphNuPostoperative_PostOperative_Belongings_Assignment',empty($data['MultiSelect_belongings']) ? array() : $data['MultiSelect_belongings'],'ophnupostoperative_postoperative_belongings_id');
 		$element->updateMultiSelectData('Element_OphNuPostoperative_PostOperative_Skin_Assignment',empty($data['MultiSelect_skin']) ? array() : $data['MultiSelect_skin'],'ophnupostoperative_postoperative_skin_id');
 		$element->updateMultiSelectData('Element_OphNuPostoperative_PostOperative_Obs_Assignment',empty($data['MultiSelect_obs']) ? array() : $data['MultiSelect_obs'],'ophnupostoperative_postoperative_obs_id');
->>>>>>> b8d8337987670da01e70308ca436e673d2d7a777
+
 	}
 }

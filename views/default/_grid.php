@@ -20,10 +20,11 @@
 
 <table class="anaesthesia_grid">
 	<tr class="times">
+		<th></th>
 		<?php foreach ($element->getTimeIntervals() as $i => $time) {?>
-			<td align="right" style="background: #<?php echo ($mode == 'edit' ? 'dae6f1' : 'fff')?>">
-				<span<?php if ($i==0) {?> style="margin-right: -122px"<?php }?>><?php echo $time?></span>
-			</td>
+			<th>
+				<span><?php echo $time?></span>
+			</th>
 		<?php }?>
 	</tr>
 	<?php foreach (OphNuPostoperative_Gas::model()->findAll(array('order'=>'display_order')) as $gas) {

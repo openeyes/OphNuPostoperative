@@ -185,7 +185,7 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 	{
 		$times = array();
 
-		for ($i=0; $i<=$this->intervals; $i++) {
+		for ($i=0; $i<$this->intervals; $i++) {
 			$times[] = date('H:i',($this->startTimeTS + ($i * 15 * 60)));
 		}
 
