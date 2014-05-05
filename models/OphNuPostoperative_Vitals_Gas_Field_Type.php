@@ -18,7 +18,7 @@
  */
 
 /**
- * This is the model class for table "ophnupostoperative_drug".
+ * This is the model class for table "ophnupostoperative_vitals_gas_field_type".
  *
  * The followings are the available columns in table:
  * @property integer $id
@@ -26,7 +26,7 @@
  * @property string $display_order
  */
 
-class OphNuPostoperative_Drug extends BaseActiveRecord
+class OphNuPostoperative_Vitals_Gas_Field_Type extends BaseActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -42,7 +42,7 @@ class OphNuPostoperative_Drug extends BaseActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'ophnupostoperative_drug';
+		return 'ophnupostoperative_vitals_gas_field_type';
 	}
 
 	/**
@@ -100,17 +100,6 @@ class OphNuPostoperative_Drug extends BaseActiveRecord
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
-	}
-
-	public function getUnitAttributes()
-	{
-		$attributes = array();
-
-		foreach (OphCiAnaesthesiarecord_Drug::model()->findAll() as $type) {
-			$attributes[$type->id] = array('data-attr-unit' => $type->unit);
-		}
-		
-		return $attributes;
 	}
 }
 ?>

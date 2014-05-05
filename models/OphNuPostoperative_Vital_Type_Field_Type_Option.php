@@ -22,7 +22,7 @@
  *
  * The followings are the available columns in table:
  * @property integer $id
- * @property integer $reading_type_id
+ * @property integer $vital_type_id
  * @property string $name
  * @property string $comments
  */
@@ -54,10 +54,10 @@ class OphNuPostoperative_Vital_Type_Field_Type_Option extends BaseActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('reading_type_id, name, display_order', 'safe'),
+			array('vital_type_id, name, display_order', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, reading_type_id, name, display_order', 'safe', 'on' => 'search'),
+			array('id, vital_type_id, name, display_order', 'safe', 'on' => 'search'),
 		);
 	}
 

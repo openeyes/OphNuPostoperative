@@ -18,7 +18,7 @@
  */
 
 /**
- * This is the model class for table "ophcianaesthesiarecord_reading".
+ * This is the model class for table "ophnupostoperative_vital".
  *
  * The followings are the available columns in table:
  * @property integer $id
@@ -28,7 +28,7 @@
  * @property integer $display_order
  */
 
-class OphCiAnaesthesiarecord_Reading extends BaseActiveRecordVersioned
+class OphNuPostoperative_Vital extends BaseActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -44,7 +44,7 @@ class OphCiAnaesthesiarecord_Reading extends BaseActiveRecordVersioned
 	 */
 	public function tableName()
 	{
-		return 'ophcianaesthesiarecord_reading';
+		return 'ophnupostoperative_vital';
 	}
 
 	/**
@@ -71,7 +71,7 @@ class OphCiAnaesthesiarecord_Reading extends BaseActiveRecordVersioned
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'item' => array(self::BELONGS_TO, 'OphCiAnaesthesiarecord_Reading_Type', 'item_id'),
+			'item' => array(self::BELONGS_TO, 'OphNuPostoperative_Vital_Type', 'item_id'),
 		);
 	}
 

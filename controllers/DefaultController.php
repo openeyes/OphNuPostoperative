@@ -80,7 +80,7 @@ class DefaultController extends BaseEventTypeController
 					'colour' => $gas->getColourForValue($value),
 					'level' => $value,
 			);
-		} else if ($element->id && $gas_level = OphCiAnaesthesiarecord_Gas_Level::model()->find('element_id=? and item_id=? and offset=?',array($element->id,$gas->id,$offset))) {
+		} else if ($element->id && $gas_level = OphNuPostoperative_Vitals_Gas_Level::model()->find('element_id=? and item_id=? and offset=?',array($element->id,$gas->id,$offset))) {
 			$value = $gas_level->value;
 
 			return array(
@@ -96,7 +96,7 @@ class DefaultController extends BaseEventTypeController
 			return @$_POST['drug_'.$drug->id.'_'.$offset];
 		}
 
-		if ($element->id && $dose = OphNuPreoperative_Drug_Dose::model()->find('element_id=? and item_id=? and offset=?',array($element->id,$drug->id,$offset))) {
+		if ($element->id && $dose = OphNuPostoperative_Vitals_Drug_Dose::model()->find('element_id=? and item_id=? and offset=?',array($element->id,$drug->id,$offset))) {
 			return $dose->value;
 		}
 	}
@@ -107,7 +107,7 @@ class DefaultController extends BaseEventTypeController
 			return @$_POST['reading_'.$reading_type->id.'_'.$offset];
 		}
 
-		if ($element->id && $reading = OphNuPreoperative_Vital::model()->find('element_id=? and item_id=? and offset=?',array($element->id,$reading_type->id,$offset))) {
+		if ($element->id && $reading = OphNuPostoperative_Vital::model()->find('element_id=? and item_id=? and offset=?',array($element->id,$reading_type->id,$offset))) {
 			return $reading->value;
 		}
 	}

@@ -2,8 +2,8 @@
 /* Module-specific javascript can be placed here */
 
 $(document).ready(function() {
-			handleButton($('#et_save'),function() {
-					});
+	handleButton($('#et_save'),function() {
+	});
 	
 	handleButton($('#et_cancel'),function(e) {
 		if (m = window.location.href.match(/\/update\/[0-9]+/)) {
@@ -64,34 +64,6 @@ $(document).ready(function() {
 		});
 	};
 
-
-	$('#vitals td').click(function() {
-		var col = $(this).data('column');
-		$('.addVitalsFields').show();
-		$('#edit-vital').val(col);
-		var fields =$('#vitals-count').val();
-		for (var row=1;row<=fields;row++){
-
-			$('.addVitalsFields').find('#' + row).val($(".vitals-col-"+col+".vitals-row-"+row).text().trim());
-		}
-	});
-
-	$('#edit-vital').click(function() {
-		event.preventDefault();
-		var fields =$('#vitals-count').val();
-
-		var col = $('#edit-vital').val();
-		for (var row=1;row<=fields;row++){
-			$(".vitals-col-"+col+".vitals-row-"+row).html($('.addVitalsFields').find('#'+row).val());
-		}
-		$('.addVitalsFields').hide();
-	});
-
-	$('.cancel-vital').click(function() {
-		event.preventDefault();
-		$('.addVitalsFields').hide();
-	});
-
 	$('.addnote').click(function() {
 		event.preventDefault();
 		$('.no_notes').hide();
@@ -138,8 +110,20 @@ $(document).ready(function() {
 		$('.notes').append('<tr><td>13:37</td><td>Note</td></tr>');
 	});
 
+	$('.timeNow').click(function(e) {
+		e.preventDefault();
 
+		var d = new Date;
 
+		var h = d.getHours();
+		var m = d.getMinutes();
+
+		if (m.length <2) {
+			m = '0' + m;
+		}
+
+		$(this).prev('input').val(h+':'+m);
+	});
 });
 
 function ucfirst(str) { str += ''; var f = str.charAt(0).toUpperCase(); return f + str.substr(1); }

@@ -23,3 +23,93 @@
 		background-image: image-url("medium.png");
 	}
 }
+
+.reading_row {
+	margin-bottom: 10px;
+
+	.data_type select {
+		width: 12em;
+	}
+
+	.reading_type select {
+		width: 12em;
+	}
+
+	span {
+		margin-left: 10px;
+	}
+
+	label {
+		display: inline-block;
+		width: 4em;
+	}
+}
+
+.vitals-grid {
+	background: #fff;
+	min-width: 0;
+
+	th {
+		border: 1px solid #000;
+		width: 123px;
+		color: #000 !important;
+		background-color: #ccc;
+		padding: 2px 10px 2px 10px !important;
+		text-align: left;
+		font-size: 11px;
+		vertical-align: middle;
+	}
+
+	td {
+		border: 1px solid #000;
+		width: 103px;
+		height: 1em;
+		text-align: center;
+		padding: 2px 10px 2px 10px !important;
+		vertical-align: middle;
+	}
+
+	input {
+		background: #fff;
+		border: none;
+		width: 4em;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	tr.times td {
+		border: none;
+		font-size: 11px;
+	}
+
+	tr.times span {
+		margin-right: -69px;
+	}
+}
+
+span.unit {
+	margin-left: 0;
+}
+
+.OphNuPostoperative_extra_label {
+	margin-left: 1em;
+	display: inline-block;
+	font-size: 15px;
+}
+
+#Element_OphNuPostoperative_Vitals_anaesthesia_start_time {
+	width: 5em;
+	display: inline;
+}
+#Element_OphNuPostoperative_Vitals_anaesthesia_end_time {
+	width: 5em;
+	display: inline;
+}
+#Element_OphNuPostoperative_Vitals_surgery_start_time {
+	width: 5em;
+	display: inline;
+}
+#Element_OphNuPostoperative_Vitals_surgery_end_time {
+	width: 5em;
+	display: inline;
+}

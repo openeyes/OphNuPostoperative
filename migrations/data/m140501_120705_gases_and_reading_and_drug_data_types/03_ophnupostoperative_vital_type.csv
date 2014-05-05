@@ -6,3 +6,5 @@ id,name,display_order,unit,validation_regex,validation_message,field_type_id
 5,TV,5,ml,,,3
 6,ETCO2,6,%,,,1
 7,Temp,7,C,,,4
+8,PNS,8,,,,3
+9,Position,9,,,,2

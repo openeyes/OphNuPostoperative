@@ -18,7 +18,7 @@
  */
 
 /**
- * This is the model class for table "ophnupostoperative_drug_dose".
+ * This is the model class for table "ophnupostoperative_vitals_drug_dose".
  *
  * The followings are the available columns in table:
  * @property integer $id
@@ -27,7 +27,7 @@
  * @property string $value
  */
 
-class OphNuPostoperative_Drug_Dose extends BaseActiveRecord
+class OphNuPostoperative_Vitals_Drug_Dose extends BaseActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -43,7 +43,7 @@ class OphNuPostoperative_Drug_Dose extends BaseActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'ophnupostoperative_drug_dose';
+		return 'ophnupostoperative_vitals_drug_dose';
 	}
 
 	/**
@@ -71,7 +71,7 @@ class OphNuPostoperative_Drug_Dose extends BaseActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'item' => array(self::BELONGS_TO, 'OphCiAnaesthesiarecord_Drug', 'item_id'),
+			'item' => array(self::BELONGS_TO, 'OphNuPostoperative_Vitals_Drug', 'item_id'),
 		);
 	}
 

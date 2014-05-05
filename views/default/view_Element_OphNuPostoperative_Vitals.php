@@ -23,18 +23,11 @@
 		<h3 class="element-title"><?php echo $element->elementType->name?></h3>
 	</header>
 
-		<div class="element-data">
-				<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('vitals'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->vitals)?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('total_fluid_intake'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->total_fluid_intake)?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('total_fluid_output'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->total_fluid_output)?></div></div>
-		</div>
+	<div class="element-data">
+		<div class="row field-row">
+			<div class="large-12 column end">
+				<?php echo $this->renderPartial('_grid',array('element'=>$element,'mode'=>'view'))?>
 			</div>
+		</div>
+	</div>
 </section>

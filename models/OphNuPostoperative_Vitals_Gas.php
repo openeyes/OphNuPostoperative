@@ -18,18 +18,16 @@
  */
 
 /**
- * This is the model class for table "ophnupostoperative_gas_level".
+ * This is the model class for table "ophnupostoperative_vitals_gas".
  *
  * The followings are the available columns in table:
  * @property integer $id
- * @property integer $event_id
- * @property integer $item_id
+ * @property string $name
+ * @property string $display_order
  * @property integer $field_type_id
- * @property time $record_time
- * @property string $value
  */
 
-class OphNuPostoperative_Gas_Level extends BaseActiveRecord
+class OphNuPostoperative_Vitals_Gas extends BaseActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -45,7 +43,7 @@ class OphNuPostoperative_Gas_Level extends BaseActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'ophnupostoperative_gas_level';
+		return 'ophnupostoperative_vitals_gas';
 	}
 
 	/**
@@ -56,10 +54,10 @@ class OphNuPostoperative_Gas_Level extends BaseActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('item_id, field_type_id, offset, value', 'safe'),
+			array('name, display_order', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, item_id, field_type_id, offset, value', 'safe', 'on' => 'search'),
+			array('id, name', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -71,7 +69,7 @@ class OphNuPostoperative_Gas_Level extends BaseActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'item' => array(self::BELONGS_TO, 'OphNuPostoperative_Gas', 'item_id'),
+			'fieldType' => array(self::BELONGS_TO, 'OphNuPostoperative_Vitals_Gas_Field_Type', 'field_type_id'),
 		);
 	}
 
@@ -82,6 +80,7 @@ class OphNuPostoperative_Gas_Level extends BaseActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+			'name' => 'Name',
 		);
 	}
 
@@ -97,23 +96,25 @@ class OphNuPostoperative_Gas_Level extends BaseActiveRecord
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id, true);
+		$criteria->compare('name', $this->name);
+		$criteria->compare('display_order', $this->display_order);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
 	}
 
-	protected function beforeValidate()
-	{
-		if ($this->item->min !== null && $this->value < $this->item->min) {
-			$this->addError('gas level',"cannot be less than {$this->item->min}{$this->item->unit}");
+	public function getColourForValue($value) {
+		if (strlen($value) >0) {
+			if ((ctype_digit($value) || is_int($value)) && ($value >= $this->min and $value <= $this->max)) {
+				$col = dechex(255 - ($value * (155 / $this->max)));
+				return '#'.$col.$col.'ff';
+			} else {
+				return '#f99';
+			}
 		}
 
-		if ($this->item->max !== null && $this->value > $this->item->max) {
-			$this->addError('gas level',"cannot be higher than {$this->item->max}{$this->item->unit}");
-		}
-
-		return parent::beforeValidate();
+		return '#fff';
 	}
 }
 ?>

@@ -28,39 +28,53 @@
 	</header>
 
 	<div class="element-fields">
-
-		<div id="div_Element_OphNuPostoperative_Vitals" class="eventDetail">
-			<div class="label">Data items:</div>
-			<div class="data">
+		<div class="row field-row">
+			<div class="large-3 column end">
+				<label>Data items:</label>
+			</div>
+		</div>
+		<div class="row field-row">
+			<div class="large-12 column end">
 				<div id="items">
 					<?php echo $this->renderPartial('_grid',array('element'=>$element,'mode'=>'edit'))?>
 				</div>
 			</div>
 		</div>
-
-
-		<div id="div_Element_OphNuPostoperative_Vitals_anaesthesia_start_time" class="eventDetail">
-			<div class="label"><?php echo $element->getAttributeLabel('anaesthesia_start_time')?>:</div>
-			<div class="data">
+		<div class="row field-row">
+			<div class="large-2 column">
+				<label><?php echo $element->getAttributeLabel('anaesthesia_start_time')?>:</label>
+			</div>
+			<div class="large-2 column end">
 				<?php echo $form->textField($element,'anaesthesia_start_time',array('size'=>6,'nowrapper'=>true))?>
-				<a href="#" id="anaesthesia_start_time_now">now</a>
-				<div class="OphNuPostoperative_extra_label">
-					<?php echo $element->getAttributeLabel('anaesthesia_end_time')?>:
-				</div>
+				<a href="#" class="timeNow">now</a>
+			</div>
+		</div>
+		<div class="row field-row">
+			<div class="large-2 column">
+				<label><?php echo $element->getAttributeLabel('anaesthesia_end_time')?>:</label>
+			</div>
+			<div class="large-2 column end">
 				<?php echo $form->textField($element,'anaesthesia_end_time',array('size'=>6,'nowrapper'=>true))?>
-				<a href="#" id="anaesthesia_end_time_now">now</a>
-				<div class="OphNuPostoperative_extra_label">
-					<?php echo $element->getAttributeLabel('surgery_start_time')?>:
-				</div>
+				<a href="#" class="timeNow">now</a>
+			</div>
+		</div>
+		<div class="row field-row">
+			<div class="large-2 column">
+				<label><?php echo $element->getAttributeLabel('surgery_start_time')?>:</label>
+			</div>
+			<div class="large-2 column end">
 				<?php echo $form->textField($element,'surgery_start_time',array('size'=>6,'nowrapper'=>true))?>
-				<a href="#" id="surgery_start_time_now">now</a>
-				<div class="OphNuPostoperative_extra_label">
-					<?php echo $element->getAttributeLabel('surgery_end_time')?>:
-				</div>
+				<a href="#" class="timeNow">now</a>
+			</div>
+		</div>
+		<div class="row field-row">
+			<div class="large-2 column">
+				<label><?php echo $element->getAttributeLabel('surgery_end_time')?>:</label>
+			</div>
+			<div class="large-2 column end">
 				<?php echo $form->textField($element,'surgery_end_time',array('size'=>6,'nowrapper'=>true))?>
-				<a href="#" id="surgery_end_time_now">now</a>
+				<a href="#" class="timeNow">now</a>
 			</div>
 		</div>
 	</div>
-
 </section>
