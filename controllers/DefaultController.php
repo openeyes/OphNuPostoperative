@@ -50,14 +50,6 @@ class DefaultController extends BaseEventTypeController
 		}
 	}
 
-
-	protected function setElementDefaultOptions_Element_OphNuPostoperative_Vitals($element, $action)
-	{
-		if ($action == 'create') {
-
-		}
-	}
-
 	/**
 	* use the split event type javascript and styling
 	*
@@ -71,7 +63,7 @@ class DefaultController extends BaseEventTypeController
 	}
 
 
-	public function getGasItem($element, $gas, $offset)
+	/*public function getGasItem($element, $gas, $offset)
 	{
 		if (!empty($_POST)) {
 			$value = @$_POST['gas_level_'.$gas->id.'_'.$offset];
@@ -110,7 +102,7 @@ class DefaultController extends BaseEventTypeController
 		if ($element->id && $reading = OphNuPostoperative_Vital::model()->find('element_id=? and item_id=? and offset=?',array($element->id,$reading_type->id,$offset))) {
 			return $reading->value;
 		}
-	}
+	}*/
 
 	protected function setElementDefaultOptions_Element_OphNuPostoperative_Patient($element, $action)
 	{
@@ -301,6 +293,127 @@ class DefaultController extends BaseEventTypeController
 		$element->updateMultiSelectData('Element_OphNuPostoperative_PostOperative_Belongings_Assignment',empty($data['MultiSelect_belongings']) ? array() : $data['MultiSelect_belongings'],'ophnupostoperative_postoperative_belongings_id');
 		$element->updateMultiSelectData('Element_OphNuPostoperative_PostOperative_Skin_Assignment',empty($data['MultiSelect_skin']) ? array() : $data['MultiSelect_skin'],'ophnupostoperative_postoperative_skin_id');
 		$element->updateMultiSelectData('Element_OphNuPostoperative_PostOperative_Obs_Assignment',empty($data['MultiSelect_obs']) ? array() : $data['MultiSelect_obs'],'ophnupostoperative_postoperative_obs_id');
+	}
 
+	protected function setComplexAttributes_Element_OphNuPostoperative_Vitals($element, $data, $index)
+	{
+		$reading_items = array();
+		$drug_items = array();
+		$gas_items = array();
+
+		$readings = array();
+		$drugs = array();
+		$gas_levels = array();
+
+		foreach ($data as $key => $value) {
+			if (preg_match('/^reading_([0-9]+)_([0-9]+)$/',$key,$m)) {
+				$reading_items[$m[1]][$m[2]] = $value;
+
+				$reading = new OphNuPostoperative_Vital;
+				$reading->item_id = $m[1];
+				$reading->offset = $m[2];
+				$reading->value = $value;
+
+				$readings[] = $reading;
+			}
+			if (preg_match('/^drug_([0-9]+)_([0-9]+)$/',$key,$m)) {
+				$drug_items[$m[1]][$m[2]] = $value;
+
+				$drug_dose = new OphNuPostoperative_Vitals_Drug_Dose;
+				$drug_dose->item_id = $m[1];
+				$drug_dose->offset = $m[2];
+				$drug_dose->value = $value;
+
+				$drug_doses[] = $drug_dose;
+			}
+			if (preg_match('/^gas_level_([0-9]+)_([0-9]+)$/',$key,$m)) {
+				$gas_items[$m[1]][$m[2]] = $value;
+
+				$gas_level = new OphNuPostoperative_Vitals_Gas_Level;
+				$gas_level->item_id = $m[1];
+				$gas_level->offset = $m[2];
+				$gas_level->value = $value;
+
+				$gas_levels[] = $gas_level;
+			}
+		}
+
+		$element->reading_items = $element->populateMissingGridItems($reading_items, 'OphNuPostoperative_Vital_Type');
+		$element->drug_items = $element->populateMissingGridItems($drug_items, 'OphNuPostoperative_Vitals_Drug');
+		$element->gas_items = $element->populateMissingGridItems($gas_items, 'OphNuPostoperative_Vitals_Gas');
+
+		$element->drugs = $drug_doses;
+		$element->readings = $readings;
+		$element->gas_levels = $gas_levels;
+	}
+
+	protected function saveComplexAttributes_Element_OphNuPostoperative_Vitals($element, $data, $index)
+	{
+		foreach ($data as $key => $value) {
+			if (preg_match('/^reading_([0-9]+)_([0-9]+)$/',$key,$m)) {
+				$reading_items[$m[1]][$m[2]] = $value;
+			} 
+			if (preg_match('/^drug_([0-9]+)_([0-9]+)$/',$key,$m)) {
+				$drug_items[$m[1]][$m[2]] = $value;
+			}
+			if (preg_match('/^gas_level_([0-9]+)_([0-9]+)$/',$key,$m)) {
+				$gas_items[$m[1]][$m[2]] = $value;
+			}
+		}
+
+		$reading_items = $element->populateMissingGridItems($reading_items, 'OphNuPostoperative_Vital_Type');
+		$drug_items = $element->populateMissingGridItems($drug_items, 'OphNuPostoperative_Vitals_Drug');
+		$gas_items = $element->populateMissingGridItems($gas_items, 'OphNuPostoperative_Vitals_Gas');
+
+		foreach ($reading_items as $item_id => $_reading_items) {
+			foreach ($_reading_items as $offset => $value) {
+				if (!$item = OphNuPostoperative_Vital::model()->find('element_id=? and item_id=? and offset=?',array($element->id, $item_id, $offset))) {
+					$item = new OphNuPostoperative_Vital;
+					$item->element_id = $element->id;
+					$item->item_id = $item_id;
+					$item->offset = $offset;
+				}
+
+				$item->value = $value;
+
+				if (!$item->save()) {
+					throw new Exception("Unable to save vital item: ".print_r($item->getErrors(),true));
+				}
+			}
+		}
+
+		foreach ($drug_items as $item_id => $_drug_items) {
+			foreach ($_drug_items as $offset => $value) {
+				if (!$item = OphNuPostoperative_Vitals_Drug_Dose::model()->find('element_id=? and item_id=? and offset=?',array($element->id, $item_id, $offset))) {
+					$item = new OphNuPostoperative_Vitals_Drug_Dose;
+					$item->element_id = $element->id;
+					$item->item_id = $item_id;
+					$item->offset = $offset;
+				}
+
+				$item->value = $value;
+
+				if (!$item->save()) {
+					throw new Exception("Unable to save dose item: ".print_r($item->getErrors(),true));
+				}
+			}
+		}
+
+		foreach ($gas_items as $item_id => $_gas_items) {
+			foreach ($_gas_items as $offset => $value) {
+				if (!$item = OphNuPostoperative_Vitals_Gas_Level::model()->find('element_id=? and item_id=? and offset=?',array($element->id, $item_id, $offset))) {
+					$item = new OphNuPostoperative_Vitals_Gas_Level;
+					$item->element_id = $element->id;
+					$item->item_id = $item_id;
+					$item->offset = $offset;
+				}
+
+				$item->value = $value;
+
+				if (!$item->save()) {
+					throw new Exception("Unable to save gas item: ".print_r($item->getErrors(),true));
+				}
+			}
+		}
 	}
 }

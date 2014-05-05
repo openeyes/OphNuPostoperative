@@ -26,7 +26,7 @@
 	<div class="element-data">
 		<div class="row field-row">
 			<div class="large-12 column end">
-				<?php echo $this->renderPartial('_grid',array('element'=>$element,'mode'=>'view'))?>
+				<?php echo $this->renderPartial('_grid_view',array('element'=>$element,'mode'=>'view'))?>
 			</div>
 		</div>
 	</div>

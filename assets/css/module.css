@@ -57,6 +57,10 @@
   min-width: 0;
 }
 /* line 52, ../sass/components/_event.scss */
+.vitals-grid tr {
+  background: #fff !important;
+}
+/* line 56, ../sass/components/_event.scss */
 .vitals-grid th {
   border: 1px solid #000;
   width: 123px;
@@ -66,8 +70,9 @@
   text-align: left;
   font-size: 11px;
   vertical-align: middle;
+  height: 28px;
 }
-/* line 63, ../sass/components/_event.scss */
+/* line 68, ../sass/components/_event.scss */
 .vitals-grid td {
   border: 1px solid #000;
   width: 103px;
@@ -76,7 +81,7 @@
   padding: 2px 10px 2px 10px !important;
   vertical-align: middle;
 }
-/* line 72, ../sass/components/_event.scss */
+/* line 77, ../sass/components/_event.scss */
 .vitals-grid input {
   background: #fff;
   border: none;
@@ -84,47 +89,48 @@
   margin-left: auto;
   margin-right: auto;
 }
-/* line 80, ../sass/components/_event.scss */
+/* line 85, ../sass/components/_event.scss */
 .vitals-grid tr.times td {
   border: none;
   font-size: 11px;
+  background: #dae6f1;
 }
-/* line 85, ../sass/components/_event.scss */
+/* line 91, ../sass/components/_event.scss */
 .vitals-grid tr.times span {
   margin-right: -69px;
 }
 
-/* line 90, ../sass/components/_event.scss */
+/* line 96, ../sass/components/_event.scss */
 span.unit {
   margin-left: 0;
 }
 
-/* line 94, ../sass/components/_event.scss */
+/* line 100, ../sass/components/_event.scss */
 .OphNuPostoperative_extra_label {
   margin-left: 1em;
   display: inline-block;
   font-size: 15px;
 }
 
-/* line 100, ../sass/components/_event.scss */
+/* line 106, ../sass/components/_event.scss */
 #Element_OphNuPostoperative_Vitals_anaesthesia_start_time {
   width: 5em;
   display: inline;
 }
 
-/* line 104, ../sass/components/_event.scss */
+/* line 110, ../sass/components/_event.scss */
 #Element_OphNuPostoperative_Vitals_anaesthesia_end_time {
   width: 5em;
   display: inline;
 }
 
-/* line 108, ../sass/components/_event.scss */
+/* line 114, ../sass/components/_event.scss */
 #Element_OphNuPostoperative_Vitals_surgery_start_time {
   width: 5em;
   display: inline;
 }
 
-/* line 112, ../sass/components/_event.scss */
+/* line 118, ../sass/components/_event.scss */
 #Element_OphNuPostoperative_Vitals_surgery_end_time {
   width: 5em;
   display: inline;

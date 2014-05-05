@@ -36,7 +36,7 @@
 		<div class="row field-row">
 			<div class="large-12 column end">
 				<div id="items">
-					<?php echo $this->renderPartial('_grid',array('element'=>$element,'mode'=>'edit'))?>
+					<?php echo $this->renderPartial('_grid_edit',array('element'=>$element,'mode'=>'edit'))?>
 				</div>
 			</div>
 		</div>

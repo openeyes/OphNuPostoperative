@@ -71,7 +71,7 @@ class OphNuPostoperative_Vitals_Gas_Level extends BaseActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'item' => array(self::BELONGS_TO, 'OphNuPostoperative_Gas', 'item_id'),
+			'item' => array(self::BELONGS_TO, 'OphNuPostoperative_Vitals_Gas', 'item_id'),
 		);
 	}
 

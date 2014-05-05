@@ -39,6 +39,9 @@
 class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 {
 	public $intervals = 8;
+	public $reading_items = array();
+	public $drug_items = array();
+	public $gas_items = array();
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -76,14 +79,14 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-				'element_type' => array(self::HAS_ONE, 'ElementType', 'id','on' => "element_type.class_name='".get_class($this)."'"),
-				'eventType' => array(self::BELONGS_TO, 'EventType', 'event_type_id'),
-				'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
-				'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
-				'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-				'drugs' => array(self::HAS_MANY, 'OphNuPostoperative_Drug_Dose', 'element_id', 'order' => 'display_order'),
-				'readings' => array(self::HAS_MANY, 'OphNuPostoperative_Reading', 'element_id', 'order' => 'display_order'),
-				'gas_levels' => array(self::HAS_MANY, 'OphNuPostoperative_Gas_Level', 'element_id', 'order' => 'display_order'),
+			'element_type' => array(self::HAS_ONE, 'ElementType', 'id','on' => "element_type.class_name='".get_class($this)."'"),
+			'eventType' => array(self::BELONGS_TO, 'EventType', 'event_type_id'),
+			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
+			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
+			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
+			'drugs' => array(self::HAS_MANY, 'OphNuPostoperative_Vitals_Drug_Dose', 'element_id', 'order' => 'offset'),
+			'readings' => array(self::HAS_MANY, 'OphNuPostoperative_Vital', 'element_id', 'order' => 'offset'),
+			'gas_levels' => array(self::HAS_MANY, 'OphNuPostoperative_Vitals_Gas_Level', 'element_id', 'order' => 'offset'),
 		);
 	}
 
@@ -93,13 +96,13 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 	public function attributeLabels()
 	{
 		return array(
-				'id' => 'ID',
-				'event_id' => 'Event',
-				'comments' => 'Post operative orders',
-				'anaesthesia_start_time' => 'Anaesthesia start time',
-				'anaesthesia_end_time' => 'End time',
-				'surgery_start_time' => 'Surgery start time',
-				'surgery_end_time' => 'End time',
+			'id' => 'ID',
+			'event_id' => 'Event',
+			'comments' => 'Post operative orders',
+			'anaesthesia_start_time' => 'Anaesthesia start time',
+			'anaesthesia_end_time' => 'End time',
+			'surgery_start_time' => 'Surgery start time',
+			'surgery_end_time' => 'End time',
 		);
 	}
 
@@ -132,26 +135,6 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 		}
 
 		$this->anaesthesia_start_time = date('H:i',$ts);
-	}
-
-	public function getItems() {
-		$items = array();
-
-		foreach (OphNuPostoperative_Gas_Level::model()->findAll(array('condition'=>'element_id=?','params'=>array($this->id),'order'=>'display_order')) as $level) {
-			$items[$level->display_order] = $level;
-		}
-
-		foreach (OphNuPostoperative_Reading::model()->findAll(array('condition'=>'element_id=?','params'=>array($this->id),'order'=>'display_order')) as $reading) {
-			$items[$reading->display_order] = $reading;
-		}
-
-		foreach (OphNuPostoperative_Drug_Dose::model()->findAll(array('condition'=>'element_id=?','params'=>array($this->id),'order'=>'display_order')) as $dose) {
-			$items[$dose->display_order] = $dose;
-		}
-
-		ksort($items);
-
-		return $items;
 	}
 
 	public function OneOf($attribute, $params)
@@ -198,42 +181,68 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 		$this->anaesthesia_end_time = substr($this->anaesthesia_end_time,0,5);
 		$this->surgery_start_time = substr($this->surgery_start_time,0,5);
 		$this->surgery_end_time = substr($this->surgery_end_time,0,5);
-	}
-
-	/* Get drug ids used by the element */
-	public function getDrugValues()
-	{
-		$drug_values = array();
-
-		foreach ($this->drugs as $drug) {
-			$drug_values[] = $drug->item_id;
-		}
-
-		return $drug_values;
-	}
-
-	/* Get reading type ids used by the element */
-	public function getReadingTypeValues()
-	{
-		$reading_type_values = array();
 
 		foreach ($this->readings as $reading) {
-			$reading_type_values[] = $reading->item_id;
+			$this->reading_items[$reading->item_id][$reading->offset] = $reading->value;
 		}
 
-		return $reading_type_values;
-	}
-
-	/* Get gas ids used by the element */
-	public function getGasValues()
-	{
-		$gas_values = array();
+		foreach ($this->drugs as $drug) {
+			$this->drug_items[$drug->item_id][$drug->offset] = $drug->value;
+		}
 
 		foreach ($this->gas_levels as $gas_level) {
-			$gas_values[] = $gas_level->item_id;
+			$this->gas_items[$gas_level->item_id][$gas_level->offset] = $gas_level->value;
 		}
 
-		return $gas_values;
+		$this->reading_items = $this->populateMissingGridItems($this->reading_items, 'OphNuPostoperative_Vital_Type');
+		$this->drug_items = $this->populateMissingGridItems($this->drug_items, 'OphNuPostoperative_Vitals_Drug');
+		$this->gas_items = $this->populateMissingGridItems($this->gas_items, 'OphNuPostoperative_Vitals_Gas');
+	}
+
+	public function populateMissingGridItems($data, $model)
+	{
+		foreach ($model::model()->findAll() as $item) {
+			if (!isset($data[$item->id])) {
+				$data[$item->id] = array();
+			}
+
+			for ($i=0; $i<$this->intervals; $i++) {
+				if (!isset($data[$item->id][$i])) {
+					$data[$item->id][$i] = '';
+				}
+			}
+		}
+
+		return $data;
+	}
+
+	public function afterValidate()
+	{
+		foreach ($this->drugs as $drug) {
+			if (!$drug->validate()) {
+				foreach ($drug->getErrors() as $field => $error) {
+					$this->addError($field,$drug->item->name.': '.$error[0]);
+				}
+			}
+		}
+
+		foreach ($this->readings as $reading) {
+			if (!$reading->validate()) {
+				foreach ($reading->getErrors() as $field => $error) {
+					$this->addError($field,$reading->item->name.': '.$error[0]);
+				}
+			}
+		}
+
+		foreach ($this->gas_levels as $gas_level) {
+			if (!$gas_level->validate()) {
+				foreach ($gas_level->getErrors() as $field => $error) {
+					$this->addError($field,$gas_level->item->name.': '.$error[0]);
+				}
+			}
+		}
+
+		return parent::afterValidate();
 	}
 }
 ?>
