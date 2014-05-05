@@ -124,6 +124,57 @@ $(document).ready(function() {
 
 		$(this).prev('input').val(h+':'+m);
 	});
+
+	$('.vitals-grid input').die('keypress').live('keypress',function(e) {
+		if (e.keyCode == 13) {
+			var n = parseInt($(this).attr('name').match(/[0-9]+$/));
+			var tr = $(this).parent().parent().next('tr');
+			var input = tr.children('td:first').children('input');
+			if (input.length >0) {
+				var name = input.attr('name').replace(/[0-9]+$/,'');
+				$('#'+name+n).select().focus();
+			}
+			return false;
+		}
+
+		return true;
+	});
+
+	$('.vitals-grid input').die('keydown').live('keydown',function(e) {
+		switch (e.keyCode) {
+			case 37:
+				var n = parseInt($(this).attr('name').match(/[0-9]+$/));
+				if (n >0) {
+					$('#'+$(this).attr('name').replace(/[0-9]+$/,'')+(n-1)).select().focus();
+				}
+				break;
+			case 38:
+				var n = parseInt($(this).attr('name').match(/[0-9]+$/));
+				var tr = $(this).parent().parent().prev('tr');
+				var input = tr.children('td:first').children('input');
+				if (input.length >0) {
+					var name = input.attr('name').replace(/[0-9]+$/,'');
+					$('#'+name+n).select().focus();
+				}
+				break;
+			case 39:
+				var n = parseInt($(this).attr('name').match(/[0-9]+$/));
+				var next = $(this).attr('name').replace(/[0-9]+$/,'')+(n+1);
+				if ($('#'+next).length >0) {
+					$('#'+next).select().focus();
+				}
+				break;
+			case 40:
+				var n = parseInt($(this).attr('name').match(/[0-9]+$/));
+				var tr = $(this).parent().parent().next('tr');
+				var input = tr.children('td:first').children('input');
+				if (input.length >0) {
+					var name = input.attr('name').replace(/[0-9]+$/,'');
+					$('#'+name+n).select().focus();
+				}
+				break;
+		}
+	});
 });
 
 function ucfirst(str) { str += ''; var f = str.charAt(0).toUpperCase(); return f + str.substr(1); }

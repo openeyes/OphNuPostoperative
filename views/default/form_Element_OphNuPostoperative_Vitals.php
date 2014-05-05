@@ -41,7 +41,7 @@
 			</div>
 		</div>
 		<div class="row field-row">
-			<div class="large-2 column">
+			<div class="large-3 column">
 				<label><?php echo $element->getAttributeLabel('anaesthesia_start_time')?>:</label>
 			</div>
 			<div class="large-2 column end">
@@ -50,7 +50,7 @@
 			</div>
 		</div>
 		<div class="row field-row">
-			<div class="large-2 column">
+			<div class="large-3 column">
 				<label><?php echo $element->getAttributeLabel('anaesthesia_end_time')?>:</label>
 			</div>
 			<div class="large-2 column end">
@@ -59,7 +59,7 @@
 			</div>
 		</div>
 		<div class="row field-row">
-			<div class="large-2 column">
+			<div class="large-3 column">
 				<label><?php echo $element->getAttributeLabel('surgery_start_time')?>:</label>
 			</div>
 			<div class="large-2 column end">
@@ -68,7 +68,7 @@
 			</div>
 		</div>
 		<div class="row field-row">
-			<div class="large-2 column">
+			<div class="large-3 column">
 				<label><?php echo $element->getAttributeLabel('surgery_end_time')?>:</label>
 			</div>
 			<div class="large-2 column end">

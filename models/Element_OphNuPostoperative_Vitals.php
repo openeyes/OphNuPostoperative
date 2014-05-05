@@ -68,6 +68,7 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('anaesthesia_start_time, anaesthesia_end_time, surgery_start_time, surgery_end_time', 'safe'),
 		);
 	}
 

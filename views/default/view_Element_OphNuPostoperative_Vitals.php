@@ -29,5 +29,53 @@
 				<?php echo $this->renderPartial('_grid_view',array('element'=>$element,'mode'=>'view'))?>
 			</div>
 		</div>
+		<div class="row field-row">
+			<div class="large-3 column">
+				<div class="data-label">
+					<?php echo CHtml::encode($element->getAttributeLabel('anaesthesia_start_time'))?>
+				</div>
+			</div>
+			<div class="large-9 column end">
+				<div class="data-value">
+					<?php echo $element->anaesthesia_start_time?>
+				</div>
+			</div>
+		</div>
+		<div class="row field-row">
+			<div class="large-3 column">
+				<div class="data-label">
+					<?php echo CHtml::encode($element->getAttributeLabel('anaesthesia_end_time'))?>
+				</div>
+			</div>
+			<div class="large-9 column end">
+				<div class="data-value">
+					<?php echo $element->anaesthesia_end_time?>
+				</div>
+			</div>
+		</div>
+		<div class="row field-row">
+			<div class="large-3 column">
+				<div class="data-label">
+					<?php echo CHtml::encode($element->getAttributeLabel('surgery_start_time'))?>
+				</div>
+			</div>
+			<div class="large-9 column end">
+				<div class="data-value">
+					<?php echo $element->surgery_start_time?>
+				</div>
+			</div>
+		</div>
+		<div class="row field-row">
+			<div class="large-3 column">
+				<div class="data-label">
+					<?php echo CHtml::encode($element->getAttributeLabel('surgery_end_time'))?>
+				</div>
+			</div>
+			<div class="large-9 column end">
+				<div class="data-value">
+					<?php echo $element->surgery_end_time?>
+				</div>
+			</div>
+		</div>
 	</div>
 </section>
