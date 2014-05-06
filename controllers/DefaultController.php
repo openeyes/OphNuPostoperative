@@ -75,6 +75,14 @@ class DefaultController extends BaseEventTypeController
 			}
 
 			$element->allergies = $allergies;
+
+			$ts = time();
+
+			while (date('i',$ts) != '00' && date('i',$ts) != '30') {
+				$ts -= 60;
+			}
+
+			$element->patient_enters_recovery_room = date('H:i',$ts);
 		}
 	}
 
