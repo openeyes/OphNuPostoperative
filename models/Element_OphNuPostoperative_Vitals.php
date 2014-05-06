@@ -220,30 +220,59 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 	public function afterValidate()
 	{
 		foreach ($this->drugs as $drug) {
-			if (!$drug->validate()) {
-				foreach ($drug->getErrors() as $field => $error) {
-					$this->addError($field,$drug->item->name.': '.$error[0]);
+			if ($this->vitalsOffsetHasData($drug->offset)) {
+				if (!$drug->validate()) {
+					foreach ($drug->getErrors() as $field => $error) {
+						$this->addError($field,$drug->item->name.': '.$error[0]);
+					}
 				}
 			}
 		}
 
 		foreach ($this->readings as $reading) {
-			if (!$reading->validate()) {
-				foreach ($reading->getErrors() as $field => $error) {
-					$this->addError($field,$reading->item->name.': '.$error[0]);
+			if ($this->vitalsOffsetHasData($reading->offset)) {
+				if (!$reading->validate()) {
+					foreach ($reading->getErrors() as $field => $error) {
+						$this->addError($field,$reading->item->name.': '.$error[0]);
+					}
 				}
 			}
 		}
 
 		foreach ($this->gas_levels as $gas_level) {
-			if (!$gas_level->validate()) {
-				foreach ($gas_level->getErrors() as $field => $error) {
-					$this->addError($field,$gas_level->item->name.': '.$error[0]);
+			if ($this->vitalsOffsetHasData($gas_level->offset)) {
+				if (!$gas_level->validate()) {
+					foreach ($gas_level->getErrors() as $field => $error) {
+						$this->addError($field,$gas_level->item->name.': '.$error[0]);
+					}
 				}
 			}
 		}
 
 		return parent::afterValidate();
+	}
+
+	public function vitalsOffsetHasData($offset)
+	{
+		foreach ($this->drugs as $drug) {
+			if ($drug->offset == $offset && strlen($drug->value) >0) {
+				return true;
+			}
+		}
+
+		foreach ($this->readings as $reading) {
+			if ($reading->offset == $offset && strlen($reading->value) >0) {
+				return true;
+			}
+		}
+
+		foreach ($this->gas_levels as $gas_level) {
+			if ($gas_level->offset == $offset && strlen($gas_level->value) >0) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }
 ?>

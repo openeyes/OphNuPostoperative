@@ -115,8 +115,12 @@ $(document).ready(function() {
 
 		var d = new Date;
 
-		var h = d.getHours();
-		var m = d.getMinutes();
+		var h = d.getHours().toString();
+		var m = d.getMinutes().toString();
+
+		if (h.length <2) {
+			h = '0' + h;
+		}
 
 		if (m.length <2) {
 			m = '0' + m;

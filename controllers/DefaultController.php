@@ -62,48 +62,6 @@ class DefaultController extends BaseEventTypeController
 		return parent::beforeAction($action);
 	}
 
-
-	/*public function getGasItem($element, $gas, $offset)
-	{
-		if (!empty($_POST)) {
-			$value = @$_POST['gas_level_'.$gas->id.'_'.$offset];
-
-			return array(
-					'colour' => $gas->getColourForValue($value),
-					'level' => $value,
-			);
-		} else if ($element->id && $gas_level = OphNuPostoperative_Vitals_Gas_Level::model()->find('element_id=? and item_id=? and offset=?',array($element->id,$gas->id,$offset))) {
-			$value = $gas_level->value;
-
-			return array(
-					'colour' => $gas->getColourForValue($value),
-					'level' => $value,
-			);
-		}
-	}
-
-	public function getDrugItem($element, $drug, $offset)
-	{
-		if (!empty($_POST)) {
-			return @$_POST['drug_'.$drug->id.'_'.$offset];
-		}
-
-		if ($element->id && $dose = OphNuPostoperative_Vitals_Drug_Dose::model()->find('element_id=? and item_id=? and offset=?',array($element->id,$drug->id,$offset))) {
-			return $dose->value;
-		}
-	}
-
-	public function getReadingItem($element, $reading_type, $offset)
-	{
-		if (!empty($_POST)) {
-			return @$_POST['reading_'.$reading_type->id.'_'.$offset];
-		}
-
-		if ($element->id && $reading = OphNuPostoperative_Vital::model()->find('element_id=? and item_id=? and offset=?',array($element->id,$reading_type->id,$offset))) {
-			return $reading->value;
-		}
-	}*/
-
 	protected function setElementDefaultOptions_Element_OphNuPostoperative_Patient($element, $action)
 	{
 		if ($action == 'create') {
@@ -295,6 +253,15 @@ class DefaultController extends BaseEventTypeController
 		$element->updateMultiSelectData('Element_OphNuPostoperative_PostOperative_Obs_Assignment',empty($data['MultiSelect_obs']) ? array() : $data['MultiSelect_obs'],'ophnupostoperative_postoperative_obs_id');
 	}
 
+	protected function setElementDefaultOptions_Element_OphNuPostoperative_Vitals($element, $action)
+	{
+		if ($action == 'create') {
+			$element->reading_items = $element->populateMissingGridItems(array(), 'OphNuPostoperative_Vital_Type');
+			$element->drug_items = $element->populateMissingGridItems(array(), 'OphNuPostoperative_Vitals_Drug');
+			$element->gas_items = $element->populateMissingGridItems(array(), 'OphNuPostoperative_Vitals_Gas');
+		}
+	}
+
 	protected function setComplexAttributes_Element_OphNuPostoperative_Vitals($element, $data, $index)
 	{
 		$reading_items = array();
@@ -361,57 +328,63 @@ class DefaultController extends BaseEventTypeController
 			}
 		}
 
-		$reading_items = $element->populateMissingGridItems($reading_items, 'OphNuPostoperative_Vital_Type');
-		$drug_items = $element->populateMissingGridItems($drug_items, 'OphNuPostoperative_Vitals_Drug');
-		$gas_items = $element->populateMissingGridItems($gas_items, 'OphNuPostoperative_Vitals_Gas');
+		$element->reading_items = $element->populateMissingGridItems($reading_items, 'OphNuPostoperative_Vital_Type');
+		$element->drug_items = $element->populateMissingGridItems($drug_items, 'OphNuPostoperative_Vitals_Drug');
+		$element->gas_items = $element->populateMissingGridItems($gas_items, 'OphNuPostoperative_Vitals_Gas');
 
 		foreach ($reading_items as $item_id => $_reading_items) {
 			foreach ($_reading_items as $offset => $value) {
-				if (!$item = OphNuPostoperative_Vital::model()->find('element_id=? and item_id=? and offset=?',array($element->id, $item_id, $offset))) {
-					$item = new OphNuPostoperative_Vital;
-					$item->element_id = $element->id;
-					$item->item_id = $item_id;
-					$item->offset = $offset;
-				}
+				if ($element->vitalsOffsetHasData($offset)) {
+					if (!$item = OphNuPostoperative_Vital::model()->find('element_id=? and item_id=? and offset=?',array($element->id, $item_id, $offset))) {
+						$item = new OphNuPostoperative_Vital;
+						$item->element_id = $element->id;
+						$item->item_id = $item_id;
+						$item->offset = $offset;
+					}
 
-				$item->value = $value;
+					$item->value = $value;
 
-				if (!$item->save()) {
-					throw new Exception("Unable to save vital item: ".print_r($item->getErrors(),true));
+					if (!$item->save()) {
+						throw new Exception("Unable to save vital item: ".print_r($item->getErrors(),true));
+					}
 				}
 			}
 		}
 
 		foreach ($drug_items as $item_id => $_drug_items) {
 			foreach ($_drug_items as $offset => $value) {
-				if (!$item = OphNuPostoperative_Vitals_Drug_Dose::model()->find('element_id=? and item_id=? and offset=?',array($element->id, $item_id, $offset))) {
-					$item = new OphNuPostoperative_Vitals_Drug_Dose;
-					$item->element_id = $element->id;
-					$item->item_id = $item_id;
-					$item->offset = $offset;
-				}
+				if ($element->vitalsOffsetHasData($offset)) {
+					if (!$item = OphNuPostoperative_Vitals_Drug_Dose::model()->find('element_id=? and item_id=? and offset=?',array($element->id, $item_id, $offset))) {
+						$item = new OphNuPostoperative_Vitals_Drug_Dose;
+						$item->element_id = $element->id;
+						$item->item_id = $item_id;
+						$item->offset = $offset;
+					}
 
-				$item->value = $value;
+					$item->value = $value;
 
-				if (!$item->save()) {
-					throw new Exception("Unable to save dose item: ".print_r($item->getErrors(),true));
+					if (!$item->save()) {
+						throw new Exception("Unable to save dose item: ".print_r($item->getErrors(),true));
+					}
 				}
 			}
 		}
 
 		foreach ($gas_items as $item_id => $_gas_items) {
 			foreach ($_gas_items as $offset => $value) {
-				if (!$item = OphNuPostoperative_Vitals_Gas_Level::model()->find('element_id=? and item_id=? and offset=?',array($element->id, $item_id, $offset))) {
-					$item = new OphNuPostoperative_Vitals_Gas_Level;
-					$item->element_id = $element->id;
-					$item->item_id = $item_id;
-					$item->offset = $offset;
-				}
+				if ($element->vitalsOffsetHasData($offset)) {
+					if (!$item = OphNuPostoperative_Vitals_Gas_Level::model()->find('element_id=? and item_id=? and offset=?',array($element->id, $item_id, $offset))) {
+						$item = new OphNuPostoperative_Vitals_Gas_Level;
+						$item->element_id = $element->id;
+						$item->item_id = $item_id;
+						$item->offset = $offset;
+					}
 
-				$item->value = $value;
+					$item->value = $value;
 
-				if (!$item->save()) {
-					throw new Exception("Unable to save gas item: ".print_r($item->getErrors(),true));
+					if (!$item->save()) {
+						throw new Exception("Unable to save gas item: ".print_r($item->getErrors(),true));
+					}
 				}
 			}
 		}
