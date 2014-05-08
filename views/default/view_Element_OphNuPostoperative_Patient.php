@@ -60,21 +60,21 @@
 		</div>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('hand_off_from_id'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->hand_off_from ? $element->hand_off_from->name : 'None'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->hand_off_from ? $element->hand_off_from->name : 'Not recoreded'?></div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('hand_off_to_id'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->hand_off_to ? $element->hand_off_to->name : 'None'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->hand_off_to ? $element->hand_off_to->name : 'Not recorded'?></div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('handing_off_from_id'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->handing_off_from ? $element->handing_off_from->name : 'None'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->handing_off_from ? $element->handing_off_from->name : 'Not recorded'?></div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('translator_present_id'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->translator_present ? $element->translator_present->name : 'None'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->translator_present ? $element->translator_present->name : 'Not recorded'?></div></div>
 		</div>
-		<?php if ($element->translator_present->name == 'Yes') {?>
+		<?php if ($element->translator_present && $element->translator_present->name == 'Yes') {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('name_of_translator'))?></div></div>
 				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->name_of_translator)?></div></div>

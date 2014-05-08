@@ -60,7 +60,6 @@ class Element_OphNuPostoperative_MedicationAdministration  extends	BaseEventType
 	{
 		return array(
 			array('event_id, medication_administration', 'safe'),
-			array('medication_administration', 'required'),
 			array('id, event_id, ', 'safe', 'on' => 'search'),
 		);
 	}
