@@ -274,5 +274,16 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 
 		return false;
 	}
+
+	public function beforeSave()
+	{
+		foreach (array('anaesthesia_start_time','anaesthesia_end_time','surgery_start_time','surgery_end_time') as $field) {
+			if (!$this->$field) {
+				$this->$field = null;
+			}
+		}
+
+		return parent::beforeSave();
+	}
 }
 ?>

@@ -37,7 +37,7 @@
 			</div>
 			<div class="large-9 column end">
 				<div class="data-value">
-					<?php echo $element->anaesthesia_start_time?>
+					<?php echo $element->anaesthesia_start_time ? $element->anaesthesia_start_time : 'Not recorded'?>
 				</div>
 			</div>
 		</div>
@@ -49,7 +49,7 @@
 			</div>
 			<div class="large-9 column end">
 				<div class="data-value">
-					<?php echo $element->anaesthesia_end_time?>
+					<?php echo $element->anaesthesia_end_time ? $element->anaesthesia_end_time : 'Not recorded'?>
 				</div>
 			</div>
 		</div>
@@ -61,7 +61,7 @@
 			</div>
 			<div class="large-9 column end">
 				<div class="data-value">
-					<?php echo $element->surgery_start_time?>
+					<?php echo $element->surgery_start_time ? $element->surgery_start_time : 'Not recorded'?>
 				</div>
 			</div>
 		</div>
@@ -73,7 +73,7 @@
 			</div>
 			<div class="large-9 column end">
 				<div class="data-value">
-					<?php echo $element->surgery_end_time?>
+					<?php echo $element->surgery_end_time ? $element->surgery_end_time : 'Not recorded'?>
 				</div>
 			</div>
 		</div>

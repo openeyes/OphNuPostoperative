@@ -26,7 +26,7 @@
 	<div class="element-data">
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('fallsmobility'))?>:</div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->fallsmobility ? 'Yes' : 'No'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo is_null($element->fallsmobility) ? 'Not recorded' : ($element->fallsmobility ? 'Yes' : 'No')?></div></div>
 		</div>
 		<?php if ($element->fallsmobility) {?>
 			<div class="row data-row">
@@ -43,9 +43,9 @@
 		<?php }?>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('removable_dental_id'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->removable_dental ? $element->removable_dental->name : 'None'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->removable_dental ? $element->removable_dental->name : 'Not recorded'?></div></div>
 		</div>
-		<?php if ($element->removable_dental->name == 'Yes') {?>
+		<?php if ($element->removable_dental && $element->removable_dental->name == 'Yes') {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('dental'))?>:</div></div>
 				<div class="large-9 column end"><div class="data-value"><?php if (!$element->dentals) {?>
@@ -66,9 +66,9 @@
 		<?php }?>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('hearing_aid_returned_id'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->hearing_aid_returned ? $element->hearing_aid_returned->name : 'None'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->hearing_aid_returned ? $element->hearing_aid_returned->name : 'Not recorded'?></div></div>
 		</div>
-		<?php if ($element->hearing_aid_returned->name == 'Yes') {?>
+		<?php if ($element->hearing_aid_returned && $element->hearing_aid_returned->name == 'Yes') {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('hearing'))?>:</div></div>
 				<div class="large-9 column end"><div class="data-value"><?php if (!$element->hearings) {?>
@@ -83,7 +83,7 @@
 		<?php }?>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('patent_belongings_returned'))?>:</div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->patent_belongings_returned ? 'Yes' : 'No'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo is_null($element->patent_belongings_returned) ? 'Not recorded' : ($element->patent_belongings_returned ? 'Yes' : 'No')?></div></div>
 		</div>
 		<?php if ($element->patent_belongings_returned) {?>
 			<div class="row data-row">
