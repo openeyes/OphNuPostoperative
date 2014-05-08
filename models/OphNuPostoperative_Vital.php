@@ -112,7 +112,9 @@ class OphNuPostoperative_Vital extends BaseActiveRecord
 
 	public function beforeValidate()
 	{
-		if ($type = $this->item && strlen($this->value) >0) {
+
+		if (isset($this->item) && strlen($this->value) >0) {
+			$type=$this->item;
 			if ($type->validation_regex) {
 				if (!preg_match($type->validation_regex,$this->value)) {
 					$this->addError('reading',"$type->validation_message");
