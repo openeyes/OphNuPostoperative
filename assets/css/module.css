@@ -135,3 +135,31 @@ span.unit {
   width: 5em;
   display: inline;
 }
+
+/* line 122, ../sass/components/_event.scss */
+#Element_OphNuPostoperative_Patient_patient_enters_recovery_room {
+  width: 5em;
+  display: inline;
+}
+
+/* line 127, ../sass/components/_event.scss */
+#div_Element_OphNuPostoperative_Vitals_total_fluid_intake input {
+  display: inline;
+  width: 5em;
+}
+/* line 131, ../sass/components/_event.scss */
+#div_Element_OphNuPostoperative_Vitals_total_fluid_intake .metric {
+  display: inline;
+  font-size: 0.8125em;
+}
+
+/* line 137, ../sass/components/_event.scss */
+#div_Element_OphNuPostoperative_Vitals_total_fluid_outtake input {
+  display: inline;
+  width: 5em;
+}
+/* line 141, ../sass/components/_event.scss */
+#div_Element_OphNuPostoperative_Vitals_total_fluid_outtake .metric {
+  display: inline;
+  font-size: 0.8125em;
+}

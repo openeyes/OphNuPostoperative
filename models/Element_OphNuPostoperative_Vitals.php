@@ -68,7 +68,8 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('anaesthesia_start_time, anaesthesia_end_time, surgery_start_time, surgery_end_time', 'safe'),
+			array('anaesthesia_start_time, total_fluid_intake, total_fluid_outtake', 'safe'),
+			array('anaesthesia_start_time', 'required'),
 		);
 	}
 
@@ -100,10 +101,8 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 			'id' => 'ID',
 			'event_id' => 'Event',
 			'comments' => 'Post operative orders',
-			'anaesthesia_start_time' => 'Anaesthesia start time',
-			'anaesthesia_end_time' => 'End time',
-			'surgery_start_time' => 'Surgery start time',
-			'surgery_end_time' => 'End time',
+			'total_fluid_intake' => 'Total fluid intake',
+			'total_fluid_outtake' => 'Total fluid outtake',
 		);
 	}
 
@@ -127,17 +126,6 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 		));
 	}
 
-	public function setDefaultOptions()
-	{
-		$ts = time();
-
-		while (date('i',$ts) != '00' && date('i',$ts) != '30') {
-			$ts -= 60;
-		}
-
-		$this->anaesthesia_start_time = date('H:i',$ts);
-	}
-
 	public function OneOf($attribute, $params)
 	{
 		$valid = false;
@@ -156,7 +144,7 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 
 	public function getStartTimeTS()
 	{
-		if (!empty($_POST)) {
+		if (!empty($_POST['Element_OphNuPostoperative_Vitals'])) {
 			preg_match('/^([0-9]+)\:([0-9]+)/',$_POST['Element_OphNuPostoperative_Vitals']['anaesthesia_start_time'],$m);
 		} else {
 			preg_match('/^([0-9]+)\:([0-9]+)/',$this->anaesthesia_start_time,$m);
@@ -179,9 +167,6 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 	protected function afterFind()
 	{
 		$this->anaesthesia_start_time = substr($this->anaesthesia_start_time,0,5);
-		$this->anaesthesia_end_time = substr($this->anaesthesia_end_time,0,5);
-		$this->surgery_start_time = substr($this->surgery_start_time,0,5);
-		$this->surgery_end_time = substr($this->surgery_end_time,0,5);
 
 		foreach ($this->readings as $reading) {
 			$this->reading_items[$reading->item_id][$reading->offset] = $reading->value;
@@ -273,17 +258,6 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 		}
 
 		return false;
-	}
-
-	public function beforeSave()
-	{
-		foreach (array('anaesthesia_start_time','anaesthesia_end_time','surgery_start_time','surgery_end_time') as $field) {
-			if (!$this->$field) {
-				$this->$field = null;
-			}
-		}
-
-		return parent::beforeSave();
 	}
 }
 ?>

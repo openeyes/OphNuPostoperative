@@ -119,3 +119,27 @@ span.unit {
 	width: 5em;
 	display: inline;
 }
+#Element_OphNuPostoperative_Patient_patient_enters_recovery_room {
+	width: 5em;
+	display: inline;
+}
+#div_Element_OphNuPostoperative_Vitals_total_fluid_intake {
+	input {
+		display: inline;
+		width: 5em;
+	}
+	.metric {
+		display: inline;
+		font-size: 0.8125em;
+	}
+}
+#div_Element_OphNuPostoperative_Vitals_total_fluid_outtake {
+	input {
+		display: inline;
+		width: 5em;
+	}
+	.metric {
+		display: inline;
+		font-size: 0.8125em;
+	}
+}

@@ -2,8 +2,10 @@
 
 class DefaultController extends BaseEventTypeController
 {
-
-	static protected $action_types = array('validateNote' => self::ACTION_TYPE_FORM);
+	static protected $action_types = array(
+		'validateNote' => self::ACTION_TYPE_FORM,
+		'dataTimes' => self::ACTION_TYPE_FORM,
+	);
 
 	public function actionCreate()
 	{
@@ -267,6 +269,14 @@ class DefaultController extends BaseEventTypeController
 			$element->reading_items = $element->populateMissingGridItems(array(), 'OphNuPostoperative_Vital_Type');
 			$element->drug_items = $element->populateMissingGridItems(array(), 'OphNuPostoperative_Vitals_Drug');
 			$element->gas_items = $element->populateMissingGridItems(array(), 'OphNuPostoperative_Vitals_Gas');
+
+			$ts = time();
+
+			while (date('i',$ts) != '00' && date('i',$ts) != '30') {
+				$ts -= 60;
+			}
+
+			$element->anaesthesia_start_time = date('H:i',$ts);
 		}
 	}
 
@@ -395,6 +405,27 @@ class DefaultController extends BaseEventTypeController
 					}
 				}
 			}
+		}
+	}
+
+	public function actionDataTimes()
+	{
+		$start_time = @$_POST['start_time'];
+
+		if (!preg_match('/^([0-9]{1,2}):([0-9]{2})$/',$start_time,$m) || $m[1] > 23 || $m[2] > 59) {
+			echo json_encode(array(
+				'status' => 'error',
+				'message' => 'Invalid time format',
+			));
+		} else {
+			$element = new Element_OphNuPostoperative_Vitals;
+			$element->anaesthesia_start_time = $start_time;
+
+			echo json_encode(array(
+				'status' => 'success',
+				'start_time' => $start_time,
+				'html' => $this->renderPartial('_grid_data_times',array('element' => $element),true),
+			));
 		}
 	}
 }

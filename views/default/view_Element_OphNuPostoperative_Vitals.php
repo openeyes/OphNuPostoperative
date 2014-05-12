@@ -32,48 +32,24 @@
 		<div class="row field-row">
 			<div class="large-3 column">
 				<div class="data-label">
-					<?php echo CHtml::encode($element->getAttributeLabel('anaesthesia_start_time'))?>
+					<?php echo $element->getAttributeLabel('total_fluid_intake')?>:
 				</div>
 			</div>
 			<div class="large-9 column end">
 				<div class="data-value">
-					<?php echo $element->anaesthesia_start_time ? $element->anaesthesia_start_time : 'Not recorded'?>
+					<?php echo $element->total_fluid_intake?>mL
 				</div>
 			</div>
 		</div>
 		<div class="row field-row">
 			<div class="large-3 column">
 				<div class="data-label">
-					<?php echo CHtml::encode($element->getAttributeLabel('anaesthesia_end_time'))?>
+					<?php echo $element->getAttributeLabel('total_fluid_outtake')?>:
 				</div>
 			</div>
 			<div class="large-9 column end">
 				<div class="data-value">
-					<?php echo $element->anaesthesia_end_time ? $element->anaesthesia_end_time : 'Not recorded'?>
-				</div>
-			</div>
-		</div>
-		<div class="row field-row">
-			<div class="large-3 column">
-				<div class="data-label">
-					<?php echo CHtml::encode($element->getAttributeLabel('surgery_start_time'))?>
-				</div>
-			</div>
-			<div class="large-9 column end">
-				<div class="data-value">
-					<?php echo $element->surgery_start_time ? $element->surgery_start_time : 'Not recorded'?>
-				</div>
-			</div>
-		</div>
-		<div class="row field-row">
-			<div class="large-3 column">
-				<div class="data-label">
-					<?php echo CHtml::encode($element->getAttributeLabel('surgery_end_time'))?>
-				</div>
-			</div>
-			<div class="large-9 column end">
-				<div class="data-value">
-					<?php echo $element->surgery_end_time ? $element->surgery_end_time : 'Not recorded'?>
+					<?php echo $element->total_fluid_outtake?>mL
 				</div>
 			</div>
 		</div>

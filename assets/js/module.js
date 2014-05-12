@@ -180,7 +180,7 @@ $(document).ready(function() {
 		}
 	});
 
-	$('button.time-now').click(function(e) {
+	$('.time-now').click(function(e) {
 		e.preventDefault();
 
 		var d = new Date;
@@ -195,7 +195,18 @@ $(document).ready(function() {
 			m = '0'+m;
 		}
 
-		$('input[type="text"][id$="'+$(this).data('target')+'"]').val(h+':'+m);
+		var element = $(this).closest('section').data('element-type-class');
+
+		$('#'+element+'_'+$(this).data('target')).val(h+':'+m);
+		$('#'+element+'_'+$(this).data('target')).change();
+	});
+
+	$('#Element_OphNuPostoperative_Patient_patient_enters_recovery_room').change(function() {
+		var val = $(this).val();
+
+		if (val != '') {
+			OphNuPostoperative_update_times(val);
+		}
 	});
 });
 
@@ -205,4 +216,22 @@ function eDparameterListener(_drawing) {
 	if (_drawing.selectedDoodle != null) {
 		// handle event
 	}
+}
+
+function OphNuPostoperative_update_times(start_time)
+{
+	$.ajax({
+		'type': 'POST',
+		'dataType': 'json',
+		'url': baseUrl+'/OphNuPostoperative/default/dataTimes',
+		'data': 'start_time='+start_time+'&YII_CSRF_TOKEN='+YII_CSRF_TOKEN,
+		'success': function(resp) {
+			if (resp['status'] == 'error') {
+				alert(resp['message']);
+			} else {
+				$('table.vitals-grid .times').html(resp['html']);
+				$('#Element_OphNuPostoperative_Vitals_anaesthesia_start_time').val(resp['start_time']);
+			}
+		}
+	});
 }
