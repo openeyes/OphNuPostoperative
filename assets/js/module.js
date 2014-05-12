@@ -179,6 +179,24 @@ $(document).ready(function() {
 				break;
 		}
 	});
+
+	$('button.time-now').click(function(e) {
+		e.preventDefault();
+
+		var d = new Date;
+
+		var h = d.getHours();
+		var m = d.getMinutes();
+
+		if (h <10) {
+			h = '0'+h;
+		}
+		if (m <10) {
+			m = '0'+m;
+		}
+
+		$('input[type="text"][id$="'+$(this).data('target')+'"]').val(h+':'+m);
+	});
 });
 
 function ucfirst(str) { str += ''; var f = str.charAt(0).toUpperCase(); return f + str.substr(1); }

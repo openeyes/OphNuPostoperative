@@ -46,7 +46,7 @@
 			</div>
 			<div class="large-2 column end">
 				<?php echo $form->textField($element,'anaesthesia_start_time',array('size'=>6,'nowrapper'=>true))?>
-				<a href="#" class="timeNow">now</a>
+				<button type="submit" class="secondary small time-now" data-target="anaesthesia_start_time">Now</button>
 			</div>
 		</div>
 		<div class="row field-row">
@@ -55,7 +55,7 @@
 			</div>
 			<div class="large-2 column end">
 				<?php echo $form->textField($element,'anaesthesia_end_time',array('size'=>6,'nowrapper'=>true))?>
-				<a href="#" class="timeNow">now</a>
+				<button type="submit" class="secondary small time-now" data-target="anaesthesia_end_time">Now</button>
 			</div>
 		</div>
 		<div class="row field-row">
@@ -64,7 +64,7 @@
 			</div>
 			<div class="large-2 column end">
 				<?php echo $form->textField($element,'surgery_start_time',array('size'=>6,'nowrapper'=>true))?>
-				<a href="#" class="timeNow">now</a>
+				<button type="submit" class="secondary small time-now" data-target="surgery_start_time">Now</button>
 			</div>
 		</div>
 		<div class="row field-row">
@@ -73,7 +73,7 @@
 			</div>
 			<div class="large-2 column end">
 				<?php echo $form->textField($element,'surgery_end_time',array('size'=>6,'nowrapper'=>true))?>
-				<a href="#" class="timeNow">now</a>
+				<button type="submit" class="secondary small time-now" data-target="surgery_end_time">Now</button>
 			</div>
 		</div>
 	</div>
