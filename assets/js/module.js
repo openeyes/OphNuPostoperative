@@ -129,10 +129,10 @@ $(document).ready(function() {
 		$(this).prev('input').val(h+':'+m);
 	});
 
-	$('.vitals-grid input').die('keypress').live('keypress',function(e) {
+	/*$('.vitals-grid input').die('keypress').live('keypress',function(e) {
 		if (e.keyCode == 13) {
 			var n = parseInt($(this).attr('name').match(/[0-9]+$/));
-			var tr = $(this).parent().parent().next('tr');
+			var tr = $(this).closest('tr');
 			var input = tr.children('td:first').children('input');
 			if (input.length >0) {
 				var name = input.attr('name').replace(/[0-9]+$/,'');
@@ -143,6 +143,7 @@ $(document).ready(function() {
 
 		return true;
 	});
+	*/
 
 	$('.vitals-grid input').die('keydown').live('keydown',function(e) {
 		switch (e.keyCode) {
@@ -176,6 +177,14 @@ $(document).ready(function() {
 					var name = input.attr('name').replace(/[0-9]+$/,'');
 					$('#'+name+n).select().focus();
 				}
+				break;
+			case 13:
+				var tr = $(this).closest('tr').next('tr');
+				var input = tr.children('td:first').children('input');
+				if (input.length >0) {
+					input.select().focus();
+				}
+				return false;
 				break;
 		}
 	});

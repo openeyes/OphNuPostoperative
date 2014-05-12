@@ -287,7 +287,7 @@ class DefaultController extends BaseEventTypeController
 		$gas_items = array();
 
 		$readings = array();
-		$drugs = array();
+		$drug_doses = array();
 		$gas_levels = array();
 
 		foreach ($data as $key => $value) {
@@ -334,6 +334,10 @@ class DefaultController extends BaseEventTypeController
 
 	protected function saveComplexAttributes_Element_OphNuPostoperative_Vitals($element, $data, $index)
 	{
+		$reading_items = array();
+		$drug_items = array();
+		$gas_items = array();
+
 		foreach ($data as $key => $value) {
 			if (preg_match('/^reading_([0-9]+)_([0-9]+)$/',$key,$m)) {
 				$reading_items[$m[1]][$m[2]] = $value;
