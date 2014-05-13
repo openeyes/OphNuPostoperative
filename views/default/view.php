@@ -20,7 +20,7 @@
 
 <?php
 if ($this->canPrint()) {
-	$this->event_actions[] = EventAction::button('Print', 'print',null,array('class'=>'small button'));
+	//$this->event_actions[] = EventAction::button('Print', 'print',null,array('class'=>'small button'));
 }
 $this->beginContent('//patient/event_container');
 ?>
