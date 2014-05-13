@@ -24,9 +24,30 @@
 	</header>
 
 	<div class="element-data">
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('progress_notes'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->progress_notes ? CHtml::encode($element->progress_notes) : 'No notes recorded'?></div></div>
+		<div class="row field-row">
+			<div class="large-3 column"><label><?php echo $element->getAttributeLabel('progress_notes')?></label></div>
+			<div class="large-9 column end">
+				<table class="grid progress-notes">
+					<thead>
+					<tr>
+						<th>Time</th>
+						<th>Comment</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr class="no-comments"<?php if (!empty($element->progressnotes)) {?> style="display: none"<?php }?>>
+						<td class="no-notes" colspan="2">
+							No Comments Entered
+						</td>
+					</tr>
+					<?php
+					if (!empty($element->progressnotes)) {?>
+						<?php foreach ($element->progressnotes as $note) {
+							$this->renderPartial('_progress_notes_row',array('id'=>$note->id,'note'=>$note->comment,'full_time'=>$note->comment_date));
+						}?>
+					<?php }?>
+					</tbody>
+				</table>
+			</div>
 		</div>
-	</div>
 </section>

@@ -64,50 +64,27 @@ $(document).ready(function() {
 		});
 	};
 
-	$('.addnote').click(function() {
-		event.preventDefault();
-		$('.no_notes').hide();
 
+	$('.add-note').click(function() {
+		event.preventDefault();
+		var div = 	$('.progress-notes tbody');
+		if($('#new_progress_note').val()=='') {return;}
 		$.ajax({
 			'type': 'POST',
-			'url': baseUrl+'/OphNuPostoperative/default/validateNote/',
-			'data': 'YII_CSRF_TOKEN='+YII_CSRF_TOKEN+'&note=yehaww',
-			'dataType': 'json',
-			'success': function(resp) {
-				$('.medicationErrorList').html('');
-
-				if (resp['status'] == 'error') {
-					for (var i in resp['errors']) {
-						$('.medicationErrorList').append('<li>'+resp['errors'][i]);
-					}
-
-					$('.medicationErrors').show();
-				} else {
-					$('.medicationErrors').hide();
-
-					if ($('#_edit_row_id').val() != '' || !medication_in_list($('#_medication_id').val(),$('#start_date').val())) {
-						$('.medications tr.no_medications').hide();
-
-						if ($('#_edit_row_id').val() == '') {
-							$('.medications tbody').append(resp['row']);
-						} else {
-							$('#'+$('#_edit_row_id').val()).replaceWith(resp['row']);
-						}
-						var i = 0;
-						$('.medications tbody tr').map(function() {
-							$(this).attr('id','t'+i);
-							i += 1;
-						});
-						$('.cancelMedication').click();
-					} else {
-						$('.medicationErrorList').append('Medication is already in the list for the given date');
-						$('.medicationErrors').show();
-					}
-				}
+			'data': $('#new_progress_note').serialize()+"&YII_CSRF_TOKEN="+YII_CSRF_TOKEN,
+			'url': baseUrl+'/OphNuPostoperative/default/addProgressNote',
+			'success': function(html) {
+			$('.no-notes').hide();
+			div.append(html);
+				$('.progress-notes tbody tr.no-notes').hide();
+				$('#new_progress_note').val('');
 			}
 		});
+	});
 
-		$('.notes').append('<tr><td>13:37</td><td>Note</td></tr>');
+	$('.remove-progress-notes-row').live('click',function() {
+		event.preventDefault();
+		$(this).closest('.progress-notes-row').remove();
 	});
 
 	$('.timeNow').click(function(e) {

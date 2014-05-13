@@ -3,7 +3,7 @@
 class DefaultController extends BaseEventTypeController
 {
 
-	static protected $action_types = array('validateNote' => self::ACTION_TYPE_FORM);
+	static protected $action_types = array('addProgressNote' => self::ACTION_TYPE_FORM);
 
 	public function actionCreate()
 	{
@@ -25,29 +25,14 @@ class DefaultController extends BaseEventTypeController
 		parent::actionPrint($id);
 	}
 
-	public function actionValidateNote($id)
+	public function actionAddProgressNote()
 	{
-		$notes = new Element_OphNuPostoperative_PostOperativeProgressNote();
-
-		$errors = array();
-
-		if (!$notes->validate()) {
-			foreach ($notes->getErrors() as $error) {
-				$errors[] = $error[0];
-			}
-		}
-
-		if (!empty($errors)) {
-			echo json_encode(array(
-					'status' => 'error',
-					'errors' => $errors,
-			));
-		} else {
-			echo json_encode(array(
-					'status' => 'ok',
-					'row' => $this->renderPartial('_notes_row',array('notes' => $notes,'time' => '13:37', 'edit' => true),true),
-			));
-		}
+		$this->renderPartial('_progress_notes_row',array(
+				'id'=>'',
+				'full_time'=> date('Y-m-d H:i:s'),
+				'note'=>$_POST['new_progress_note'],
+				'edit'=>true,
+		));
 	}
 
 	/**
@@ -138,6 +123,16 @@ class DefaultController extends BaseEventTypeController
 			}
 
 			$element->medications = $medications;
+		}
+	}
+
+	protected function saveComplexAttributes_Element_OphNuPostoperative_PostOperativeProgressNotes($element, $data, $index)
+	{
+		if(empty($data['progress_notes_ids'])) {
+		$element->updateProgressNotes();
+		}
+		else{
+			$element->updateProgressNotes($data['progress_notes_ids'],$data['progress_notes_time'],$data['progress_notes_note']);
 		}
 	}
 
