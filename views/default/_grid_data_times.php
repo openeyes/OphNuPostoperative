@@ -2,7 +2,7 @@
 /**
  * OpenEyes
  *
- * (C) Moorfields Eye Hospital NHS Foundation Trust, 2008-2011
+ * (C) Moorfields Eye Hospital NHS Foundation Trust, 2008-2013
  * (C) OpenEyes Foundation, 2011-2013
  * This file is part of OpenEyes.
  * OpenEyes is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
@@ -17,21 +17,8 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
 ?>
-
-<?php
-if ($this->canPrint()) {
-	//$this->event_actions[] = EventAction::button('Print', 'print',null,array('class'=>'small button'));
-}
-$this->beginContent('//patient/event_container');
-?>
-
-<?php if ($this->event->delete_pending) {?>
-	<div class="alert-box alert with-icon">
-		This event is pending deletion and has been locked.
-	</div>
+<?php foreach ($element->getTimeIntervals() as $i => $time) {?>
+	<td align="right">
+		<span<?php if ($i==0) {?> style="margin-right: -122px"<?php }?>><?php echo $time?></span>
+	</td>
 <?php }?>
-
-<?php $this->renderDefaultElements($this->action->id)?>
-<?php $this->renderOptionalElements($this->action->id)?>
-
-<?php $this->endContent()?>

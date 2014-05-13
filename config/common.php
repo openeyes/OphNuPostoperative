@@ -16,42 +16,19 @@
  * @copyright Copyright (c) 2011-2013, OpenEyes Foundation
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
-?>
 
-<section class="element">
-	<header class="element-header">
-		<h3 class="element-title"><?php echo $element->elementType->name?></h3>
-	</header>
-
-	<div class="element-data">
-		<div class="row field-row">
-			<div class="large-12 column end">
-				<?php echo $this->renderPartial('_grid_view',array('element'=>$element,'mode'=>'view'))?>
-			</div>
-		</div>
-		<div class="row field-row">
-			<div class="large-3 column">
-				<div class="data-label">
-					<?php echo $element->getAttributeLabel('total_fluid_intake')?>:
-				</div>
-			</div>
-			<div class="large-9 column end">
-				<div class="data-value">
-					<?php echo $element->total_fluid_intake?>mL
-				</div>
-			</div>
-		</div>
-		<div class="row field-row">
-			<div class="large-3 column">
-				<div class="data-label">
-					<?php echo $element->getAttributeLabel('total_fluid_outtake')?>:
-				</div>
-			</div>
-			<div class="large-9 column end">
-				<div class="data-value">
-					<?php echo $element->total_fluid_outtake?>mL
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
+return array(
+	'params' => array(
+		'admin_menu' => array(
+			'Post-op patient identifiers' => '/OphNuPostoperative/admin/editPatientIdentifiers',
+			'Hand off from' => '/OphNuPostoperative/admin/editHandOffFrom',
+			'Hand off to' => '/OphNuPostoperative/admin/editHandOffTo',
+			'Falls / mobility' => '/OphNuPostoperative/admin/editFallsMobility',
+			'Dental items returned' => '/OphNuPostoperative/admin/editDental',
+			'Hearing items returned' => '/OphNuPostoperative/admin/editHearing',
+			'Belongings returned' => '/OphNuPostoperative/admin/editBelongings',
+			'Skin assessment' => '/OphNuPostoperative/admin/editSkinAssessment',
+			'Post-op observations' => '/OphNuPostoperative/admin/editPostopObservations',
+		),
+	),
+);

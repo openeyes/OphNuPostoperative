@@ -40,40 +40,27 @@
 				</div>
 			</div>
 		</div>
-		<div class="row field-row">
+		<?php echo $form->hiddenField($element, 'anaesthesia_start_time')?>
+		<div id="div_Element_OphNuPostoperative_Vitals_total_fluid_intake" class="row field-row">
 			<div class="large-3 column">
-				<label><?php echo $element->getAttributeLabel('anaesthesia_start_time')?>:</label>
+				<label for="Element_OphNuPostoperative_Vitals_total_fluid_intake">
+					<?php echo $element->getAttributeLabel('total_fluid_intake')?>:
+				</label>
 			</div>
 			<div class="large-2 column end">
-				<?php echo $form->textField($element,'anaesthesia_start_time',array('size'=>6,'nowrapper'=>true))?>
-				<button type="submit" class="secondary small time-now" data-target="anaesthesia_start_time">Now</button>
+				<?php echo $form->textField($element,'total_fluid_intake',array('nowrapper' => true),array(),array('label' => 3, 'field' => 1, 'append-text' => 1))?>
+				<span class="metric">mL</span>
 			</div>
 		</div>
-		<div class="row field-row">
+		<div id="div_Element_OphNuPostoperative_Vitals_total_fluid_outtake" class="row field-row">
 			<div class="large-3 column">
-				<label><?php echo $element->getAttributeLabel('anaesthesia_end_time')?>:</label>
+				<label for="Element_OphNuPostoperative_Vitals_total_fluid_outtake">	
+					<?php echo $element->getAttributeLabel('total_fluid_outtake')?>:
+				</label>
 			</div>
 			<div class="large-2 column end">
-				<?php echo $form->textField($element,'anaesthesia_end_time',array('size'=>6,'nowrapper'=>true))?>
-				<button type="submit" class="secondary small time-now" data-target="anaesthesia_end_time">Now</button>
-			</div>
-		</div>
-		<div class="row field-row">
-			<div class="large-3 column">
-				<label><?php echo $element->getAttributeLabel('surgery_start_time')?>:</label>
-			</div>
-			<div class="large-2 column end">
-				<?php echo $form->textField($element,'surgery_start_time',array('size'=>6,'nowrapper'=>true))?>
-				<button type="submit" class="secondary small time-now" data-target="surgery_start_time">Now</button>
-			</div>
-		</div>
-		<div class="row field-row">
-			<div class="large-3 column">
-				<label><?php echo $element->getAttributeLabel('surgery_end_time')?>:</label>
-			</div>
-			<div class="large-2 column end">
-				<?php echo $form->textField($element,'surgery_end_time',array('size'=>6,'nowrapper'=>true))?>
-				<button type="submit" class="secondary small time-now" data-target="surgery_end_time">Now</button>
+				<?php echo $form->textField($element,'total_fluid_outtake',array('nowrapper' => true),array(),array('label' => 3, 'field' => 1, 'append-text' => 1))?>
+				<span class="metric">mL</span>
 			</div>
 		</div>
 	</div>
