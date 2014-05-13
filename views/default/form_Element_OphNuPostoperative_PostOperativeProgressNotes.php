@@ -34,14 +34,14 @@
 					<thead>
 					<tr>
 						<th>Time</th>
-						<th>Comment</th>
+						<th>Notes</th>
 						<th>Actions</th>
 					</tr>
 					</thead>
 					<tbody>
 					<tr class="no-comments"<?php if (!empty($element->progressnotes)) {?> style="display: none"<?php }?>>
 						<td class="no-notes" colspan="2">
-							No Comments Entered
+							No notes have been entered
 						</td>
 					</tr>
 					<?php

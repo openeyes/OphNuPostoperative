@@ -67,7 +67,7 @@ $(document).ready(function() {
 
 	$('.add-note').click(function() {
 		event.preventDefault();
-		var div = 	$('.progress-notes tbody');
+		var div=$('.progress-notes tbody');
 		if($('#new_progress_note').val()=='') {return;}
 		$.ajax({
 			'type': 'POST',

@@ -4,8 +4,8 @@ class DefaultController extends BaseEventTypeController
 {
 
 	static protected $action_types = array(
-		'validateNote' => self::ACTION_TYPE_FORM,
 		'dataTimes' => self::ACTION_TYPE_FORM,
+		'addProgressNote' => self::ACTION_TYPE_FORM,
 	);
 
 	public function actionCreate()
