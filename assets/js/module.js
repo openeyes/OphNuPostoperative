@@ -85,6 +85,9 @@ $(document).ready(function() {
 	$('.remove-progress-notes-row').live('click',function() {
 		event.preventDefault();
 		$(this).closest('.progress-notes-row').remove();
+		if (!$('.progress-notes-row').length > 0){
+			$('.no-notes').show();
+		}
 	});
 
 	$('.timeNow').click(function(e) {
