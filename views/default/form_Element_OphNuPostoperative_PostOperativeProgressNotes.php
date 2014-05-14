@@ -67,6 +67,6 @@
 				<button type="submit" class="secondary small add-note">Add Note</button>
 			</div>
 		</div>
-		<?php echo $form->hiddenInput($element,'progress_notes','test')?>
+		<?php echo $form->hiddenInput($element,'present',1)?>
 	</div>
 </section>

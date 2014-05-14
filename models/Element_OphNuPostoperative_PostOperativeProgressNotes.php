@@ -45,6 +45,8 @@ class Element_OphNuPostoperative_PostOperativeProgressNotes  extends  BaseEventT
 		return parent::model($className);
 	}
 
+	public $present;
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -59,8 +61,8 @@ class Element_OphNuPostoperative_PostOperativeProgressNotes  extends  BaseEventT
 	public function rules()
 	{
 		return array(
-			array('event_id, progress_notes, ', 'safe'),
-			array('id, event_id, progress_notes, ', 'safe', 'on' => 'search'),
+			array('event_id, ', 'safe'),
+			array('id, event_id, ', 'safe', 'on' => 'search'),
 		);
 	}
 
