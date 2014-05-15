@@ -55,7 +55,7 @@ class OphNuPostoperative_Vitals_Drug_Dose extends BaseActiveRecord
 		// will receive user inputs.
 		return array(
 			array('item_id, offset, value', 'safe'),
-			array('item_id, offset, value', 'required'),
+			array('item_id, offset', 'required'),
 			array('value', 'numerical', 'integerOnly' => false),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

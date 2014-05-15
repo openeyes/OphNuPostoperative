@@ -56,7 +56,7 @@ class OphNuPostoperative_Vital extends BaseActiveRecord
 		// will receive user inputs.
 		return array(
 			array('item_id, offset, value', 'safe'),
-			array('item_id, offset, value', 'required'),
+			array('item_id, offset', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, item_id, offset, value, display_order', 'safe', 'on' => 'search'),
