@@ -27,22 +27,6 @@ class AdminController extends ModuleAdminController
 		));
 	}
 
-	public function actionEditHandOffFrom()
-	{
-		$this->render('//admin/generic_admin',array(
-			'title' => 'Hand off from',
-			'model' => 'OphNuPostoperative_Patient_HandOffFrom',
-		));
-	}
-
-	public function actionEditHandOffTo()
-	{
-		$this->render('//admin/generic_admin',array(
-			'title' => 'Hand off to',
-			'model' => 'OphNuPostoperative_Patient_HandOffTo',
-		));
-	}
-
 	public function actionEditFallsMobility()
 	{
 		$this->render('//admin/generic_admin',array(

@@ -47,9 +47,9 @@
 				<button type="submit" class="secondary small time-now" data-target="patient_enters_recovery_room">Now</button>
 			</div>
 		</div>
-		<?php echo $form->dropDownList($element, 'hand_off_from_id', CHtml::listData(OphNuPostoperative_Patient_HandOffFrom::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 4))?>
-		<?php echo $form->dropDownList($element, 'hand_off_to_id', CHtml::listData(OphNuPostoperative_Patient_HandOffTo::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 4))?>
-		<?php echo $form->dropDownList($element, 'handing_off_from_id', CHtml::listData(OphNuPostoperative_Patient_HandingOffFrom::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 4))?>
+		<?php echo $form->dropDownList($element, 'hand_off_from_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 4))?>
+		<?php echo $form->dropDownList($element, 'hand_off_to_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 4))?>
+		<?php echo $form->dropDownList($element, 'handing_off_from_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 4))?>
 		<?php echo $form->radioButtons($element, 'translator_present_id', CHtml::listData(OphNuPostoperative_Patient_TranslatorPresent::model()->findAll(array('order' => 'display_order asc')),'id','name'), null, false, false, false, false, array('class'=>'linked-fields','data-linked-fields'=>'name_of_translator','data-linked-values'=>'Yes'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->textField($element, 'name_of_translator', array('hide' => !$element->translator_present || $element->translator_present->name != 'Yes'), array(), array('label' => 3, 'field' => 4))?>
 	</div>
