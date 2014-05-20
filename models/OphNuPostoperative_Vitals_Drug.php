@@ -26,7 +26,7 @@
  * @property string $display_order
  */
 
-class OphNuPostoperative_Vitals_Drug extends BaseActiveRecord
+class OphNuPostoperative_Vitals_Drug extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.

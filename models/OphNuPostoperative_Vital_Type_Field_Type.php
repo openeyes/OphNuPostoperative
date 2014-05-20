@@ -26,7 +26,7 @@
  * @property string $comments
  */
 
-class OphNuPostoperative_Vital_Type_Field_Type extends BaseActiveRecord
+class OphNuPostoperative_Vital_Type_Field_Type extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.

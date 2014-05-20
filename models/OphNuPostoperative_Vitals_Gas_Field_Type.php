@@ -26,7 +26,7 @@
  * @property string $display_order
  */
 
-class OphNuPostoperative_Vitals_Gas_Field_Type extends BaseActiveRecord
+class OphNuPostoperative_Vitals_Gas_Field_Type extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.

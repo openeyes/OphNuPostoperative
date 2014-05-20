@@ -29,7 +29,7 @@
  * @property string $value
  */
 
-class OphNuPostoperative_Vitals_Gas_Level extends BaseActiveRecord
+class OphNuPostoperative_Vitals_Gas_Level extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.

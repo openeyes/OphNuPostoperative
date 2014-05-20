@@ -32,7 +32,7 @@
  * @property User $usermodified
  */
 
-class OphNuPostoperative_Patient_Allergy extends BaseActiveRecord
+class OphNuPostoperative_Patient_Allergy extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
