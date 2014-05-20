@@ -17,12 +17,6 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
 ?>
-
-<section class="element">
-	<header class="element-header">
-		<h3 class="element-title"><?php echo $element->elementType->name?></h3>
-	</header>
-
 	<div class="element-data">
 		<div class="row field-row">
 			<div class="large-12 column end">
@@ -54,4 +48,3 @@
 			</div>
 		</div>
 	</div>
-</section>

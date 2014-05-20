@@ -17,16 +17,6 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
 ?>
-
-<section class="element <?php echo $element->elementType->class_name?>"
-	data-element-type-id="<?php echo $element->elementType->id?>"
-	data-element-type-class="<?php echo $element->elementType->class_name?>"
-	data-element-type-name="<?php echo $element->elementType->name?>"
-	data-element-display-order="<?php echo $element->elementType->display_order?>">
-	<header class="element-header">
-		<h3 class="element-title"><?php echo $element->elementType->name; ?></h3>
-	</header>
-
 	<div class="element-fields">
 		<?php echo $form->checkBox($element, 'patient_id_verified_with_two_identifiers', array('text-align' => 'right','class' => 'linked-fields', 'data-linked-fields' => 'MultiSelect_identifiers', 'data-linked-values' => '1'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->multiSelectList($element, 'MultiSelect_identifiers', 'identifiers', 'identifier_id', CHtml::listData(OphNuPostoperative_Patient_Identifier::model()->findAll(array('order'=>'display_order asc')),'id','name'), array(), array('empty' => '- Please select -', 'label' => 'Two identifiers'), !$element->patient_id_verified_with_two_identifiers, false, null, false, false, array('label' => 3, 'field' => 4))?>
@@ -53,4 +43,3 @@
 		<?php echo $form->radioButtons($element, 'translator_present_id', CHtml::listData(OphNuPostoperative_Patient_TranslatorPresent::model()->findAll(array('order' => 'display_order asc')),'id','name'), null, false, false, false, false, array('class'=>'linked-fields','data-linked-fields'=>'name_of_translator','data-linked-values'=>'Yes'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->textField($element, 'name_of_translator', array('hide' => !$element->translator_present || $element->translator_present->name != 'Yes'), array(), array('label' => 3, 'field' => 4))?>
 	</div>
-</section>

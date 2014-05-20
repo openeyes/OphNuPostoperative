@@ -17,7 +17,7 @@
  */
 
 /**
- * This is the model class for table "et_ophnupostoperative_postoperative_belongings_assignment".
+ * This is the model class for table "et_ophnupostoperative_postoperative_belongassign".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -48,7 +48,7 @@ class Element_OphNuPostoperative_PostOperative_Belongings_Assignment extends Bas
 	 */
 	public function tableName()
 	{
-		return 'et_ophnupostoperative_postoperative_belongings_assignment';
+		return 'et_ophnupostoperative_postoperative_belongassign';
 	}
 
 	/**

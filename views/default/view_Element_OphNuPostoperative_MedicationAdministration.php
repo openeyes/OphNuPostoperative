@@ -17,12 +17,6 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
 ?>
-
-<section class="element">
-	<header class="element-header">
-		<h3 class="element-title"><?php echo $element->elementType->name?></h3>
-	</header>
-
 	<div class="element-data">
 		<?php $this->widget('application.widgets.MedicationSelection', array(
 			'element' => $element,
@@ -37,4 +31,3 @@
 			</div>
 		<?php }?>
 	</div>
-</section>

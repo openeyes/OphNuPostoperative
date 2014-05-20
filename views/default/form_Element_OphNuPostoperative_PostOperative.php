@@ -17,16 +17,6 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
 ?>
-
-<section class="element <?php echo $element->elementType->class_name?>"
-				 data-element-type-id="<?php echo $element->elementType->id?>"
-				 data-element-type-class="<?php echo $element->elementType->class_name?>"
-				 data-element-type-name="<?php echo $element->elementType->name?>"
-				 data-element-display-order="<?php echo $element->elementType->display_order?>">
-	<header class="element-header">
-		<h3 class="element-title"><?php echo $element->elementType->name; ?></h3>
-	</header>
-
 	<div class="element-fields">
 		<?php echo $form->radioBoolean($element, 'fallsmobility', array('class'=>'linked-fields','data-linked-fields'=>'MultiSelect_falls','data-linked-values'=>'Yes'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->multiSelectList($element, 'MultiSelect_falls', 'fallss', 'ophnupostoperative_postoperative_falls_id', CHtml::listData(OphNuPostoperative_PostOperative_Falls::model()->findAll(array('order'=>'display_order asc')),'id','name'), array(), array('empty' => '- Please select -', 'label' => 'Falls/mobility items'), !$element->fallsmobility, false, null, false, false, array('label' => 3, 'field' => 4))?>
@@ -43,4 +33,3 @@
 		<?php echo $form->multiSelectList($element, 'MultiSelect_obs', 'obss', 'ophnupostoperative_postoperative_obs_id', CHtml::listData(OphNuPostoperative_PostOperative_Obs::model()->findAll(array('order'=>'display_order asc')),'id','name'), array(), array('empty' => '- Please select -', 'label' => 'Post-op observations','class' => 'linked-fields', 'data-linked-fields' => 'o_comments', 'data-linked-values' => 'Other (please specify)'), false, false, null, false, false, array('label' => 3, 'field' => 4))?>
 		<?php echo $form->textField($element, 'o_comments', array('hide' => !$element->hasMultiSelectValue('obss','Other (please specify)')), array(), array('label' => 3, 'field' => 4))?>
 	</div>
-</section>
