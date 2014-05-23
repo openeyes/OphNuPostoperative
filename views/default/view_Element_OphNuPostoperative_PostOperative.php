@@ -25,11 +25,11 @@
 		<?php if ($element->fallsmobility) {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('falls'))?>:</div></div>
-				<div class="large-9 column end"><div class="data-value"><?php if (!$element->fallss) {?>
+				<div class="large-9 column end"><div class="data-value"><?php if (!$element->falls) {?>
 								None
 							<?php } else {?>
-									<?php foreach ($element->fallss as $item) {
-										echo $item->ophnupostoperative_postoperative_falls->name?><br/>
+									<?php foreach ($element->falls as $item) {
+										echo $item->name?><br/>
 									<?php }?>
 							<?php }?>
 				</div></div>
@@ -46,7 +46,7 @@
 								None
 							<?php } else {?>
 									<?php foreach ($element->dentals as $item) {
-										echo $item->ophnupostoperative_postoperative_dental->name?><br/>
+										echo $item->name?><br/>
 									<?php }?>
 							<?php }?>
 				</div></div>
@@ -69,7 +69,7 @@
 								None
 							<?php } else {?>
 									<?php foreach ($element->hearings as $item) {
-										echo $item->ophnupostoperative_postoperative_hearing->name?><br/>
+										echo $item->name?><br/>
 									<?php }?>
 							<?php }?>
 				</div></div>
@@ -82,17 +82,17 @@
 		<?php if ($element->patent_belongings_returned) {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('belongings'))?>:</div></div>
-				<div class="large-9 column end"><div class="data-value"><?php if (!$element->belongingss) {?>
+				<div class="large-9 column end"><div class="data-value"><?php if (!$element->belongings) {?>
 								None
 							<?php } else {?>
-									<?php foreach ($element->belongingss as $item) {
-										echo $item->ophnupostoperative_postoperative_belongings->name?><br/>
+									<?php foreach ($element->belongings as $item) {
+										echo $item->name?><br/>
 									<?php }?>
 							<?php }?>
 				</div></div>
 			</div>
 		<?php }?>
-		<?php if ($element->hasMultiSelectValue('belongingss','Other (please specify)')) {?>
+		<?php if ($element->hasMultiSelectValue('belongings','Other (please specify)')) {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('h_comments'))?></div></div>
 				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->h_comments)?></div></div>
@@ -104,7 +104,7 @@
 							None
 						<?php } else {?>
 								<?php foreach ($element->skins as $item) {
-									echo $item->ophnupostoperative_postoperative_skin->name?><br/>
+									echo $item->name?><br/>
 								<?php }?>
 						<?php }?>
 			</div></div>
@@ -117,16 +117,16 @@
 		<?php }?>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('obs'))?>:</div></div>
-			<div class="large-9 column end"><div class="data-value"><?php if (!$element->obss) {?>
+			<div class="large-9 column end"><div class="data-value"><?php if (!$element->obs) {?>
 							None
 						<?php } else {?>
-								<?php foreach ($element->obss as $item) {
-									echo $item->ophnupostoperative_postoperative_obs->name?><br/>
+								<?php foreach ($element->obs as $item) {
+									echo $item->name?><br/>
 								<?php }?>
 						<?php }?>
 			</div></div>
 		</div>
-		<?php if ($element->hasMultiSelectValue('obss','Other (please specify)')) {?>
+		<?php if ($element->hasMultiSelectValue('obs','Other (please specify)')) {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('o_comments'))?></div></div>
 				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->o_comments)?></div></div>

@@ -51,6 +51,8 @@
 
 class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 {
+	protected $auto_update_relations = true;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -74,7 +76,7 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, fallsmobility, removable_dental_id, other_comments, hearing_aid_returned_id, patent_belongings_returned, h_comments, s_comments, o_comments, ', 'safe'),
+			array('event_id, fallsmobility, removable_dental_id, other_comments, hearing_aid_returned_id, patent_belongings_returned, h_comments, s_comments, o_comments, falls, dentals, hearings, belongings, skins, obs', 'safe'),
 			array('id, event_id, fallsmobility, removable_dental_id, other_comments, hearing_aid_returned_id, patent_belongings_returned, h_comments, s_comments, o_comments, ', 'safe', 'on' => 'search'),
 		);
 	}
@@ -90,14 +92,20 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'fallss' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Falls_Assignment', 'element_id'),
+			'falls' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Falls', 'ophnupostoperative_postoperative_falls_id', 'through' => 'falls_assignment'),
+			'falls_assignment' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Falls_Assignment', 'element_id'),
 			'removable_dental' => array(self::BELONGS_TO, 'OphNuPostoperative_PostOperative_RemovableDental', 'removable_dental_id'),
-			'dentals' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Dental_Assignment', 'element_id'),
+			'dentals' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Dental', 'ophnupostoperative_postoperative_dental_id', 'through' => 'dentals_assignment'),
+			'dentals_assignment' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Dental_Assignment', 'element_id'),
 			'hearing_aid_returned' => array(self::BELONGS_TO, 'OphNuPostoperative_PostOperative_HearingAidReturned', 'hearing_aid_returned_id'),
-			'hearings' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Hearing_Assignment', 'element_id'),
-			'belongingss' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Belongings_Assignment', 'element_id'),
-			'skins' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Skin_Assignment', 'element_id'),
-			'obss' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Obs_Assignment', 'element_id'),
+			'hearings' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Hearing', 'ophnupostoperative_postoperative_hearing_id', 'through' => 'hearings_assignment'),
+			'hearings_assignment' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Hearing_Assignment', 'element_id'),
+			'belongings' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Belongings', 'ophnupostoperative_postoperative_belongings_id', 'through' => 'belongings_assignment'),
+			'belongings_assignment' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Belongings_Assignment', 'element_id'),
+			'skins' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Skin', 'ophnupostoperative_postoperative_skin_id', 'through' => 'skins_assignment'),
+			'skins_assignment' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Skin_Assignment', 'element_id'),
+			'obs' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Obs', 'ophnupostoperative_postoperative_obs_id', 'through' => 'obs_assignment'),
+			'obs_assignment' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Obs_Assignment', 'element_id'),
 		);
 	}
 
@@ -159,8 +167,8 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 	public function beforeValidate()
 	{
 		if ($this->fallsmobility) {
-			if (empty($this->fallss)) {
-				$this->addError('fallss','Please enter at least one falls/mobility item');
+			if (empty($this->falls)) {
+				$this->addError('falls','Please enter at least one falls/mobility item');
 			}
 		}
 
@@ -183,11 +191,11 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 		}
 
 		if ($this->patent_belongings_returned) {
-			if (empty($this->belongingss)) {
-				$this->addError('belongingss','Please enter at least one patient belonging');
+			if (empty($this->belongings)) {
+				$this->addError('belongings','Please enter at least one patient belonging');
 			}
 
-			if ($this->hasMultiSelectValue('belongingss','Other (please specify)')) {
+			if ($this->hasMultiSelectValue('belongings','Other (please specify)')) {
 				if (!$this->h_comments) {
 					$this->addError('h_comments',$this->getAttributeLabel('h_comments').' cannot be blank.');
 				}
@@ -200,7 +208,7 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 			}
 		}
 
-		if ($this->hasMultiSelectValue('obss','Other (please specify)')) {
+		if ($this->hasMultiSelectValue('obs','Other (please specify)')) {
 			if (!$this->o_comments) {
 				$this->addError('o_comments',$this->getAttributeLabel('o_comments').' cannot be blank.');
 			}

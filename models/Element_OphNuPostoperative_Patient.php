@@ -47,6 +47,8 @@
 
 class Element_OphNuPostoperative_Patient	extends  BaseEventTypeElement
 {
+	protected $auto_update_relations = true;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -70,7 +72,7 @@ class Element_OphNuPostoperative_Patient	extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, patient_id_verified_with_two_identifiers, allergies_verified, patient_enters_recovery_room, hand_off_from_id, hand_off_to_id, handing_off_from_id, translator_present_id, name_of_translator, patient_has_no_allergies', 'safe'),
+			array('event_id, patient_id_verified_with_two_identifiers, allergies_verified, patient_enters_recovery_room, hand_off_from_id, hand_off_to_id, handing_off_from_id, translator_present_id, name_of_translator, patient_has_no_allergies, identifiers', 'safe'),
 			array('id, event_id, patient_id_verified_with_two_identifiers, allergies_verified, patient_enters_recovery_room, hand_off_from_id, hand_off_to_id, handing_off_from_id, translator_present_id, name_of_translator, ', 'safe', 'on' => 'search'),
 		);
 	}
@@ -91,7 +93,8 @@ class Element_OphNuPostoperative_Patient	extends  BaseEventTypeElement
 			'handing_off_from' => array(self::BELONGS_TO, 'User', 'handing_off_from_id'),
 			'translator_present' => array(self::BELONGS_TO, 'OphNuPostoperative_Patient_TranslatorPresent', 'translator_present_id'),
 			'allergies' => array(self::HAS_MANY, 'OphNuPostoperative_Patient_Allergy', 'element_id'),
-			'identifiers' => array(self::HAS_MANY, 'OphNuPostoperative_Patient_Identifier_Assignment', 'element_id'),
+			'identifiers' => array(self::HAS_MANY, 'OphNuPostoperative_Patient_Identifier', 'identifier_id', 'through' => 'identifier_assignment'),
+			'identifier_assignment' => array(self::HAS_MANY, 'OphNuPostoperative_Patient_Identifier_Assignment', 'element_id'),
 		);
 	}
 

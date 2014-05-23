@@ -29,7 +29,7 @@
 								None
 							<?php } else {?>
 									<?php foreach ($element->identifiers as $item) {
-										echo $item->identifier->name?><br/>
+										echo $item->name?><br/>
 									<?php }?>
 							<?php }?>
 				</div></div>
