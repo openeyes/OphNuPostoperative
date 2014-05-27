@@ -17,22 +17,22 @@
  */
 
 /**
- * This is the model class for table "et_ophnupostoperative_postoperative_skin_assignment".
+ * This is the model class for table "ophnupostoperative_postoperative_falls_assignment".
  *
  * The followings are the available columns in table:
  * @property string $id
  * @property integer $element_id
- * @property integer $ophnupostoperative_postoperative_skin_id
+ * @property integer $fall_id
  *
  * The followings are the available model relations:
  *
  * @property Element_OphNuPostoperative_PostOperative $element
- * @property OphNuPostoperative_PostOperative_Skin $ophnupostoperative_postoperative_skin
+ * @property OphNuPostoperative_PostOperative_Falls $ophnupostoperative_postoperative_falls
  * @property User $user
  * @property User $usermodified
  */
 
-class Element_OphNuPostoperative_PostOperative_Skin_Assignment extends BaseActiveRecordVersioned
+class OphNuPostoperative_PostOperative_Falls_Assignment extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -48,7 +48,7 @@ class Element_OphNuPostoperative_PostOperative_Skin_Assignment extends BaseActiv
 	 */
 	public function tableName()
 	{
-		return 'et_ophnupostoperative_postoperative_skin_assignment';
+		return 'ophnupostoperative_postoperative_falls_assignment';
 	}
 
 	/**
@@ -57,9 +57,9 @@ class Element_OphNuPostoperative_PostOperative_Skin_Assignment extends BaseActiv
 	public function rules()
 	{
 		return array(
-			array('element_id, ophnupostoperative_postoperative_skin_id', 'safe'),
-			array('element_id, ophnupostoperative_postoperative_skin_id', 'required'),
-			array('id, element_id, ophnupostoperative_postoperative_skin_id', 'safe', 'on' => 'search'),
+			array('element_id, fall_id', 'safe'),
+			array('element_id, fall_id', 'required'),
+			array('id, element_id, fall_id', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -70,7 +70,7 @@ class Element_OphNuPostoperative_PostOperative_Skin_Assignment extends BaseActiv
 	{
 		return array(
 			'element' => array(self::BELONGS_TO, 'Element_OphNuPostoperative_PostOperative', 'element_id'),
-			'ophnupostoperative_postoperative_skin' => array(self::BELONGS_TO, 'OphNuPostoperative_PostOperative_Skin', 'ophnupostoperative_postoperative_skin_id'),
+			'ophnupostoperative_postoperative_falls' => array(self::BELONGS_TO, 'OphNuPostoperative_PostOperative_Falls', 'fall_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 		);
@@ -101,11 +101,6 @@ class Element_OphNuPostoperative_PostOperative_Skin_Assignment extends BaseActiv
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
-	}
-
-	public function getName()
-	{
-		return $this->ophnupostoperative_postoperative_skin->name;
 	}
 }
 ?>

@@ -39,14 +39,14 @@
  * @property Event $event
  * @property User $user
  * @property User $usermodified
- * @property Element_OphNuPostoperative_PostOperative_Falls_Assignment $fallss
+ * @property OphNuPostoperative_PostOperative_Falls_Assignment $fallss
  * @property OphNuPostoperative_PostOperative_RemovableDental $removable_dental
- * @property Element_OphNuPostoperative_PostOperative_Dental_Assignment $dentals
+ * @property OphNuPostoperative_PostOperative_Dental_Assignment $dentals
  * @property OphNuPostoperative_PostOperative_HearingAidReturned $hearing_aid_returned
- * @property Element_OphNuPostoperative_PostOperative_Hearing_Assignment $hearings
- * @property Element_OphNuPostoperative_PostOperative_Belongings_Assignment $belongingss
- * @property Element_OphNuPostoperative_PostOperative_Skin_Assignment $skins
- * @property Element_OphNuPostoperative_PostOperative_Obs_Assignment $obss
+ * @property OphNuPostoperative_PostOperative_Hearing_Assignment $hearings
+ * @property OphNuPostoperative_PostOperative_Belongings_Assignment $belongingss
+ * @property OphNuPostoperative_PostOperative_Skin_Assignment $skins
+ * @property OphNuPostoperative_PostOperative_Obs_Assignment $obss
  */
 
 class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
@@ -92,20 +92,20 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'falls' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Falls', 'ophnupostoperative_postoperative_falls_id', 'through' => 'falls_assignment'),
-			'falls_assignment' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Falls_Assignment', 'element_id'),
+			'falls' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Falls', 'fall_id', 'through' => 'falls_assignment'),
+			'falls_assignment' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Falls_Assignment', 'element_id'),
 			'removable_dental' => array(self::BELONGS_TO, 'OphNuPostoperative_PostOperative_RemovableDental', 'removable_dental_id'),
-			'dentals' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Dental', 'ophnupostoperative_postoperative_dental_id', 'through' => 'dentals_assignment'),
-			'dentals_assignment' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Dental_Assignment', 'element_id'),
+			'dentals' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Dental', 'dental_id', 'through' => 'dentals_assignment'),
+			'dentals_assignment' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Dental_Assignment', 'element_id'),
 			'hearing_aid_returned' => array(self::BELONGS_TO, 'OphNuPostoperative_PostOperative_HearingAidReturned', 'hearing_aid_returned_id'),
-			'hearings' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Hearing', 'ophnupostoperative_postoperative_hearing_id', 'through' => 'hearings_assignment'),
-			'hearings_assignment' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Hearing_Assignment', 'element_id'),
-			'belongings' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Belongings', 'ophnupostoperative_postoperative_belongings_id', 'through' => 'belongings_assignment'),
-			'belongings_assignment' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Belongings_Assignment', 'element_id'),
-			'skins' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Skin', 'ophnupostoperative_postoperative_skin_id', 'through' => 'skins_assignment'),
-			'skins_assignment' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Skin_Assignment', 'element_id'),
-			'obs' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Obs', 'ophnupostoperative_postoperative_obs_id', 'through' => 'obs_assignment'),
-			'obs_assignment' => array(self::HAS_MANY, 'Element_OphNuPostoperative_PostOperative_Obs_Assignment', 'element_id'),
+			'hearings' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Hearing', 'hearing_id', 'through' => 'hearings_assignment'),
+			'hearings_assignment' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Hearing_Assignment', 'element_id'),
+			'belongings' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Belongings', 'belonging_id', 'through' => 'belongings_assignment'),
+			'belongings_assignment' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Belongings_Assignment', 'element_id'),
+			'skins' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Skin', 'skin_id', 'through' => 'skins_assignment'),
+			'skins_assignment' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Skin_Assignment', 'element_id'),
+			'obs' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Obs', 'ob_id', 'through' => 'obs_assignment'),
+			'obs_assignment' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Obs_Assignment', 'element_id'),
 		);
 	}
 

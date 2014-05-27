@@ -17,22 +17,22 @@
  */
 
 /**
- * This is the model class for table "et_ophnupostoperative_postoperative_dental_assignment".
+ * This is the model class for table "ophnupostoperative_postoperative_skin_assignment".
  *
  * The followings are the available columns in table:
  * @property string $id
  * @property integer $element_id
- * @property integer $ophnupostoperative_postoperative_dental_id
+ * @property integer $skin_id
  *
  * The followings are the available model relations:
  *
  * @property Element_OphNuPostoperative_PostOperative $element
- * @property OphNuPostoperative_PostOperative_Dental $ophnupostoperative_postoperative_dental
+ * @property OphNuPostoperative_PostOperative_Skin $ophnupostoperative_postoperative_skin
  * @property User $user
  * @property User $usermodified
  */
 
-class Element_OphNuPostoperative_PostOperative_Dental_Assignment extends BaseActiveRecordVersioned
+class OphNuPostoperative_PostOperative_Skin_Assignment extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -48,7 +48,7 @@ class Element_OphNuPostoperative_PostOperative_Dental_Assignment extends BaseAct
 	 */
 	public function tableName()
 	{
-		return 'et_ophnupostoperative_postoperative_dental_assignment';
+		return 'ophnupostoperative_postoperative_skin_assignment';
 	}
 
 	/**
@@ -57,9 +57,9 @@ class Element_OphNuPostoperative_PostOperative_Dental_Assignment extends BaseAct
 	public function rules()
 	{
 		return array(
-			array('element_id, ophnupostoperative_postoperative_dental_id', 'safe'),
-			array('element_id, ophnupostoperative_postoperative_dental_id', 'required'),
-			array('id, element_id, ophnupostoperative_postoperative_dental_id', 'safe', 'on' => 'search'),
+			array('element_id, skin_id', 'safe'),
+			array('element_id, skin_id', 'required'),
+			array('id, element_id, skin_id', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -70,7 +70,7 @@ class Element_OphNuPostoperative_PostOperative_Dental_Assignment extends BaseAct
 	{
 		return array(
 			'element' => array(self::BELONGS_TO, 'Element_OphNuPostoperative_PostOperative', 'element_id'),
-			'ophnupostoperative_postoperative_dental' => array(self::BELONGS_TO, 'OphNuPostoperative_PostOperative_Dental', 'ophnupostoperative_postoperative_dental_id'),
+			'ophnupostoperative_postoperative_skin' => array(self::BELONGS_TO, 'OphNuPostoperative_PostOperative_Skin', 'skin_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 		);
@@ -105,7 +105,7 @@ class Element_OphNuPostoperative_PostOperative_Dental_Assignment extends BaseAct
 
 	public function getName()
 	{
-		return $this->ophnupostoperative_postoperative_dental->name;
+		return $this->ophnupostoperative_postoperative_skin->name;
 	}
 }
 ?>

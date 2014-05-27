@@ -17,22 +17,22 @@
  */
 
 /**
- * This is the model class for table "et_ophnupostoperative_postoperative_belongassign".
+ * This is the model class for table "ophnupostoperative_postoperative_obs_assignment".
  *
  * The followings are the available columns in table:
  * @property string $id
  * @property integer $element_id
- * @property integer $ophnupostoperative_postoperative_belongings_id
+ * @property integer $ob_id
  *
  * The followings are the available model relations:
  *
  * @property Element_OphNuPostoperative_PostOperative $element
- * @property OphNuPostoperative_PostOperative_Belongings $ophnupostoperative_postoperative_belongings
+ * @property OphNuPostoperative_PostOperative_Obs $ophnupostoperative_postoperative_obs
  * @property User $user
  * @property User $usermodified
  */
 
-class Element_OphNuPostoperative_PostOperative_Belongings_Assignment extends BaseActiveRecordVersioned
+class OphNuPostoperative_PostOperative_Obs_Assignment extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -48,7 +48,7 @@ class Element_OphNuPostoperative_PostOperative_Belongings_Assignment extends Bas
 	 */
 	public function tableName()
 	{
-		return 'et_ophnupostoperative_postoperative_belongassign';
+		return 'ophnupostoperative_postoperative_obs_assignment';
 	}
 
 	/**
@@ -57,9 +57,9 @@ class Element_OphNuPostoperative_PostOperative_Belongings_Assignment extends Bas
 	public function rules()
 	{
 		return array(
-			array('element_id, ophnupostoperative_postoperative_belongings_id', 'safe'),
-			array('element_id, ophnupostoperative_postoperative_belongings_id', 'required'),
-			array('id, element_id, ophnupostoperative_postoperative_belongings_id', 'safe', 'on' => 'search'),
+			array('element_id, ob_id', 'safe'),
+			array('element_id, ob_id', 'required'),
+			array('id, element_id, ob_id', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -70,7 +70,7 @@ class Element_OphNuPostoperative_PostOperative_Belongings_Assignment extends Bas
 	{
 		return array(
 			'element' => array(self::BELONGS_TO, 'Element_OphNuPostoperative_PostOperative', 'element_id'),
-			'ophnupostoperative_postoperative_belongings' => array(self::BELONGS_TO, 'OphNuPostoperative_PostOperative_Belongings', 'ophnupostoperative_postoperative_belongings_id'),
+			'ophnupostoperative_postoperative_obs' => array(self::BELONGS_TO, 'OphNuPostoperative_PostOperative_Obs', 'ob_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 		);
@@ -105,7 +105,7 @@ class Element_OphNuPostoperative_PostOperative_Belongings_Assignment extends Bas
 
 	public function getName()
 	{
-		return $this->ophnupostoperative_postoperative_belongings->name;
+		return $this->ophnupostoperative_postoperative_obs->name;
 	}
 }
 ?>

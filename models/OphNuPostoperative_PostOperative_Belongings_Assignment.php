@@ -17,22 +17,22 @@
  */
 
 /**
- * This is the model class for table "et_ophnupostoperative_postoperative_hearing_assignment".
+ * This is the model class for table "ophnupostoperative_postoperative_belongassign".
  *
  * The followings are the available columns in table:
  * @property string $id
  * @property integer $element_id
- * @property integer $ophnupostoperative_postoperative_hearing_id
+ * @property integer $belonging_id
  *
  * The followings are the available model relations:
  *
  * @property Element_OphNuPostoperative_PostOperative $element
- * @property OphNuPostoperative_PostOperative_Hearing $ophnupostoperative_postoperative_hearing
+ * @property OphNuPostoperative_PostOperative_Belongings $ophnupostoperative_postoperative_belongings
  * @property User $user
  * @property User $usermodified
  */
 
-class Element_OphNuPostoperative_PostOperative_Hearing_Assignment extends BaseActiveRecordVersioned
+class OphNuPostoperative_PostOperative_Belongings_Assignment extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -48,7 +48,7 @@ class Element_OphNuPostoperative_PostOperative_Hearing_Assignment extends BaseAc
 	 */
 	public function tableName()
 	{
-		return 'et_ophnupostoperative_postoperative_hearing_assignment';
+		return 'ophnupostoperative_postoperative_belongassign';
 	}
 
 	/**
@@ -57,9 +57,9 @@ class Element_OphNuPostoperative_PostOperative_Hearing_Assignment extends BaseAc
 	public function rules()
 	{
 		return array(
-			array('element_id, ophnupostoperative_postoperative_hearing_id', 'safe'),
-			array('element_id, ophnupostoperative_postoperative_hearing_id', 'required'),
-			array('id, element_id, ophnupostoperative_postoperative_hearing_id', 'safe', 'on' => 'search'),
+			array('element_id, belonging_id', 'safe'),
+			array('element_id, belonging_id', 'required'),
+			array('id, element_id, belonging_id', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -70,7 +70,7 @@ class Element_OphNuPostoperative_PostOperative_Hearing_Assignment extends BaseAc
 	{
 		return array(
 			'element' => array(self::BELONGS_TO, 'Element_OphNuPostoperative_PostOperative', 'element_id'),
-			'ophnupostoperative_postoperative_hearing' => array(self::BELONGS_TO, 'OphNuPostoperative_PostOperative_Hearing', 'ophnupostoperative_postoperative_hearing_id'),
+			'ophnupostoperative_postoperative_belongings' => array(self::BELONGS_TO, 'OphNuPostoperative_PostOperative_Belongings', 'belonging_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 		);
@@ -101,6 +101,11 @@ class Element_OphNuPostoperative_PostOperative_Hearing_Assignment extends BaseAc
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
+	}
+
+	public function getName()
+	{
+		return $this->ophnupostoperative_postoperative_belongings->name;
 	}
 }
 ?>
