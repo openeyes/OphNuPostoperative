@@ -136,6 +136,11 @@ class OphNuPostoperative_Vital extends BaseActiveRecord
 							$this->addError('reading','Temperature must be in the range 15-45°C');
 						}
 						break;
+					case 'Decimal':
+						if (!preg_match('/^\d*\.?\d*$/',$this->value)) {
+							$this->addError('reading','Must be a decimal');
+						}
+						break;
 				}
 			}
 		}
