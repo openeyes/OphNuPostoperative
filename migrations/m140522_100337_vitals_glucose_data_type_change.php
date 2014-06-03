@@ -12,6 +12,5 @@ class m140522_100337_vitals_glucose_data_type_change extends OEMigration
 	{
 		$this->update('ophnupostoperative_vital_type',array('field_type_id'=>3),"name ='Glucose level'");
 		$this->execute("delete from ophnupostoperative_vital_type_field_type where name = 'Decimal'");
-
 	}
 }
