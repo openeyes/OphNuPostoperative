@@ -17,37 +17,22 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
 ?>
-
-<section class="element">
-	<header class="element-header">
-		<h3 class="element-title"><?php echo $element->elementType->name?></h3>
-	</header>
-
-	<div class="element-data">
-		<div class="row field-row">
-			<div class="large-3 column"><label><?php echo $element->getAttributeLabel('progress_notes')?></label></div>
-			<div class="large-9 column end">
-				<table class="grid progress-notes">
-					<thead>
-					<tr>
-						<th>Time</th>
-						<th>Notes</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr class="no-comments"<?php if (!empty($element->progressnotes)) {?> style="display: none"<?php }?>>
-						<td class="no-notes" colspan="2">
-							No notes have been entered
-						</td>
-					</tr>
-					<?php
-					if (!empty($element->progressnotes)) {?>
-						<?php foreach ($element->progressnotes as $note) {
-							$this->renderPartial('_progress_notes_row',array('id'=>$note->id,'note'=>$note->comment,'full_time'=>$note->comment_date));
-						}?>
-					<?php }?>
-					</tbody>
-				</table>
-			</div>
-		</div>
-</section>
+<tr class="progress-notes-row">
+	<td>
+		<?php
+		$date = strtotime($full_time);
+		$time = date("H:i",$date);
+		echo $time?>
+		<?php echo CHtml::hiddenField('progress_notes_ids[]',$id)?>
+		<?php echo CHtml::hiddenField('progress_notes_time[]',$full_time)?>
+	</td>
+	<td>
+		<?php echo $note?>
+		<?php echo CHtml::hiddenField('progress_notes_note[]',$note)?>
+	</td>
+	<?php if(isset($edit)){?>
+	<td>
+		<a href="#" class="remove-progress-notes-row">remove</a>
+	</td>
+	<?php }?>
+</tr>

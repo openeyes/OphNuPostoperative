@@ -1,5 +1,4 @@
-<?php
-/**
+<?php /**
  * OpenEyes
  *
  * (C) Moorfields Eye Hospital NHS Foundation Trust, 2008-2011
@@ -18,12 +17,12 @@
  */
 
 /**
- * This is the model class for table "et_ophnupostoperative_progressnote".
+ * This is the model class for table "ophnupostoperative_postoperative_falls".
  *
  * The followings are the available columns in table:
  * @property string $id
- * @property integer $event_id
- * @property string $progress_notes
+ * @property string $comment
+ * @property string $comment_date
  *
  * The followings are the available model relations:
  *
@@ -34,7 +33,7 @@
  * @property User $usermodified
  */
 
-class Element_OphNuPostoperative_PostOperativeProgressNotes  extends  BaseEventTypeElement
+class OphNuPostoperative_PostOperative_ProgressNotes extends BaseActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -45,14 +44,12 @@ class Element_OphNuPostoperative_PostOperativeProgressNotes  extends  BaseEventT
 		return parent::model($className);
 	}
 
-	public $present;
-
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'et_ophnupostoperative_progressnote';
+		return 'ophnupostoperative_postoperative_progress_notes';
 	}
 
 	/**
@@ -61,8 +58,9 @@ class Element_OphNuPostoperative_PostOperativeProgressNotes  extends  BaseEventT
 	public function rules()
 	{
 		return array(
-			array('event_id, ', 'safe'),
-			array('id, event_id, ', 'safe', 'on' => 'search'),
+				array('id, element_id, comment, comment_date', 'safe'),
+				array('comment, comment_date', 'required'),
+				array('id, comment, comment_date', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -72,12 +70,8 @@ class Element_OphNuPostoperative_PostOperativeProgressNotes  extends  BaseEventT
 	public function relations()
 	{
 		return array(
-			'element_type' => array(self::HAS_ONE, 'ElementType', 'id','on' => "element_type.class_name='".get_class($this)."'"),
-			'eventType' => array(self::BELONGS_TO, 'EventType', 'event_type_id'),
-			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
-			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
-			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'progressnotes' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_ProgressNotes', 'element_id'),
+				'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
+				'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 		);
 	}
 
@@ -87,9 +81,6 @@ class Element_OphNuPostoperative_PostOperativeProgressNotes  extends  BaseEventT
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'event_id' => 'Event',
-			'progress_notes' => 'Post operative progress notes',
 		);
 	}
 
@@ -102,48 +93,11 @@ class Element_OphNuPostoperative_PostOperativeProgressNotes  extends  BaseEventT
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id, true);
-		$criteria->compare('event_id', $this->event_id, true);
-		$criteria->compare('progress_notes', $this->progress_notes);
+		$criteria->compare('name', $this->name, true);
 
 		return new CActiveDataProvider(get_class($this), array(
-			'criteria' => $criteria,
+				'criteria' => $criteria,
 		));
-	}
-
-	public function updateProgressNotes($ids = array(), $times= array(), $notes=array()) {
-
-
-		$keep_ids = array();
-
-		foreach ($ids as $i => $id) {
-			if (!$ids[$i] || !$note = OphNuPostoperative_PostOperative_ProgressNotes::model()->findByPk($ids[$i])) {
-				$note = new OphNuPostoperative_PostOperative_ProgressNotes;
-				$note->element_id = $this->id;
-			}
-			$note->comment_date = $times[$i];
-			$note->comment = $notes[$i];
-
-			if (!$note->save()) {
-				throw new Exception("Unable to save progress note: ".print_r($note->getErrors(),true));
-			}
-
-			$keep_ids[] = $note->id;
-		}
-
-		$criteria = new CDbCriteria;
-		$criteria->addCondition('element_id = :element_id');
-		$criteria->params[':element_id'] = $this->id;
-
-		!empty($ids) && $criteria->addNotInCondition('id',$keep_ids);
-
-		OphNuPostoperative_PostOperative_ProgressNotes::model()->deleteAll($criteria);
-	}
-
-
-	protected function afterSave()
-	{
-
-		return parent::afterSave();
 	}
 }
 ?>

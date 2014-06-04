@@ -26,8 +26,47 @@
 	<header class="element-header">
 		<h3 class="element-title"><?php echo $element->elementType->name; ?></h3>
 	</header>
-
 	<div class="element-fields">
-		<?php echo $form->textArea($element, 'progress_notes', array('layoutColumns'=>array('label' => 3, 'field' => 9)))?>
+		<div class="row field-row">
+			<div class="large-3 column"><label><?php echo $element->getAttributeLabel('progress_notes')?></label></div>
+			<div class="large-9 column end">
+				<table class="grid progress-notes">
+					<thead>
+					<tr>
+						<th>Time</th>
+						<th>Notes</th>
+						<th>Actions</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr class="no-comments"<?php if (!empty($element->progressnotes)) {?> style="display: none"<?php }?>>
+						<td class="no-notes" colspan="2">
+							No notes have been entered
+						</td>
+					</tr>
+					<?php
+					if (!empty($element->progressnotes)) {?>
+						<?php foreach ($element->progressnotes as $note) {
+						$this->renderPartial('_progress_notes_row',array('id'=>$note->id,'note'=>$note->comment,'full_time'=>$note->comment_date, 'edit'=>true));
+						}?>
+					<?php }?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row field-row">
+			<div class="large-3 column"><label></label></div>
+			<div class="large-9 column end new-note-form">
+				<?php echo CHtml::textArea('new_progress_note')?>
+
+			</div>
+		</div>
+		<div class="row field-row">
+			<div class="large-3 column"><label></label></div>
+			<div class="large-9 column end">
+				<button type="submit" class="secondary small add-note">Add Note</button>
+			</div>
+		</div>
+		<?php echo $form->hiddenInput($element,'present',1)?>
 	</div>
 </section>
