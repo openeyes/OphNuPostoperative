@@ -102,7 +102,7 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 			'event_id' => 'Event',
 			'comments' => 'Post operative orders',
 			'total_fluid_intake' => 'Total fluid intake',
-			'total_fluid_outtake' => 'Total fluid outtake',
+			'total_fluid_outtake' => 'Total fluid output',
 		);
 	}
 
