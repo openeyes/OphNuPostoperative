@@ -27,7 +27,7 @@
 		<?php echo CHtml::hiddenField('progress_notes_time[]',$full_time)?>
 	</td>
 	<td>
-		<?php echo $note?>
+		<?php echo CHtml::encode ($note)?>
 		<?php echo CHtml::hiddenField('progress_notes_note[]',$note)?>
 	</td>
 	<?php if(isset($edit)){?>
