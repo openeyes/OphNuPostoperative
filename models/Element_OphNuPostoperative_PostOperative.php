@@ -124,7 +124,7 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 			'other_comments' => 'Other dental items',
 			'hearing_aid_returned_id' => 'Hearing aid returned?',
 			'hearing' => 'Items returned',
-			'patent_belongings_returned' => 'Patient belongings',
+			'patent_belongings_returned' => 'Patient belongings returned',
 			'belongings' => 'Items returned',
 			'h_comments' => 'Other belongings',
 			'skin' => 'Skin assessment',
