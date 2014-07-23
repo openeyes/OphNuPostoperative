@@ -55,8 +55,8 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('item_id, offset, value', 'safe'),
-			array('item_id, offset', 'required'),
+			array('hr_pulse, blood_pressure, rr, spo2, o2, pain_score, timestamp', 'safe'),
+			array('hr_pulse, blood_pressure, rr, spo2, o2, pain_score, timestamp', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, item_id, offset, value, display_order', 'safe', 'on' => 'search'),
@@ -71,7 +71,6 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'item' => array(self::BELONGS_TO, 'OphNuPostoperative_Vital_Type', 'item_id'),
 		);
 	}
 
@@ -82,10 +81,25 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 	{
 		return array(
 			'id' => 'ID',
-			'item_id' => 'Reading type',
-			'record_time' => 'Time',
-			'value' => 'Reading',
+			'hr_pulse' => 'HR / pulse',
+			'blood_pressure' => 'Blood pressure',
+			'rr' => 'RR',
+			'spo2' => 'SpO2',
+			'o2' => 'O2',
+			'pain_score' => 'Pain score',
 		);
+	}
+
+	public function getAttributeSuffix($attribute)
+	{
+		$suffixes = array(
+			'hr_pulse' => 'mmHg',
+			'blood_pressure' => 'bpm',
+			'rr' => 'insp/min',
+			'spo2' => '%',
+		);
+
+		return @$suffixes[$attribute];
 	}
 
 	/**

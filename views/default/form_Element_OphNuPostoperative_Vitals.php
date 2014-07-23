@@ -18,6 +18,28 @@
  */
 ?>
 	<div class="element-fields">
+		<?php $form->widget('application.widgets.Records', array(
+			'form' => $form,
+			'element' => $element,
+			'model' => new OphNuPostoperative_Vital,
+			'field' => 'vitals',
+			'columns' => array(
+				array(
+					'width' => 5,
+					'fields' => array('hr_pulse','blood_pressure','rr'),
+				),
+				array(
+					'width' => 5,
+					'fields' => array('spo2','o2','pain_score'),
+				),
+			),
+			'no_items_text' => 'No vitals have been recorded.',
+			'add_button_text' => 'Add vital',
+		))?>
+	</div>
+
+	<?php /*
+	<div class="element-fields">
 		<div class="row field-row">
 			<div class="large-3 column end">
 				<label>Data items:</label>
@@ -54,3 +76,4 @@
 			</div>
 		</div>
 	</div>
+	*/?>
