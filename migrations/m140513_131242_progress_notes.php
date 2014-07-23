@@ -23,14 +23,14 @@ class m140513_131242_progress_notes extends CDbMigration
 			'CONSTRAINT `et_ophnupostoperative_postoperative_progress_notes_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)'
 		), 'COLLATE=`utf8_bin` ENGINE=InnoDB AUTO_INCREMENT=7');
 
-		$old_notes = Yii::app()->db->createCommand()
+		$old_notes = $this->dbConnection->createCommand()
 			->select('*')
 			->from('et_ophnupostoperative_progressnote')
 			->where('progress_notes IS NOT NULL')
 			->queryAll();
 
 		foreach($old_notes as $old_note) {
-			$command = Yii::app()->db->createCommand();
+			$command = $this->dbConnection->createCommand();
 			$command->insert('ophnupostoperative_postoperative_progress_notes', array(
 				'element_id'=>$old_note['id'],
 				'comment_date'=>$old_note['created_date'],
