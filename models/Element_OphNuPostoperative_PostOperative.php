@@ -76,7 +76,7 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, fallsmobility, removable_dental_id, other_comments, hearing_aid_returned_id, patent_belongings_returned, h_comments, s_comments, o_comments, falls, dentals, hearings, belongings, skins, obs', 'safe'),
+			array('event_id, fallsmobility, removable_dental_id, other_comments, hearing_aid_returned_id, h_comments, s_comments, o_comments, falls, dentals, hearings, belongings, skins, obs, iv_discontinued, dressing_in_place, dressing_condition_id, ecg_dots_removed, belongings_returned_id', 'safe'),
 			array('id, event_id, fallsmobility, removable_dental_id, other_comments, hearing_aid_returned_id, patent_belongings_returned, h_comments, s_comments, o_comments, ', 'safe', 'on' => 'search'),
 		);
 	}
@@ -106,6 +106,8 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 			'skins_assignment' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Skin_Assignment', 'element_id'),
 			'obs' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Obs', 'ob_id', 'through' => 'obs_assignment'),
 			'obs_assignment' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Obs_Assignment', 'element_id'),
+			'dressing_condition' => array(self::BELONGS_TO, 'OphNuPostoperative_PostOperative_Dressing_condition', 'dressing_condition_id'),
+			'belongings_returned' => array(self::BELONGS_TO, 'OphNuPostoperative_PostOperative_Belongings_Returned', 'belongings_returned_id'),
 		);
 	}
 
@@ -124,13 +126,17 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 			'other_comments' => 'Other dental items',
 			'hearing_aid_returned_id' => 'Hearing aid returned?',
 			'hearing' => 'Items returned',
-			'patent_belongings_returned' => 'Patient belongings returned',
+			'belongings_returned_id' => 'Patient belongings returned',
 			'belongings' => 'Items returned',
 			'h_comments' => 'Other belongings',
 			'skin' => 'Skin assessment',
 			's_comments' => 'Other skin notes',
 			'obs' => 'Post-op observations',
 			'o_comments' => 'Other post-op observations',
+			'iv_discontinued' => 'IV discontinued',
+			'dressing_in_place' => 'Dressing in place',
+			'dressing_condition_id' => 'Dressing condition',
+			'ecg_dots_removed' => 'ECG dots removed',
 		);
 	}
 
@@ -177,7 +183,7 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 				$this->addError('dentals','Please enter at least one dental item');
 			}
 
-			if ($this->hasMultiSelectValue('dentals','Other (please specify)')) {
+			if ($this->hasMultiSelectValue('dentals','Others (please specify)')) {
 				if (!$this->other_comments) {
 					$this->addError('other_comments',$this->getAttributeLabel('other_comments').' cannot be blank.');
 				}
@@ -190,7 +196,7 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 			}
 		}
 
-		if ($this->patent_belongings_returned) {
+		if ($this->belongings_returned && $this->belongings_returned->name == 'Yes') {
 			if (empty($this->belongings)) {
 				$this->addError('belongings','Please enter at least one patient belonging');
 			}

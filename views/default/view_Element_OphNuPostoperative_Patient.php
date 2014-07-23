@@ -54,7 +54,7 @@
 		</div>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('hand_off_from_id'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->hand_off_from ? $element->hand_off_from->fullName : 'Not recoreded'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->hand_off_from ? $element->hand_off_from->fullName : 'Not recorded'?></div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('hand_off_to_id'))?></div></div>
