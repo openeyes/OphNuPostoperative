@@ -24,21 +24,8 @@
 			'model' => new OphNuPostoperative_Vital,
 			'field' => 'vitals',
 			'edit' => false,
-			'validate_method' => '/OphNuPostoperative/default/validateVital',
 			'row_view' => 'protected/modules/OphNuPostoperative/views/default/_vital_row.php',
-			'columns' => array(
-				array(
-					'width' => 5,
-					'fields' => array('hr_pulse','blood_pressure','rr'),
-				),
-				array(
-					'width' => 5,
-					'fields' => array('spo2','o2','pain_score'),
-				),
-			),
 			'no_items_text' => 'No vitals have been recorded.',
-			'add_button_text' => 'Add vital',
-			'use_last_button_text' => 'Input last recorded vital signs',
 		))?>
 		<div class="row field-row">
 			<div class="large-3 column">
