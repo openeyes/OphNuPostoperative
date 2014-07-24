@@ -28,11 +28,37 @@
 			'columns' => array(
 				array(
 					'width' => 5,
-					'fields' => array('hr_pulse','blood_pressure','rr'),
+					'fields' => array(
+						array(
+							'field' => 'hr_pulse',
+							'type' => 'text',
+						),
+						array(
+							'field' => 'blood_pressure',
+							'type' => 'text',
+						),
+						array(
+							'field' => 'rr',
+							'type' => 'text',
+						),
+					),
 				),
 				array(
 					'width' => 5,
-					'fields' => array('spo2','o2','pain_score'),
+					'fields' => array(
+						array(
+							'field' => 'spo2',
+							'type' => 'text',
+						),
+						array(
+							'field' => 'o2',
+							'type' => 'text',
+						),
+						array(
+							'field' => 'pain_score',
+							'type' => 'text',
+						),
+					),
 				),
 			),
 			'no_items_text' => 'No vitals have been recorded.',
