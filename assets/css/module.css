@@ -148,17 +148,67 @@ span.unit {
 }
 
 /* line 148, ../sass/components/_event.scss */
+#div_Element_OphNuPostoperative_Vitals_blood_loss input {
+  display: inline;
+  width: 5em;
+}
+/* line 152, ../sass/components/_event.scss */
+#div_Element_OphNuPostoperative_Vitals_blood_loss .metric {
+  display: inline;
+  font-size: 0.8125em;
+}
+
+/* line 158, ../sass/components/_event.scss */
+#div_Element_OphNuPostoperative_Vitals_glucose_level input {
+  display: inline;
+  width: 5em;
+}
+/* line 162, ../sass/components/_event.scss */
+#div_Element_OphNuPostoperative_Vitals_glucose_level .metric {
+  display: inline;
+  font-size: 0.8125em;
+}
+/* line 166, ../sass/components/_event.scss */
+#div_Element_OphNuPostoperative_Vitals_glucose_level label {
+  display: inline-block;
+}
+/* line 169, ../sass/components/_event.scss */
+#div_Element_OphNuPostoperative_Vitals_glucose_level input[type="checkbox"] {
+  width: 1em;
+  margin-left: 8px;
+}
+
+/* line 176, ../sass/components/_event.scss */
 .addRecordItemDiv label {
   width: 10em;
   margin-top: 5px;
 }
-/* line 152, ../sass/components/_event.scss */
-.addRecordItemDiv input {
+/* line 180, ../sass/components/_event.scss */
+.addRecordItemDiv input.recordInput {
   width: 5em;
 }
-/* line 155, ../sass/components/_event.scss */
+/* line 183, ../sass/components/_event.scss */
 .addRecordItemDiv .large-2 {
   display: inline-block !important;
   margin-left: -2.2em;
   margin-top: 3px;
+}
+/* line 188, ../sass/components/_event.scss */
+.addRecordItemDiv .recordTimestamp {
+  width: 6.4em;
+  display: inline-block;
+}
+/* line 192, ../sass/components/_event.scss */
+.addRecordItemDiv .recordTime {
+  width: 5em;
+  display: inline-block !important;
+}
+/* line 196, ../sass/components/_event.scss */
+.addRecordItemDiv .recordDateLabel {
+  width: 6.8em;
+}
+/* line 199, ../sass/components/_event.scss */
+.addRecordItemDiv .recordsUseLastItemDiv {
+  width: 35%;
+  margin: 0 auto;
 }

@@ -144,17 +144,60 @@ span.unit {
 	}
 }
 
+#div_Element_OphNuPostoperative_Vitals_blood_loss {
+	input {
+		display: inline;
+		width: 5em;
+	}
+	.metric {
+		display: inline;
+		font-size: 0.8125em;
+	}
+}
+#div_Element_OphNuPostoperative_Vitals_glucose_level {
+	input {
+		display: inline;
+		width: 5em;
+	}
+	.metric {
+		display: inline;
+		font-size: 0.8125em;
+	}
+	label {
+		display: inline-block;
+	}
+	input[type="checkbox"] {
+		width: 1em;
+		margin-left: 8px;
+	}
+}
+
 .addRecordItemDiv {
 	label {
 		width: 10em;
 		margin-top: 5px;
 	}
-	input {
+	input.recordInput {
 		width: 5em;
 	}
 	.large-2 {
 		display: inline-block !important;
 		margin-left: -2.2em;
 		margin-top: 3px;
+	}
+	.recordTimestamp {
+		width: 6.4em;
+		display: inline-block;
+	}
+	.recordTime {
+		width: 5em;
+		display: inline-block !important;
+	}
+	.recordDateLabel {
+		width: 6.8em;
+	}
+	.recordsUseLastItemDiv {
+		width: 35%;
+		margin: 0 auto;
 	}
 }

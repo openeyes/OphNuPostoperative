@@ -197,6 +197,15 @@ $(document).ready(function() {
 			OphNuPostoperative_update_times(val);
 		}
 	});
+
+	$('input[type="checkbox"][name="Element_OphNuPostoperative_Vitals[glucose_level_na]"]').click(function(e) {
+		if ($(this).is(':checked')) {
+			$('input[type="text"][name="Element_OphNuPostoperative_Vitals[glucose_level]"]').val('');
+			$('input[type="text"][name="Element_OphNuPostoperative_Vitals[glucose_level]"]').attr('disabled','disabled');
+		} else {
+			$('input[type="text"][name="Element_OphNuPostoperative_Vitals[glucose_level]"]').removeAttr('disabled');
+		}
+	});
 });
 
 function ucfirst(str) { str += ''; var f = str.charAt(0).toUpperCase(); return f + str.substr(1); }

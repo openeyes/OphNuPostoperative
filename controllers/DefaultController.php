@@ -5,6 +5,7 @@ class DefaultController extends BaseEventTypeController
 	static protected $action_types = array(
 		'dataTimes' => self::ACTION_TYPE_FORM,
 		'addProgressNote' => self::ACTION_TYPE_FORM,
+		'validateVital' => self::ACTION_TYPE_FORM,
 	);
 
 	public function actionCreate()
@@ -152,9 +153,72 @@ class DefaultController extends BaseEventTypeController
 		}
 	}
 
-	public function actionValidateRecordItem()
+	public function actionValidateVital()
 	{
 		$vital = new OphNuPostoperative_Vital;
 		$vital->attributes = $_POST;
+
+		$vital->validate();
+
+		$errors = array();
+
+		foreach ($vital->errors as $field => $error) {
+			$errors[$field] = $error[0];
+		}
+
+		if (empty($errors)) {
+			$vital->timestamp = date('Y-m-d',strtotime($vital->timestamp)).' '.$vital->time.':00';
+			$errors['row'] = $this->renderPartial('_vital_row',array('item' => $vital, 'i' => $_POST['i'], 'edit' => true),true);
+		}
+
+		echo json_encode($errors);
+	}
+
+	protected function setComplexAttributes_Element_OphNuPostoperative_Vitals($element, $data, $index)
+	{
+		$vitals = array();
+
+		if (!empty($data['OphNuPostoperative_Vital']['hr_pulse'])) {
+			foreach ($data['OphNuPostoperative_Vital']['hr_pulse'] as $i => $hr_pulse) {
+				$vital = new OphNuPostoperative_Vital;
+				$vital->element_id = $element->id;
+				$vital->hr_pulse = $hr_pulse;
+
+				foreach (array('blood_pressure','rr','spo2','o2','pain_score','timestamp') as $field) {
+					$vital->$field = $data['OphNuPostoperative_Vital'][$field][$i];
+				}
+
+				$vital->time = date('H:i',strtotime($vital->timestamp));
+
+				$vitals[] = $vital;
+			}
+		}
+
+		$element->vitals = $vitals;
+	}
+
+	protected function saveComplexAttributes_Element_OphNuPostoperative_Vitals($element, $data, $index)
+	{
+		$ids = array();
+
+		foreach ($element->vitals as $vital) {
+			$vital->element_id = $element->id;
+
+			if (!$vital->save()) {
+				throw new Exception("Unable to save vital item: ".print_r($vital->errors,true));
+			}
+
+			$ids[] = $vital->id;
+		}
+
+		$criteria = new CDbCriteria;
+		$criteria->addCondition('element_id = :element_id');
+		$criteria->params[':element_id'] = $element->id;
+
+		if (!empty($ids)) {
+			$criteria->addNotInCondition('id',$ids);
+		}
+
+		OphNuPostoperative_Vital::model()->deleteAll($criteria);
 	}
 }

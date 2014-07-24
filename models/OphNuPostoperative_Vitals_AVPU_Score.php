@@ -1,5 +1,4 @@
-<?php
-/**
+<?php /**
  * OpenEyes
  *
  * (C) Moorfields Eye Hospital NHS Foundation Trust, 2008-2011
@@ -18,12 +17,11 @@
  */
 
 /**
- * This is the model class for table "et_ophnupostoperative_vitals".
+ * This is the model class for table "ophnupostoperative_postoperative_obs".
  *
  * The followings are the available columns in table:
  * @property string $id
- * @property integer $event_id
- * @property string $comments
+ * @property string $name
  *
  * The followings are the available model relations:
  *
@@ -32,17 +30,10 @@
  * @property Event $event
  * @property User $user
  * @property User $usermodified
- * @property OphNuPostoperative_Drug_Dose $drugs
- * @property OphNuPostoperative_Reading $readings
  */
 
-class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
+class OphNuPostoperative_Vitals_AVPU_Score extends BaseActiveRecordVersioned
 {
-	public $intervals = 8;
-	public $reading_items = array();
-	public $drug_items = array();
-	public $gas_items = array();
-
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -57,7 +48,7 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 	 */
 	public function tableName()
 	{
-		return 'et_ophnupostoperative_vitals';
+		return 'ophnupostoperative_vital_avpu';
 	}
 
 	/**
@@ -65,10 +56,10 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
-			array('total_fluid_intake, total_fluid_outtake, glucose_level, glucose_level_na, nausea_vomiting, blood_loss, avpu_score_id, mews_score', 'safe'),
+			array('name', 'safe'),
+			array('name', 'required'),
+			array('id, name', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -77,16 +68,12 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
 		return array(
 			'element_type' => array(self::HAS_ONE, 'ElementType', 'id','on' => "element_type.class_name='".get_class($this)."'"),
 			'eventType' => array(self::BELONGS_TO, 'EventType', 'event_type_id'),
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'vitals' => array(self::HAS_MANY, 'OphNuPostoperative_Vital', 'element_id'),
-			'avpu_score' => array(self::BELONGS_TO, 'OphNuPostoperative_Vitals_AVPU_Score', 'avpu_score_id'),
 		);
 	}
 
@@ -97,16 +84,7 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 	{
 		return array(
 			'id' => 'ID',
-			'event_id' => 'Event',
-			'comments' => 'Post operative orders',
-			'total_fluid_intake' => 'Total fluid intake',
-			'total_fluid_outtake' => 'Total fluid output',
-			'glucose_level' => 'Glucose level',
-			'glucose_level_na' => 'N/A',
-			'nausea_vomiting' => 'Nausea / vomiting',
-			'blood_loss' => 'Blood loss',
-			'avpu_score_id' => 'AVPU score',
-			'mews_score' => 'MEWS score',
+			'name' => 'Name',
 		);
 	}
 
@@ -116,26 +94,14 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 	 */
 	public function search()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id, true);
-		$criteria->compare('event_id', $this->event_id, true);
-		$criteria->compare('comments', $this->comments);
+		$criteria->compare('name', $this->name, true);
 
 		return new CActiveDataProvider(get_class($this), array(
-				'criteria' => $criteria,
+			'criteria' => $criteria,
 		));
 	}
-
-	public function beforeSave()
-	{
-		if ($this->glucose_level_na) {
-			$this->glucose_level = null;
-		}
-
-		return parent::beforeSave();
-	}
 }
+?>

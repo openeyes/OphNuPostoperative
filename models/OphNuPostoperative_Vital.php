@@ -30,6 +30,8 @@
 
 class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 {
+	public $time;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -55,7 +57,7 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('hr_pulse, blood_pressure, rr, spo2, o2, pain_score, timestamp', 'safe'),
+			array('hr_pulse, blood_pressure, rr, spo2, o2, pain_score, timestamp, time', 'safe'),
 			array('hr_pulse, blood_pressure, rr, spo2, o2, pain_score, timestamp', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -97,9 +99,19 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 			'blood_pressure' => 'bpm',
 			'rr' => 'insp/min',
 			'spo2' => '%',
+			'o2' => 'L/min',
 		);
 
 		return @$suffixes[$attribute];
+	}
+
+	public function afterFind()
+	{
+		if ($this->timestamp) {
+			$this->time = date('H:i',strtotime($this->timestamp));
+		}
+
+		return parent::afterFind();
 	}
 
 	/**
@@ -124,42 +136,8 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 		));
 	}
 
-	public function beforeValidate()
+	public function getDescription()
 	{
-
-		if (isset($this->item) && strlen($this->value) >0) {
-			$type=$this->item;
-			if ($type->validation_regex) {
-				if (!preg_match($type->validation_regex,$this->value)) {
-					$this->addError('reading',"$type->validation_message");
-				}
-			} else {
-				switch ($type->fieldType->name) {
-					case 'Percentage':
-						if (!ctype_digit($this->value) || $this->value <0 || $this->value >100) {
-							$this->addError('reading','Must be 0-100');
-						}
-						break;
-					case 'Integer':
-						if (!ctype_digit($this->value)) {
-							$this->addError('reading','Must be an integer');
-						}
-						break;
-					case 'Temperature':
-						if (!preg_match('/^[0-9]+(\.[0-9]+)?$/',$this->value) || $this->value < 15 || $this->value > 45) {
-							$this->addError('reading','Temperature must be in the range 15-45°C');
-						}
-						break;
-					case 'Decimal':
-						if (!preg_match('/^\d*\.?\d*$/',$this->value)) {
-							$this->addError('reading','Must be a decimal');
-						}
-						break;
-				}
-			}
-		}
-
-		return parent::beforeValidate();
+		return "Pulse: ".$this->hr_pulse." mmHh, BP: ".$this->blood_pressure." bpm, RR: ".$this->rr." insp/min, SpO2: ".$this->spo2."%, O2: ".$this->o2." L/min, pain score: ".$this->pain_score;
 	}
 }
-?>
