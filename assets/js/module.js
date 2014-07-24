@@ -190,7 +190,7 @@ $(document).ready(function() {
 		$('#'+element+'_'+$(this).data('target')).change();
 	});
 
-	$('#Element_OphNuPostoperative_Patient_patient_enters_recovery_room').change(function() {
+	$('#Element_OphNuPostoperative_Handoff_patient_enters_recovery_room').change(function() {
 		var val = $(this).val();
 
 		if (val != '') {

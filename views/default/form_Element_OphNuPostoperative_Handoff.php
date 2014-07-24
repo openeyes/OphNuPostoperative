@@ -28,9 +28,9 @@
 			'no_allergies_field' => 'patient_has_no_allergies',
 		))?>
 		<?php echo $form->checkBox($element, 'allergies_verified', array('text-align' => 'right'), array('label' => 3, 'field' => 4))?>
-		<div id="div_Element_OphNuPostoperative_Patient_patient_enters_recovery_room" class="row field-row">
+		<div id="div_Element_OphNuPostoperative_Handoff_patient_enters_recovery_room" class="row field-row">
 			<div class="large-3 column">
-				<label for="Element_OphNuPostoperative_Patient_patient_enters_recovery_room"><?php echo $element->getAttributeLabel('patient_enters_recovery_room')?>:</label>
+				<label for="Element_OphNuPostoperative_Handoff_patient_enters_recovery_room"><?php echo $element->getAttributeLabel('patient_enters_recovery_room')?>:</label>
 			</div>
 			<div class="large-2 column end">
 				<?php echo $form->textField($element, 'patient_enters_recovery_room', array('nowrapper' => true), array(), array('label' => 3, 'field' => 1))?>

@@ -50,7 +50,7 @@ class DefaultController extends BaseEventTypeController
 		return parent::beforeAction($action);
 	}
 
-	protected function setElementDefaultOptions_Element_OphNuPostoperative_Patient($element, $action)
+	protected function setElementDefaultOptions_Element_OphNuPostoperative_Handoff($element, $action)
 	{
 		if ($action == 'create') {
 			$allergies = array();
@@ -74,7 +74,7 @@ class DefaultController extends BaseEventTypeController
 		}
 	}
 
-	protected function setComplexAttributes_Element_OphNuPostoperative_Patient($element, $data, $index)
+	protected function setComplexAttributes_Element_OphNuPostoperative_Handoff($element, $data, $index)
 	{
 		$allergies = array();
 
@@ -90,7 +90,7 @@ class DefaultController extends BaseEventTypeController
 		$element->allergies = $allergies;
 	}
 
-	protected function saveComplexAttributes_Element_OphNuPostoperative_Patient($element, $data, $index)
+	protected function saveComplexAttributes_Element_OphNuPostoperative_Handoff($element, $data, $index)
 	{
 		$element->updateAllergies(empty($data['allergies_allergies']) ? array() : $data['allergies_allergies']);
 	}

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /** OphNuPostoperative module styles */
 /**
  * OpenEyes
@@ -22,11 +23,11 @@
 }
 /* line 19, ../sass/components/_event.scss */
 .event .event-content {
-  background-image: url('../img/watermark.png?1398938415');
+  background-image: url('../img/watermark.png?1406129894');
 }
 /* line 22, ../sass/components/_event.scss */
 .event .event-title {
-  background-image: url('../img/medium.png?1398938415');
+  background-image: url('../img/medium.png?1406129894');
 }
 
 /* line 27, ../sass/components/_event.scss */
@@ -137,7 +138,7 @@ span.unit {
 }
 
 /* line 122, ../sass/components/_event.scss */
-#Element_OphNuPostoperative_Patient_patient_enters_recovery_room {
+#Element_OphNuPostoperative_Handoff_patient_enters_recovery_room {
   width: 5em;
   display: inline;
 }

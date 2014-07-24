@@ -45,7 +45,7 @@
  * @property OphNuPostoperative_Patient_TranslatorPresent $translator_present
  */
 
-class Element_OphNuPostoperative_Patient	extends  BaseEventTypeElement
+class Element_OphNuPostoperative_Handoff	extends  BaseEventTypeElement
 {
 	protected $auto_update_relations = true;
 
@@ -63,7 +63,7 @@ class Element_OphNuPostoperative_Patient	extends  BaseEventTypeElement
 	 */
 	public function tableName()
 	{
-		return 'et_ophnupostoperative_patient';
+		return 'et_ophnupostoperative_handoff';
 	}
 
 	/**
