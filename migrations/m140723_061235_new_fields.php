@@ -64,7 +64,7 @@ class m140723_061235_new_fields extends OEMigration
 				if ($row['patent_belongings_returned'] == 1) {
 					$this->update('et_ophnupostoperative_postoperative',array('belongings_returned_id' => 1),"id = {$row['id']}");
 				} else {
-					$this->update('et_ophnupostoperative_postoperative',array('belongings_returned_id' => 0),"id = {$row['id']}");
+					$this->update('et_ophnupostoperative_postoperative',array('belongings_returned_id' => 2),"id = {$row['id']}");
 				}
 			}
 
@@ -73,7 +73,7 @@ class m140723_061235_new_fields extends OEMigration
 					if ($version['patent_belongings_returned'] == 1) {
 						$this->update('et_ophnupostoperative_postoperative_version',array('belongings_returned_id' => 1),"id = {$version['id']}");
 					} else {
-						$this->update('et_ophnupostoperative_postoperative_version',array('belongings_returned_id' => 0),"id = {$version['id']}");
+						$this->update('et_ophnupostoperative_postoperative_version',array('belongings_returned_id' => 2),"id = {$version['id']}");
 					}
 				}
 			}
