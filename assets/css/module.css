@@ -212,3 +212,24 @@ span.unit {
   width: 35%;
   margin: 0 auto;
 }
+
+/* line 205, ../sass/components/_event.scss */
+.progressNoteTimestamp {
+  width: 6.4em !important;
+  display: inline-block !important;
+}
+
+/* line 210, ../sass/components/_event.scss */
+.progressNoteTime {
+  width: 5em !important;
+  display: inline-block !important;
+}
+
+/* line 216, ../sass/components/_event.scss */
+.progress-notes .dateTime {
+  width: 13em;
+}
+/* line 220, ../sass/components/_event.scss */
+.progress-notes .actions {
+  width: 12em;
+}

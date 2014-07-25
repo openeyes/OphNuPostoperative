@@ -201,3 +201,23 @@ span.unit {
 		margin: 0 auto;
 	}
 }
+
+.progressNoteTimestamp {
+	width: 6.4em !important;
+	display: inline-block !important;
+}
+
+.progressNoteTime {
+	width: 5em !important;
+	display: inline-block !important;
+}
+
+.progress-notes {
+	.dateTime {
+		width: 13em;
+	}
+
+	.actions {
+		width: 12em;
+	}
+}

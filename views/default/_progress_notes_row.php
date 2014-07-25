@@ -17,22 +17,20 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
 ?>
-<tr class="progress-notes-row">
+<tr class="progress-notes-row"<?php if ($edit) {?> data-i="<?php echo $i?>" data-date="<?php echo date('j M Y',strtotime($note->comment_date))?>" data-time="<?php echo date('H:i',strtotime($note->comment_date))?>" data-comment="<?php echo CHtml::encode($note->comment)?>"<?php }?>>
 	<td>
-		<?php
-		$date = strtotime($full_time);
-		$time = date("H:i",$date);
-		echo $time?>
-		<?php echo CHtml::hiddenField('progress_notes_ids[]',$id)?>
-		<?php echo CHtml::hiddenField('progress_notes_time[]',$full_time)?>
+		<?php echo date('j M Y H:i',strtotime($note->comment_date))?>
 	</td>
 	<td>
-		<?php echo $note?>
-		<?php echo CHtml::hiddenField('progress_notes_note[]',$note)?>
+		<?php echo CHtml::encode($note->comment)?>
 	</td>
-	<?php if(isset($edit)){?>
-	<td>
-		<a href="#" class="remove-progress-notes-row">remove</a>
-	</td>
+	<?php if ($edit) {?>
+		<td>
+			<a href="#" class="editProgressNote">edit</a>
+			&nbsp;&nbsp;
+			<a href="#" class="removeProgressNote">remove</a>
+			<input type="hidden" name="<?php echo CHtml::modelName($note)?>[comment_date][]" value="<?php echo $note->comment_date?>" />
+			<input type="hidden" name="<?php echo CHtml::modelName($note)?>[comment][]" value="<?php echo CHtml::encode($note->comment)?>" />
+		</td>
 	<?php }?>
 </tr>

@@ -23,23 +23,23 @@
 			<div class="large-9 column end">
 				<table class="grid progress-notes">
 					<thead>
-					<tr>
-						<th>Time</th>
-						<th>Notes</th>
-					</tr>
+						<tr>
+							<th class="dateTime">Date/time</th>
+							<th>Notes</th>
+						</tr>
 					</thead>
 					<tbody>
-					<tr class="no-comments"<?php if (!empty($element->progressnotes)) {?> style="display: none"<?php }?>>
-						<td class="no-notes" colspan="2">
-							No notes have been entered
-						</td>
-					</tr>
-					<?php
-					if (!empty($element->progressnotes)) {?>
-						<?php foreach ($element->progressnotes as $note) {
-							$this->renderPartial('_progress_notes_row',array('id'=>$note->id,'note'=>$note->comment,'full_time'=>$note->comment_date));
+						<?php if (empty($element->progressnotes)) {?>
+							<tr>
+								<td colspan="2">
+									No notes have been entered
+								</td>
+							</tr>
+						<?php } else {
+							foreach ($element->progressnotes as $note) {
+								$this->renderPartial('_progress_notes_row',array('note' => $note, 'edit' => false))?>
+							<?php }
 						}?>
-					<?php }?>
 					</tbody>
 				</table>
 			</div>

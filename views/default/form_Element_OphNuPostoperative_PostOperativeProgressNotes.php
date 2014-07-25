@@ -24,36 +24,86 @@
 			<div class="large-9 column end">
 				<table class="grid progress-notes">
 					<thead>
-					<tr>
-						<th>Time</th>
-						<th>Notes</th>
-						<th>Actions</th>
-					</tr>
+						<tr>
+							<th class="dateTime">Date/time</th>
+							<th>Notes</th>
+							<th class="actions">Actions</th>
+						</tr>
 					</thead>
 					<tbody>
-					<tr class="no-comments"<?php if (!empty($element->progressnotes)) {?> style="display: none"<?php }?>>
-						<td class="no-notes" colspan="2">
-							No notes have been entered
-						</td>
-					</tr>
-					<?php
-					if (!empty($element->progressnotes)) {?>
-						<?php foreach ($element->progressnotes as $note) {
-						$this->renderPartial('_progress_notes_row',array('id'=>$note->id,'note'=>$note->comment,'full_time'=>$note->comment_date, 'edit'=>true));
-						}?>
-					<?php }?>
+						<tr class="no-comments"<?php if (!empty($element->progressnotes)) {?> style="display: none"<?php }?>>
+							<td class="no-notes" colspan="2">
+								No notes have been entered
+							</td>
+						</tr>
+						<?php if (!empty($element->progressnotes)) {?>
+							<?php foreach ($element->progressnotes as $i => $note) {
+								$this->renderPartial('_progress_notes_row',array('edit' => true, 'note' => $note, 'i' => $i))?>
+							<?php }?>
+						<?php }?>
 					</tbody>
 				</table>
 			</div>
 		</div>
-		<div class="row field-row">
-			<div class="large-3 column"><label></label></div>
-			<div class="large-9 column end new-note-form">
-				<?php echo CHtml::textArea('new_progress_note')?>
-
+		<div class="addProgressNoteDiv" style="display: none">
+			<input type="hidden" class="progressNoteEditItem" value="" />
+			<div class="large-3 column">
+				<label></label>
+			</div>
+			<div class="large-9 column end">
+				<div class="row field-row">
+					<div class="large-2 column progressNoteLabel">
+						<label>Date/time:</label>
+					</div>
+					<div class="large-5 column end">
+						<?php
+						$this->widget('zii.widgets.jui.CJuiDatePicker',array(
+							'name' => 'comment_date',
+							'options' => array(
+								'showAnim' => 'fold',
+								'dateFormat' => Helper::NHS_DATE_FORMAT_JS,
+							),
+							'htmlOptions' => array(
+								'class' => 'progressNoteTimestamp',
+							),
+						))?>
+						<?php
+						$this->widget('application.widgets.TimePicker', array(
+							'name' => 'time',
+							'htmlOptions' => array('nowrapper' => true, 'class' => 'progressNoteTime'),
+						))?>
+						<?php echo EventAction::button('Now', 'now', array('level' => 'save'),array('class' => 'progressNoteTimeNow'))->toHtml()?>
+					</div>
+				</div>
+				<div class="row field-row">
+					<div class="large-2 column progressNoteLabel">
+						<label>Note:</label>
+					</div>
+					<div class="large-5 column end">
+						<?php echo CHtml::textArea('progress_note','')?>
+					</div>
+				</div>
+				<div class="row field-row progressNoteErrorsDiv" style="display: none">
+					<div class="large-2 column">
+						<label></label>
+					</div>
+					<div class="large-9 column end">
+						<div class="alert-box alert with-icon">
+							<p>Please fix the following input errors:</p>
+							<ul class="progressNoteErrors">
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="row field-row">
+					<div class="large-9 column end">
+						<?php echo EventAction::button('Save', 'save', array('level' => 'save'),array('class' => 'saveProgressNote'))->toHtml()?>
+						<?php echo EventAction::button('Cancel', 'cancel', array(),array('class' => 'small warning primary cancelProgressNote'))->toHtml()?>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="row field-row">
+		<div class="row field-row addNoteButtonDiv">
 			<div class="large-3 column"><label></label></div>
 			<div class="large-9 column end">
 				<button type="submit" class="secondary small add-note">Add Note</button>

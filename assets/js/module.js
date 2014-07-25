@@ -64,32 +64,6 @@ $(document).ready(function() {
 		});
 	};
 
-
-	$('.add-note').click(function() {
-		event.preventDefault();
-		var div=$('.progress-notes tbody');
-		if($('#new_progress_note').val()=='') {return;}
-		$.ajax({
-			'type': 'POST',
-			'data': $('#new_progress_note').serialize()+"&YII_CSRF_TOKEN="+YII_CSRF_TOKEN,
-			'url': baseUrl+'/OphNuPostoperative/default/addProgressNote',
-			'success': function(html) {
-			$('.no-notes').hide();
-			div.append(html);
-				$('.progress-notes tbody tr.no-notes').hide();
-				$('#new_progress_note').val('');
-			}
-		});
-	});
-
-	$('.remove-progress-notes-row').live('click',function() {
-		event.preventDefault();
-		$(this).closest('.progress-notes-row').remove();
-		if (!$('.progress-notes-row').length > 0){
-			$('.no-notes').show();
-		}
-	});
-
 	$('.timeNow').click(function(e) {
 		e.preventDefault();
 
@@ -206,6 +180,122 @@ $(document).ready(function() {
 			$('input[type="text"][name="Element_OphNuPostoperative_Vitals[glucose_level]"]').removeAttr('disabled');
 		}
 	});
+
+	$('.add-note').click(function(e) {
+		e.preventDefault();
+
+		$('.progressNoteTimeNow').click();
+		$('#progress_note').val('');
+		$('.progressNoteEditItem').val('');
+
+		$('.addProgressNoteDiv').slideDown('fast',function() {
+			$('.addNoteButtonDiv').slideUp('fast',function() {
+				$('#progress_note').focus();
+			});
+		});
+	});
+
+	$('.progressNoteTimeNow').click(function(e) {
+		e.preventDefault();
+
+		var d = new Date;
+
+		var h = withLeadingZero(d.getHours());
+		var m = withLeadingZero(d.getMinutes());
+		var s = withLeadingZero(d.getSeconds());
+
+		$('.progressNoteTimestamp').val($.datepicker.formatDate('d M yy',d));
+		$('.progressNoteTime').val(h+':'+m);
+		$('#progress_note').focus();
+	});
+
+	$('.cancelProgressNote').click(function(e) {
+		e.preventDefault();
+
+		$('.addProgressNoteDiv').slideUp('fast',function() {
+			$('.addNoteButtonDiv').slideDown('fast');
+		});
+	});
+
+	$('.saveProgressNote').click(function(e) {
+		e.preventDefault();
+
+		$('.progressNoteErrorsDiv').hide();
+
+		if ($('.progressNoteEditItem').val() == '') {
+			var i = 0;
+
+			$('.progress-notes tbody').children('tr').map(function() {
+				if (parseInt($(this).data('i')) >= parseInt(i)) {
+					i = (parseInt($(this).data('i')) + 1).toString();
+				}
+			});
+		} else {
+			var i = $('.progressNoteEditItem').val();
+		}
+
+		$.ajax({
+			'type': 'POST',
+			'url': baseUrl+'/OphNuPostoperative/default/validateProgressNote',
+			'data': 'YII_CSRF_TOKEN='+YII_CSRF_TOKEN+'&comment_date='+$('.progressNoteTimestamp').val()+'&time='+$('.progressNoteTime').val()+'&comment='+$('#progress_note').val()+'&i='+i,
+			'dataType': 'json',
+			'success': function(errors) {
+				if (typeof(errors['row']) != 'undefined') {
+					if ($('.progressNoteEditItem').val() != '') {
+						$('tr.progress-notes-row[data-i="' + $('.progressNoteEditItem').val() + '"]').replaceWith(errors['row']);
+					} else {
+						$('.progress-notes tbody').append(errors['row']);
+						$('.progress-notes tbody').children('tr:first').hide();
+					}
+
+					$('.addProgressNoteDiv').slideUp('fast',function() {
+						$('.addNoteButtonDiv').slideDown('fast');
+					});
+				} else {
+					$('.progressNoteErrors').html('');
+
+					for (var i in errors) {
+						$('.progressNoteErrors').append('<li>' + errors[i] + '</li>');
+					}
+
+					$('.progressNoteErrorsDiv').show();
+				}
+			}
+		});
+	});
+
+	$('.removeProgressNote').die('click').live('click',function(e) {
+		e.preventDefault();
+		var table = $(this).closest('table');
+
+		if ($('.progressNoteEditItem').val() != '' && $(this).closest('tr').data('i') == $('.progressNoteEditItem').val()) {
+			$('.addProgressNoteDiv').slideUp('fast',function() {
+				$('.addNoteButtonDiv').slideDown('fast');
+			});
+		}
+
+		$(this).closest('tr').remove();
+
+		if (table.children('tbody').children('tr').length == 1) {
+			table.children('tbody').children('tr').show();
+		}
+	});
+
+	$('.editProgressNote').die('click').live('click',function(e) {
+		e.preventDefault();
+
+		$('.progressNoteEditItem').val($(this).closest('tr').data('i'));
+
+		$('.progressNoteTimestamp').val($(this).closest('tr').data('date'));
+		$('.progressNoteTime').val($(this).closest('tr').data('time'));
+		$('#progress_note').val($(this).closest('tr').data('comment'));
+
+		$('.addProgressNoteDiv').slideDown('fast',function() {
+			$('.addNoteButtonDiv').slideUp('fast',function() {
+				$('#progress_note').focus();
+			});
+		});
+	});
 });
 
 function ucfirst(str) { str += ''; var f = str.charAt(0).toUpperCase(); return f + str.substr(1); }
@@ -232,4 +322,13 @@ function OphNuPostoperative_update_times(start_time)
 			}
 		}
 	});
+}
+
+function withLeadingZero(value)
+{
+	value = value.toString();
+	if (value.length <2) {
+		return '0'+value;
+	}
+	return value;
 }

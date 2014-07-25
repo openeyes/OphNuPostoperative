@@ -4,7 +4,7 @@ class DefaultController extends BaseEventTypeController
 {
 	static protected $action_types = array(
 		'dataTimes' => self::ACTION_TYPE_FORM,
-		'addProgressNote' => self::ACTION_TYPE_FORM,
+		'validateProgressNote' => self::ACTION_TYPE_FORM,
 		'validateVital' => self::ACTION_TYPE_FORM,
 	);
 
@@ -26,16 +26,6 @@ class DefaultController extends BaseEventTypeController
 	public function actionPrint($id)
 	{
 		parent::actionPrint($id);
-	}
-
-	public function actionAddProgressNote()
-	{
-		$this->renderPartial('_progress_notes_row',array(
-				'id'=>'',
-				'full_time'=> date('Y-m-d H:i:s'),
-				'note'=>$_POST['new_progress_note'],
-				'edit'=>true,
-		));
 	}
 
 	/**
@@ -111,16 +101,6 @@ class DefaultController extends BaseEventTypeController
 			}
 
 			$element->medications = $medications;
-		}
-	}
-
-	protected function saveComplexAttributes_Element_OphNuPostoperative_PostOperativeProgressNotes($element, $data, $index)
-	{
-		if(empty($data['progress_notes_ids'])) {
-		$element->updateProgressNotes();
-		}
-		else{
-			$element->updateProgressNotes($data['progress_notes_ids'],$data['progress_notes_time'],$data['progress_notes_note']);
 		}
 	}
 
@@ -220,5 +200,68 @@ class DefaultController extends BaseEventTypeController
 		}
 
 		OphNuPostoperative_Vital::model()->deleteAll($criteria);
+	}
+
+	public function actionValidateProgressNote()
+	{
+		$note = new OphNuPostoperative_PostOperative_ProgressNotes;
+		$note->comment_date = date('Y-m-d',strtotime($_POST['comment_date'])).' '.$_POST['time'].':00';
+		$note->comment = $_POST['comment'];
+
+		$errors = array();
+
+		if (!$note->validate()) {
+			foreach ($note->errors as $error) {
+				$errors[] = $error[0];
+			}
+		}
+
+		if (empty($errors)) {
+			$errors['row'] = $this->renderPartial('_progress_notes_row',array('edit' => true, 'note' => $note, 'i' => (integer)$_POST['i']),true);
+		}
+
+		echo json_encode($errors);
+	}
+
+	protected function setComplexAttributes_Element_OphNuPostoperative_PostOperativeProgressNotes($element, $data, $index)
+	{
+		$notes = array();
+
+		if (!empty($data['OphNuPostoperative_PostOperative_ProgressNotes']['comment_date'])) {
+			foreach ($data['OphNuPostoperative_PostOperative_ProgressNotes']['comment_date'] as $i => $comment_date) {
+				$note = new OphNuPostoperative_PostOperative_ProgressNotes;
+				$note->comment_date = $comment_date;
+				$note->comment = $data['OphNuPostoperative_PostOperative_ProgressNotes']['comment'][$i];
+
+				$notes[] = $note;
+			}
+		}
+
+		$element->progressnotes = $notes;
+	}
+
+	protected function saveComplexAttributes_Element_OphNuPostoperative_PostOperativeProgressNotes($element, $data, $index)
+	{
+		$ids = array();
+
+		foreach ($element->progressnotes as $note) {
+			$note->element_id = $element->id;
+
+			if (!$note->save()) {
+				throw new Exception("Unable to save progress note: ".print_r($note->errors,true));
+			}
+
+			$ids[] = $note->id;
+		}
+
+		$criteria = new CDbCriteria;
+		$criteria->addCondition('element_id = :element_id');
+		$criteria->params[':element_id'] = $element->id;
+
+		if (!empty($ids)) {
+			$criteria->addNotInCondition('id',$ids);
+		}
+
+		OphNuPostoperative_PostOperative_ProgressNotes::model()->deleteAll($criteria);
 	}
 }
