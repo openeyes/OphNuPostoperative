@@ -106,7 +106,7 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 			'skins_assignment' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Skin_Assignment', 'element_id'),
 			'obs' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Obs', 'ob_id', 'through' => 'obs_assignment'),
 			'obs_assignment' => array(self::HAS_MANY, 'OphNuPostoperative_PostOperative_Obs_Assignment', 'element_id'),
-			'dressing_condition' => array(self::BELONGS_TO, 'OphNuPostoperative_PostOperative_Dressing_condition', 'dressing_condition_id'),
+			'dressing_condition' => array(self::BELONGS_TO, 'OphNuPostoperative_PostOperative_Dressing_Condition', 'dressing_condition_id'),
 			'belongings_returned' => array(self::BELONGS_TO, 'OphNuPostoperative_PostOperative_Belongings_Returned', 'belongings_returned_id'),
 		);
 	}
