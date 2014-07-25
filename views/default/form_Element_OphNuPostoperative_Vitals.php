@@ -65,52 +65,51 @@
 			'add_button_text' => 'Add vital',
 			'use_last_button_text' => 'Input last recorded vital signs',
 		))?>
-			<div id="div_Element_OphNuPostoperative_Vitals_glucose_level" class="row field-row">
-				<div class="large-3 column">
-					<label for="Element_OphNuPostoperative_Vitals_glucose_level">
-						<?php echo $element->getAttributeLabel('glucose_level')?>:
-					</label>
-				</div>
-				<div class="large-3 column end">
-					<?php echo $form->textField($element,'glucose_level',array('nowrapper' => true, 'disabled' => $element->glucose_level_na),array(),array('label' => 3, 'field' => 1, 'append-text' => 1))?>
-					<?php echo $form->checkBox($element,'glucose_level_na',array('nowrapper' => true))?>
-				</div>
+		<div id="div_Element_OphNuPostoperative_Vitals_glucose_level" class="row field-row">
+			<div class="large-3 column">
+				<label for="Element_OphNuPostoperative_Vitals_glucose_level">
+					<?php echo $element->getAttributeLabel('glucose_level')?>:
+				</label>
 			</div>
-			<?php echo $form->textField($element, 'nausea_vomiting', array(), array(), array('label' => 3, 'field' => 4))?>
-			<div id="div_Element_OphNuPostoperative_Vitals_blood_loss" class="row field-row">
-				<div class="large-3 column">
-					<label for="Element_OphNuPostoperative_Vitals_blood_loss">
-						<?php echo $element->getAttributeLabel('blood_loss')?>:
-					</label>
-				</div>
-				<div class="large-2 column end">
-					<?php echo $form->textField($element,'blood_loss',array('nowrapper' => true),array(),array('label' => 3, 'field' => 1, 'append-text' => 1))?>
-					<span class="metric">mL</span>
-				</div>
+			<div class="large-3 column end">
+				<?php echo $form->textField($element,'glucose_level',array('nowrapper' => true, 'disabled' => $element->glucose_level_na),array(),array('label' => 3, 'field' => 1, 'append-text' => 1))?>
+				<?php echo $form->checkBox($element,'glucose_level_na',array('nowrapper' => true))?>
 			</div>
-			<div id="div_Element_OphNuPostoperative_Vitals_total_fluid_intake" class="row field-row">
-				<div class="large-3 column">
-					<label for="Element_OphNuPostoperative_Vitals_total_fluid_intake">
-						<?php echo $element->getAttributeLabel('total_fluid_intake')?>:
-					</label>
-				</div>
-				<div class="large-2 column end">
-					<?php echo $form->textField($element,'total_fluid_intake',array('nowrapper' => true),array(),array('label' => 3, 'field' => 1, 'append-text' => 1))?>
-					<span class="metric">mL</span>
-				</div>
-			</div>
-			<div id="div_Element_OphNuPostoperative_Vitals_total_fluid_outtake" class="row field-row">
-				<div class="large-3 column">
-					<label for="Element_OphNuPostoperative_Vitals_total_fluid_outtake">	
-						<?php echo $element->getAttributeLabel('total_fluid_outtake')?>:
-					</label>
-				</div>
-				<div class="large-2 column end">
-					<?php echo $form->textField($element,'total_fluid_outtake',array('nowrapper' => true),array(),array('label' => 3, 'field' => 1, 'append-text' => 1))?>
-					<span class="metric">mL</span>
-				</div>
-			</div>
-			<?php echo $form->dropDownList($element, 'avpu_score_id', CHtml::listData(OphNuPostoperative_Vitals_AVPU_Score::model()->findAll(array('order'=>'display_order asc')),'id','name'), array(), false, array('label' => 3, 'field' => 2))?>
-			<?php echo $form->dropDownList($element, 'mews_score', array(0,1,2,3,4,5), array(), false, array('label' => 3, 'field' => 2))?>
 		</div>
+		<?php echo $form->textField($element, 'nausea_vomiting', array(), array(), array('label' => 3, 'field' => 4))?>
+		<div id="div_Element_OphNuPostoperative_Vitals_blood_loss" class="row field-row">
+			<div class="large-3 column">
+				<label for="Element_OphNuPostoperative_Vitals_blood_loss">
+					<?php echo $element->getAttributeLabel('blood_loss')?>:
+				</label>
+			</div>
+			<div class="large-2 column end">
+				<?php echo $form->textField($element,'blood_loss',array('nowrapper' => true),array(),array('label' => 3, 'field' => 1, 'append-text' => 1))?>
+				<span class="metric">mL</span>
+			</div>
+		</div>
+		<div id="div_Element_OphNuPostoperative_Vitals_total_fluid_intake" class="row field-row">
+			<div class="large-3 column">
+				<label for="Element_OphNuPostoperative_Vitals_total_fluid_intake">
+					<?php echo $element->getAttributeLabel('total_fluid_intake')?>:
+				</label>
+			</div>
+			<div class="large-2 column end">
+				<?php echo $form->textField($element,'total_fluid_intake',array('nowrapper' => true),array(),array('label' => 3, 'field' => 1, 'append-text' => 1))?>
+				<span class="metric">mL</span>
+			</div>
+		</div>
+		<div id="div_Element_OphNuPostoperative_Vitals_total_fluid_outtake" class="row field-row">
+			<div class="large-3 column">
+				<label for="Element_OphNuPostoperative_Vitals_total_fluid_outtake">	
+					<?php echo $element->getAttributeLabel('total_fluid_outtake')?>:
+				</label>
+			</div>
+			<div class="large-2 column end">
+				<?php echo $form->textField($element,'total_fluid_outtake',array('nowrapper' => true),array(),array('label' => 3, 'field' => 1, 'append-text' => 1))?>
+				<span class="metric">mL</span>
+			</div>
+		</div>
+		<?php echo $form->dropDownList($element, 'avpu_score_id', CHtml::listData(OphNuPostoperative_Vitals_AVPU_Score::model()->findAll(array('order'=>'display_order asc')),'id','name'), array(), false, array('label' => 3, 'field' => 2))?>
+		<?php echo $form->dropDownList($element, 'mews_score', array(0,1,2,3,4,5), array(), false, array('label' => 3, 'field' => 2))?>
 	</div>
