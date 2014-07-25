@@ -95,8 +95,8 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 	public function getAttributeSuffix($attribute)
 	{
 		$suffixes = array(
-			'hr_pulse' => 'mmHg',
-			'blood_pressure' => 'bpm',
+			'hr_pulse' => 'bpm',
+			'blood_pressure' => 'mmHg',
 			'rr' => 'insp/min',
 			'spo2' => '%',
 			'o2' => 'L/min',

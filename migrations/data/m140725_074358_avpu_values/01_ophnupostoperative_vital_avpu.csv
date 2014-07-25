@@ -1,0 +1,5 @@
+id,name,display_order
+1,Patient is awake,1
+2,Patient responds to verbal stimulation,2
+3,Patient responds to painful stimulation,3
+4,Patient is completely unresponsive,4
