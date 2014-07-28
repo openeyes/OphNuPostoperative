@@ -101,8 +101,6 @@ class m140723_165012_orb244 extends OEMigration
 		)->execute();
 
 		//re-add foreign keys
-		//addForeignKey(string $name, string $table, string $columns, string $refTable,
-		// string $refColumns, string $delete=NULL, string $update=NULL)
 
 		$this->addForeignKey('ophnupostoperative_patient_translator_present_fk', 'et_ophnupostoperative_patient',
 		'translator_present_id', 'ophnupostoperative_patient_translator_present', 'id');
