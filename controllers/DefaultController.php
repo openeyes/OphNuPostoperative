@@ -53,7 +53,12 @@ class DefaultController extends BaseEventTypeController
 			}
 
 			$element->allergies = $allergies;
+		}
+	}
 
+	protected function setElementDefaultOptions_Element_OphNuPostoperative_HandOff($element, $action)
+	{
+		if ($action == 'create') {
 			$ts = time();
 
 			while (date('i',$ts) != '00' && date('i',$ts) != '30') {
