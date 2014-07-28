@@ -18,17 +18,13 @@
  */
 
 /**
- * This is the model class for table "et_ophnupostoperative_patient".
+ * This is the model class for table "et_ophnupostoperative_patientidentification".
  *
  * The followings are the available columns in table:
  * @property string $id
  * @property integer $event_id
  * @property integer $patient_id_verified_with_two_identifiers
  * @property integer $allergies_verified
- * @property string $patient_enters_recovery_room
- * @property integer $hand_off_from_id
- * @property integer $hand_off_to_id
- * @property integer $handing_off_from_id
  * @property integer $translator_present_id
  * @property string $name_of_translator
  *
@@ -39,13 +35,10 @@
  * @property Event $event
  * @property User $user
  * @property User $usermodified
- * @property OphNuPostoperative_Patient_HandOffFrom $hand_off_from
- * @property OphNuPostoperative_Patient_HandOffTo $hand_off_to
- * @property OphNuPostoperative_Patient_HandingOffFrom $handing_off_from
  * @property OphNuPostoperative_Patient_TranslatorPresent $translator_present
  */
 
-class Element_OphNuPostoperative_Handoff	extends  BaseEventTypeElement
+class Element_OphNuPostoperative_PatientIdentification	extends  BaseEventTypeElement
 {
 	protected $auto_update_relations = true;
 
@@ -63,7 +56,7 @@ class Element_OphNuPostoperative_Handoff	extends  BaseEventTypeElement
 	 */
 	public function tableName()
 	{
-		return 'et_ophnupostoperative_handoff';
+		return 'et_ophnupostoperative_patientidentification';
 	}
 
 	/**
@@ -72,8 +65,9 @@ class Element_OphNuPostoperative_Handoff	extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, patient_id_verified_with_two_identifiers, allergies_verified, patient_enters_recovery_room, hand_off_from_id, hand_off_to_id, handing_off_from_id, translator_present_id, name_of_translator, patient_has_no_allergies, identifiers', 'safe'),
-			array('id, event_id, patient_id_verified_with_two_identifiers, allergies_verified, patient_enters_recovery_room, hand_off_from_id, hand_off_to_id, handing_off_from_id, translator_present_id, name_of_translator, ', 'safe', 'on' => 'search'),
+			array('event_id, patient_id_verified_with_two_identifiers, allergies_verified, translator_present_id, name_of_translator, patient_has_no_allergies', 'safe'),
+			array('id, event_id, patient_id_verified_with_two_identifiers, allergies_verified, translator_present_id, name_of_translator, ', 'safe', 'on' => 'search'),
+			array('translator_present_id', 'required')
 		);
 	}
 
@@ -84,17 +78,11 @@ class Element_OphNuPostoperative_Handoff	extends  BaseEventTypeElement
 	{
 		return array(
 			'element_type' => array(self::HAS_ONE, 'ElementType', 'id','on' => "element_type.class_name='".get_class($this)."'"),
-			'eventType' => array(self::BELONGS_TO, 'EventType', 'event_type_id'),
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'hand_off_from' => array(self::BELONGS_TO, 'User', 'hand_off_from_id'),
-			'hand_off_to' => array(self::BELONGS_TO, 'User', 'hand_off_to_id'),
-			'handing_off_from' => array(self::BELONGS_TO, 'User', 'handing_off_from_id'),
-			//'translator_present' => array(self::BELONGS_TO, 'OphNuPostoperative_Patient_TranslatorPresent', 'translator_present_id'),
-			//'allergies' => array(self::HAS_MANY, 'OphNuPostoperative_Patient_Allergy', 'element_id'),
-			//'identifiers' => array(self::HAS_MANY, 'OphNuPostoperative_Patient_Identifier', 'identifier_id', 'through' => 'identifier_assignment'),
-			//'identifier_assignment' => array(self::HAS_MANY, 'OphNuPostoperative_Patient_Identifier_Assignment', 'element_id'),
+			'translator_present' => array(self::BELONGS_TO, 'OphNuPostoperative_Patient_TranslatorPresent', 'translator_present_id'),
+			'allergies' => array(self::HAS_MANY, 'OphNuPostoperative_Patient_Allergy', 'element_id'),
 		);
 	}
 
@@ -106,15 +94,11 @@ class Element_OphNuPostoperative_Handoff	extends  BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			//'patient_id_verified_with_two_identifiers' => 'Patient ID / wristband verified with two identifiers',
-			//'allergies_verified' => 'Allergies verified',
-			'patient_enters_recovery_room' => 'Time patient enters recovery room',
-			'hand_off_from_id' => 'Anaesthesia hand off from',
-			'hand_off_to_id' => 'Hand off to',
-			'handing_off_from_id' => 'Nursing hand off from',
-			//'translator_present_id' => 'Translator present',
-			//'name_of_translator' => 'Name of translator',
-			//'patient_has_no_allergies' => 'Confirm that the patient has no allergies',
+			'patient_id_verified_with_two_identifiers' => 'Patient ID / wristband verified with two identifiers',
+			'allergies_verified' => 'Allergies verified',
+			'translator_present_id' => 'Translator present',
+			'name_of_translator' => 'Name of translator',
+			'patient_has_no_allergies' => 'Confirm that the patient has no allergies',
 		);
 	}
 
@@ -128,21 +112,17 @@ class Element_OphNuPostoperative_Handoff	extends  BaseEventTypeElement
 
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
-		//$criteria->compare('patient_id_verified_with_two_identifiers', $this->patient_id_verified_with_two_identifiers);
-		//$criteria->compare('allergies_verified', $this->allergies_verified);
-		$criteria->compare('patient_enters_recovery_room', $this->patient_enters_recovery_room);
-		$criteria->compare('hand_off_from_id', $this->hand_off_from_id);
-		$criteria->compare('hand_off_to_id', $this->hand_off_to_id);
-		$criteria->compare('handing_off_from_id', $this->handing_off_from_id);
-		//$criteria->compare('translator_present_id', $this->translator_present_id);
-		//$criteria->compare('name_of_translator', $this->name_of_translator);
+		$criteria->compare('patient_id_verified_with_two_identifiers', $this->patient_id_verified_with_two_identifiers);
+		$criteria->compare('allergies_verified', $this->allergies_verified);
+		$criteria->compare('translator_present_id', $this->translator_present_id);
+		$criteria->compare('name_of_translator', $this->name_of_translator);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
 	}
 
-	/*public function beforeValidate()
+	public function beforeValidate()
 	{
 		if ($this->translator_present && $this->translator_present->name == 'Yes') {
 			if (!$this->name_of_translator) {
@@ -150,11 +130,11 @@ class Element_OphNuPostoperative_Handoff	extends  BaseEventTypeElement
 			}
 		}
 
-		if ($this->patient_id_verified_with_two_identifiers) {
+		/*if ($this->patient_id_verified_with_two_identifiers) {
 			if (count($this->identifiers) != 2) {
 				$this->addError('identifiers','Please select exactly 2 identifiers');
 			}
-		}
+		}*/
 
 		return parent::beforeValidate();
 	}
@@ -198,6 +178,6 @@ class Element_OphNuPostoperative_Handoff	extends  BaseEventTypeElement
 		!empty($ids) && $criteria->addNotInCondition('id',$ids);
 
 		OphNuPostoperative_Patient_Allergy::model()->deleteAll($criteria);
-	}*/
+	}
 }
 ?>

@@ -18,16 +18,16 @@
  */
 ?>
 	<div class="element-fields">
-		<?php echo $form->checkBox($element, 'patient_id_verified_with_two_identifiers', array('text-align' => 'right','class' => 'linked-fields', 'data-linked-fields' => 'identifiers', 'data-linked-values' => '1'), array('label' => 3, 'field' => 4))?>
-		<?php echo $form->multiSelectList($element, 'identifiers', 'identifiers', 'identifier_id', CHtml::listData(OphNuPostoperative_Patient_Identifier::model()->findAll(array('order'=>'display_order asc')),'id','name'), array(), array('empty' => '- Please select -', 'label' => 'Two identifiers'), !$element->patient_id_verified_with_two_identifiers, false, null, false, false, array('label' => 3, 'field' => 4))?>
-		<?php $form->widget('application.widgets.AllergySelection', array(
+		<?php //echo $form->checkBox($element, 'patient_id_verified_with_two_identifiers', array('text-align' => 'right','class' => 'linked-fields', 'data-linked-fields' => 'identifiers', 'data-linked-values' => '1'), array('label' => 3, 'field' => 4))?>
+		<?php //echo $form->multiSelectList($element, 'identifiers', 'identifiers', 'identifier_id', CHtml::listData(OphNuPostoperative_Patient_Identifier::model()->findAll(array('order'=>'display_order asc')),'id','name'), array(), array('empty' => '- Please select -', 'label' => 'Two identifiers'), !$element->patient_id_verified_with_two_identifiers, false, null, false, false, array('label' => 3, 'field' => 4))?>
+		<?php /*$form->widget('application.widgets.AllergySelection', array(
 			'form' => $form,
 			'element' => $element,
 			'relation' => 'allergies',
 			'input_name' => 'allergies',
 			'no_allergies_field' => 'patient_has_no_allergies',
-		))?>
-		<?php echo $form->checkBox($element, 'allergies_verified', array('text-align' => 'right'), array('label' => 3, 'field' => 4))?>
+		))*/ ?>
+		<?php //echo $form->checkBox($element, 'allergies_verified', array('text-align' => 'right'), array('label' => 3, 'field' => 4))?>
 		<div id="div_Element_OphNuPostoperative_Handoff_patient_enters_recovery_room" class="row field-row">
 			<div class="large-3 column">
 				<label for="Element_OphNuPostoperative_Handoff_patient_enters_recovery_room"><?php echo $element->getAttributeLabel('patient_enters_recovery_room')?>:</label>
@@ -40,6 +40,6 @@
 		<?php echo $form->dropDownList($element, 'hand_off_from_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 4))?>
 		<?php echo $form->dropDownList($element, 'hand_off_to_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 4))?>
 		<?php echo $form->dropDownList($element, 'handing_off_from_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 4))?>
-		<?php echo $form->radioButtons($element, 'translator_present_id', CHtml::listData(OphNuPostoperative_Patient_TranslatorPresent::model()->findAll(array('order' => 'display_order asc')),'id','name'), null, false, false, false, false, array('class'=>'linked-fields','data-linked-fields'=>'name_of_translator','data-linked-values'=>'Yes'), array('label' => 3, 'field' => 4))?>
-		<?php echo $form->textField($element, 'name_of_translator', array('hide' => !$element->translator_present || $element->translator_present->name != 'Yes'), array(), array('label' => 3, 'field' => 4))?>
+		<?php //echo $form->radioButtons($element, 'translator_present_id', CHtml::listData(OphNuPostoperative_Patient_TranslatorPresent::model()->findAll(array('order' => 'display_order asc')),'id','name'), null, false, false, false, false, array('class'=>'linked-fields','data-linked-fields'=>'name_of_translator','data-linked-values'=>'Yes'), array('label' => 3, 'field' => 4))?>
+		<?php //echo $form->textField($element, 'name_of_translator', array('hide' => !$element->translator_present || $element->translator_present->name != 'Yes'), array(), array('label' => 3, 'field' => 4))?>
 	</div>
