@@ -29,35 +29,17 @@
 				array(
 					'width' => 5,
 					'fields' => array(
-						array(
-							'field' => 'hr_pulse',
-							'type' => 'text',
-						),
-						array(
-							'field' => 'blood_pressure',
-							'type' => 'text',
-						),
-						array(
-							'field' => 'rr',
-							'type' => 'text',
-						),
+						array('field' => 'hr_pulse','type' => 'text'),
+						array('field' => 'blood_pressure','type' => 'text'),
+						array('field' => 'rr','type' => 'text'),
 					),
 				),
 				array(
 					'width' => 5,
 					'fields' => array(
-						array(
-							'field' => 'spo2',
-							'type' => 'text',
-						),
-						array(
-							'field' => 'o2',
-							'type' => 'text',
-						),
-						array(
-							'field' => 'pain_score',
-							'type' => 'text',
-						),
+						array('field' => 'spo2','type' => 'text'),
+						array('field' => 'o2','type' => 'text'),
+						array('field' => 'pain_score','type' => 'text'),
 					),
 				),
 			),
