@@ -39,6 +39,11 @@ class m140729_113212_orb244 extends OEMigration
 		);
 		$this->versionExistingTable('ophnupostoperative_patient_identifier');
 
+		$this->insert('ophnupostoperative_patient_identifier',array('name'=>'DOB', 'display_order' => 1));
+		$this->insert('ophnupostoperative_patient_identifier',array('name'=>'Patient name', 'display_order' => 2));
+		$this->insert('ophnupostoperative_patient_identifier',array('name'=>'Parent/Caregiver', 'display_order' => 3));
+		$this->insert('ophnupostoperative_patient_identifier',array('name'=>'Chart number', 'display_order' => 4));
+
 		$this->createOETable(
 			'ophnupostoperative_patient_identifier_assignment',
 			array(
