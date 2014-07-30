@@ -134,7 +134,7 @@ class Element_OphNuPostoperative_PostOperative  extends  BaseEventTypeElement
 			'obs' => 'Post-op observations',
 			'o_comments' => 'Other post-op observations',
 			'iv_discontinued' => 'IV discontinued',
-			'dressing_in_place' => 'Dressing in place',
+			'dressing_in_place' => 'Eye dressing in place',
 			'dressing_condition_id' => 'Dressing condition',
 			'ecg_dots_removed' => 'ECG dots removed',
 		);
