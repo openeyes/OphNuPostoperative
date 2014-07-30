@@ -23,7 +23,7 @@
  * The followings are the available columns in table:
  * @property string $id
  * @property integer $event_id
- * @property integer $patient_id_verified_with_two_identifiers
+ * @property integer $patient_id_verified
  * @property integer $allergies_verified
  * @property string $patient_enters_recovery_room
  * @property integer $hand_off_from_id
@@ -72,8 +72,8 @@ class Element_OphNuPostoperative_Patient	extends  BaseEventTypeElement
 	public function rules()
 	{
 		return array(
-			array('event_id, patient_id_verified_with_two_identifiers, allergies_verified, translator_present_id, name_of_translator, patient_has_no_allergies, identifiers', 'safe'),
-			array('id, event_id, patient_id_verified_with_two_identifiers, allergies_verified, translator_present_id, name_of_translator, ', 'safe', 'on' => 'search'),
+			array('event_id, patient_id_verified, allergies_verified, translator_present_id, name_of_translator, patient_has_no_allergies, identifiers', 'safe'),
+			array('id, event_id, patient_id_verified, allergies_verified, translator_present_id, name_of_translator, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -90,8 +90,6 @@ class Element_OphNuPostoperative_Patient	extends  BaseEventTypeElement
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 			'translator_present' => array(self::BELONGS_TO, 'OphNuPostoperative_Patient_TranslatorPresent', 'translator_present_id'),
 			'allergies' => array(self::HAS_MANY, 'OphNuPostoperative_Patient_Allergy', 'element_id'),
-			'identifiers' => array(self::HAS_MANY, 'OphNuPostoperative_Patient_Identifier', 'identifier_id', 'through' => 'identifier_assignment'),
-			'identifier_assignment' => array(self::HAS_MANY, 'OphNuPostoperative_Patient_Identifier_Assignment', 'element_id'),
 		);
 	}
 
@@ -103,7 +101,7 @@ class Element_OphNuPostoperative_Patient	extends  BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'patient_id_verified_with_two_identifiers' => 'Patient ID / wristband verified with two identifiers',
+			'patient_id_verified' => 'Patient ID verified and ID band applied',
 			'allergies_verified' => 'Allergies verified',
 			'translator_present_id' => 'Translator present',
 			'name_of_translator' => 'Name of translator',
@@ -121,7 +119,7 @@ class Element_OphNuPostoperative_Patient	extends  BaseEventTypeElement
 
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
-		$criteria->compare('patient_id_verified_with_two_identifiers', $this->patient_id_verified_with_two_identifiers);
+		$criteria->compare('patient_id_verified', $this->patient_id_verified_with_two_identifiers);
 		$criteria->compare('allergies_verified', $this->allergies_verified);
 		$criteria->compare('patient_enters_recovery_room', $this->patient_enters_recovery_room);
 		$criteria->compare('hand_off_from_id', $this->hand_off_from_id);
@@ -140,12 +138,6 @@ class Element_OphNuPostoperative_Patient	extends  BaseEventTypeElement
 		if ($this->translator_present && $this->translator_present->name == 'Yes') {
 			if (!$this->name_of_translator) {
 				$this->addError('name_of_translator',$this->getAttributeLabel('name_of_translator').' cannot be blank.');
-			}
-		}
-
-		if ($this->patient_id_verified_with_two_identifiers) {
-			if (count($this->identifiers) != 2) {
-				$this->addError('identifiers','Please select exactly 2 identifiers');
 			}
 		}
 
