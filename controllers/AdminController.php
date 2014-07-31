@@ -19,13 +19,6 @@
 
 class AdminController extends ModuleAdminController
 {
-	public function actionEditPatientIdentifiers()
-	{
-		$this->render('//admin/generic_admin',array(
-			'title' => 'Patient identifiers',
-			'model' => 'OphNuPostoperative_Patient_Identifier',
-		));
-	}
 
 	public function actionEditFallsMobility()
 	{
