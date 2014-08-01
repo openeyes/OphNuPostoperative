@@ -1,6 +1,6 @@
 <?php
 
-class m140801_120427_change_event_type_name extends CDbMigration
+class m140801_120427_change_event_type_name extends OEMigration
 {
 	public function up()
 	{
