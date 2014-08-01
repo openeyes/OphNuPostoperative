@@ -40,22 +40,6 @@ class DefaultController extends BaseEventTypeController
 		return parent::beforeAction($action);
 	}
 
-	protected function setElementDefaultOptions_Element_OphNuPostoperative_Patient($element, $action)
-	{
-		if ($action == 'create') {
-			$allergies = array();
-
-			foreach ($this->patient->allergies as $allergy) {
-				$_allergy = new OphNuPostoperative_Patient_Allergy;
-				$_allergy->allergy_id = $allergy->id;
-
-				$allergies[] = $_allergy;
-			}
-
-			$element->allergies = $allergies;
-		}
-	}
-
 	protected function setElementDefaultOptions_Element_OphNuPostoperative_HandOff($element, $action)
 	{
 		if ($action == 'create') {
@@ -67,27 +51,6 @@ class DefaultController extends BaseEventTypeController
 
 			$element->patient_enters_recovery_room = date('H:i',$ts);
 		}
-	}
-
-	protected function setComplexAttributes_Element_OphNuPostoperative_Patient($element, $data, $index)
-	{
-		$allergies = array();
-
-		if (!empty($data['allergies_allergies'])) {
-			foreach ($data['allergies_allergies'] as $i => $allergy_id) {
-				$allergy = new OphNuPostoperative_Patient_Allergy;
-				$allergy->allergy_id = $allergy_id;
-
-				$allergies[] = $allergy;
-			}
-		}
-
-		$element->allergies = $allergies;
-	}
-
-	protected function saveComplexAttributes_Element_OphNuPostoperative_Patient($element, $data, $index)
-	{
-		$element->updateAllergies(empty($data['allergies_allergies']) ? array() : $data['allergies_allergies']);
 	}
 
 	protected function setElementDefaultOptions_Element_OphNuPostoperative_MedicationAdministration($element, $action)
