@@ -20,7 +20,6 @@
 return array(
 	'params' => array(
 		'admin_menu' => array(
-			'Post-op patient identifiers' => '/OphNuPostoperative/admin/editPatientIdentifiers',
 			'Falls / mobility' => '/OphNuPostoperative/admin/editFallsMobility',
 			'Dental items returned' => '/OphNuPostoperative/admin/editDental',
 			'Hearing items returned' => '/OphNuPostoperative/admin/editHearing',
