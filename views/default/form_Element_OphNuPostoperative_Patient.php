@@ -25,6 +25,12 @@
 			</div>
 			<div class="large-9 column end">
 				<div class="data-value">
+					<?php if (empty($this->patient->allergies)) {?>
+						<?php if ($this->patient->no_allergies_date) {?>
+							This patient has no allergies (confirmed).
+						<?php }else{?>
+							This patient has no allergies (unconfirmed).
+						<?php }?>
 					<?php foreach ($this->patient->allergies as $allergy) {?>
 						<?php echo $allergy->name?><br/>
 					<?php }?>
