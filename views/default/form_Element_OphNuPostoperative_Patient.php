@@ -19,13 +19,18 @@
 ?>
 	<div class="element-fields">
 		<?php echo $form->checkBox($element, 'patient_id_verified', array('text-align' => 'right','class' => 'linked-fields', 'data-linked-fields' => 'identifiers', 'data-linked-values' => '1'), array('label' => 3, 'field' => 4))?>
-		<?php $form->widget('application.widgets.AllergySelection', array(
-			'form' => $form,
-			'element' => $element,
-			'relation' => 'allergies',
-			'input_name' => 'allergies',
-			'no_allergies_field' => 'patient_has_no_allergies',
-		))?>
+		<div class="row field-row">
+			<div class="large-3 column">
+				<label>Allergies:</label>
+			</div>
+			<div class="large-9 column end">
+				<div class="data-value">
+					<?php foreach ($this->patient->allergies as $allergy) {?>
+						<?php echo $allergy->name?><br/>
+					<?php }?>
+				</div>
+			</div>
+		</div>
 		<?php echo $form->checkBox($element, 'allergies_verified', array('text-align' => 'right'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->radioButtons($element, 'translator_present_id', CHtml::listData(OphNuPostoperative_Patient_TranslatorPresent::model()->findAll(array('order' => 'display_order asc')),'id','name'), null, false, false, false, false, array('class'=>'linked-fields','data-linked-fields'=>'name_of_translator','data-linked-values'=>'Yes'), array('label' => 3, 'field' => 4))?>
 		<?php echo $form->textField($element, 'name_of_translator', array('hide' => !$element->translator_present || $element->translator_present->name != 'Yes'), array(), array('label' => 3, 'field' => 4))?>

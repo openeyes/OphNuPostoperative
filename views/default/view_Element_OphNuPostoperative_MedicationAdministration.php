@@ -27,7 +27,7 @@
 		<?php if ($element->medication_administration) {?>
 			<div class="row data-row">
 				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('medication_administration'))?></div></div>
-				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->medication_administration)?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo CFormatter::formatNtext($element->medication_administration)?></div></div>
 			</div>
 		<?php }?>
 	</div>
