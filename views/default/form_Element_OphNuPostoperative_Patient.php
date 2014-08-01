@@ -31,8 +31,10 @@
 						<?php }else{?>
 							This patient has no allergies (unconfirmed).
 						<?php }?>
-					<?php foreach ($this->patient->allergies as $allergy) {?>
-						<?php echo $allergy->name?><br/>
+					<?php }else{?>
+						<?php foreach ($this->patient->allergies as $allergy) {?>
+							<?php echo $allergy->name?><br/>
+						<?php }?>
 					<?php }?>
 				</div>
 			</div>
