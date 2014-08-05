@@ -29,17 +29,17 @@
 				array(
 					'width' => 5,
 					'fields' => array(
-						array('field' => 'hr_pulse','type' => 'text'),
-						array('field' => 'blood_pressure','type' => 'text'),
-						array('field' => 'rr','type' => 'text'),
+						array('field' => 'hr_pulse_m','type' => 'text'),
+						array('field' => 'blood_pressure_m','type' => 'text'),
+						array('field' => 'rr_m','type' => 'text'),
 					),
 				),
 				array(
 					'width' => 5,
 					'fields' => array(
-						array('field' => 'spo2','type' => 'text'),
+						array('field' => 'spo2_m','type' => 'text'),
 						array('field' => 'o2','type' => 'text'),
-						array('field' => 'pain_score','type' => 'text'),
+						array('field' => 'pain_score_m','type' => 'text'),
 					),
 				),
 			),
@@ -54,7 +54,7 @@
 				</label>
 			</div>
 			<div class="large-3 column end">
-				<?php echo $form->textField($element,'glucose_level',array('nowrapper' => true, 'disabled' => $element->glucose_level_na),array(),array('label' => 3, 'field' => 1, 'append-text' => 1))?>
+				<?php echo $form->bloodGlucoseMeasurement($element,array('nowrapper' => true, 'disabled' => $element->glucose_level_na),array('label' => 3, 'field' => 1, 'append-text' => 1))?>
 				<?php echo $form->checkBox($element,'glucose_level_na',array('nowrapper' => true))?>
 			</div>
 		</div>

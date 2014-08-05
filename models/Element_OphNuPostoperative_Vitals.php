@@ -42,6 +42,7 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 	public $reading_items = array();
 	public $drug_items = array();
 	public $gas_items = array();
+	public $auto_update_measurements = true;
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -68,7 +69,7 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('total_fluid_intake, total_fluid_outtake, glucose_level, glucose_level_na, nausea_vomiting, blood_loss, avpu_score_id, mews_score', 'safe'),
+			array('total_fluid_intake, total_fluid_outtake, blood_glucose_m, glucose_level_na, nausea_vomiting, blood_loss, avpu_score_id, mews_score', 'safe'),
 		);
 	}
 
@@ -85,8 +86,9 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'vitals' => array(self::HAS_MANY, 'OphNuPostoperative_Vital', 'element_id'),
+			'vitals' => array(self::HAS_MANY, 'OphNuPostoperative_Vital', 'element_id', 'order' => 'timestamp asc'),
 			'avpu_score' => array(self::BELONGS_TO, 'OphNuPostoperative_Vitals_AVPU_Score', 'avpu_score_id'),
+			'blood_glucose_m' => array(self::BELONGS_TO, 'MeasurementGlucoseLevel', 'blood_glucose_m_id'),
 		);
 	}
 
@@ -133,7 +135,7 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 	public function beforeSave()
 	{
 		if ($this->glucose_level_na) {
-			$this->glucose_level = null;
+			$this->blood_glucose_m = null;
 		}
 
 		return parent::beforeSave();

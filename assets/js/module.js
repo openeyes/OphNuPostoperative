@@ -174,10 +174,10 @@ $(document).ready(function() {
 
 	$('input[type="checkbox"][name="Element_OphNuPostoperative_Vitals[glucose_level_na]"]').click(function(e) {
 		if ($(this).is(':checked')) {
-			$('input[type="text"][name="Element_OphNuPostoperative_Vitals[glucose_level]"]').val('');
-			$('input[type="text"][name="Element_OphNuPostoperative_Vitals[glucose_level]"]').attr('disabled','disabled');
+			$('input[type="text"][name="Element_OphNuPostoperative_Vitals[blood_glucose_m]"]').val('');
+			$('input[type="text"][name="Element_OphNuPostoperative_Vitals[blood_glucose_m]"]').attr('disabled','disabled');
 		} else {
-			$('input[type="text"][name="Element_OphNuPostoperative_Vitals[glucose_level]"]').removeAttr('disabled');
+			$('input[type="text"][name="Element_OphNuPostoperative_Vitals[blood_glucose_m]"]').removeAttr('disabled');
 		}
 	});
 

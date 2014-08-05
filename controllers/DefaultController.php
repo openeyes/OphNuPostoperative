@@ -126,13 +126,16 @@ class DefaultController extends BaseEventTypeController
 	{
 		$vitals = array();
 
-		if (!empty($data['OphNuPostoperative_Vital']['hr_pulse'])) {
-			foreach ($data['OphNuPostoperative_Vital']['hr_pulse'] as $i => $hr_pulse) {
-				$vital = new OphNuPostoperative_Vital;
-				$vital->element_id = $element->id;
-				$vital->hr_pulse = $hr_pulse;
+		if (!empty($data['OphNuPostoperative_Vital']['hr_pulse_m'])) {
+			foreach ($data['OphNuPostoperative_Vital']['hr_pulse_m'] as $i => $hr_pulse) {
+				if (!$data['OphNuPostoperative_Vital']['id'][$i] || !($vital = OphNuPostoperative_Vital::model()->findByPk($data['OphNuPostoperative_Vital']['id'][$i]))) {
+					$vital = new OphNuPostoperative_Vital;
+					$vital->element_id = $element->id;
+				}
 
-				foreach (array('blood_pressure','rr','spo2','o2','pain_score','timestamp') as $field) {
+				$vital->hr_pulse_m = $hr_pulse;
+
+				foreach (array('blood_pressure_m','rr_m','spo2_m','o2','pain_score_m','timestamp') as $field) {
 					$vital->$field = $data['OphNuPostoperative_Vital'][$field][$i];
 				}
 

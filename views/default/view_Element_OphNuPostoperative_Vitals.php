@@ -35,7 +35,7 @@
 			</div>
 			<div class="large-9 column end">
 				<div class="data-value">
-					<?php echo $element->glucose_level_na ? 'N/A' : $element->glucose_level?>
+					<?php echo $element->glucose_level_na ? 'N/A' : $element->blood_glucose_m->glucose_level?>
 				</div>
 			</div>
 		</div>
