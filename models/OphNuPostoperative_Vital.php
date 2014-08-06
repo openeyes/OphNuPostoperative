@@ -95,6 +95,8 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 			'id' => 'ID',
 			'hr_pulse_m' => 'HR / pulse',
 			'blood_pressure_m' => 'Blood pressure',
+			'blood_pressure_m_systolic' => 'Blood pressure (systolic)',
+			'blood_pressure_m_diastolic' => 'Blood pressure (diastolic)',
 			'rr_m' => 'RR',
 			'spo2_m' => 'SpO2',
 			'o2' => 'O2',
