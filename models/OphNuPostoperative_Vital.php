@@ -32,6 +32,8 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 {
 	public $time;
 	public $auto_update_measurements = true;
+	public $blood_pressure_m_systolic;
+	public $blood_pressure_m_diastolic;
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -58,8 +60,8 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('hr_pulse_m, blood_pressure_m, rr_m, spo2_m, o2, pain_score_m, timestamp, time', 'safe'),
-			array('hr_pulse_m, blood_pressure_m, rr_m, spo2_m, o2, pain_score_m, timestamp', 'required'),
+			array('hr_pulse_m, rr_m, spo2_m, o2, pain_score_m, timestamp, time, blood_pressure_m_systolic, blood_pressure_m_diastolic', 'safe'),
+			array('hr_pulse_m, rr_m, spo2_m, o2, pain_score_m, timestamp, blood_pressure_m_systolic, blood_pressure_m_diastolic', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, item_id, offset, value, display_order', 'safe', 'on' => 'search'),
@@ -146,6 +148,6 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 
 	public function getDescription()
 	{
-		return "Pulse: ".$this->hr_pulse_m." mmHh, BP: ".$this->blood_pressure_m." bpm, RR: ".$this->rr_m." insp/min, SpO2: ".$this->spo2_m."%, O2: ".$this->o2." L/min, pain score: ".$this->pain_score_m;
+		return "Pulse: ".$this->hr_pulse_m->getValueText().", BP: ".$this->blood_pressure_m->getValueText().", RR: ".$this->rr_m->getValueText().", SpO2: ".$this->spo2_m->getValueText().", O2: ".$this->o2." L/min, pain score: ".$this->pain_score_m->getValueText();
 	}
 }

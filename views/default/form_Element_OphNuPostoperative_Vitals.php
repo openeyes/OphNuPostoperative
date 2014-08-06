@@ -28,9 +28,10 @@
 			'columns' => array(
 				array(
 					'width' => 5,
+					'field_width' => 5,
 					'fields' => array(
 						array('field' => 'hr_pulse_m','type' => 'text'),
-						array('field' => 'blood_pressure_m','type' => 'text'),
+						array('field' => 'blood_pressure_m','type' => 'blood_pressure'),
 						array('field' => 'rr_m','type' => 'text'),
 					),
 				),

@@ -115,6 +115,11 @@ class DefaultController extends BaseEventTypeController
 		}
 
 		if (empty($errors)) {
+			$vital->blood_pressure_m = array(
+				'bp_systolic' => $vital->blood_pressure_m_systolic,
+				'bp_diastolic' => $vital->blood_pressure_m_diastolic,
+			);
+
 			$vital->timestamp = date('Y-m-d',strtotime($vital->timestamp)).' '.$vital->time.':00';
 			$errors['row'] = $this->renderPartial('_vital_row',array('item' => $vital, 'i' => $_POST['i'], 'edit' => true),true);
 		}
@@ -135,9 +140,14 @@ class DefaultController extends BaseEventTypeController
 
 				$vital->hr_pulse_m = $hr_pulse;
 
-				foreach (array('blood_pressure_m','rr_m','spo2_m','o2','pain_score_m','timestamp') as $field) {
+				foreach (array('blood_pressure_m_systolic','blood_pressure_m_diastolic','rr_m','spo2_m','o2','pain_score_m','timestamp') as $field) {
 					$vital->$field = $data['OphNuPostoperative_Vital'][$field][$i];
 				}
+
+				$vital->blood_pressure_m = array(
+					'bp_systolic' => $vital->blood_pressure_m_systolic,
+					'bp_diastolic' => $vital->blood_pressure_m_diastolic,
+				);
 
 				$vital->time = date('H:i',strtotime($vital->timestamp));
 
