@@ -18,7 +18,7 @@
  */
 ?>
 	<div class="element-fields">
-		<?php echo $form->timePicker($element, 'patient_enters_recovery_room', array('nowrapper' => true, 'showTimeNowButton' => true))?>
+		<?php echo $form->timePicker($element, 'patient_enters_recovery_room', array('showTimeNowButton' => true))?>
 		<?php echo $form->dropDownList($element, 'anaesthesia_handoff_from_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false)?>
 		<?php echo $form->dropDownList($element, 'anaesthesia_handoff_to_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false)?>
 		<?php echo $form->dropDownList($element, 'nursing_handoff_from_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false)?>
