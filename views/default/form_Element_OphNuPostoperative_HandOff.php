@@ -18,16 +18,8 @@
  */
 ?>
 	<div class="element-fields">
-		<div id="div_Element_OphNuPostoperative_Patient_patient_enters_recovery_room" class="row field-row">
-			<div class="large-3 column">
-				<label for="Element_OphNuPostoperative_Patient_patient_enters_recovery_room"><?php echo $element->getAttributeLabel('patient_enters_recovery_room')?>:</label>
-			</div>
-			<div class="large-2 column end">
-				<?php echo $form->textField($element, 'patient_enters_recovery_room', array('nowrapper' => true), array(), array('label' => 3, 'field' => 1))?>
-				<button type="submit" class="secondary small time-now" data-target="patient_enters_recovery_room">Now</button>
-			</div>
-		</div>
-		<?php echo $form->dropDownList($element, 'anaesthesia_handoff_from_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 4))?>
-		<?php echo $form->dropDownList($element, 'anaesthesia_handoff_to_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 4))?>
-		<?php echo $form->dropDownList($element, 'nursing_handoff_from_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 4))?>
+		<?php echo $form->timePicker($element, 'patient_enters_recovery_room', array('nowrapper' => true, 'showTimeNowButton' => true))?>
+		<?php echo $form->dropDownList($element, 'anaesthesia_handoff_from_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false)?>
+		<?php echo $form->dropDownList($element, 'anaesthesia_handoff_to_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false)?>
+		<?php echo $form->dropDownList($element, 'nursing_handoff_from_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false)?>
 	</div>
