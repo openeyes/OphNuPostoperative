@@ -140,7 +140,7 @@ class DefaultController extends BaseEventTypeController
 
 				$vital->hr_pulse_m = $hr_pulse;
 
-				foreach (array('blood_pressure_m_systolic','blood_pressure_m_diastolic','rr_m','spo2_m','o2','pain_score_m','timestamp') as $field) {
+				foreach (array('blood_pressure_m_systolic','blood_pressure_m_diastolic','rr_m','sao2_m','o2','pain_score_m','timestamp') as $field) {
 					$vital->$field = $data['OphNuPostoperative_Vital'][$field][$i];
 				}
 

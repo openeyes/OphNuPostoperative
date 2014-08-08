@@ -33,7 +33,7 @@ class m140804_145001_use_measurements_system extends CDbMigration
 						'MeasurementPulse' => array('hr_pulse','pulse','measurement_pulse'),
 						'MeasurementBloodPressure' => array('blood_pressure','bp_systolic','measurement_blood_pressure'),
 						'MeasurementRespiratoryRate' => array('rr','rr','measurement_respiratory_rate'),
-						'MeasurementSPO2' => array('sao2','sao2','measurement_sao2'),
+						'MeasurementSAO2' => array('sao2','sao2','measurement_sao2'),
 						'MeasurementPainScore' => array('pain_score','pain_score','measurement_pain_score'),
 					) as $class => $fields) {
 
@@ -159,7 +159,7 @@ class m140804_145001_use_measurements_system extends CDbMigration
 						'MeasurementPulse' => array('hr_pulse','pulse','measurement_pulse'),
 						'MeasurementBloodPressure' => array('blood_pressure','bp_systolic','measurement_blood_pressure'),
 						'MeasurementRespiratoryRate' => array('rr','rr','measurement_respiratory_rate'),
-						'MeasurementSPO2' => array('sao2','sao2','measurement_sao2'),
+						'MeasurementSAO2' => array('sao2','sao2','measurement_sao2'),
 						'MeasurementPainScore' => array('pain_score','pain_score','measurement_pain_score'),
 					) as $class => $fields) {
 

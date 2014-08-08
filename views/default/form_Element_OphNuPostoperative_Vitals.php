@@ -38,7 +38,7 @@
 				array(
 					'width' => 5,
 					'fields' => array(
-						array('field' => 'spo2_m','type' => 'text'),
+						array('field' => 'sao2_m','type' => 'text'),
 						array('field' => 'o2','type' => 'text'),
 						array('field' => 'pain_score_m','type' => 'text'),
 					),
