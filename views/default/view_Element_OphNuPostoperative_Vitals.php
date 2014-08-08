@@ -30,12 +30,12 @@
 		<div class="row field-row">
 			<div class="large-3 column">
 				<div class="data-label">
-					<?php echo $element->getAttributeLabel('glucose_level')?>:
+					<?php echo $element->getAttributeLabel('blood_glucose_m')?>:
 				</div>
 			</div>
 			<div class="large-9 column end">
 				<div class="data-value">
-					<?php echo $element->glucose_level_na ? 'N/A' : $element->blood_glucose_m->glucose_level?>
+					<?php echo $element->glucose_level_na ? 'N/A' : ($element->blood_glucose_m ? $element->blood_glucose_m->blood_glucose : 'Not recorded')?>
 				</div>
 			</div>
 		</div>

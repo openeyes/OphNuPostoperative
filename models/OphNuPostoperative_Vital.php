@@ -32,8 +32,6 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 {
 	public $time;
 	public $auto_update_measurements = true;
-	public $blood_pressure_m_systolic;
-	public $blood_pressure_m_diastolic;
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -60,8 +58,8 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('hr_pulse_m, rr_m, sao2_m, o2, pain_score_m, timestamp, time, blood_pressure_m_systolic, blood_pressure_m_diastolic', 'safe'),
-			array('hr_pulse_m, rr_m, sao2_m, o2, pain_score_m, timestamp, blood_pressure_m_systolic, blood_pressure_m_diastolic', 'required'),
+			array('pulse_m, rr_m, sao2_m, o2_m, pain_score_m, timestamp, time, blood_pressure_m', 'safe'),
+			array('pulse_m, rr_m, sao2_m, o2_m, pain_score_m, timestamp, blood_pressure_m', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, item_id, offset, value, display_order', 'safe', 'on' => 'search'),
@@ -76,10 +74,11 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'hr_pulse_m' => array(self::BELONGS_TO, 'MeasurementPulse', 'hr_pulse_m_id'),
+			'pulse_m' => array(self::BELONGS_TO, 'MeasurementPulse', 'hr_pulse_m_id'),
 			'blood_pressure_m' => array(self::BELONGS_TO, 'MeasurementBloodPressure', 'blood_pressure_m_id'),
 			'rr_m' => array(self::BELONGS_TO, 'MeasurementRespiratoryRate', 'rr_m_id'),
 			'sao2_m' => array(self::BELONGS_TO, 'MeasurementSAO2', 'sao2_m_id'),
+			'o2_m' => array(self::BELONGS_TO, 'MeasurementO2', 'o2_m_id'),
 			'pain_score_m' => array(self::BELONGS_TO, 'MeasurementPainScore', 'pain_score_m_id'),
 			'element' => array(self::BELONGS_TO, 'Element_OphNuPostoperative_Vitals', 'element_id'),
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id', 'through' => 'element'),
@@ -93,28 +92,19 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 	{
 		return array(
 			'id' => 'ID',
-			'hr_pulse_m' => 'HR / pulse',
+			'pulse_m' => 'HR / pulse',
 			'blood_pressure_m' => 'Blood pressure',
 			'blood_pressure_m_systolic' => 'Blood pressure (systolic)',
 			'blood_pressure_m_diastolic' => 'Blood pressure (diastolic)',
 			'rr_m' => 'RR',
 			'sao2_m' => 'SaO2',
-			'o2' => 'O2',
+			'o2_m' => 'O2',
 			'pain_score_m' => 'Pain score',
 		);
 	}
 
 	public function getAttributeSuffix($attribute)
 	{
-		$suffixes = array(
-			'hr_pulse_m' => 'bpm',
-			'blood_pressure_m' => 'mmHg',
-			'rr_m' => 'insp/min',
-			'sao2_m' => '%',
-			'o2' => 'L/min',
-		);
-
-		return @$suffixes[$attribute];
 	}
 
 	public function afterFind()
@@ -150,6 +140,6 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 
 	public function getDescription()
 	{
-		return "Pulse: ".$this->hr_pulse_m->getValueText().", BP: ".$this->blood_pressure_m->getValueText().", RR: ".$this->rr_m->getValueText().", SaO2: ".$this->sao2_m->getValueText().", O2: ".$this->o2." L/min, pain score: ".$this->pain_score_m->getValueText();
+		return "Pulse: ".$this->pulse_m->getValueText().", BP: ".$this->blood_pressure_m->getValueText().", RR: ".$this->rr_m->getValueText().", SaO2: ".$this->sao2_m->getValueText().", O2: ".$this->o2_m->getValueText().", pain score: ".$this->pain_score_m->getValueText();
 	}
 }

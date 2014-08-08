@@ -88,7 +88,7 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 			'vitals' => array(self::HAS_MANY, 'OphNuPostoperative_Vital', 'element_id', 'order' => 'timestamp asc'),
 			'avpu_score' => array(self::BELONGS_TO, 'OphNuPostoperative_Vitals_AVPU_Score', 'avpu_score_id'),
-			'blood_glucose_m' => array(self::BELONGS_TO, 'MeasurementGlucoseLevel', 'blood_glucose_m_id'),
+			'blood_glucose_m' => array(self::BELONGS_TO, 'MeasurementBloodGlucose', 'blood_glucose_m_id'),
 		);
 	}
 
@@ -103,7 +103,7 @@ class Element_OphNuPostoperative_Vitals extends BaseEventTypeElement
 			'comments' => 'Post operative orders',
 			'total_fluid_intake' => 'Total fluid intake',
 			'total_fluid_outtake' => 'Total fluid output',
-			'glucose_level' => 'Glucose level',
+			'blood_glucose_m' => 'Glucose level',
 			'glucose_level_na' => 'N/A',
 			'nausea_vomiting' => 'Nausea / vomiting',
 			'blood_loss' => 'Blood loss',

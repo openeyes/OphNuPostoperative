@@ -22,11 +22,11 @@
 }
 /* line 19, ../sass/components/_event.scss */
 .event .event-content {
-  background-image: url('../img/watermark.png?1407423154');
+  background-image: url('../img/watermark.png?1407492705');
 }
 /* line 22, ../sass/components/_event.scss */
 .event .event-title {
-  background-image: url('../img/medium.png?1407423047');
+  background-image: url('../img/medium.png?1407492705');
 }
 
 /* line 27, ../sass/components/_event.scss */
@@ -175,22 +175,21 @@ span.unit {
   font-size: 0.8125em;
 }
 
-/* line 158, ../sass/components/_event.scss */
-#div_Element_OphNuPostoperative_Vitals_glucose_level input {
+/* line 159, ../sass/components/_event.scss */
+#div_Element_OphNuPostoperative_Vitals_blood_glucose_m input {
   display: inline;
-  width: 5em;
 }
 /* line 162, ../sass/components/_event.scss */
-#div_Element_OphNuPostoperative_Vitals_glucose_level .metric {
+#div_Element_OphNuPostoperative_Vitals_blood_glucose_m .metric {
   display: inline;
   font-size: 0.8125em;
 }
 /* line 166, ../sass/components/_event.scss */
-#div_Element_OphNuPostoperative_Vitals_glucose_level label {
+#div_Element_OphNuPostoperative_Vitals_blood_glucose_m label {
   display: inline-block;
 }
 /* line 169, ../sass/components/_event.scss */
-#div_Element_OphNuPostoperative_Vitals_glucose_level input[type="checkbox"] {
+#div_Element_OphNuPostoperative_Vitals_blood_glucose_m input[type="checkbox"] {
   width: 1em;
   margin-left: 8px;
 }

@@ -103,7 +103,10 @@ class DefaultController extends BaseEventTypeController
 
 	public function actionValidateVital()
 	{
-		$vital = new OphNuPostoperative_Vital;
+		if (!@$_POST['Element_OphNuPostoperative_Vitals_vitals_editItem_id'] || !($vital = OphNuPostoperative_Vital::model()->findByPk($_POST['Element_OphNuPostoperative_Vitals_vitals_editItem_id']))) {
+			$vital = new OphNuPostoperative_Vital;
+		}
+
 		$vital->attributes = $_POST;
 
 		$vital->validate();
@@ -115,11 +118,6 @@ class DefaultController extends BaseEventTypeController
 		}
 
 		if (empty($errors)) {
-			$vital->blood_pressure_m = array(
-				'bp_systolic' => $vital->blood_pressure_m_systolic,
-				'bp_diastolic' => $vital->blood_pressure_m_diastolic,
-			);
-
 			$vital->timestamp = date('Y-m-d',strtotime($vital->timestamp)).' '.$vital->time.':00';
 			$errors['row'] = $this->renderPartial('_vital_row',array('item' => $vital, 'i' => $_POST['i'], 'edit' => true),true);
 		}
@@ -131,23 +129,18 @@ class DefaultController extends BaseEventTypeController
 	{
 		$vitals = array();
 
-		if (!empty($data['OphNuPostoperative_Vital']['hr_pulse_m'])) {
-			foreach ($data['OphNuPostoperative_Vital']['hr_pulse_m'] as $i => $hr_pulse) {
+		$safe = OphNuPostoperative_Vital::model()->safeAttributeNames;
+
+		if (!empty($data['OphNuPostoperative_Vital'][$safe[0]])) {
+			foreach ($data['OphNuPostoperative_Vital'][$safe[0]] as $i => $hr_pulse) {
 				if (!$data['OphNuPostoperative_Vital']['id'][$i] || !($vital = OphNuPostoperative_Vital::model()->findByPk($data['OphNuPostoperative_Vital']['id'][$i]))) {
 					$vital = new OphNuPostoperative_Vital;
 					$vital->element_id = $element->id;
 				}
 
-				$vital->hr_pulse_m = $hr_pulse;
-
-				foreach (array('blood_pressure_m_systolic','blood_pressure_m_diastolic','rr_m','sao2_m','o2','pain_score_m','timestamp') as $field) {
-					$vital->$field = $data['OphNuPostoperative_Vital'][$field][$i];
+				foreach ($safe as $attribute) {
+					$vital->$attribute = @$data['OphNuPostoperative_Vital'][$attribute][$i];
 				}
-
-				$vital->blood_pressure_m = array(
-					'bp_systolic' => $vital->blood_pressure_m_systolic,
-					'bp_diastolic' => $vital->blood_pressure_m_diastolic,
-				);
 
 				$vital->time = date('H:i',strtotime($vital->timestamp));
 
@@ -180,7 +173,25 @@ class DefaultController extends BaseEventTypeController
 			$criteria->addNotInCondition('id',$ids);
 		}
 
+		$measurements = array();
+
+		foreach (OphNuPostoperative_Vital::model()->findAll($criteria) as $vital) {
+			foreach ($vital->relations() as $relation => $def) {
+				if ($vital->$relation instanceof Measurement) {
+					$measurements[] = $vital->$relation;
+				}
+			}
+		}
+
 		OphNuPostoperative_Vital::model()->deleteAll($criteria);
+
+		foreach ($measurements as $measurement) {
+			if ($measurement->isOrigin($element->event)) {
+				if (!$measurement->delete()) {
+					throw new Exception("Unable to delete measurement: ".print_r($measurement->errors,true));
+				}
+			}
+		}
 	}
 
 	public function actionValidateProgressNote()

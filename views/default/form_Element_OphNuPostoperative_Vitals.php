@@ -28,19 +28,19 @@
 			'columns' => array(
 				array(
 					'width' => 5,
-					'field_width' => 5,
+					'field_width' => 6,
 					'fields' => array(
-						array('field' => 'hr_pulse_m','type' => 'text'),
+						array('field' => 'pulse_m','type' => 'pulse'),
 						array('field' => 'blood_pressure_m','type' => 'blood_pressure'),
-						array('field' => 'rr_m','type' => 'text'),
+						array('field' => 'rr_m','type' => 'rr'),
 					),
 				),
 				array(
 					'width' => 5,
 					'fields' => array(
-						array('field' => 'sao2_m','type' => 'text'),
-						array('field' => 'o2','type' => 'text'),
-						array('field' => 'pain_score_m','type' => 'text'),
+						array('field' => 'sao2_m','type' => 'sao2'),
+						array('field' => 'o2','type' => 'o2'),
+						array('field' => 'pain_score_m','type' => 'pain_score'),
 					),
 				),
 			),
@@ -48,10 +48,10 @@
 			'add_button_text' => 'Add vital',
 			'use_last_button_text' => 'Input last recorded vital signs',
 		))?>
-		<div id="div_Element_OphNuPostoperative_Vitals_glucose_level" class="row field-row">
+		<div id="div_Element_OphNuPostoperative_Vitals_blood_glucose_m" class="row field-row">
 			<div class="large-3 column">
-				<label for="Element_OphNuPostoperative_Vitals_glucose_level">
-					<?php echo $element->getAttributeLabel('glucose_level')?>:
+				<label for="Element_OphNuPostoperative_Vitals_blood_glucose_m">
+					<?php echo $element->getAttributeLabel('blood_glucose_m')?>:
 				</label>
 			</div>
 			<div class="large-3 column end">
