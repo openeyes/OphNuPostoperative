@@ -79,12 +79,12 @@ class m140804_145001_use_measurements_system extends CDbMigration
 
 				$pm_id = $this->dbConnection->createCommand()->select("max(id)")->from("patient_measurement")->queryScalar();
 
-				$this->insert('measurement_glucose_level',array(
+				$this->insert('measurement_blood_glucose',array(
 					'patient_measurement_id' => $pm_id,
-					'glucose_level' => $element['glucose_level'],
+					'blood_glucose' => $element['glucose_level'],
 				));
 
-				$m_id = $this->dbConnection->createCommand()->select("max(id)")->from("measurement_glucose_level")->queryScalar();
+				$m_id = $this->dbConnection->createCommand()->select("max(id)")->from("measurement_blood_glucose")->queryScalar();
 
 				$this->update('et_ophnupostoperative_vitals',array('blood_glucose_m_id' => $m_id),"id = {$element['id']}");
 
@@ -96,7 +96,7 @@ class m140804_145001_use_measurements_system extends CDbMigration
 			}
 		}
 
-		$this->addForeignKey('et_ophnupostoperative_vitals_bgmi_fk','et_ophnupostoperative_vitals','blood_glucose_m_id','measurement_glucose_level','id');
+		$this->addForeignKey('et_ophnupostoperative_vitals_bgmi_fk','et_ophnupostoperative_vitals','blood_glucose_m_id','measurement_blood_glucose','id');
 
 		$this->addForeignKey('ophnupostoperative_vital_hpmi_id_fk','ophnupostoperative_vital','hr_pulse_m_id','measurement_pulse','id');
 		$this->addForeignKey('ophnupostoperative_vital_bpmi_fk','ophnupostoperative_vital','blood_pressure_m_id','measurement_blood_pressure','id');
@@ -172,11 +172,11 @@ class m140804_145001_use_measurements_system extends CDbMigration
 			}
 
 			if ($element['blood_glucose_m_id']) {
-				$mes = $this->getRecord('measurement_glucose_level',$element['blood_glucose_m_id']);
+				$mes = $this->getRecord('measurement_blood_glucose',$element['blood_glucose_m_id']);
 
-				$this->update('et_ophnupostoperative_vitals',array('glucose_level' => $mes['glucose_level']),"id = {$element['id']}");
+				$this->update('et_ophnupostoperative_vitals',array('glucose_level' => $mes['blood_glucose']),"id = {$element['id']}");
 
-				$this->delete('measurement_glucose_level',"id = ".$element['blood_glucose_m_id']);
+				$this->delete('measurement_blood_glucose',"id = ".$element['blood_glucose_m_id']);
 			}
 		}
 
