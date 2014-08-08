@@ -21,7 +21,7 @@ $this->beginContent('//patient/event_container');
 		'id'=>'create-form',
 		'enableAjaxValidation'=>false,
 		'layoutColumns' => array(
-			'label' => 2,
+			'label' => 3,
 			'field' => 4
 		)
 	));
