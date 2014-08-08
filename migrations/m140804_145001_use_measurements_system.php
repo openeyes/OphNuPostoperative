@@ -15,13 +15,13 @@ class m140804_145001_use_measurements_system extends CDbMigration
 		$this->addColumn('ophnupostoperative_vital','hr_pulse_m_id','int(10) unsigned null');
 		$this->addColumn('ophnupostoperative_vital','blood_pressure_m_id','int(10) unsigned null');
 		$this->addColumn('ophnupostoperative_vital','rr_m_id','int(10) unsigned null');
-		$this->addColumn('ophnupostoperative_vital','spo2_m_id','int(10) unsigned null');
+		$this->addColumn('ophnupostoperative_vital','sao2_m_id','int(10) unsigned null');
 		$this->addColumn('ophnupostoperative_vital','pain_score_m_id','int(10) unsigned null');
 
 		$this->addColumn('ophnupostoperative_vital_version','hr_pulse_m_id','int(10) unsigned null');
 		$this->addColumn('ophnupostoperative_vital_version','blood_pressure_m_id','int(10) unsigned null');
 		$this->addColumn('ophnupostoperative_vital_version','rr_m_id','int(10) unsigned null');
-		$this->addColumn('ophnupostoperative_vital_version','spo2_m_id','int(10) unsigned null');
+		$this->addColumn('ophnupostoperative_vital_version','sao2_m_id','int(10) unsigned null');
 		$this->addColumn('ophnupostoperative_vital_version','pain_score_m_id','int(10) unsigned null');
 
 		foreach ($this->dbConnection->createCommand()->select("*")->from("et_ophnupostoperative_vitals")->order("id asc")->queryAll() as $element) {
@@ -33,7 +33,7 @@ class m140804_145001_use_measurements_system extends CDbMigration
 						'MeasurementPulse' => array('hr_pulse','pulse','measurement_pulse'),
 						'MeasurementBloodPressure' => array('blood_pressure','bp_systolic','measurement_blood_pressure'),
 						'MeasurementRespiratoryRate' => array('rr','rr','measurement_respiratory_rate'),
-						'MeasurementSPO2' => array('spo2','spo2','measurement_spo2'),
+						'MeasurementSPO2' => array('sao2','sao2','measurement_sao2'),
 						'MeasurementPainScore' => array('pain_score','pain_score','measurement_pain_score'),
 					) as $class => $fields) {
 
@@ -101,7 +101,7 @@ class m140804_145001_use_measurements_system extends CDbMigration
 		$this->addForeignKey('ophnupostoperative_vital_hpmi_id_fk','ophnupostoperative_vital','hr_pulse_m_id','measurement_pulse','id');
 		$this->addForeignKey('ophnupostoperative_vital_bpmi_fk','ophnupostoperative_vital','blood_pressure_m_id','measurement_blood_pressure','id');
 		$this->addForeignKey('ophnupostoperative_vital_rrmi_fk','ophnupostoperative_vital','rr_m_id','measurement_respiratory_rate','id');
-		$this->addForeignKey('ophnupostoperative_vital_spmi_fk','ophnupostoperative_vital','spo2_m_id','measurement_spo2','id');
+		$this->addForeignKey('ophnupostoperative_vital_spmi_fk','ophnupostoperative_vital','sao2_m_id','measurement_sao2','id');
 		$this->addForeignKey('ophnupostoperative_vital_psmi_fk','ophnupostoperative_vital','pain_score_m_id','measurement_pain_score','id');
 
 		$this->dropColumn('et_ophnupostoperative_vitals','glucose_level');
@@ -110,13 +110,13 @@ class m140804_145001_use_measurements_system extends CDbMigration
 		$this->dropColumn('ophnupostoperative_vital','hr_pulse');
 		$this->dropColumn('ophnupostoperative_vital','blood_pressure');
 		$this->dropColumn('ophnupostoperative_vital','rr');
-		$this->dropColumn('ophnupostoperative_vital','spo2');
+		$this->dropColumn('ophnupostoperative_vital','sao2');
 		$this->dropColumn('ophnupostoperative_vital','pain_score');
 
 		$this->dropColumn('ophnupostoperative_vital_version','hr_pulse');
 		$this->dropColumn('ophnupostoperative_vital_version','blood_pressure');
 		$this->dropColumn('ophnupostoperative_vital_version','rr');
-		$this->dropColumn('ophnupostoperative_vital_version','spo2');
+		$this->dropColumn('ophnupostoperative_vital_version','sao2');
 		$this->dropColumn('ophnupostoperative_vital_version','pain_score');
 	}
 
@@ -130,13 +130,13 @@ class m140804_145001_use_measurements_system extends CDbMigration
 		$this->addColumn('ophnupostoperative_vital','hr_pulse','varchar(64) not null');
 		$this->addColumn('ophnupostoperative_vital','blood_pressure','varchar(255) not null');
 		$this->addColumn('ophnupostoperative_vital','rr','varchar(64) not null');
-		$this->addColumn('ophnupostoperative_vital','spo2','varchar(64) not null');
+		$this->addColumn('ophnupostoperative_vital','sao2','varchar(64) not null');
 		$this->addColumn('ophnupostoperative_vital','pain_score','int(10) unsigned not null');
 
 		$this->addColumn('ophnupostoperative_vital_version','hr_pulse','varchar(64) not null');
 		$this->addColumn('ophnupostoperative_vital_version','blood_pressure','varchar(255) not null');
 		$this->addColumn('ophnupostoperative_vital_version','rr','varchar(64) not null');
-		$this->addColumn('ophnupostoperative_vital_version','spo2','varchar(64) not null');
+		$this->addColumn('ophnupostoperative_vital_version','sao2','varchar(64) not null');
 		$this->addColumn('ophnupostoperative_vital_version','pain_score','int(10) unsigned not null');
 
 		$this->addColumn('et_ophnupostoperative_vitals_version','glucose_level','tinyint(1) unsigned null');
@@ -159,7 +159,7 @@ class m140804_145001_use_measurements_system extends CDbMigration
 						'MeasurementPulse' => array('hr_pulse','pulse','measurement_pulse'),
 						'MeasurementBloodPressure' => array('blood_pressure','bp_systolic','measurement_blood_pressure'),
 						'MeasurementRespiratoryRate' => array('rr','rr','measurement_respiratory_rate'),
-						'MeasurementSPO2' => array('spo2','spo2','measurement_spo2'),
+						'MeasurementSPO2' => array('sao2','sao2','measurement_sao2'),
 						'MeasurementPainScore' => array('pain_score','pain_score','measurement_pain_score'),
 					) as $class => $fields) {
 
@@ -186,13 +186,13 @@ class m140804_145001_use_measurements_system extends CDbMigration
 		$this->dropColumn('ophnupostoperative_vital','hr_pulse_m_id');
 		$this->dropColumn('ophnupostoperative_vital','blood_pressure_m_id');
 		$this->dropColumn('ophnupostoperative_vital','rr_m_id');
-		$this->dropColumn('ophnupostoperative_vital','spo2_m_id');
+		$this->dropColumn('ophnupostoperative_vital','sao2_m_id');
 		$this->dropColumn('ophnupostoperative_vital','pain_score_m_id');
 
 		$this->dropColumn('ophnupostoperative_vital_version','hr_pulse_m_id');
 		$this->dropColumn('ophnupostoperative_vital_version','blood_pressure_m_id');
 		$this->dropColumn('ophnupostoperative_vital_version','rr_m_id');
-		$this->dropColumn('ophnupostoperative_vital_version','spo2_m_id');
+		$this->dropColumn('ophnupostoperative_vital_version','sao2_m_id');
 		$this->dropColumn('ophnupostoperative_vital_version','pain_score_m_id');
 	}
 }
