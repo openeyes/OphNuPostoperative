@@ -56,7 +56,7 @@ class m140728_142513_element_field_changes extends OEMigration
 				'patient_enters_recovery_room' => $row['patient_enters_recovery_room'],
 				'anaesthesia_handoff_from_id' => $row['hand_off_from_id'],
 				'anaesthesia_handoff_to_id' => $row['hand_off_to_id'],
-				'nursing_handoff_from_id' => $row['handing_off_from_id'],
+				'nursing_handoff_from_id' => $row['handing_off_from_id'] ? $row['handing_off_from_id'] : null,
 				'last_modified_user_id' => $row['last_modified_user_id'],
 				'last_modified_date' => $row['last_modified_date'],
 				'created_user_id' => $row['created_user_id'],
