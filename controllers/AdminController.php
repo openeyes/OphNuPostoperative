@@ -22,49 +22,31 @@ class AdminController extends ModuleAdminController
 
 	public function actionEditFallsMobility()
 	{
-		$this->render('//admin/generic_admin',array(
-			'title' => 'Falls / mobility items',
-			'model' => 'OphNuPostoperative_PostOperative_Falls',
-		));
+		$this->genericAdmin('Falls / mobility items','OphNuPostoperative_PostOperative_Falls');
 	}
 
 	public function actionEditDental()
 	{
-		$this->render('//admin/generic_admin',array(
-			'title' => 'Dental items returned',
-			'model' => 'OphNuPostoperative_PostOperative_Dental',
-		));
+		$this->genericAdmin('Dental items returned','OphNuPostoperative_PostOperative_Dental');
 	}
 
 	public function actionEditHearing()
 	{
-		$this->render('//admin/generic_admin',array(
-			'title' => 'Hearing items returned',
-			'model' => 'OphNuPostoperative_PostOperative_Hearing',
-		));
+		$this->genericAdmin('Hearing items returned','OphNuPostoperative_PostOperative_Hearing');
 	}
 
 	public function actionEditBelongings()
 	{
-		$this->render('//admin/generic_admin',array(
-			'title' => 'Belongings returned',
-			'model' => 'OphNuPostoperative_PostOperative_Belongings',
-		));
+		$this->genericAdmin('Belongings returned','OphNuPostoperative_PostOperative_Belongings');
 	}
 
 	public function actionEditSkinAssessment()
 	{
-		$this->render('//admin/generic_admin',array(
-			'title' => 'Skin assessment',
-			'model' => 'OphNuPostoperative_PostOperative_Skin',
-		));
+		$this->genericAdmin('Skin assessment','OphNuPostoperative_PostOperative_Skin');
 	}
 
 	public function actionEditPostopObservations()
 	{
-		$this->render('//admin/generic_admin',array(
-			'title' => 'Post-op observations',
-			'model' => 'OphNuPostoperative_PostOperative_Obs',
-		));
+		$this->genericAdmin('Post-op observations','OphNuPostoperative_PostOperative_Obs');
 	}
 }
