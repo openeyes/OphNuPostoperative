@@ -59,7 +59,7 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 		// will receive user inputs.
 		return array(
 			array('pulse_m, rr_m, sao2_m, o2_m, pain_score_m, timestamp, time, blood_pressure_m', 'safe'),
-			array('pulse_m, rr_m, sao2_m, o2_m, pain_score_m, timestamp, blood_pressure_m', 'required'),
+			array('timestamp', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, item_id, offset, value, display_order', 'safe', 'on' => 'search'),
@@ -140,6 +140,41 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 
 	public function getDescription()
 	{
-		return "Pulse: ".$this->pulse_m->getValueText().", BP: ".$this->blood_pressure_m->getValueText().", RR: ".$this->rr_m->getValueText().", SaO2: ".$this->sao2_m->getValueText().", O2: ".$this->o2_m->getValueText().", pain score: ".$this->pain_score_m->getValueText();
+		$description = '';
+
+		foreach (array(
+			'Pulse' => 'pulse_m',
+			'BP' => 'blood_pressure_m',
+			'RR' => 'rr_m',
+			'SaO2' => 'sao2_m',
+			'O2' => 'o2_m',
+			'pain score' => 'pain_score_m',
+		) as $label => $field) {
+			if ($this->$field) {
+				if ($description) {
+					$description .= ', ';
+				}
+				$description .= $label.': '.$this->$field->getValueText();
+			}
+		}
+
+		return $description;
+	}
+
+	public function afterValidate()
+	{
+		$have_data = false;
+
+		foreach (array('pulse_m','rr_m','sao2_m','o2_m','pain_score_m','blood_pressure_m') as $field) {
+			if (is_object($this->$field)) {
+				$have_data = true;
+			}
+		}
+
+		if (!$have_data) {
+			$this->addError('','Please enter at least one vital sign item');
+		}
+
+		return parent::afterValidate();
 	}
 }

@@ -17,7 +17,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
 ?>
-<tr<?php if ($edit) {?> data-pulse_m="<?php echo CHtml::encode($item->pulse_m->getValue())?>" data-blood_pressure_m='{"bp_systolic":<?php echo CHtml::encode($item->blood_pressure_m->bp_systolic)?>,"bp_diastolic":<?php echo CHtml::encode($item->blood_pressure_m->bp_diastolic)?>}' data-rr_m="<?php echo CHtml::encode($item->rr_m->getValue())?>" data-sao2_m="<?php echo CHtml::encode($item->sao2_m->getValue())?>" data-o2_m="<?php echo CHtml::encode($item->o2_m->getValue())?>" data-pain_score_m="<?php echo CHtml::encode($item->pain_score_m->getValue())?>" data-timestamp="<?php echo CHtml::encode($item->NHSDate('timestamp'))?>" data-time="<?php echo $item->time?>" data-i="<?php echo $i?>"<?php }?> data-id="<?php echo $item->id?>">
+<tr<?php if ($edit) {?> data-pulse_m="<?php echo CHtml::encode($item->pulse_m ? $item->pulse_m->getValue() : '')?>" data-blood_pressure_m='{"bp_systolic":<?php echo CHtml::encode($item->blood_pressure_m ? $item->blood_pressure_m->bp_systolic : '')?>,"bp_diastolic":<?php echo CHtml::encode($item->blood_pressure_m ? $item->blood_pressure_m->bp_diastolic : '')?>}' data-rr_m="<?php echo CHtml::encode($item->rr_m ? $item->rr_m->getValue() : '')?>" data-sao2_m="<?php echo CHtml::encode($item->sao2_m ? $item->sao2_m->getValue() : '')?>" data-o2_m="<?php echo CHtml::encode($item->o2_m ? $item->o2_m->getValue() :'')?>" data-pain_score_m="<?php echo CHtml::encode($item->pain_score_m ? $item->pain_score_m->getValue() : '')?>" data-timestamp="<?php echo CHtml::encode($item->NHSDate('timestamp'))?>" data-time="<?php echo $item->time?>" data-i="<?php echo $i?>"<?php }?> data-id="<?php echo $item->id?>">
 	<td>
 		<?php echo $item->NHSDate('timestamp')?>
 		<?php echo substr($item->time,0,5)?>
@@ -31,13 +31,13 @@
 			&nbsp;&nbsp;
 			<a class="deleteRecordItem">delete</a>
 			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[id][<?php echo $i?>]" value="<?php echo $item->id?>" />
-			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[pulse_m][<?php echo $i?>]" value="<?php echo CHtml::encode($item->pulse_m->getValue())?>" />
-			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[blood_pressure_m][<?php echo $i?>][bp_systolic]" value="<?php echo CHtml::encode($item->blood_pressure_m->bp_systolic)?>" />
-			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[blood_pressure_m][<?php echo $i?>][bp_diastolic]" value="<?php echo CHtml::encode($item->blood_pressure_m->bp_diastolic)?>" />
-			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[rr_m][<?php echo $i?>]" value="<?php echo CHtml::encode($item->rr_m->getValue())?>" />
-			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[sao2_m][<?php echo $i?>]" value="<?php echo CHtml::encode($item->sao2_m->getValue())?>" />
-			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[o2_m][<?php echo $i?>]" value="<?php echo CHtml::encode($item->o2_m->getValue())?>" />
-			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[pain_score_m][<?php echo $i?>]" value="<?php echo CHtml::encode($item->pain_score_m->getValue())?>" />
+			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[pulse_m][<?php echo $i?>]" value="<?php echo CHtml::encode($item->pulse_m ? $item->pulse_m->getValue() : '')?>" />
+			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[blood_pressure_m][<?php echo $i?>][bp_systolic]" value="<?php echo CHtml::encode($item->blood_pressure_m ? $item->blood_pressure_m->bp_systolic : '')?>" />
+			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[blood_pressure_m][<?php echo $i?>][bp_diastolic]" value="<?php echo CHtml::encode($item->blood_pressure_m ? $item->blood_pressure_m->bp_diastolic : '')?>" />
+			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[rr_m][<?php echo $i?>]" value="<?php echo CHtml::encode($item->rr_m ? $item->rr_m->getValue() : '')?>" />
+			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[sao2_m][<?php echo $i?>]" value="<?php echo CHtml::encode($item->sao2_m ? $item->sao2_m->getValue() : '')?>" />
+			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[o2_m][<?php echo $i?>]" value="<?php echo CHtml::encode($item->o2_m ? $item->o2_m->getValue() : '')?>" />
+			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[pain_score_m][<?php echo $i?>]" value="<?php echo CHtml::encode($item->pain_score_m ? $item->pain_score_m->getValue() : '')?>" />
 			<input type="hidden" name="<?php echo CHtml::modelName($item)?>[timestamp][<?php echo $i?>]" value="<?php echo CHtml::encode($item->timestamp)?>" />
 		</td>
 	<?php }?>
