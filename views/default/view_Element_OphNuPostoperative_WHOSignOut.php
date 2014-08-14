@@ -48,7 +48,7 @@
 			<?php if ($element->equipment_problems_comments) {?>
 				<div class="row data-row">
 					<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('equipment_problems_comments'))?></div></div>
-					<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->equipment_problems_comments)?></div></div>
+					<div class="large-9 column end"><div class="data-value"><?php echo $element->textWithLineBreaks('equipment_problems_comments')?></div></div>
 				</div>
 			<?php }?>
 		<?php }?>
