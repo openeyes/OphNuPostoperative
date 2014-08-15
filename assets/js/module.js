@@ -2,6 +2,42 @@
 /* Module-specific javascript can be placed here */
 
 $(document).ready(function() {
+	var sortTable = (function() {
+
+		function getColVal(row, col) {
+			return $.trim(
+				$(row).find('td:eq(' + col + ')').text()
+			);
+		}
+
+		function getTime(row, col) {
+			return (new Date(getColVal(row, col))).getTime();
+		}
+
+		function getType(row, col, type) {
+			switch(type) {
+				case 'date':
+					return getTime(row, col);
+				default:
+					return 1;
+			}
+		}
+
+		function sortRows(table, col, type) {
+			var rows = table.find('tbody tr:visible');
+			rows.sort(function(rowA, rowB) {
+				return Number(
+					getType(rowA, col, type) > getType(rowB, col, type)
+				);
+			});
+			rows.each(function(i, row) {
+				table.append(row);
+			});
+		}
+
+		return sortRows;
+	}());
+
 	handleButton($('#et_save'),function() {
 	});
 	
@@ -247,6 +283,8 @@ $(document).ready(function() {
 						$('.progress-notes tbody').append(errors['row']);
 						$('.progress-notes tbody').children('tr:first').hide();
 					}
+
+					sortTable($('.progress-notes'), 0, 'date');
 
 					$('.addProgressNoteDiv').slideUp('fast',function() {
 						$('.addNoteButtonDiv').slideDown('fast');
