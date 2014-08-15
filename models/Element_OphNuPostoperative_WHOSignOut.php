@@ -136,6 +136,12 @@ class Element_OphNuPostoperative_WHOSignOut extends  BaseEventTypeElement
 			if (empty($this->problems)) {
 				$this->addError('problems','Please select at least one equipment problem');
 			}
+
+			if ($this->hasMultiSelectValue('problems','Other')) {
+				if (!$this->equipment_problems_comments) {
+					$this->addError('equipment_problems_comments','Please specify the equipment problems');
+				}
+			}
 		}
 
 		return parent::beforeValidate();
