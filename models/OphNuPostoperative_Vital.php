@@ -58,7 +58,7 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('pulse_m, rr_m, spo2_m, o2_m, pain_score_m, timestamp, time, blood_pressure_m', 'safe'),
+			array('pulse_m, rr_m, sao2_m, o2_m, pain_score_m, timestamp, time, blood_pressure_m', 'safe'),
 			array('timestamp', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -77,7 +77,7 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 			'pulse_m' => array(self::BELONGS_TO, 'MeasurementPulse', 'hr_pulse_m_id'),
 			'blood_pressure_m' => array(self::BELONGS_TO, 'MeasurementBloodPressure', 'blood_pressure_m_id'),
 			'rr_m' => array(self::BELONGS_TO, 'MeasurementRespiratoryRate', 'rr_m_id'),
-			'spo2_m' => array(self::BELONGS_TO, 'MeasurementSPO2', 'spo2_m_id'),
+			'sao2_m' => array(self::BELONGS_TO, 'MeasurementSAO2', 'sao2_m_id'),
 			'o2_m' => array(self::BELONGS_TO, 'MeasurementO2', 'o2_m_id'),
 			'pain_score_m' => array(self::BELONGS_TO, 'MeasurementPainScore', 'pain_score_m_id'),
 			'element' => array(self::BELONGS_TO, 'Element_OphNuPostoperative_Vitals', 'element_id'),
@@ -97,7 +97,7 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 			'blood_pressure_m_systolic' => 'Blood pressure (systolic)',
 			'blood_pressure_m_diastolic' => 'Blood pressure (diastolic)',
 			'rr_m' => 'RR',
-			'spo2_m' => 'SpO2',
+			'sao2_m' => 'SaO2',
 			'o2_m' => 'O2',
 			'pain_score_m' => 'Pain score',
 		);
@@ -146,7 +146,7 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 			'Pulse' => 'pulse_m',
 			'BP' => 'blood_pressure_m',
 			'RR' => 'rr_m',
-			'SpO2' => 'spo2_m',
+			'SaO2' => 'sao2_m',
 			'O2' => 'o2_m',
 			'pain score' => 'pain_score_m',
 		) as $label => $field) {
@@ -165,7 +165,7 @@ class OphNuPostoperative_Vital extends BaseActiveRecordVersioned
 	{
 		$have_data = false;
 
-		foreach (array('pulse_m','rr_m','spo2_m','o2_m','pain_score_m','blood_pressure_m') as $field) {
+		foreach (array('pulse_m','rr_m','sao2_m','o2_m','pain_score_m','blood_pressure_m') as $field) {
 			if (is_object($this->$field)) {
 				$have_data = true;
 			}
