@@ -95,7 +95,7 @@
 			</div>
 			<div class="large-9 column end">
 				<div class="data-value">
-					<?php echo $element->avpu_score->name?>
+					<?php echo $element->avpu_score_id ? $element->avpu_score->name : 'Not recorded'?>
 				</div>
 			</div>
 		</div>

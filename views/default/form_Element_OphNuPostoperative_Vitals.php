@@ -97,6 +97,6 @@
 				<span class="metric">mL</span>
 			</div>
 		</div>
-		<?php echo $form->dropDownList($element, 'avpu_score_id', CHtml::listData(OphNuPostoperative_Vitals_AVPU_Score::model()->findAll(array('order'=>'display_order asc')),'id','name'), array(), false, array('label' => 3, 'field' => 2))?>
+		<?php echo $form->dropDownList($element, 'avpu_score_id', CHtml::listData(OphNuPostoperative_Vitals_AVPU_Score::model()->findAll(array('order'=>'display_order asc')),'id','name'), array('empty' => '- Please Select -'), false, array('label' => 3, 'field' => 2))?>
 		<?php echo $form->dropDownList($element, 'mews_score', array(0,1,2,3,4,5), array(), false, array('label' => 3, 'field' => 2))?>
 	</div>
