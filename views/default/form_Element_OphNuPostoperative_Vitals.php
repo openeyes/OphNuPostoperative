@@ -42,7 +42,7 @@
 				array(
 					'width' => 5,
 					'fields' => array(
-						array('field' => 'sao2_m','type' => 'sao2'),
+						array('field' => 'spo2_m','type' => 'spo2'),
 						array('field' => 'o2','type' => 'o2'),
 						array('field' => 'pain_score_m','type' => 'pain_score'),
 					),
@@ -88,7 +88,7 @@
 		</div>
 		<div id="div_Element_OphNuPostoperative_Vitals_total_fluid_outtake" class="row field-row">
 			<div class="large-3 column">
-				<label for="Element_OphNuPostoperative_Vitals_total_fluid_outtake">	
+				<label for="Element_OphNuPostoperative_Vitals_total_fluid_outtake">
 					<?php echo $element->getAttributeLabel('total_fluid_outtake')?>:
 				</label>
 			</div>
