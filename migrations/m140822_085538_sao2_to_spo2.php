@@ -1,6 +1,6 @@
 <?php // [ORB-366]
 
-class m140822_085538_sao2_to_spo2 extends CDbMigration
+class m140822_085538_sao2_to_spo2 extends OEMigration
 {
 	private $spo2_measurement_type;
 	private $sao2_measurement_type;

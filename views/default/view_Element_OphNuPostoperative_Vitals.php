@@ -107,7 +107,7 @@
 			</div>
 			<div class="large-9 column end">
 				<div class="data-value">
-					<?php echo $element->mews_score?>
+					<?php echo ($element->mews_score === '' || is_null($element->mews_score)) ? 'Not recorded' : $element->mews_score; ?>
 				</div>
 			</div>
 		</div>
